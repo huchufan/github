@@ -18,21 +18,36 @@ files = files[-8:]
 weeks = []
 ok_count = 0
 high_count = 0
+raw_weeks = []
 for p in files:
     try:
         j = json.load(open(p))
         ts = j.get('ts','')
         metric = j.get('metrics', {}).get('package_compat_risk', 'UNKNOWN')
         weeks.append((ts, metric))
-        if metric == 'LOW' or metric == 'OK' or metric == 'Ok':
+        raw_weeks.append({'path': p, 'ts': ts, 'metric': metric, 'raw': j})
+        if metric in ('LOW','OK','Ok'):
             ok_count += 1
         elif metric == 'HIGH':
             high_count += 1
     except Exception:
         weeks.append((os.path.basename(p), 'ERR'))
+        raw_weeks.append({'path': p, 'ts': os.path.basename(p), 'metric': 'ERR', 'raw': None})
 
 now = datetime.now().strftime('%Y%m%dT%H%M%S')
 md_path = os.path.join(INBOX, f'{now}_compatibility_weekly_dashboard.md')
+json_path = os.path.join(HERMES_HOME, 'state', 'weekly_rollups', f'{now}_weekly_rollup.json')
+os.makedirs(os.path.dirname(json_path), exist_ok=True)
+
+report = {
+    'generated_at': now,
+    'weeks': [{'ts': w[0], 'metric': w[1]} for w in weeks],
+    'summary': {'ok_count': ok_count, 'high_count': high_count, 'weeks_considered': len(weeks)}
+}
+
+with open(json_path, 'w') as jf:
+    json.dump(report, jf, indent=2, ensure_ascii=False)
+
 with open(md_path, 'w') as f:
     f.write('---\n')
     f.write('title: Compatibility Weekly Dashboard\n')
@@ -43,6 +58,7 @@ with open(md_path, 'w') as f:
     f.write(f'- Weeks considered: {len(weeks)}\n')
     f.write(f'- LOW/OK weeks: {ok_count}\n')
     f.write(f'- HIGH weeks: {high_count}\n\n')
+
     f.write('### Trend (last weeks)\n\n')
     # simple bar-like mermaid gantt or sequence; use pie or bar
     # We'll use a simple textual representation and a mermaid pie for counts
@@ -54,5 +70,10 @@ with open(md_path, 'w') as f:
     f.write('### Week details\n\n')
     for ts, m in weeks:
         f.write(f'- {ts}: {m}\n')
+    f.write('\n')
+    f.write('### Raw sources\n\n')
+    for rw in raw_weeks:
+        f.write(f'- {rw.get("path")}: {rw.get("metric")}\n')
 
 print(md_path)
+print(json_path)
