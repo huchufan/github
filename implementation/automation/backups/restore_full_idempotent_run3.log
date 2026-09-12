@@ -1,0 +1,4 @@
+processing /Users/huchufan/Hermes/implementation/automation/backups/hermes_memory_points_20260912_142547.jsonl
+processing /Users/huchufan/Hermes/implementation/automation/backups/hermes_memory_points_full_20260912_171508.jsonl
+WROTE /Users/huchufan/Hermes/implementation/automation/backups/restore_full_idempotent_1789212192.md
+processed= 1000 upserted= 1000 failed_batches= 0 restored_count= count=1001

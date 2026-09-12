@@ -59,11 +59,11 @@ class SkillQualityAssurance:
     @staticmethod
     def _test_functional(skill: SkillDefinition) -> float:
         # 有代码实现即视为基本可用
-        return 0.8 if skill.code else 0.0
+        return 0.8 if getattr(skill, "code", None) else 0.0
 
     @staticmethod
     def evaluate_documentation(skill: SkillDefinition) -> float:
-        return 0.8 if skill.description else 0.2
+        return 0.8 if getattr(skill, "description", None) else 0.2
 
     @staticmethod
     def evaluate_code_quality(skill: SkillDefinition) -> float:
@@ -117,9 +117,9 @@ class SkillEvolutionSystem:
         improved = SkillDefinition(
             name=skill.name,
             description=skill.description,
-            code=skill.code,
+            code=getattr(skill, 'code', ''),
             version=self._bump_version(skill.version),
-            created_from_pattern=skill.created_from_pattern,
+            created_from_pattern=getattr(skill, 'created_from_pattern', ''),
         )
         original_score = (await self.qa.evaluate_skill_quality(skill)).overall_score
         test = await self.qa.evaluate_skill_quality(improved)

@@ -42,16 +42,21 @@ class IntentRecognizer:
         """简单分词（按空白与常见标点）。"""
         import re
 
-        return [t for t in re.split(r"[\s，。！？、,.!?;:；]+", text) if t]
+        # Split on whitespace only — preserve URLs and file path tokens intact.
+        return re.findall(r"\S+", text)
 
     def extract_entities(self, tokens: List[str]) -> Dict[str, Any]:
         """从 token 中提取实体（占位实现：数字、URL、文件路径）。"""
         import re
 
         entities: Dict[str, Any] = {}
-        numbers = [t for t in tokens if re.match(r"^\d+(\.\d+)?$", t)]
-        urls = [t for t in tokens if t.startswith(("http://", "https://"))]
-        paths = [t for t in tokens if "/" in t and not t.startswith(("http", "www"))]
+        full_text = " ".join(tokens)
+        # numbers: integers or floats
+        numbers = re.findall(r"\d+(?:\.\d+)?", full_text)
+        # urls: http(s)://... up to whitespace or common punctuation
+        urls = re.findall(r"https?://[^\s,，。！？、;:]+", full_text)
+        # paths: Unix-style paths (simple heuristic)
+        paths = re.findall(r"/[A-Za-z0-9_\-./]+", full_text)
         if numbers:
             entities["numbers"] = numbers
         if urls:
@@ -193,7 +198,14 @@ class ParameterExtractor:
             tokens = text.split()
             return tokens if tokens else None
         if param_def.type == "boolean":
-            return "true" in text.lower() or "是" in text
+            lowered = text.lower()
+            # explicit true/false indicators
+            if "true" in lowered or "是" in lowered or "yes" in lowered:
+                return True
+            if "false" in lowered or "否" in lowered or "no" in lowered:
+                return False
+            # No explicit boolean found: return default (could be None) so validation handles it
+            return param_def.default
         if param_def.type == "number":
             import re
 

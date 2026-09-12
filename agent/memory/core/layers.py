@@ -97,7 +97,17 @@ class MemoryLayer(ABC):
         created = self.created_at.get(key)
         if created is None:
             return False
-        return datetime.now() - created > self.ttl
+        # Support both naive and timezone-aware datetimes recorded in created_at.
+        # If the recorded timestamp is naive, compare with a naive now(); otherwise use timezone-aware now().
+        try:
+            is_naive = created.tzinfo is None or created.tzinfo.utcoffset(created) is None
+        except Exception:
+            is_naive = True
+        if is_naive:
+            current = datetime.now()
+        else:
+            current = now()
+        return current - created > self.ttl
 
     def cleanup_expired(self) -> int:
         """清理过期项，返回清理数量。"""
@@ -125,7 +135,7 @@ class ImmediateContextMemory(MemoryLayer):
 
     def store(self, key: str, value: Any) -> None:
         self.storage[key] = value
-        self.created_at[key] = datetime.now()
+        self.created_at[key] = now()
 
     def retrieve(self, key: str) -> Optional[Any]:
         if key not in self.storage:
@@ -176,7 +186,7 @@ class ImmediateContextMemory(MemoryLayer):
 
     def update_execution_state(self, state_update: Dict[str, Any]) -> None:
         self.execution_state.update(state_update)
-        self.execution_state["_updated_at"] = datetime.now()
+        self.execution_state["_updated_at"] = now()
 
     def get_attention_context(self) -> AttentionContext:
         if not self.attention_stack:
@@ -204,16 +214,33 @@ class SessionMemory(MemoryLayer):
 
     def store(self, key: str, value: Any) -> None:
         self.storage[key] = value
-        self.created_at[key] = datetime.now()
+        self.created_at[key] = now()
         self.cache.put(key, value)
 
     def retrieve(self, key: str) -> Optional[Any]:
+        # Prefer cache for speed but respect TTL — if cached item is expired, evict it.
         if key in self.cache:
+            if self._is_expired(key):
+                # expired: remove from both storage and cache
+                try:
+                    del self.storage[key]
+                except KeyError:
+                    pass
+                # remove from cache internal dict by accessing put with None-size trick
+                # LRUCache does not provide explicit delete; emulate by putting then popping
+                # Safer: directly access internal structure if available
+                try:
+                    del self.cache._cache[key]
+                except Exception:
+                    pass
+                self.created_at.pop(key, None)
+                return None
             return self.cache.get(key)
         if key not in self.storage:
             return None
         if self._is_expired(key):
             del self.storage[key]
+            self.created_at.pop(key, None)
             return None
         value = self.storage[key]
         self.cache.put(key, value)
@@ -234,7 +261,14 @@ class SessionMemory(MemoryLayer):
     @staticmethod
     def _record_text(record: Any) -> str:
         if isinstance(record, SessionRecord):
-            return record.summary + " " + " ".join(record.key_decisions)
+            # Prefer an explicit summary, but fall back to identifiable fields when empty
+            summary = (record.summary or "").strip()
+            if not summary:
+                # include session_id and user_id to make searches by id possible
+                sid = getattr(record, "session_id", "")
+                uid = getattr(record, "user_id", "")
+                return f"{sid} {uid}".strip()
+            return summary + " " + " ".join(record.key_decisions)
         return str(record)
 
     def store_session_context(self, session_id: str, context: SessionContext) -> SessionRecord:
@@ -284,7 +318,7 @@ class EpisodicMemory(MemoryLayer):
 
     def store(self, key: str, value: Any) -> None:
         self.storage[key] = value
-        self.created_at[key] = datetime.now()
+        self.created_at[key] = now()
 
     def retrieve(self, key: str) -> Optional[Any]:
         if key not in self.storage:
@@ -371,7 +405,7 @@ class SemanticMemory(MemoryLayer):
 
     def store(self, key: str, value: Any) -> None:
         self.storage[key] = value
-        self.created_at[key] = datetime.now()
+        self.created_at[key] = now()
 
     def retrieve(self, key: str) -> Optional[Any]:
         return self.storage.get(key)
@@ -458,7 +492,7 @@ class ArchiveMemory(MemoryLayer):
 
     def store(self, key: str, value: Any) -> None:
         self.storage[key] = value
-        self.created_at[key] = datetime.now()
+        self.created_at[key] = now()
 
     def retrieve(self, key: str) -> Optional[Any]:
         return self.storage.get(key)

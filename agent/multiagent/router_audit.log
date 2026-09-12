@@ -814,3 +814,4575 @@ summary:
 timestamp: '2026-09-12T12:13:09Z'
 type: model_health_check
 ---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:19:42Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:19:49Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1500
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4002
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:19:51Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4000
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 752
+    status: ok
+timestamp: '2026-09-12T12:19:56Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1000
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:19:57Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:20:04Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4004
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:20:05Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1000
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 751
+    status: ok
+timestamp: '2026-09-12T12:20:11Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4000
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T12:20:35Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:20:42Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4000
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:20:44Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:20:43Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:20:50Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T12:20:49Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1505
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4004
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:20:51Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:20:57Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4000
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:21:27Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:21:34Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4001
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:21:36Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:21:41Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T12:21:51Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:21:58Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 755
+    status: ok
+timestamp: '2026-09-12T12:21:56Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4002
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:21:59Z'
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:22:03Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1005
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1500
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4000
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T12:22:01Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:22:09Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4003
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:22:05Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1500
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:22:05Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4001
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:22:08Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4000
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:22:10Z'
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:22:15Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4001
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:22:11Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4001
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:22:17Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T12:22:16Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T12:22:23Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:24:36Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:24:43Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T12:24:41Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:24:49Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4001
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:24:45Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4004
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:24:50Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T12:24:50Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:24:56Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T12:25:23Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:25:30Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4004
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:25:32Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4000
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T12:25:37Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1000
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T12:30:00Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:30:07Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1507
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4006
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 756
+    status: ok
+timestamp: '2026-09-12T12:30:04Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:30:11Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1506
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4009
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:30:09Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4001
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:30:13Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T12:30:14Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1506
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 756
+    status: ok
+timestamp: '2026-09-12T12:30:18Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1507
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4006
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 758
+    status: ok
+timestamp: '2026-09-12T12:31:09Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1508
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:31:16Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1506
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4009
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:31:18Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 760
+    status: ok
+timestamp: '2026-09-12T12:31:23Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1508
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 759
+    status: ok
+timestamp: '2026-09-12T12:31:59Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:32:07Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1509
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4009
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:32:08Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4008
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 759
+    status: ok
+timestamp: '2026-09-12T12:32:14Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1508
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 757
+    status: ok
+timestamp: '2026-09-12T12:33:03Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1500
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:33:11Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4008
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:33:12Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 758
+    status: ok
+timestamp: '2026-09-12T12:33:18Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 755
+    status: ok
+timestamp: '2026-09-12T12:34:13Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1508
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:34:21Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1506
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4003
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:34:22Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1506
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T12:34:28Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1009
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4008
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 759
+    status: ok
+timestamp: '2026-09-12T12:35:37Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1509
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:35:44Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4002
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:35:46Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 758
+    status: ok
+timestamp: '2026-09-12T12:35:51Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1009
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1507
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4008
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 758
+    status: ok
+timestamp: '2026-09-12T12:36:21Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:36:28Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4007
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:36:30Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4008
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 758
+    status: ok
+timestamp: '2026-09-12T12:36:35Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 758
+    status: ok
+timestamp: '2026-09-12T12:38:45Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1508
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:38:52Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1508
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4005
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:38:54Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1009
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1508
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4009
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 759
+    status: ok
+timestamp: '2026-09-12T12:38:59Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1508
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 756
+    status: ok
+timestamp: '2026-09-12T12:39:40Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1506
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:39:47Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1508
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4006
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:39:49Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1506
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4009
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 756
+    status: ok
+timestamp: '2026-09-12T12:39:54Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1507
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 755
+    status: ok
+timestamp: '2026-09-12T12:41:04Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1508
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T12:41:12Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1509
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4005
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T12:41:13Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1507
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 756
+    status: ok
+timestamp: '2026-09-12T12:41:19Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 755
+    status: ok
+timestamp: '2026-09-12T14:59:21Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T14:59:28Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4003
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T14:59:29Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 752
+    status: ok
+timestamp: '2026-09-12T14:59:35Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1005
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 751
+    status: ok
+timestamp: '2026-09-12T15:00:49Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1505
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T15:00:56Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1500
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4005
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T15:00:58Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T15:01:03Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 999
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 3994
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 752
+    status: ok
+timestamp: '2026-09-12T15:01:47Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T15:01:54Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 3997
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T15:01:55Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1500
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4001
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 751
+    status: ok
+timestamp: '2026-09-12T15:02:01Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1005
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 751
+    status: ok
+timestamp: '2026-09-12T15:02:41Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T15:02:49Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4002
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T15:02:50Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4000
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 751
+    status: ok
+timestamp: '2026-09-12T15:02:56Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T15:03:26Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T15:03:33Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4002
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T15:03:35Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1500
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T15:03:41Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1006
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1506
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4009
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 751
+    status: ok
+timestamp: '2026-09-12T15:04:13Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1510
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T15:04:21Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4005
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T15:04:22Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T15:04:28Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4000
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T15:13:40Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T15:13:47Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4004
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T15:13:48Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T15:13:54Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4001
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 752
+    status: ok
+timestamp: '2026-09-12T15:14:39Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T15:14:47Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1500
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4001
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T15:14:48Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1500
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4000
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T15:14:54Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 752
+    status: ok
+timestamp: '2026-09-12T15:16:02Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T15:16:10Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4004
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T15:16:11Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T15:16:17Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T16:20:12Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:20:19Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4001
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:20:21Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 752
+    status: ok
+timestamp: '2026-09-12T16:20:26Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T16:20:32Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:20:39Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4004
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:20:41Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1000
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 751
+    status: ok
+timestamp: '2026-09-12T16:20:46Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T16:20:57Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:21:05Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4005
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:21:06Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T16:21:12Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T16:40:27Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:40:34Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4000
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:40:36Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1500
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4001
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T16:40:42Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T16:44:20Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:44:27Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4003
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:44:29Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 751
+    status: ok
+timestamp: '2026-09-12T16:44:34Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T16:44:40Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:44:48Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4004
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:44:49Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T16:44:55Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1500
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T16:45:19Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:45:26Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4001
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:45:28Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T16:45:33Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T16:46:37Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:46:44Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4004
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:46:45Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1000
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1500
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 751
+    status: ok
+timestamp: '2026-09-12T16:46:51Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T16:47:42Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:47:49Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1505
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4004
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:47:51Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T16:47:56Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1000
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 751
+    status: ok
+timestamp: '2026-09-12T16:49:23Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:49:30Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4000
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:49:32Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T16:49:37Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T16:54:08Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1502
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:54:15Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4002
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:54:17Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 752
+    status: ok
+timestamp: '2026-09-12T16:54:22Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4000
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-12T16:57:37Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1505
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T16:57:44Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4005
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T16:57:46Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4006
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 755
+    status: ok
+timestamp: '2026-09-12T16:57:51Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T17:00:37Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T17:00:44Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4002
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T17:00:46Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1000
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 752
+    status: ok
+timestamp: '2026-09-12T17:00:51Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1506
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4006
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T17:03:32Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1506
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T17:03:39Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1505
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4006
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T17:03:41Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4006
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-12T17:03:44Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T17:03:52Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1501
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T17:03:46Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1505
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4001
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T17:03:53Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4001
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 757
+    status: ok
+timestamp: '2026-09-12T17:03:59Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1005
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1508
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4002
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 758
+    status: ok
+timestamp: '2026-09-12T17:07:44Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T17:07:51Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1504
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4005
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T17:07:53Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1507
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 756
+    status: ok
+timestamp: '2026-09-12T17:07:58Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4006
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 757
+    status: ok
+timestamp: '2026-09-12T17:10:29Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1508
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T17:10:36Z'
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1509
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4007
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T17:10:38Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1508
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 757
+    status: ok
+timestamp: '2026-09-12T17:10:44Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T17:19:42Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1508
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 757
+    status: ok
+timestamp: '2026-09-12T17:20:08Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T17:20:17Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1507
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4006
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 755
+    status: ok
+timestamp: '2026-09-12T17:20:16Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4006
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T17:20:18Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1003
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4006
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 757
+    status: ok
+timestamp: '2026-09-12T17:20:24Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 758
+    status: ok
+timestamp: '2026-09-12T17:24:32Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T17:24:41Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1005
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1506
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4008
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 759
+    status: ok
+timestamp: '2026-09-12T17:24:40Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1503
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4008
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T17:24:42Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1009
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 758
+    status: ok
+timestamp: '2026-09-12T17:24:48Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1008
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1504
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 756
+    status: ok
+timestamp: '2026-09-12T17:35:06Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T17:35:15Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1005
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1507
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4006
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T17:35:14Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1509
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4009
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T17:35:16Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4008
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 756
+    status: ok
+timestamp: '2026-09-12T17:35:22Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1510
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4010
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-12T17:41:57Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1507
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-12T17:42:05Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1005
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4006
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 756
+    status: ok
+timestamp: '2026-09-12T17:42:04Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1501
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4009
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-12T17:42:07Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1007
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1509
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4007
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 755
+    status: ok
+timestamp: '2026-09-12T17:42:12Z'
+type: model_health_check
+---
