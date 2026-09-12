@@ -59,9 +59,14 @@ class ErrorHandlingStrategy:
     def select_recovery_strategy(self, task: SubTask, error_category: str, retry_count: int) -> Dict[str, Any]:
         """选择恢复策略。"""
         strategy_name = task.retry_policy if task.retry_policy in self.strategies else self.default_strategy
-        strategy = dict(self.strategies[strategy_name])
+        # defend against mutated/missing global strategies by falling back to default strategy dict
+        base = self.strategies.get(strategy_name) or self.strategies.get(self.default_strategy) or {}
+        strategy = dict(base)
 
+        # allow FALLBACK strategies to execute even when retries == 0
         if retry_count >= strategy.get("retries", 0):
+            if strategy.get("action") == "FALLBACK":
+                return strategy
             # 重试已耗尽，降级为停止或跳过
             return {"action": "STOP"}
         return strategy
