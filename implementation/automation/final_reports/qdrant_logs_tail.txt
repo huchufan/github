@@ -1,0 +1,800 @@
+2026-09-12T05:27:55.499639Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001018
+2026-09-12T05:27:55.504023Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001125
+2026-09-12T05:27:55.507527Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001087
+2026-09-12T05:27:55.511037Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001069
+2026-09-12T05:27:55.515901Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001547
+2026-09-12T05:27:55.519650Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001043
+2026-09-12T05:27:55.523199Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001118
+2026-09-12T05:27:55.526741Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001082
+2026-09-12T05:27:55.531317Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001430
+2026-09-12T05:27:55.535297Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001093
+2026-09-12T05:27:55.538932Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001047
+2026-09-12T05:27:55.542432Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.000988
+2026-09-12T05:27:55.546467Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001276
+2026-09-12T05:27:55.551031Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001325
+2026-09-12T05:27:55.554800Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001069
+2026-09-12T05:27:55.558301Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001129
+2026-09-12T05:27:55.562063Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001123
+2026-09-12T05:27:55.569786Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.004377
+2026-09-12T05:27:55.573516Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001127
+2026-09-12T05:27:55.577228Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001335
+2026-09-12T05:27:55.584442Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.002453
+2026-09-12T05:27:55.590078Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001358
+2026-09-12T05:27:55.593982Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001055
+2026-09-12T05:27:55.598856Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001638
+2026-09-12T05:27:55.602472Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001026
+2026-09-12T05:27:55.606121Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001031
+2026-09-12T05:27:55.609553Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001050
+2026-09-12T05:27:55.613929Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001496
+2026-09-12T05:27:55.617659Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001051
+2026-09-12T05:27:55.621473Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001205
+2026-09-12T05:27:55.625055Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001150
+2026-09-12T05:27:55.628701Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001189
+2026-09-12T05:27:55.633343Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001336
+2026-09-12T05:27:55.637098Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001100
+2026-09-12T05:27:55.640584Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001099
+2026-09-12T05:27:55.644254Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001200
+2026-09-12T05:27:55.649558Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001652
+2026-09-12T05:27:55.653651Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001109
+2026-09-12T05:27:55.657081Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001089
+2026-09-12T05:27:55.660616Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001026
+2026-09-12T05:27:55.665244Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001631
+2026-09-12T05:27:55.669058Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001098
+2026-09-12T05:27:55.672624Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001004
+2026-09-12T05:27:55.675970Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.000999
+2026-09-12T05:27:55.679885Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001283
+2026-09-12T05:27:55.684645Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001091
+2026-09-12T05:27:55.688312Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001100
+2026-09-12T05:27:55.691674Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001001
+2026-09-12T05:27:55.695524Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001255
+2026-09-12T05:27:55.700199Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001087
+2026-09-12T05:27:55.703932Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001090
+2026-09-12T05:27:55.707432Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001047
+2026-09-12T05:27:55.710999Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001164
+2026-09-12T05:27:55.715576Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001534
+2026-09-12T05:27:55.719433Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001275
+2026-09-12T05:27:55.723078Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001199
+2026-09-12T05:27:55.726570Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001086
+2026-09-12T05:27:55.731130Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001607
+2026-09-12T05:27:55.734871Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001158
+2026-09-12T05:27:55.738593Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001037
+2026-09-12T05:27:55.742162Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001173
+2026-09-12T05:27:55.746239Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001450
+2026-09-12T05:27:55.750477Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001133
+2026-09-12T05:27:55.754364Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001172
+2026-09-12T05:27:55.757721Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001053
+2026-09-12T05:27:55.761438Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001156
+2026-09-12T05:27:55.766308Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001402
+2026-09-12T05:27:55.769989Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001140
+2026-09-12T05:27:55.773588Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001052
+2026-09-12T05:27:55.777033Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001018
+2026-09-12T05:27:55.781286Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001345
+2026-09-12T05:27:55.785153Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001118
+2026-09-12T05:27:55.789007Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001116
+2026-09-12T05:27:55.792498Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001060
+2026-09-12T05:27:55.796513Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001342
+2026-09-12T05:27:55.800816Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001285
+2026-09-12T05:27:55.804391Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001058
+2026-09-12T05:27:55.807848Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001105
+2026-09-12T05:27:55.811499Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001265
+2026-09-12T05:27:55.816011Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001112
+2026-09-12T05:27:55.819752Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001111
+2026-09-12T05:27:55.826983Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.004847
+2026-09-12T05:27:55.831714Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001523
+2026-09-12T05:27:55.941090Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.002029
+2026-09-12T05:27:55.946600Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001697
+2026-09-12T05:27:55.951400Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001225
+2026-09-12T05:27:55.955313Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001200
+2026-09-12T05:27:55.958882Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001078
+2026-09-12T05:27:55.964144Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001722
+2026-09-12T05:27:55.970017Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001427
+2026-09-12T05:27:55.974315Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001339
+2026-09-12T05:27:55.979049Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001455
+2026-09-12T05:27:55.984588Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001734
+2026-09-12T05:27:55.989932Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001556
+2026-09-12T05:27:55.995642Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002092
+2026-09-12T05:27:56.002147Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001765
+2026-09-12T05:27:56.007431Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001436
+2026-09-12T05:27:56.015129Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.004282
+2026-09-12T05:27:56.021089Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001639
+2026-09-12T05:27:56.025635Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001285
+2026-09-12T05:27:56.032846Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.003304
+2026-09-12T05:27:56.039047Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001736
+2026-09-12T05:27:56.043381Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001266
+2026-09-12T05:27:56.047933Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001328
+2026-09-12T05:27:56.051650Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001013
+2026-09-12T05:27:56.055403Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001068
+2026-09-12T05:27:56.058858Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001049
+2026-09-12T05:27:56.063125Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001358
+2026-09-12T05:27:56.067982Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001382
+2026-09-12T05:27:56.071630Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001014
+2026-09-12T05:27:56.075066Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.000966
+2026-09-12T05:27:56.078858Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001100
+2026-09-12T05:27:56.083139Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001031
+2026-09-12T05:27:56.086839Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001149
+2026-09-12T05:27:56.090387Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001074
+2026-09-12T05:27:56.093844Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001066
+2026-09-12T05:27:56.098502Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001324
+2026-09-12T05:27:56.102445Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001153
+2026-09-12T05:27:56.105964Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001015
+2026-09-12T05:27:56.109429Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001027
+2026-09-12T05:27:56.113664Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001479
+2026-09-12T05:27:56.117667Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001101
+2026-09-12T05:27:56.121380Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001046
+2026-09-12T05:27:56.124842Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001104
+2026-09-12T05:27:56.128556Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001091
+2026-09-12T05:27:56.133455Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001477
+2026-09-12T05:27:56.137144Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001097
+2026-09-12T05:27:56.140631Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001000
+2026-09-12T05:27:56.144025Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001017
+2026-09-12T05:27:56.148533Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001402
+2026-09-12T05:27:56.152422Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001072
+2026-09-12T05:27:56.156003Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001131
+2026-09-12T05:27:56.159561Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001047
+2026-09-12T05:27:56.164699Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001349
+2026-09-12T05:27:56.168405Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001065
+2026-09-12T05:27:56.171992Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.000950
+2026-09-12T05:27:56.175408Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.000990
+2026-09-12T05:27:56.179388Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001257
+2026-09-12T05:27:56.185094Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001185
+2026-09-12T05:27:56.188725Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.000981
+2026-09-12T05:27:56.192233Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001126
+2026-09-12T05:27:56.196265Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001365
+2026-09-12T05:27:56.201016Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001136
+2026-09-12T05:27:56.204573Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001046
+2026-09-12T05:27:56.208055Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001076
+2026-09-12T05:27:56.216005Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.005403
+2026-09-12T05:27:56.220110Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001387
+2026-09-12T05:27:56.224372Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001586
+2026-09-12T05:27:56.228913Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001104
+2026-09-12T05:27:56.243989Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.010239
+2026-09-12T05:27:56.250248Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002137
+2026-09-12T05:27:56.256051Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001455
+2026-09-12T05:27:56.260744Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001815
+2026-09-12T05:27:56.266116Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001637
+2026-09-12T05:27:56.271225Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001472
+2026-09-12T05:27:56.275925Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001524
+2026-09-12T05:27:56.283804Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.002137
+2026-09-12T05:27:56.290795Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.002439
+2026-09-12T05:27:56.297246Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002478
+2026-09-12T05:27:56.303667Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001843
+2026-09-12T05:27:56.307654Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001132
+2026-09-12T05:27:56.311222Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001074
+2026-09-12T05:27:56.316338Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001644
+2026-09-12T05:27:56.320090Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001115
+2026-09-12T05:27:56.323759Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001250
+2026-09-12T05:27:56.329123Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001560
+2026-09-12T05:27:56.334571Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001956
+2026-09-12T05:27:56.338673Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001177
+2026-09-12T05:27:56.342120Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001133
+2026-09-12T05:27:56.346327Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001481
+2026-09-12T05:27:56.350948Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001264
+2026-09-12T05:27:56.354658Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001173
+2026-09-12T05:27:56.358191Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001067
+2026-09-12T05:27:56.362062Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001153
+2026-09-12T05:27:56.366817Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001303
+2026-09-12T05:27:56.370542Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001071
+2026-09-12T05:27:56.374129Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001127
+2026-09-12T05:27:56.378686Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001289
+2026-09-12T05:27:56.383498Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001572
+2026-09-12T05:27:56.387320Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001203
+2026-09-12T05:27:56.390872Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001160
+2026-09-12T05:27:56.394549Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001206
+2026-09-12T05:27:56.399494Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001203
+2026-09-12T05:27:56.403522Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001219
+2026-09-12T05:27:56.407113Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001161
+2026-09-12T05:27:56.410642Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001117
+2026-09-12T05:27:56.415443Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001502
+2026-09-12T05:27:56.419142Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001118
+2026-09-12T05:27:56.422830Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001174
+2026-09-12T05:27:56.426507Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001323
+2026-09-12T05:27:56.431251Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001789
+2026-09-12T05:27:56.435089Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001083
+2026-09-12T05:27:56.438809Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001074
+2026-09-12T05:27:56.442394Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001186
+2026-09-12T05:27:56.446505Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001452
+2026-09-12T05:27:56.450597Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001146
+2026-09-12T05:27:56.454530Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001187
+2026-09-12T05:27:56.458083Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001186
+2026-09-12T05:27:56.462019Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001284
+2026-09-12T05:27:56.466700Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001280
+2026-09-12T05:27:56.470560Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001322
+2026-09-12T05:27:56.474471Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001417
+2026-09-12T05:27:56.478331Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001339
+2026-09-12T05:27:56.482674Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001153
+2026-09-12T05:27:56.486526Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001295
+2026-09-12T05:27:56.490089Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001105
+2026-09-12T05:27:56.493879Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001360
+2026-09-12T05:27:56.498715Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001532
+2026-09-12T05:27:56.502553Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001223
+2026-09-12T05:27:56.509527Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.004565
+2026-09-12T05:27:56.513851Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001521
+2026-09-12T05:27:56.518508Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001870
+2026-09-12T05:27:56.522797Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001100
+2026-09-12T05:27:56.526092Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.000994
+2026-09-12T05:27:56.530479Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001492
+2026-09-12T05:27:56.534609Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001262
+2026-09-12T05:27:56.538298Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001120
+2026-09-12T05:27:56.541787Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001087
+2026-09-12T05:27:56.545736Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001177
+2026-09-12T05:27:56.550565Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001374
+2026-09-12T05:27:56.554324Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001133
+2026-09-12T05:27:56.558448Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001128
+2026-09-12T05:27:56.562226Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001129
+2026-09-12T05:27:56.566522Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001156
+2026-09-12T05:27:56.570170Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001084
+2026-09-12T05:27:56.573707Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001077
+2026-09-12T05:27:56.577328Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001125
+2026-09-12T05:27:56.581798Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001280
+2026-09-12T05:27:56.585565Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001183
+2026-09-12T05:27:56.589211Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001156
+2026-09-12T05:27:56.592694Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001100
+2026-09-12T05:27:56.596618Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001256
+2026-09-12T05:27:56.601171Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001264
+2026-09-12T05:27:56.605073Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001106
+2026-09-12T05:27:56.608522Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001038
+2026-09-12T05:27:56.612361Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001215
+2026-09-12T05:27:56.616963Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001046
+2026-09-12T05:27:56.620724Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001038
+2026-09-12T05:27:56.624186Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001033
+2026-09-12T05:27:56.627744Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001067
+2026-09-12T05:27:56.632338Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001172
+2026-09-12T05:27:56.635948Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001079
+2026-09-12T05:27:56.639486Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001120
+2026-09-12T05:27:56.642932Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001112
+2026-09-12T05:27:56.646987Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001278
+2026-09-12T05:27:56.651171Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001192
+2026-09-12T05:27:56.655003Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001127
+2026-09-12T05:27:56.658465Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001079
+2026-09-12T05:27:56.662304Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001203
+2026-09-12T05:27:56.666618Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001108
+2026-09-12T05:27:56.670466Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001156
+2026-09-12T05:27:56.673876Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001027
+2026-09-12T05:27:56.677724Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001204
+2026-09-12T05:27:56.682332Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001403
+2026-09-12T05:27:56.686610Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001109
+2026-09-12T05:27:56.690222Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001128
+2026-09-12T05:27:56.693785Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001100
+2026-09-12T05:27:56.698595Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001622
+2026-09-12T05:27:56.702384Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001158
+2026-09-12T05:27:56.706104Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001176
+2026-09-12T05:27:56.710320Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001300
+2026-09-12T05:27:56.715764Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001616
+2026-09-12T05:27:56.720527Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001480
+2026-09-12T05:27:56.724332Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001269
+2026-09-12T05:27:56.728769Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001547
+2026-09-12T05:27:56.734842Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001601
+2026-09-12T05:27:56.739848Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001392
+2026-09-12T05:27:56.743458Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001168
+2026-09-12T05:27:56.747815Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001361
+2026-09-12T05:27:56.751683Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001096
+2026-09-12T05:27:56.755370Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001032
+2026-09-12T05:27:56.759260Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001185
+2026-09-12T05:27:56.763623Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001594
+2026-09-12T05:27:56.771238Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.004724
+2026-09-12T05:27:56.774833Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.000993
+2026-09-12T05:27:56.779063Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001425
+2026-09-12T05:27:56.786355Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002298
+2026-09-12T05:27:56.792453Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001941
+2026-09-12T05:27:56.797799Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001967
+2026-09-12T05:27:56.802219Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001095
+2026-09-12T05:27:56.805958Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001034
+2026-09-12T05:27:56.809451Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001054
+2026-09-12T05:27:56.813395Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001218
+2026-09-12T05:27:56.923637Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001977
+2026-09-12T05:27:56.928433Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001676
+2026-09-12T05:27:56.934627Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001805
+2026-09-12T05:27:56.940288Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001529
+2026-09-12T05:27:56.946380Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001998
+2026-09-12T05:27:56.952249Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001605
+2026-09-12T05:27:56.957137Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001315
+2026-09-12T05:27:56.961651Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001313
+2026-09-12T05:27:56.967722Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001378
+2026-09-12T05:27:56.971944Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001183
+2026-09-12T05:27:56.975809Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001199
+2026-09-12T05:27:56.980718Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001679
+2026-09-12T05:27:56.985311Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001224
+2026-09-12T05:27:56.989433Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001114
+2026-09-12T05:27:56.993169Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001101
+2026-09-12T05:27:56.998244Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001623
+2026-09-12T05:27:57.002317Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001229
+2026-09-12T05:27:57.006202Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001101
+2026-09-12T05:27:57.010053Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001144
+2026-09-12T05:27:57.015013Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001459
+2026-09-12T05:27:57.019167Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001167
+2026-09-12T05:27:57.023008Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001141
+2026-09-12T05:27:57.026747Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001154
+2026-09-12T05:27:57.031828Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001487
+2026-09-12T05:27:57.036491Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001337
+2026-09-12T05:27:57.041037Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001130
+2026-09-12T05:27:57.048476Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.003271
+2026-09-12T05:27:57.054056Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001422
+2026-09-12T05:27:57.058369Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001218
+2026-09-12T05:27:57.063008Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001529
+2026-09-12T05:27:57.067610Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001202
+2026-09-12T05:27:57.072367Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001326
+2026-09-12T05:27:57.077669Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001465
+2026-09-12T05:27:57.083621Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001465
+2026-09-12T05:27:57.088200Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001376
+2026-09-12T05:27:57.092794Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001200
+2026-09-12T05:27:57.097988Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001613
+2026-09-12T05:27:57.102416Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001230
+2026-09-12T05:27:57.106550Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001136
+2026-09-12T05:27:57.110550Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001173
+2026-09-12T05:27:57.115733Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001302
+2026-09-12T05:27:57.120302Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001256
+2026-09-12T05:27:57.124326Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001304
+2026-09-12T05:27:57.128603Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001413
+2026-09-12T05:27:57.133476Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001402
+2026-09-12T05:27:57.137733Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001203
+2026-09-12T05:27:57.141573Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001138
+2026-09-12T05:27:57.146064Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001717
+2026-09-12T05:27:57.152153Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001384
+2026-09-12T05:27:57.156734Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001152
+2026-09-12T05:27:57.160880Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001217
+2026-09-12T05:27:57.168244Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.002062
+2026-09-12T05:27:57.173347Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001357
+2026-09-12T05:27:57.177949Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001460
+2026-09-12T05:27:57.190359Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.006331
+2026-09-12T05:27:57.195576Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001865
+2026-09-12T05:27:57.206086Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001880
+2026-09-12T05:27:57.211384Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001639
+2026-09-12T05:27:57.219614Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001999
+2026-09-12T05:27:57.224804Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001381
+2026-09-12T05:27:57.231566Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002573
+2026-09-12T05:27:57.239171Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001692
+2026-09-12T05:27:57.244653Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001625
+2026-09-12T05:27:57.253962Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.002377
+2026-09-12T05:27:57.260168Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001843
+2026-09-12T05:27:57.268600Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.002369
+2026-09-12T05:27:57.274161Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001613
+2026-09-12T05:27:57.281866Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.004088
+2026-09-12T05:27:57.290201Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001964
+2026-09-12T05:27:57.297000Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002369
+2026-09-12T05:27:57.306605Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001643
+2026-09-12T05:27:57.313564Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002797
+2026-09-12T05:27:57.322125Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001786
+2026-09-12T05:27:57.327829Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001809
+2026-09-12T05:27:57.336809Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.002265
+2026-09-12T05:27:57.344154Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001727
+2026-09-12T05:27:57.355265Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.002588
+2026-09-12T05:27:57.361493Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001873
+2026-09-12T05:27:57.371130Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.002260
+2026-09-12T05:27:57.377250Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001769
+2026-09-12T05:27:57.385959Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002635
+2026-09-12T05:27:57.391923Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001638
+2026-09-12T05:27:57.397629Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002010
+2026-09-12T05:27:57.404005Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001874
+2026-09-12T05:27:57.408826Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001347
+2026-09-12T05:27:57.413723Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001582
+2026-09-12T05:27:57.419190Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001457
+2026-09-12T05:27:57.423605Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001363
+2026-09-12T05:27:57.427555Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001280
+2026-09-12T05:27:57.432756Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001597
+2026-09-12T05:27:57.437067Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001253
+2026-09-12T05:27:57.440727Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001014
+2026-09-12T05:27:57.444501Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001249
+2026-09-12T05:27:57.449679Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001718
+2026-09-12T05:27:57.455096Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001954
+2026-09-12T05:27:57.459303Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001201
+2026-09-12T05:27:57.463670Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001347
+2026-09-12T05:27:57.468319Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001264
+2026-09-12T05:27:57.472404Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001032
+2026-09-12T05:27:57.475963Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001007
+2026-09-12T05:27:57.480107Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001317
+2026-09-12T05:27:57.484838Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001298
+2026-09-12T05:27:57.488981Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001144
+2026-09-12T05:27:57.492721Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001036
+2026-09-12T05:27:57.496893Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001241
+2026-09-12T05:27:57.502210Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001620
+2026-09-12T05:27:57.546243Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.040653
+2026-09-12T05:27:57.584324Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.032435
+2026-09-12T05:27:57.623567Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.034497
+2026-09-12T05:27:57.631052Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002226
+2026-09-12T05:27:57.637526Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001703
+2026-09-12T05:27:57.642029Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001343
+2026-09-12T05:27:57.646237Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001265
+2026-09-12T05:27:57.651020Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001229
+2026-09-12T05:27:57.655743Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001184
+2026-09-12T05:27:57.659535Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001342
+2026-09-12T05:27:57.664525Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001468
+2026-09-12T05:27:57.670391Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001754
+2026-09-12T05:27:57.679455Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.005727
+2026-09-12T05:27:57.685038Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001530
+2026-09-12T05:27:57.690724Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001337
+2026-09-12T05:27:57.695063Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001491
+2026-09-12T05:27:57.700685Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001604
+2026-09-12T05:27:57.705659Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001429
+2026-09-12T05:27:57.710108Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001356
+2026-09-12T05:27:57.715114Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001599
+2026-09-12T05:27:57.720555Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001553
+2026-09-12T05:27:57.725516Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001496
+2026-09-12T05:27:57.730937Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002007
+2026-09-12T05:27:57.737764Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001980
+2026-09-12T05:27:57.742915Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001457
+2026-09-12T05:27:57.747955Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001529
+2026-09-12T05:27:57.754769Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002191
+2026-09-12T05:27:57.760425Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002146
+2026-09-12T05:27:57.765430Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001646
+2026-09-12T05:27:57.770999Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001706
+2026-09-12T05:27:57.776115Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001678
+2026-09-12T05:27:57.783129Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.002484
+2026-09-12T05:27:57.789242Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001311
+2026-09-12T05:27:57.794231Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001980
+2026-09-12T05:27:57.799890Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001668
+2026-09-12T05:27:57.805718Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002086
+2026-09-12T05:27:57.810017Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001366
+2026-09-12T05:27:57.815232Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001576
+2026-09-12T05:27:57.821219Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001471
+2026-09-12T05:27:57.825439Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001188
+2026-09-12T05:27:57.830105Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001473
+2026-09-12T05:27:57.835511Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001443
+2026-09-12T05:27:57.840929Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001873
+2026-09-12T05:27:57.846117Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001849
+2026-09-12T05:27:57.851282Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001443
+2026-09-12T05:27:57.855513Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001255
+2026-09-12T05:27:57.859273Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001116
+2026-09-12T05:27:57.863353Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001207
+2026-09-12T05:27:57.868664Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001522
+2026-09-12T05:27:57.873208Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001289
+2026-09-12T05:27:57.877079Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001215
+2026-09-12T05:27:57.881679Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001622
+2026-09-12T05:27:57.886415Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001122
+2026-09-12T05:27:57.890071Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001029
+2026-09-12T05:27:57.893828Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001151
+2026-09-12T05:27:57.898260Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001378
+2026-09-12T05:27:57.903452Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001614
+2026-09-12T05:27:57.907149Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections HTTP/1.1" 200 82 "-" "Python-urllib/3.14" 0.000054
+2026-09-12T05:27:57.907666Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001452
+2026-09-12T05:27:57.909300Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections HTTP/1.1" 200 83 "-" "Python-urllib/3.14" 0.000051
+2026-09-12T05:27:57.911533Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory/info HTTP/1.1" 404 0 "-" "Python-urllib/3.14" 0.000078
+2026-09-12T05:27:57.911778Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001237
+2026-09-12T05:27:57.916941Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001673
+2026-09-12T05:27:57.922136Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001517
+2026-09-12T05:27:57.926445Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001363
+2026-09-12T05:27:57.931302Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001609
+2026-09-12T05:27:57.937874Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001738
+2026-09-12T05:27:57.942658Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001434
+2026-09-12T05:27:57.947564Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001603
+2026-09-12T05:27:57.954060Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002005
+2026-09-12T05:27:57.958058Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001142
+2026-09-12T05:27:57.961798Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001049
+2026-09-12T05:27:57.966633Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001724
+2026-09-12T05:27:57.971188Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001335
+2026-09-12T05:27:57.975116Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001221
+2026-09-12T05:27:57.978616Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001023
+2026-09-12T05:27:57.983386Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.001502
+2026-09-12T05:27:57.987417Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001270
+2026-09-12T05:27:57.990985Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001115
+2026-09-12T05:27:57.998511Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.005128
+2026-09-12T05:27:58.002609Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001307
+2026-09-12T05:27:58.007403Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001977
+2026-09-12T05:27:58.011092Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001063
+2026-09-12T05:27:58.015319Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001302
+2026-09-12T05:27:58.019480Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001346
+2026-09-12T05:27:58.023237Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001082
+2026-09-12T05:27:58.026709Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001104
+2026-09-12T05:27:58.030697Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001241
+2026-09-12T05:27:58.035328Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001169
+2026-09-12T05:27:58.039166Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001118
+2026-09-12T05:27:58.043693Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001190
+2026-09-12T05:27:58.049137Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001861
+2026-09-12T05:27:58.055033Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001324
+2026-09-12T05:27:58.059435Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 94 "-" "python-client/1.19.0 python/3.14.5" 0.001120
+2026-09-12T05:27:58.063835Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001399
+2026-09-12T05:27:58.070677Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.003200
+2026-09-12T05:27:58.074739Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001197
+2026-09-12T05:27:58.184180Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 92 "-" "python-client/1.19.0 python/3.14.5" 0.002259
+2026-09-12T05:28:01.586008Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory/points?limit=2 HTTP/1.1" 404 0 "-" "-" 0.000138
+2026-09-12T05:28:39.595187Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 400 157 "-" "-" 0.000198
+2026-09-12T05:28:39.597703Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory/info HTTP/1.1" 404 0 "-" "-" 0.000072
+2026-09-12T05:28:39.600076Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory/points?limit=3 HTTP/1.1" 404 0 "-" "-" 0.000164
+2026-09-12T05:28:43.584458Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections HTTP/1.1" 200 83 "-" "Python-urllib/3.14" 0.000183
+2026-09-12T05:28:43.587016Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections HTTP/1.1" 200 83 "-" "Python-urllib/3.14" 0.000073
+2026-09-12T05:28:43.589286Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory/info HTTP/1.1" 404 0 "-" "Python-urllib/3.14" 0.000134
+2026-09-12T05:29:14.950003Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections HTTP/1.1" 200 95 "-" "python-client/1.19.0 python/3.14.5" 0.000119
+2026-09-12T05:29:14.954303Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory HTTP/1.1" 200 464 "-" "python-client/1.19.0 python/3.14.5" 0.000718
+2026-09-12T05:29:14.961749Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/count HTTP/1.1" 200 81 "-" "python-client/1.19.0 python/3.14.5" 0.003671
+2026-09-12T05:29:14.968797Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002540
+2026-09-12T05:29:14.977764Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/scroll HTTP/1.1" 200 437 "-" "python-client/1.19.0 python/3.14.5" 0.004846
+2026-09-12T05:39:34.575440Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/count HTTP/1.1" 200 81 "-" "python-client/1.19.0 python/3.14.5" 0.000877
+2026-09-12T05:39:39.449729Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/count HTTP/1.1" 200 81 "-" "python-client/1.19.0 python/3.14.5" 0.000581
+2026-09-12T05:39:39.460022Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.001861
+2026-09-12T05:39:39.465499Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/count HTTP/1.1" 200 80 "-" "python-client/1.19.0 python/3.14.5" 0.000599
+2026-09-12T05:39:44.865787Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/count HTTP/1.1" 200 81 "-" "python-client/1.19.0 python/3.14.5" 0.000698
+2026-09-12T05:39:44.873463Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory/points?wait=true HTTP/1.1" 200 93 "-" "python-client/1.19.0 python/3.14.5" 0.002317
+2026-09-12T05:39:44.880837Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/scroll HTTP/1.1" 200 626 "-" "python-client/1.19.0 python/3.14.5" 0.002192
+2026-09-12T06:22:52.842687Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections HTTP/1.1" 200 83 "-" "-" 0.000122
+2026-09-12T06:25:47.234014Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/count HTTP/1.1" 200 80 "-" "python-client/1.19.0 python/3.14.5" 0.001096
+2026-09-12T06:25:47.244842Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/scroll HTTP/1.1" 200 36082 "-" "python-client/1.19.0 python/3.14.5" 0.004760
+2026-09-12T06:28:26.629081Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/count HTTP/1.1" 200 81 "-" "python-client/1.19.0 python/3.14.5" 0.001802
+2026-09-12T06:28:26.702017Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory_restore/points?wait=true HTTP/1.1" 404 110 "-" "python-client/1.19.0 python/3.14.5" 0.016744
+2026-09-12T06:29:11.669603Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory_restore/points?wait=true HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.006767
+2026-09-12T06:29:33.636978Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections HTTP/1.1" 200 96 "-" "python-client/1.19.0 python/3.14.5" 0.000155
+2026-09-12T06:29:33.642593Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 104 "-" "python-client/1.19.0 python/3.14.5" 0.000296
+2026-09-12T06:29:33.651892Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections HTTP/1.1" 200 96 "-" "python-client/1.19.0 python/3.14.5" 0.000227
+2026-09-12T06:29:33.656238Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory_restore/points?wait=true HTTP/1.1" 404 110 "-" "python-client/1.19.0 python/3.14.5" 0.000279
+2026-09-12T06:29:33.663620Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 107 "-" "python-client/1.19.0 python/3.14.5" 0.000198
+2026-09-12T06:30:16.405125Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/count HTTP/1.1" 200 81 "-" "python-client/1.19.0 python/3.14.5" 0.001448
+2026-09-12T06:30:16.411643Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000231
+2026-09-12T06:30:16.922535Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000391
+2026-09-12T06:30:17.433152Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 109 "-" "python-client/1.19.0 python/3.14.5" 0.000461
+2026-09-12T06:30:17.944223Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000368
+2026-09-12T06:30:18.452516Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000372
+2026-09-12T06:30:18.962520Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 105 "-" "python-client/1.19.0 python/3.14.5" 0.000241
+2026-09-12T06:30:19.472900Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 107 "-" "python-client/1.19.0 python/3.14.5" 0.000431
+2026-09-12T06:30:19.980151Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000607
+2026-09-12T06:30:20.492027Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000542
+2026-09-12T06:30:21.002559Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 109 "-" "python-client/1.19.0 python/3.14.5" 0.000462
+2026-09-12T06:30:21.514514Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000521
+2026-09-12T06:30:22.024523Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000279
+2026-09-12T06:30:22.535570Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000280
+2026-09-12T06:30:23.046348Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000231
+2026-09-12T06:30:23.557632Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000271
+2026-09-12T06:30:24.065598Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 107 "-" "python-client/1.19.0 python/3.14.5" 0.000204
+2026-09-12T06:30:24.572994Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 106 "-" "python-client/1.19.0 python/3.14.5" 0.000164
+2026-09-12T06:30:25.079391Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 105 "-" "python-client/1.19.0 python/3.14.5" 0.000159
+2026-09-12T06:30:25.590681Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000211
+2026-09-12T06:30:26.101215Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000312
+2026-09-12T06:30:26.611287Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000270
+2026-09-12T06:30:27.122086Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000206
+2026-09-12T06:30:27.629396Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000209
+2026-09-12T06:30:28.141095Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000296
+2026-09-12T06:30:28.652772Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000476
+2026-09-12T06:30:29.164869Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000296
+2026-09-12T06:30:29.676878Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000278
+2026-09-12T06:30:30.187459Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000291
+2026-09-12T06:30:30.698306Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000462
+2026-09-12T06:30:31.209139Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000229
+2026-09-12T06:30:31.715613Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 109 "-" "python-client/1.19.0 python/3.14.5" 0.000410
+2026-09-12T06:30:32.225654Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000563
+2026-09-12T06:30:32.734978Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000674
+2026-09-12T06:30:33.242711Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000189
+2026-09-12T06:30:33.751814Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000264
+2026-09-12T06:30:34.261574Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000544
+2026-09-12T06:30:34.770114Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000213
+2026-09-12T06:30:35.278622Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000339
+2026-09-12T06:30:35.788821Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000452
+2026-09-12T06:30:36.296106Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000275
+2026-09-12T06:30:36.808257Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000317
+2026-09-12T06:30:37.317079Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000385
+2026-09-12T06:30:37.829747Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000278
+2026-09-12T06:30:38.341807Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000443
+2026-09-12T06:30:38.848880Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 110 "-" "python-client/1.19.0 python/3.14.5" 0.000390
+2026-09-12T06:30:39.358730Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000529
+2026-09-12T06:30:39.865729Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000574
+2026-09-12T06:30:40.374785Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 109 "-" "python-client/1.19.0 python/3.14.5" 0.000317
+2026-09-12T06:30:40.882886Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000582
+2026-09-12T06:30:41.391130Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000355
+2026-09-12T06:30:41.901927Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000375
+2026-09-12T06:30:42.410098Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000564
+2026-09-12T06:30:42.918323Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000529
+2026-09-12T06:30:43.428077Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000525
+2026-09-12T06:30:43.936922Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000187
+2026-09-12T06:30:44.445812Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000207
+2026-09-12T06:30:44.954793Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000712
+2026-09-12T06:30:45.466190Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000231
+2026-09-12T06:30:45.974462Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000228
+2026-09-12T06:30:46.482362Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 107 "-" "python-client/1.19.0 python/3.14.5" 0.000291
+2026-09-12T06:30:46.990088Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 107 "-" "python-client/1.19.0 python/3.14.5" 0.000218
+2026-09-12T06:30:47.497945Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000297
+2026-09-12T06:30:48.006986Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 110 "-" "python-client/1.19.0 python/3.14.5" 0.000365
+2026-09-12T06:30:48.517270Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000277
+2026-09-12T06:30:49.028507Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000521
+2026-09-12T06:30:49.537112Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000396
+2026-09-12T06:30:50.049838Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 110 "-" "python-client/1.19.0 python/3.14.5" 0.000650
+2026-09-12T06:30:50.559795Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000607
+2026-09-12T06:30:51.071732Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 110 "-" "python-client/1.19.0 python/3.14.5" 0.000524
+2026-09-12T06:30:51.580381Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000535
+2026-09-12T06:30:52.090243Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000245
+2026-09-12T06:30:52.599933Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000752
+2026-09-12T06:30:53.106285Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000336
+2026-09-12T06:30:53.613910Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000272
+2026-09-12T06:30:54.125014Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.001158
+2026-09-12T06:30:54.632150Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000357
+2026-09-12T06:30:55.143096Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000290
+2026-09-12T06:30:55.654758Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000605
+2026-09-12T06:30:56.162553Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000354
+2026-09-12T06:30:56.674272Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000296
+2026-09-12T06:30:57.186283Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000385
+2026-09-12T06:30:57.698726Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000448
+2026-09-12T06:30:58.210201Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000532
+2026-09-12T06:30:58.720544Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000286
+2026-09-12T06:30:59.229074Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000417
+2026-09-12T06:30:59.741345Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000669
+2026-09-12T06:31:00.250339Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000759
+2026-09-12T06:31:00.761451Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000521
+2026-09-12T06:31:01.272129Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 110 "-" "python-client/1.19.0 python/3.14.5" 0.000472
+2026-09-12T06:31:01.784102Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000630
+2026-09-12T06:31:02.292427Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 110 "-" "python-client/1.19.0 python/3.14.5" 0.000705
+2026-09-12T06:31:02.804094Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000539
+2026-09-12T06:31:03.313316Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000747
+2026-09-12T06:31:03.824100Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000214
+2026-09-12T06:31:04.335300Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000240
+2026-09-12T06:31:04.843938Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 107 "-" "python-client/1.19.0 python/3.14.5" 0.000465
+2026-09-12T06:31:05.355646Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000203
+2026-09-12T06:31:05.863661Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000269
+2026-09-12T06:31:06.375152Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000412
+2026-09-12T06:31:06.883316Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000588
+2026-09-12T06:31:07.391287Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 107 "-" "python-client/1.19.0 python/3.14.5" 0.000519
+2026-09-12T06:31:07.901632Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000389
+2026-09-12T06:31:08.411352Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000295
+2026-09-12T06:31:08.922927Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 108 "-" "python-client/1.19.0 python/3.14.5" 0.000329
+2026-09-12T06:31:09.434494Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000389
+2026-09-12T06:31:09.941695Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000309
+2026-09-12T06:31:10.449424Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000500
+2026-09-12T06:31:10.958207Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 110 "-" "python-client/1.19.0 python/3.14.5" 0.000523
+2026-09-12T06:31:11.469949Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 110 "-" "python-client/1.19.0 python/3.14.5" 0.000521
+2026-09-12T06:31:11.979066Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 109 "-" "python-client/1.19.0 python/3.14.5" 0.000371
+2026-09-12T06:31:12.486548Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 111 "-" "python-client/1.19.0 python/3.14.5" 0.000785
+2026-09-12T06:31:12.995408Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000477
+2026-09-12T06:31:13.504795Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000395
+2026-09-12T06:31:14.015017Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 113 "-" "python-client/1.19.0 python/3.14.5" 0.000439
+2026-09-12T06:31:14.525370Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000222
+2026-09-12T06:31:15.036026Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 112 "-" "python-client/1.19.0 python/3.14.5" 0.000346
+2026-09-12T06:31:15.543715Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 107 "-" "python-client/1.19.0 python/3.14.5" 0.000262
+2026-09-12T06:31:16.052222Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore HTTP/1.1" 404 107 "-" "python-client/1.19.0 python/3.14.5" 0.000148
+2026-09-12T06:31:48.760903Z  INFO storage::content_manager::toc::collection_meta_ops: Creating collection hermes_memory_restore
+2026-09-12T06:31:48.988110Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory_restore HTTP/1.1" 200 48 "-" "-" 0.227640
+2026-09-12T06:31:48.992674Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000187
+2026-09-12T06:31:49.496333Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000105
+2026-09-12T06:31:50.003222Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000204
+2026-09-12T06:31:50.512557Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000324
+2026-09-12T06:31:51.020255Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000234
+2026-09-12T06:31:51.528659Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000150
+2026-09-12T06:31:52.034812Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000204
+2026-09-12T06:31:52.544054Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000418
+2026-09-12T06:31:53.051486Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000203
+2026-09-12T06:31:53.560664Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000141
+2026-09-12T06:31:54.069713Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000191
+2026-09-12T06:31:54.580120Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000142
+2026-09-12T06:31:55.088837Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000313
+2026-09-12T06:31:55.595483Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000188
+2026-09-12T06:31:56.101378Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000148
+2026-09-12T06:31:56.612422Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000223
+2026-09-12T06:31:57.119413Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000184
+2026-09-12T06:31:57.628030Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000427
+2026-09-12T06:31:58.136497Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000238
+2026-09-12T06:31:58.644034Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000163
+2026-09-12T06:31:59.150036Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000145
+2026-09-12T06:31:59.658902Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000125
+2026-09-12T06:32:00.167991Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000144
+2026-09-12T06:32:00.679087Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000156
+2026-09-12T06:32:01.186320Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000218
+2026-09-12T06:32:01.693029Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000396
+2026-09-12T06:32:02.201398Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000221
+2026-09-12T06:32:02.709013Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000156
+2026-09-12T06:32:03.220454Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000207
+2026-09-12T06:32:03.730198Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000219
+2026-09-12T06:40:07.634828Z  INFO storage::content_manager::toc::collection_meta_ops: Creating collection hermes_memory_restore
+2026-09-12T06:40:07.635348Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory_restore HTTP/1.1" 409 105 "-" "-" 0.000890
+2026-09-12T06:40:07.639571Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000123
+2026-09-12T06:40:08.650625Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000208
+2026-09-12T06:40:09.659163Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000116
+2026-09-12T06:40:10.664230Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000188
+2026-09-12T06:40:11.674433Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000237
+2026-09-12T06:40:12.682983Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000271
+2026-09-12T06:40:13.694195Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000146
+2026-09-12T06:40:14.704363Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000232
+2026-09-12T06:40:15.712478Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000150
+2026-09-12T06:40:16.721763Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000222
+2026-09-12T06:40:17.733388Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000191
+2026-09-12T06:40:18.743420Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000183
+2026-09-12T06:40:19.753758Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000184
+2026-09-12T06:40:20.760234Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000119
+2026-09-12T06:40:21.765312Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000132
+2026-09-12T06:40:22.776605Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000146
+2026-09-12T06:40:23.786581Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000155
+2026-09-12T06:40:24.796744Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000234
+2026-09-12T06:40:25.803724Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000155
+2026-09-12T06:40:26.813139Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000143
+2026-09-12T06:40:27.822050Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000356
+2026-09-12T06:40:28.849562Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000160
+2026-09-12T06:40:29.857323Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000150
+2026-09-12T06:40:30.864682Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000234
+2026-09-12T06:40:31.876315Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000180
+2026-09-12T06:40:32.885527Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000125
+2026-09-12T06:40:33.894294Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000127
+2026-09-12T06:40:34.902831Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000127
+2026-09-12T06:40:35.910325Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000149
+2026-09-12T06:40:36.917004Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000292
+2026-09-12T06:40:37.927859Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000161
+2026-09-12T06:40:38.936261Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000117
+2026-09-12T06:40:39.945546Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000187
+2026-09-12T06:40:40.954256Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000154
+2026-09-12T06:40:41.962729Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000112
+2026-09-12T06:40:42.971134Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000094
+2026-09-12T06:40:43.978051Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000111
+2026-09-12T06:40:44.982796Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000089
+2026-09-12T06:40:45.990255Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000156
+2026-09-12T06:40:46.996361Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000112
+2026-09-12T06:40:47.884836Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/count HTTP/1.1" 200 81 "-" "python-client/1.19.0 python/3.14.5" 0.001009
+2026-09-12T06:40:47.893377Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections HTTP/1.1" 200 106 "-" "python-client/1.19.0 python/3.14.5" 0.000189
+2026-09-12T06:40:47.898530Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory_restore/points/count HTTP/1.1" 200 78 "-" "python-client/1.19.0 python/3.14.5" 0.000439
+2026-09-12T06:40:47.906723Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory_restore/points/scroll HTTP/1.1" 200 96 "-" "python-client/1.19.0 python/3.14.5" 0.001123
+2026-09-12T06:40:48.005558Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000152
+2026-09-12T06:40:49.014601Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000161
+2026-09-12T06:40:50.022048Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000112
+2026-09-12T06:40:51.031439Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000187
+2026-09-12T06:40:52.041245Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000171
+2026-09-12T06:40:53.046452Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000118
+2026-09-12T06:40:54.053880Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000218
+2026-09-12T06:40:55.064246Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000445
+2026-09-12T06:40:56.075381Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000147
+2026-09-12T06:40:57.085927Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000159
+2026-09-12T06:40:58.096854Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000167
+2026-09-12T06:40:59.111116Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000159
+2026-09-12T06:41:00.119274Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000216
+2026-09-12T06:41:01.130105Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000125
+2026-09-12T06:41:02.138548Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000205
+2026-09-12T06:41:03.146601Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000116
+2026-09-12T06:41:04.153312Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000155
+2026-09-12T06:41:05.164089Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000183
+2026-09-12T06:41:06.170583Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000156
+2026-09-12T06:41:07.180075Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000135
+2026-09-12T06:41:08.205485Z  INFO actix_web::middleware::logger: 192.168.65.1 "PUT /collections/hermes_memory_restore/points?wait=true HTTP/1.1" 200 83 "-" "-" 0.015137
+2026-09-12T06:41:08.209310Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000296
+2026-09-12T06:41:09.213663Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000112
+2026-09-12T06:41:10.222145Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000145
+2026-09-12T06:41:11.231561Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000139
+2026-09-12T06:41:12.239482Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000206
+2026-09-12T06:41:13.248298Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000206
+2026-09-12T06:41:14.258180Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000156
+2026-09-12T06:41:15.264993Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000132
+2026-09-12T06:41:16.275546Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000233
+2026-09-12T06:41:17.285270Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000193
+2026-09-12T06:41:18.294641Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000157
+2026-09-12T06:41:19.302214Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000208
+2026-09-12T06:41:20.312666Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000143
+2026-09-12T06:41:21.320712Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000187
+2026-09-12T06:41:22.330181Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000150
+2026-09-12T06:41:23.336378Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000089
+2026-09-12T06:41:23.878266Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000103
+2026-09-12T06:41:23.881244Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/points?limit=3 HTTP/1.1" 404 0 "-" "-" 0.000191
+2026-09-12T06:41:24.340652Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000113
+2026-09-12T06:41:25.347034Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000139
+2026-09-12T06:41:26.292935Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections HTTP/1.1" 200 105 "-" "python-client/1.19.0 python/3.14.5" 0.000247
+2026-09-12T06:41:26.298619Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory/points/count HTTP/1.1" 200 81 "-" "python-client/1.19.0 python/3.14.5" 0.000850
+2026-09-12T06:41:26.303447Z  INFO actix_web::middleware::logger: 192.168.65.1 "POST /collections/hermes_memory_restore/points/count HTTP/1.1" 200 78 "-" "python-client/1.19.0 python/3.14.5" 0.000434
+2026-09-12T06:41:26.354870Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000230
+2026-09-12T06:41:27.365122Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000140
+2026-09-12T06:41:28.373966Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000189
+2026-09-12T06:41:29.383356Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000157
+2026-09-12T06:41:30.389584Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000321
+2026-09-12T06:41:31.396870Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000142
+2026-09-12T06:41:32.405979Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000218
+2026-09-12T06:41:33.415061Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000198
+2026-09-12T06:41:34.423655Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000291
+2026-09-12T06:41:35.432206Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000147
+2026-09-12T06:41:36.442930Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000139
+2026-09-12T06:41:37.451957Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000178
+2026-09-12T06:41:38.461147Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000142
+2026-09-12T06:41:39.466836Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000157
+2026-09-12T06:41:40.477264Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000151
+2026-09-12T06:41:41.485733Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000382
+2026-09-12T06:41:42.493303Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000160
+2026-09-12T06:41:43.501922Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000201
+2026-09-12T06:41:44.512846Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000228
+2026-09-12T06:41:45.522740Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000178
+2026-09-12T06:41:46.530229Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000137
+2026-09-12T06:41:47.537246Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000161
+2026-09-12T06:41:48.546595Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000278
+2026-09-12T06:41:49.554110Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000178
+2026-09-12T06:41:50.570077Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000301
+2026-09-12T06:41:51.580956Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000151
+2026-09-12T06:41:52.590234Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000144
+2026-09-12T06:41:53.599890Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000190
+2026-09-12T06:41:54.610955Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000146
+2026-09-12T06:41:55.616839Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000142
+2026-09-12T06:41:56.626412Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000228
+2026-09-12T06:41:57.633186Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000142
+2026-09-12T06:41:58.642179Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000376
+2026-09-12T06:41:59.651047Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000195
+2026-09-12T06:42:00.658294Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000264
+2026-09-12T06:42:01.667567Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000190
+2026-09-12T06:42:02.676553Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000248
+2026-09-12T06:42:03.685911Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000193
+2026-09-12T06:42:04.694326Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000162
+2026-09-12T06:42:05.699831Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000107
+2026-09-12T06:42:06.705847Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000147
+2026-09-12T06:42:07.716448Z  INFO actix_web::middleware::logger: 192.168.65.1 "GET /collections/hermes_memory_restore/info HTTP/1.1" 404 0 "-" "-" 0.000218
