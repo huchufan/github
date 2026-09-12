@@ -1,0 +1,22 @@
+{
+  "messages": {
+    "task_create": {
+      "type": "object",
+      "properties": {
+        "intent": {"type":"string"},
+        "payload": {"type":"object"},
+        "request_id": {"type":"string"}
+      },
+      "required": ["intent","request_id"]
+    },
+    "agent_heartbeat": {
+      "type": "object",
+      "properties": {
+        "agent_id": {"type":"string"},
+        "timestamp": {"type":"string","format":"date-time"},
+        "status": {"type":"string"}
+      },
+      "required": ["agent_id","timestamp"]
+    }
+  }
+}
