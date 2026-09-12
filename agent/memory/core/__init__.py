@@ -48,3 +48,5 @@ __all__ = [
     "MemoryMigrationManager",
     "MemoryRetrievalEngine",
 ]
+from .search import Search
+from .fusion import Fusion

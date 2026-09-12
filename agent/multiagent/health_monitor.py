@@ -1,8 +1,29 @@
 import threading
 import time
 from typing import Optional
-from prometheus_client import Gauge, Histogram, CollectorRegistry, REGISTRY, generate_latest
-from prometheus_client import start_http_server
+try:
+    from prometheus_client import Gauge, Histogram, CollectorRegistry, REGISTRY, generate_latest
+    from prometheus_client import start_http_server
+    PROMETHEUS_AVAILABLE = True
+except Exception:
+    # prometheus_client missing: provide lightweight no-op fallbacks so tests can run
+    PROMETHEUS_AVAILABLE = False
+
+    class _NoopMetric:
+        def __init__(self, *args, **kwargs):
+            pass
+        def labels(self, *args, **kwargs):
+            return self
+        def set(self, *args, **kwargs):
+            return None
+        def observe(self, *args, **kwargs):
+            return None
+
+    Gauge = Histogram = _NoopMetric
+    def start_http_server(port):
+        # no-op
+        return None
+
 from pathlib import Path
 from agent.multiagent import router
 
@@ -24,7 +45,7 @@ class HealthMonitor:
         self._thread: Optional[threading.Thread] = None
         self._start_http = start_http
 
-        # Prometheus metrics
+        # Prometheus metrics (or no-op fallbacks)
         # Per-model availability gauge (0/1)
         self.availability_gauge = Gauge('model_availability', 'Model availability 0/1', ['model_key'])
         # Per-model latency histogram
@@ -50,7 +71,7 @@ class HealthMonitor:
         return summary
 
     def _loop(self):
-        if self._start_http:
+        if self._start_http and PROMETHEUS_AVAILABLE:
             try:
                 start_http_server(self.port)
             except Exception:
