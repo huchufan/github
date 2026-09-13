@@ -173,6 +173,10 @@ class RBACManager:
         base -= set(self._revoked.get(role, set()))
         return base
 
+    def check_permission(self, role: Role, permission: Permission) -> bool:
+        """Return True if the role currently has the permission."""
+        return permission in self.get_permissions(role)
+
     def grant_permission(self, role: Role, permission: Permission):
         self._overrides.setdefault(role, set()).add(permission)
 
@@ -206,6 +210,7 @@ class Rbac(RBACManager):
     Minimal subclass of RBACManager with identical behaviour.
     """
     pass
+
 
 # module-level alias
 Rbac = Rbac
