@@ -195,8 +195,8 @@ class SessionMemory(MemoryLayer):
 
 class EpisodicMemory(MemoryLayer):
     """Episodic memory across a conversation/session with longer TTL."""
-    def __init__(self):
-        super().__init__("episodic", ttl=timedelta(days=1))
+    def __init__(self, ttl: Optional[timedelta] = None):
+        super().__init__("episodic", ttl=ttl or timedelta(days=1))
         # event log for PoC
         self.events: List[Any] = []
 
