@@ -150,7 +150,13 @@ class AuditAnalyzer:
         return out
 
     def generate_compliance_report(self, start, end, policy_id):
-        return ComplianceReport(summary='empty', details=[], audit_coverage=0.0)
+        # Build a lightweight compliance report scoped to [start, end].
+        recs = [r for r in self.logger.records if getattr(r, 'timestamp', None) and start <= r.timestamp <= end]
+        total = len(recs)
+        sensitive = sum(1 for r in recs if getattr(r, 'involves_sensitive_data', False))
+        coverage = (sensitive / total) if total else 0.0
+        details = [f"{r.audit_id}:{r.operation_type}:{r.data_classification}" for r in recs]
+        return ComplianceReport(summary=f"Compliance report for {policy_id}", details=details, audit_coverage=coverage, policy_id=policy_id, log_integrity=True)
 
 class Audit:
     def __init__(self):
