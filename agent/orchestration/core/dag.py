@@ -10,7 +10,7 @@ from typing import Dict, List, Optional, Any
 class Node:
     id: str
     name: str
-    task_type: str
+    task_type: str = "task"
     params: Dict = None
 
 @dataclass
