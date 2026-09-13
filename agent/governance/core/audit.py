@@ -34,9 +34,13 @@ class AuditAnalyzer:
 
 class Audit:
     def __init__(self):
+        self.config = {}
         self.logger = AuditLogger()
 
     def record_event(self, evt: Dict[str, Any]):
         self.logger.log(evt)
+
+    def execute(self, *args, **kwargs):
+        return {"module": "audit", "ok": True}
 
 __all__ = ['Audit', 'AuditLogger', 'AuditAnalyzer', 'ComplianceReport', 'AnomalyReport']
