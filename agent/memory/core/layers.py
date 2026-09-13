@@ -140,6 +140,57 @@ class EpisodicMemory(MemoryLayer):
     """Episodic memory across a conversation/session with longer TTL."""
     def __init__(self):
         super().__init__("episodic", ttl=timedelta(days=1))
+        # event log for PoC
+        self.events: List[Any] = []
+
+    def record_event(self, event: Any) -> None:
+        """Record a SystemEvent-like object into episodic storage."""
+        # store event by generated id if not provided
+        eid = getattr(event, 'event_id', None) or f"evt_{len(self.events)+1}"
+        self.events.append({'id': eid, 'event': event, 'timestamp': getattr(event, 'timestamp', self.now())})
+        return None
+
+    def extract_learned_patterns(self, time_window: Optional[timedelta] = None) -> List[Any]:
+        """Simple PoC pattern extraction.
+
+        Returns a list of pattern-like objects with attribute 'pattern_type'.
+        Detects two simple patterns:
+          - 'success_sequence': two or more consecutive success events within window
+          - 'failure_recovery': a failure event followed by a success event within window
+        """
+        now = self.now()
+        # filter events within window
+        if time_window:
+            cutoff = now - time_window
+            seq = [e for e in self.events if e['timestamp'] >= cutoff]
+        else:
+            seq = list(self.events)
+        patterns: List[Any] = []
+        # detect success_sequence
+        consec = 0
+        for item in seq:
+            ev = item['event']
+            ok = getattr(ev, 'success', None)
+            if ok:
+                consec += 1
+            else:
+                consec = 0
+            if consec >= 2:
+                p = type('P', (), {})()
+                p.pattern_type = 'success_sequence'
+                patterns.append(p)
+                break
+        # detect failure_recovery
+        for i in range(len(seq)-1):
+            ev1 = seq[i]['event']
+            ev2 = seq[i+1]['event']
+            if getattr(ev1, 'success', None) is False and getattr(ev2, 'success', None) is True:
+                p = type('P', (), {})()
+                p.pattern_type = 'failure_recovery'
+                patterns.append(p)
+                break
+        return patterns
+
 
 class ArchiveMemory(MemoryLayer):
     """Archive storage (cold) - readonly PoC interface."""
