@@ -192,6 +192,17 @@ class SessionMemory(MemoryLayer):
     """
     def __init__(self, ttl: Optional[timedelta] = None):
         super().__init__("session", ttl=ttl or timedelta(hours=1))
+        # internal in-memory cache used by some tests
+        class _SimpleCache:
+            def __init__(self):
+                self._cache = {}
+            def set(self, k,v):
+                self._cache[k]=v
+            def get(self,k,default=None):
+                return self._cache.get(k, default)
+            def clear(self):
+                self._cache.clear()
+        self.cache = _SimpleCache()
 
 class EpisodicMemory(MemoryLayer):
     """Episodic memory across a conversation/session with longer TTL."""
