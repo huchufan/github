@@ -14,6 +14,14 @@ class AgentCommunicationBus:
     def subscribe(self, channel: str):
         return self.channels.get(channel, [])
 
+    # compatibility API expected by tests
+    async def send_message(self, sender: str, recipients: List[str], message_type: str, payload: Dict[str, Any]):
+        for r in recipients:
+            self.publish(r, type('Msg', (), {'message_type': message_type, 'payload': payload}))
+
+    def receive_messages(self, recipient: str):
+        return self.channels.get(recipient, [])
+
 class Communication:
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
