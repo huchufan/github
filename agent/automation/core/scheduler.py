@@ -1,18 +1,25 @@
 """
-Automation Framework - Scheduler Module
-Generated: 2026-09-13T11:11:15.368225
+Automation Framework - Scheduler Module (compat shim)
+Provides PriorityQueue, SchedulingEngine, ResourceAwareScheduler expected names.
 """
+from typing import Any, Dict, List
 
-from typing import Any, Dict, Optional
+class PriorityQueue:
+    def __init__(self):
+        self.q = []
 
-class Scheduler:
-    """Scheduler module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+    def push(self, item):
+        self.q.append(item)
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "scheduler", "ok": True}
+    def pop(self):
+        return self.q.pop(0)
 
-__all__ = ['Scheduler']
+class SchedulingEngine:
+    def schedule(self, tasks):
+        return tasks
+
+class ResourceAwareScheduler:
+    def schedule(self, tasks, resources=None):
+        return tasks
+
+__all__ = ['PriorityQueue', 'SchedulingEngine', 'ResourceAwareScheduler']
