@@ -200,12 +200,22 @@ class EpisodicMemory(MemoryLayer):
         # event log for PoC
         self.events: List[Any] = []
 
-    def record_event(self, event: Any) -> None:
-        """Record a SystemEvent-like object into episodic storage."""
+    def record_event(self, event: Any):
+        """Record a SystemEvent-like object into episodic storage.
+
+        Returns a small reference object with attribute `event_id` and `timestamp`.
+        """
         # store event by generated id if not provided
         eid = getattr(event, 'event_id', None) or f"evt_{len(self.events)+1}"
-        self.events.append({'id': eid, 'event': event, 'timestamp': getattr(event, 'timestamp', self.now())})
-        return None
+        ts = getattr(event, 'timestamp', self.now())
+        self.events.append({'id': eid, 'event': event, 'timestamp': ts})
+        # also record created_at for expiry checks
+        self.created_at[eid] = ts
+        class EventRef:
+            def __init__(self, event_id, timestamp):
+                self.event_id = event_id
+                self.timestamp = timestamp
+        return EventRef(event_id=eid, timestamp=ts)
 
     def extract_learned_patterns(self, time_window: Optional[timedelta] = None) -> List[Any]:
         """Simple PoC pattern extraction.
