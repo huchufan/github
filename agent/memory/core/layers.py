@@ -129,7 +129,7 @@ class SemanticMemory(MemoryLayer):
         self.storage[item.knowledge_id] = item
         return item
 
-    def semantic_search(self, query: str, top_k: int = 5) -> List[KnowledgeItem]:
+    def semantic_search(self, query: str, top_k: int = 5, threshold: float = 0.0) -> List[KnowledgeItem]:
         # PoC: return items whose content contains query. Be permissive about payload types
         res = []
         q = query.lower()
