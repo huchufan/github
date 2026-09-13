@@ -105,7 +105,8 @@ class RuleEngine:
             allow = all(results) if results else True
         else:
             allow = any(results) if results else True
-        return ValidationResult(allow, 'ALLOW' if allow else 'DENY')
+        # return a small object with .passed (legacy tests expect rd.passed)
+        return type('R', (), {'passed': allow, 'action': 'ALLOW' if allow else 'DENY'})()
 
 class RuleDecision:
     def __init__(self, decision: str = 'ALLOW'):
