@@ -68,7 +68,9 @@ class GovernancePolicy:
             # fallback to a safe permission-like default
             perm = Permission.EXECUTE_AGENT
         allowed = self.allows(role_enum, perm, getattr(resource, 'type', '*'))
-        return type('D', (), {'allow': allowed})()
+        # include audit_code and reason for callers that expect richer decision objects
+        obj = type('D', (), {'allow': allowed, 'audit_code': 'ACCESS_DENIED' if not allowed else 'ACCESS_GRANTED', 'reason': ''})()
+        return obj
 
 class RBACManager:
     def __init__(self, policy: GovernancePolicy | None = None):
