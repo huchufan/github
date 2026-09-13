@@ -269,6 +269,13 @@ class ArchiveMemory(MemoryLayer):
         return Ref(archive_id=aid, archive_path=path)
 
     def retrieve_archived_session(self, archive_id: str) -> Optional[SessionRecord]:
+        # If a separate data slot exists and contains corrupted bytes, raise ArchiveCorruptedError
+        data_key = f"{archive_id}:data"
+        if data_key in self.storage:
+            val = self.storage[data_key]
+            if isinstance(val, (bytes, bytearray)):
+                from agent.core.errors import ArchiveCorruptedError
+                raise ArchiveCorruptedError(f"archive {archive_id} data corrupted")
         return self.storage.get(archive_id)
 
 class Layers:
