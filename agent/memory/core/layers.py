@@ -294,6 +294,9 @@ class ArchiveMemory(MemoryLayer):
         return Ref(archive_id=aid, archive_path=path)
 
     def retrieve_archived_session(self, archive_id: str) -> Optional[SessionRecord]:
+        # If archive_id not present at all, return None (unknown archive)
+        if archive_id not in self.storage:
+            return None
         # Expect a data/checksum marker to exist; missing marker indicates corruption
         data_key = f"{archive_id}:data"
         from agent.core.errors import ArchiveCorruptedError
