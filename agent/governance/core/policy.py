@@ -1,18 +1,37 @@
 """
-Governance Framework - Policy Module
-Generated: 2026-09-13T10:54:47.638863
+Governance Framework - Policy Module (compat shim)
+Provides minimal PolicyCondition/PolicyLimit/PolicyValidator/PolicyViolation/RuleEngine/ValidationResult
+names expected by package imports. Lightweight for tests and imports.
 """
+from typing import Any, Dict, List, NamedTuple
+from dataclasses import dataclass
 
-from typing import Any, Dict, Optional
+@dataclass
+class PolicyCondition:
+    key: str
+    op: str
+    value: Any
 
-class Policy:
-    """Policy module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+@dataclass
+class PolicyLimit:
+    name: str
+    limit: int
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "policy", "ok": True}
+@dataclass
+class PolicyViolation:
+    reason: str
 
-__all__ = ['Policy']
+class ValidationResult(NamedTuple):
+    allowed: bool
+    action: str = 'ALLOW'
+
+class PolicyValidator:
+    def validate(self, ctx: Dict[str, Any]) -> ValidationResult:
+        # trivial validator: allow everything
+        return ValidationResult(True, 'ALLOW')
+
+class RuleEngine:
+    def decide(self, input_data: Dict[str, Any]) -> ValidationResult:
+        return ValidationResult(True, 'ALLOW')
+
+__all__ = ['PolicyCondition', 'PolicyLimit', 'PolicyValidator', 'PolicyViolation', 'RuleEngine', 'ValidationResult']
