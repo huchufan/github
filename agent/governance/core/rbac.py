@@ -233,6 +233,17 @@ class RBACManager:
         return permission in self.get_permissions(role)
 
     def grant_permission(self, role: Role, permission: Permission):
+        """Grant a permission to a role at runtime (for tests/PoC).
+
+        If the permission was previously revoked for the role, remove the revocation
+        so a subsequent check_permission will succeed.
+        """
+        # remove any explicit revocation for this role+permission
+        if role in self._revoked and permission in self._revoked[role]:
+            try:
+                self._revoked[role].remove(permission)
+            except Exception:
+                pass
         self._overrides.setdefault(role, set()).add(permission)
 
     def revoke_permission(self, role: Role, permission: Permission):
