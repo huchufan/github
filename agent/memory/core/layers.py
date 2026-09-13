@@ -102,6 +102,14 @@ class SemanticMemory(MemoryLayer):
         # simple list index
         self.index: List[Dict[str, Any]] = []
         self.dim = dim
+        # PoC semantic index holder and embedding model stub used by tests
+        self.semantic_index = set()
+        class EmbStub:
+            def __init__(self, dim):
+                self.dim = dim
+            def embed(self, text):
+                return [0.0]*self.dim
+        self.embedding_model = EmbStub(dim)
 
     def index_item(self, id: str, vector: List[float], payload: Any):
         self.index.append({"id": id, "vector": vector, "payload": payload})
