@@ -36,7 +36,11 @@ class TriggerManager:
         self.triggers: Dict[str, Trigger] = {}
 
     def register(self, t: Dict[str, Any]):
-        trig = Trigger(trigger_id=str(uuid.uuid4()), trigger_type=t.get('trigger_type','schedule'), workflow_id=t.get('workflow_id'))
+        trig_type = t.get('trigger_type','schedule')
+        allowed = {'schedule', 'webhook', 'event', 'cron'}
+        if trig_type not in allowed:
+            raise ValueError(f"unsupported trigger_type: {trig_type}")
+        trig = Trigger(trigger_id=str(uuid.uuid4()), trigger_type=trig_type, workflow_id=t.get('workflow_id'))
         self.triggers[trig.trigger_id] = trig
         return trig
 
@@ -45,6 +49,9 @@ class TriggerManager:
         # assign id if missing
         if not getattr(trigger, 'trigger_id', None):
             trigger.trigger_id = str(uuid.uuid4())
+        allowed = {'schedule', 'webhook', 'event', 'cron'}
+        if getattr(trigger, 'trigger_type', None) not in allowed:
+            raise ValueError(f"unsupported trigger_type: {getattr(trigger,'trigger_type',None)}")
         self.triggers[trigger.trigger_id] = trigger
         return trigger
 
