@@ -1,18 +1,54 @@
 """
-Orchestration Framework - Dag Module
-Generated: 2026-09-13T11:01:05.554294
+Orchestration Framework - Dag Module (compat shim)
+Provides DAG, Node, Edge expected names and minimal implementation for imports/tests.
 """
+from dataclasses import dataclass
+from typing import Dict, List, Optional
 
-from typing import Any, Dict, Optional
+@dataclass
+class Node:
+    id: str
+    name: str
+    task_type: str
+    params: Dict = None
 
-class Dag:
-    """Dag module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+@dataclass
+class Edge:
+    source: str
+    target: str
+    condition: Optional[str] = None
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "dag", "ok": True}
+class DAG:
+    def __init__(self):
+        self.nodes: Dict[str, Node] = {}
+        self.edges: List[Edge] = []
 
-__all__ = ['Dag']
+    def add_node(self, node: Node):
+        if node.id in self.nodes:
+            raise ValueError(f"Node {node.id} already exists")
+        self.nodes[node.id] = node
+
+    def add_edge(self, source: str, target: str, condition: str = None):
+        if source not in self.nodes or target not in self.nodes:
+            raise ValueError("Source or target node not found")
+        self.edges.append(Edge(source, target, condition))
+
+    def topological_sort(self):
+        # simple Kahn's algorithm
+        in_degree = {n: 0 for n in self.nodes}
+        for e in self.edges:
+            in_degree[e.target] += 1
+        zero = [n for n, d in in_degree.items() if d == 0]
+        order = []
+        while zero:
+            n = zero.pop()
+            order.append(n)
+            for e in [x for x in self.edges if x.source == n]:
+                in_degree[e.target] -= 1
+                if in_degree[e.target] == 0:
+                    zero.append(e.target)
+        if len(order) != len(self.nodes):
+            raise ValueError("Graph has cycles")
+        return order
+
+__all__ = ['DAG', 'Node', 'Edge']
