@@ -1,26 +1,8 @@
-"""
-Governance Framework - Rbac Module
-Generated: 2026-09-13T
-
-Minimal compatibility shim exposing the names expected by agent.governance.core.__init__
-This file provides lightweight implementations sufficient for unit tests and import-time
-resolution. It is intentionally small and conservative.
-"""
 from typing import Set, Dict, Any, Optional
-from enum import Enum
 from dataclasses import dataclass
 
-class Role(Enum):
-    ADMIN = "admin"
-    DEVELOPER = "developer"
-    USER = "user"
-    GUEST = "guest"
-
-class Permission(Enum):
-    EXECUTE_AGENT = "agent:execute"
-    READ_MEMORY = "memory:read"
-    WRITE_CONFIG = "config:write"
-    AUDIT_LOG = "audit:read"
+# Use canonical Role and Permission from agent.core.types to ensure consistency
+from agent.core.types import Role, Permission
 
 @dataclass
 class AccessRule:
