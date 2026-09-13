@@ -1,6 +1,7 @@
 """
 Multiagent Framework - Distribution Module (compat shim)
 Provides TaskDistributionManager and LoadBalancer minimal implementations for imports/tests.
+Includes Distribution alias for PoC compatibility.
 """
 from typing import Any, Dict, List
 
@@ -25,4 +26,11 @@ class TaskDistributionManager:
             wb.register_worker(w)
         return wb.select_worker(job)
 
-__all__ = ['TaskDistributionManager', 'LoadBalancer']
+class Distribution:
+    def __init__(self, config: Dict[str, Any] = None):
+        self.config = config or {}
+
+    def execute(self, *args, **kwargs):
+        return {"module": "distribution", "ok": True}
+
+__all__ = ['TaskDistributionManager', 'LoadBalancer', 'Distribution']
