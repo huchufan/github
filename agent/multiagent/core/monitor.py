@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import logging
 from typing import Any, Dict, List, Optional
+import asyncio
+import inspect
 
 from agent.core.types import (
     Anomaly,
@@ -31,7 +33,14 @@ class ClusterMonitor:
         """收集集群指标。"""
         if self.lifecycle is None:
             return ClusterMetrics()
-        agents = await self.lifecycle.get_all_agents()
+        # lifecycle.get_all_agents may be sync or async; handle both
+        get_agents = getattr(self.lifecycle, 'get_all_agents', None)
+        if get_agents is None:
+            return ClusterMetrics()
+        if inspect.iscoroutinefunction(get_agents):
+            agents = await get_agents()
+        else:
+            agents = get_agents()
         if not agents:
             return ClusterMetrics()
 
