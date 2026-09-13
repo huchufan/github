@@ -32,6 +32,34 @@ class GovernancePolicy:
                 return True
         return False
 
+    def evaluate_access(self, subject, action: str, resource, ctx):
+        """Compatibility shim: return object with .allow attribute.
+        Accepts subject.role as enum or string. Maps action string to Permission when possible.
+        """
+        role_val = getattr(subject, 'role', subject)
+        if hasattr(role_val, 'value'):
+            role_val = role_val.value
+        try:
+            role_enum = Role(role_val)
+        except Exception:
+            return type('D', (), {'allow': False})()
+        # map action ("memory:read") to Permission if possible
+        perm = None
+        if isinstance(action, str):
+            try:
+                perm = Permission(action)
+            except Exception:
+                # try mapping by name (e.g. 'QUERY_READONLY')
+                try:
+                    perm = Permission[action]
+                except Exception:
+                    perm = None
+        if perm is None:
+            # fallback to a safe permission-like default
+            perm = Permission.EXECUTE_AGENT
+        allowed = self.allows(role_enum, perm, getattr(resource, 'type', '*'))
+        return type('D', (), {'allow': allowed})()
+
 class RBACManager:
     def __init__(self, policy: GovernancePolicy | None = None):
         self.policy = policy or GovernancePolicy()
