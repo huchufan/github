@@ -1,18 +1,24 @@
 """
-Multiagent Framework - Cluster Module
-Generated: 2026-09-13T11:25:50.687186
+Multiagent Framework - Cluster Module (compat shim)
+Provides AgentRegistry and ClusterScaler minimal implementations for imports/tests.
 """
+from typing import Any, Dict, List
 
-from typing import Any, Dict, Optional
+class AgentRegistry:
+    def __init__(self):
+        self.agents: Dict[str, Dict[str, Any]] = {}
 
-class Cluster:
-    """Cluster module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+    def register(self, agent_id: str, info: Dict[str, Any] = None):
+        self.agents[agent_id] = info or {}
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "cluster", "ok": True}
+    def list_agents(self):
+        return list(self.agents.keys())
 
-__all__ = ['Cluster']
+class ClusterScaler:
+    def __init__(self):
+        self.scale = 1
+
+    def scale_to(self, n: int):
+        self.scale = n
+
+__all__ = ['AgentRegistry', 'ClusterScaler']
