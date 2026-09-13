@@ -115,18 +115,30 @@ class SemanticMemory(MemoryLayer):
         return item
 
     def semantic_search(self, query: str, top_k: int = 5) -> List[KnowledgeItem]:
-        # PoC: return items whose content contains query
+        # PoC: return items whose content contains query. Be permissive about payload types
         res = []
+        q = query.lower()
         for e in self.index:
             payload = e.get('payload')
-            if isinstance(payload, KnowledgeItem) and query.lower() in (getattr(payload, 'content', '') or '').lower():
+            text = None
+            # accept dataclass-like or dict-like payloads
+            if hasattr(payload, 'content'):
+                text = getattr(payload, 'content')
+            elif isinstance(payload, dict):
+                text = payload.get('content')
+            if text and q in str(text).lower():
                 res.append(payload)
                 if len(res) >= top_k:
                     break
         # Fallback: if index yielded nothing, search stored items directly (robustness for PoC)
         if not res:
             for v in self.storage.values():
-                if isinstance(v, KnowledgeItem) and query.lower() in (getattr(v, 'content', '') or '').lower():
+                text = None
+                if hasattr(v, 'content'):
+                    text = getattr(v, 'content')
+                elif isinstance(v, dict):
+                    text = v.get('content')
+                if text and q in str(text).lower():
                     res.append(v)
                     if len(res) >= top_k:
                         break
