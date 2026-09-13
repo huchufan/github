@@ -160,8 +160,31 @@ class SemanticMemory(MemoryLayer):
         return res
 
     def build_knowledge_graph(self):
-        # PoC: return dict of id->concepts
-        return {e['id']: getattr(e.get('payload'), 'concepts', []) for e in self.index}
+        # PoC: build a simple knowledge graph structure with nodes and edges.
+        nodes: List[Dict[str, Any]] = []
+        edges: List[Dict[str, Any]] = []
+        seen = set()
+        for e in self.index:
+            nid = e.get('id')
+            payload = e.get('payload')
+            concepts = getattr(payload, 'concepts', []) if payload is not None else []
+            nodes.append({'id': nid, 'concepts': concepts})
+            seen.add(nid)
+        for sid, v in self.storage.items():
+            if sid not in seen and hasattr(v, 'knowledge_id'):
+                nodes.append({'id': sid, 'concepts': getattr(v, 'concepts', [])})
+                seen.add(sid)
+        for sid, v in self.storage.items():
+            rels = getattr(v, 'relationships', []) or []
+            for r in rels:
+                target = r.get('target_id')
+                etype = r.get('type', 'related')
+                strength = r.get('strength', 0.0)
+                if target and target not in seen:
+                    nodes.append({'id': target, 'concepts': []})
+                    seen.add(target)
+                edges.append({'source': sid, 'target': target, 'type': etype, 'strength': strength})
+        return {'nodes': nodes, 'edges': edges}
 
 class SessionMemory(MemoryLayer):
     """Minimal session-scoped memory (episodic short-lived between requests)
