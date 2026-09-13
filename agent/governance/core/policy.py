@@ -24,9 +24,9 @@ class PolicyCondition:
             self.op = self.operator
         # final fallback: ensure key/op are strings
         if self.key is None:
-            self.key = 
+            self.key = ''
         if self.op is None:
-            self.op = 
+            self.op = ''
 
 @dataclass
 class PolicyLimit:
