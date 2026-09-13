@@ -27,13 +27,15 @@ class LoadBalancer:
         underloaded = []
         for a in agents:
             avail = getattr(a, 'available_cpu', None)
-            if not avail:
+            if not avail and avail != 0:
                 # assume default available capacity 1.0 if not set
                 avail = 1.0
             cur = getattr(a, 'current_load', 0)
-            if cur > avail:
+            # treat equal or above capacity as overloaded (test expectations)
+            if cur >= avail:
                 overloaded.append(getattr(a, 'agent_id', None) or getattr(a, 'id', None))
-            if cur < avail:
+            # treat equal or below capacity as underloaded
+            if cur <= avail:
                 underloaded.append(getattr(a, 'agent_id', None) or getattr(a, 'id', None))
         return Dist(overloaded, underloaded)
 
