@@ -59,8 +59,10 @@ class AuditLogger:
         )
         self.records.append(rec)
         self.immutable_log.append(rec)
-        if getattr(evt.get('result', {}), 'status', None) == 'FAILURE':
-            alert = {'level': 'ERROR', 'record': rec}
+        # Alert when the record matches alerting heuristics (sensitive data, failure, etc.)
+        if self.should_alert(rec) or getattr(evt.get('result', {}), 'status', None) == 'FAILURE':
+            level = 'ERROR' if getattr(evt.get('result', {}), 'status', None) == 'FAILURE' else 'WARN'
+            alert = {'level': level, 'record': rec}
             self.alerts.append(alert)
             for h in list(self._alert_handlers):
                 try:
