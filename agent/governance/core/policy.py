@@ -79,7 +79,13 @@ class PolicyValidator:
                     applies = True
             if not applies:
                 continue
-            # evaluate conditions: if any condition denies, return DENY with violation
+            violations: List[PolicyViolation] = []
+            # check limits first so quota violations are reported even when conditions also fail
+            for lim in getattr(pol, 'limits', []):
+                used = self.usage_counters.get(getattr(op.actor, 'id', ''), {}).get(lim.name, 0)
+                if used >= lim.limit:
+                    violations.append(PolicyViolation(reason='limit_exceeded', policy_id=pol.id, limit=lim))
+            # evaluate conditions afterwards and collect condition violations
             for cond in getattr(pol, 'conditions', []):
                 k = cond.key
                 oper = cond.op
@@ -87,14 +93,11 @@ class PolicyValidator:
                 if k == 'role':
                     role_val = getattr(op.actor, 'role', None)
                     if oper in ('ne', '!=') and role_val == val:
-                        return ValidationResult(False, 'DENY', [PolicyViolation(reason='condition_denied', policy_id=pol.id)])
+                        violations.append(PolicyViolation(reason='condition_denied', policy_id=pol.id))
                     if oper in ('eq', '==') and role_val != val:
-                        return ValidationResult(False, 'DENY', [PolicyViolation(reason='condition_denied', policy_id=pol.id)])
-            # check limits
-            for lim in getattr(pol, 'limits', []):
-                used = self.usage_counters.get(getattr(op.actor, 'id', ''), {}).get(lim.name, 0)
-                if used >= lim.limit:
-                    return ValidationResult(False, 'DENY', [PolicyViolation(reason='limit_exceeded', policy_id=pol.id, limit=lim)])
+                        violations.append(PolicyViolation(reason='condition_denied', policy_id=pol.id))
+            if violations:
+                return ValidationResult(False, 'DENY', violations)
             # if no denying condition or limit found, allow
             return ValidationResult(True, 'ALLOW', [])
         # default deny when no policy allows
