@@ -165,6 +165,8 @@ class RBACManager:
         # dynamic grants and revokes applied at runtime (tests mutate these)
         self._overrides: Dict[Role, Set[Permission]] = {}
         self._revoked: Dict[Role, Set[Permission]] = {}
+        # compatibility: basic config store expected by legacy tests
+        self.config: Dict[str, Any] = {}
 
     def get_permissions(self, role: Role) -> Set[Permission]:
         # base defaults, plus overrides, minus revoked entries
