@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Optional
 class AgentCommunicationBus:
     def __init__(self):
         self.channels: Dict[str, List[Any]] = {}
+        self._rpc_handlers: Dict[str, Any] = {}
 
     def publish(self, channel: str, message: Any):
         self.channels.setdefault(channel, []).append(message)
@@ -21,6 +22,18 @@ class AgentCommunicationBus:
 
     def receive_messages(self, recipient: str):
         return self.channels.get(recipient, [])
+
+    def register_rpc_handler(self, name: str, fn):
+        self._rpc_handlers[name] = fn
+
+    async def call_rpc(self, caller: str, target: str, name: str, params: Dict[str, Any]):
+        if name not in self._rpc_handlers:
+            raise Exception('rpc handler not found')
+        fn = self._rpc_handlers[name]
+        res = fn(params)
+        if hasattr(res, '__await__'):
+            return await res
+        return res
 
 class Communication:
     def __init__(self, config: Optional[Dict[str, Any]] = None):
