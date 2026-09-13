@@ -1,18 +1,78 @@
 """
 Governance Framework - Rbac Module
-Generated: 2026-09-13T10:54:47.634109
+Generated: 2026-09-13T
+
+Minimal compatibility shim exposing the names expected by agent.governance.core.__init__
+This file provides lightweight implementations sufficient for unit tests and import-time
+resolution. It is intentionally small and conservative.
 """
+from typing import Set, Dict, Any
+from enum import Enum
+from dataclasses import dataclass
 
-from typing import Any, Dict, Optional
+class Role(Enum):
+    ADMIN = "admin"
+    DEVELOPER = "developer"
+    USER = "user"
+    GUEST = "guest"
 
-class Rbac:
-    """Rbac module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+class Permission(Enum):
+    EXECUTE_AGENT = "agent:execute"
+    READ_MEMORY = "memory:read"
+    WRITE_CONFIG = "config:write"
+    AUDIT_LOG = "audit:read"
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "rbac", "ok": True}
+@dataclass
+class AccessRule:
+    role: Role
+    permission: Permission
+    resource: str = "*"
 
-__all__ = ['Rbac']
+# sensible default permissions map
+DEFAULT_ROLE_PERMISSIONS: Dict[Role, Set[Permission]] = {
+    Role.ADMIN: set(p for p in Permission),
+    Role.DEVELOPER: {Permission.EXECUTE_AGENT, Permission.READ_MEMORY},
+    Role.USER: {Permission.EXECUTE_AGENT},
+    Role.GUEST: set(),
+}
+
+class GovernancePolicy:
+    """Minimal policy container"""
+    def __init__(self, rules=None):
+        self.rules = rules or []
+
+    def allows(self, role: Role, permission: Permission, resource: str = "*") -> bool:
+        # simple check against defaults then explicit rules
+        if permission in DEFAULT_ROLE_PERMISSIONS.get(role, set()):
+            return True
+        for r in self.rules:
+            if r.role == role and r.permission == permission and (r.resource == resource or r.resource == "*"):
+                return True
+        return False
+
+class RBACManager:
+    def __init__(self, policy: GovernancePolicy | None = None):
+        self.policy = policy or GovernancePolicy()
+
+    def check_permission(self, role: Role, permission: Permission, resource: str = "*") -> bool:
+        return self.policy.allows(role, permission, resource)
+
+    def grant_permission(self, role: Role, permission: Permission):
+        DEFAULT_ROLE_PERMISSIONS.setdefault(role, set()).add(permission)
+
+    def revoke_permission(self, role: Role, permission: Permission):
+        DEFAULT_ROLE_PERMISSIONS.setdefault(role, set()).discard(permission)
+
+def enforce_access(role: Role, permission: Permission, manager: RBACManager | None = None) -> bool:
+    """Utility to enforce access; returns True if allowed, False otherwise."""
+    mgr = manager or RBACManager()
+    return mgr.check_permission(role, permission)
+
+# Exported names expected by package __init__
+__all__ = [
+    'AccessRule',
+    'DEFAULT_ROLE_PERMISSIONS',
+    'GovernancePolicy',
+    'RBACManager',
+    'enforce_access',
+]
