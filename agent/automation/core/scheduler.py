@@ -36,17 +36,36 @@ class SchedulingEngine:
     async def schedule_workflow(self, wf):
         # return a simple Job object (awaitable for compatibility)
         class Job:
-            def __init__(self, priority=0):
+            def __init__(self, priority=0, retries=0):
                 self.priority = getattr(wf, 'priority', priority)
-        return Job(priority=getattr(wf, 'priority', 0))
+                self.retries_remaining = getattr(wf, 'max_retries', retries)
+        return Job(priority=getattr(wf, 'priority', 0), retries=getattr(wf, 'max_retries', 0))
 
     async def execute_job(self, job, run_fn=None):
         # simulate execution result (awaitable)
         class Result:
-            def __init__(self):
-                self.status = 'SUCCESS'
-                self.retries_remaining = 0
-        return Result()
+            def __init__(self, status='SUCCESS', retries_remaining=0):
+                self.status = status
+                self.retries_remaining = retries_remaining
+
+        # If a run function (async or callable) is provided, call it and handle failures with retries
+        if run_fn is not None:
+            try:
+                res = run_fn(job)
+                # if it's awaitable, await it
+                import inspect
+                if inspect.isawaitable(res):
+                    await res
+                return Result(status='SUCCESS', retries_remaining=getattr(job, 'retries_remaining', 0))
+            except Exception:
+                rem = getattr(job, 'retries_remaining', 0)
+                if rem > 0:
+                    job.retries_remaining = rem - 1
+                    return Result(status='RETRY', retries_remaining=job.retries_remaining)
+                else:
+                    return Result(status='FAILURE', retries_remaining=0)
+
+        return Result(status='SUCCESS', retries_remaining=getattr(job, 'retries_remaining', 0))
 
 class ResourceAwareScheduler:
     def schedule(self, tasks, resources=None):
