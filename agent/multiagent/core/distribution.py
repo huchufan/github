@@ -6,8 +6,9 @@ Includes Distribution alias for PoC compatibility.
 from typing import Any, Dict, List
 
 class LoadBalancer:
-    def __init__(self):
+    def __init__(self, lifecycle_manager=None):
         self.workers = []
+        self.lifecycle_manager = lifecycle_manager
 
     def register_worker(self, w: Dict[str, Any]):
         self.workers.append(w)
@@ -15,6 +16,16 @@ class LoadBalancer:
     def select_worker(self, job):
         # naive: return first
         return self.workers[0] if self.workers else None
+
+    def analyze_load_distribution(self, agents):
+        # return simple object with overloaded/underloaded lists
+        class Dist:
+            def __init__(self, overloaded, underloaded):
+                self.overloaded_agents = overloaded
+                self.underloaded_agents = underloaded
+        overloaded = [a.agent_id for a in agents if getattr(a, 'current_load', 0) > getattr(a, 'available_cpu', 1.0)]
+        underloaded = [a.agent_id for a in agents if getattr(a, 'current_load', 0) < getattr(a, 'available_cpu', 1.0)]
+        return Dist(overloaded, underloaded)
 
 class TaskDistributionManager:
     def __init__(self, lifecycle_manager=None):
