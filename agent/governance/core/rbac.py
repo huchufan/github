@@ -194,55 +194,53 @@ base |= set(self._overrides.get(role, set()))
 base -= set(self._revoked.get(role, set()))
 return base
 def check_permission(self, role: Role, permission: Permission) -> bool:
-        """Return True if the role currently has the permission.
-
-        Normalize inputs to canonical enums. Revoked permissions take precedence.
-        Overrides are respected. Admin has implicit grant unless revoked.
-        """
-        # normalize role/permission
-        try:
-            if not isinstance(role, Role):
-                role = Role(role)
-        except Exception:
-            pass
-        try:
-            if not isinstance(permission, Permission):
-                permission = Permission(permission)
-        except Exception:
-            pass
-        # revoked permissions take precedence
-        if role in self._revoked and permission in self._revoked.get(role, set()):
-            return False
-        # explicit overrides add permissions
-        if role in self._overrides and permission in self._overrides.get(role, set()):
-            return True
-        # Admin has all permissions unless explicitly revoked above
-        if role == Role.ADMIN:
-            return True
-        return permission in self.get_permissions(role)
+"""Return True if the role currently has the permission.
+Normalize inputs to canonical enums. Revoked permissions take precedence.
+Overrides are respected. Admin has implicit grant unless revoked.
+"""
+# normalize role/permission
+try:
+if not isinstance(role, Role):
+role = Role(role)
+except Exception:
+pass
+try:
+if not isinstance(permission, Permission):
+permission = Permission(permission)
+except Exception:
+pass
+# revoked permissions take precedence
+if role in self._revoked and permission in self._revoked.get(role, set()):
+return False
+# explicit overrides add permissions
+if role in self._overrides and permission in self._overrides.get(role, set()):
+return True
+# Admin has all permissions unless explicitly revoked above
+if role == Role.ADMIN:
+return True
+return permission in self.get_permissions(role)
 def grant_permission(self, role: Role, permission: Permission):
-        """Grant a permission to a role at runtime (for tests/PoC).
-
-        Normalize inputs; if the permission was previously revoked for the role,
-        remove the revocation so a subsequent check_permission will succeed.
-        """
-        try:
-            if not isinstance(role, Role):
-                role = Role(role)
-        except Exception:
-            pass
-        try:
-            if not isinstance(permission, Permission):
-                permission = Permission(permission)
-        except Exception:
-            pass
-        # remove any explicit revocation for this role+permission
-        if role in self._revoked and permission in self._revoked.get(role, set()):
-            try:
-                self._revoked[role].remove(permission)
-            except Exception:
-                pass
-        self._overrides.setdefault(role, set()).add(permission)
+"""Grant a permission to a role at runtime (for tests/PoC).
+Normalize inputs; if the permission was previously revoked for the role,
+remove the revocation so a subsequent check_permission will succeed.
+"""
+try:
+if not isinstance(role, Role):
+role = Role(role)
+except Exception:
+pass
+try:
+if not isinstance(permission, Permission):
+permission = Permission(permission)
+except Exception:
+pass
+# remove any explicit revocation for this role+permission
+if role in self._revoked and permission in self._revoked.get(role, set()):
+try:
+self._revoked[role].remove(permission)
+except Exception:
+pass
+self._overrides.setdefault(role, set()).add(permission)
 def revoke_permission(self, role: Role, permission: Permission):
 self._revoked.setdefault(role, set()).add(permission)
 if role in self._overrides and permission in self._overrides[role]:
