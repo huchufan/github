@@ -88,6 +88,8 @@ class ImmediateContextMemory(MemoryLayer):
 
     def get_attention_context(self) -> Any:
         ac = type('AC', (), {})()
+        # expose the raw items for tests
+        ac.items = list(self.attention_stack)
         ac.primary = self.attention_stack[0] if self.attention_stack else None
         ac.secondary = self.attention_stack[1:] if len(self.attention_stack) > 1 else []
         ac.focus_strength = (1.0 / len(self.attention_stack)) if self.attention_stack else 0.0
