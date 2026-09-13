@@ -1,15 +1,7 @@
 """
-fusion 模块的类型定义
+Types for fusion
 """
-
-from typing import Protocol, Any, Dict
-
+from typing import Protocol, Any
 
 class IFusion(Protocol):
-    """
-    fusion 模块接口
-    """
-
-    def execute(self) -> Any:
-        """执行主逻辑"""
-        ...
+    def execute(self, *args, **kwargs) -> Any: ...
