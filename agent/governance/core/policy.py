@@ -32,8 +32,18 @@ class PolicyCondition:
 
 @dataclass
 class PolicyLimit:
-    name: str
-    limit: int
+    # support test-driven fields: limit_type / max_count and legacy name/limit
+    name: str = ''
+    limit: int = 0
+    limit_type: str = ''
+    max_count: int = 0
+
+    def __post_init__(self):
+        # normalize aliases
+        if not self.name and self.limit_type:
+            self.name = self.limit_type
+        if not self.limit and self.max_count:
+            self.limit = self.max_count
 
 @dataclass
 class PolicyViolation:
