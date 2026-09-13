@@ -80,12 +80,52 @@ class GovernancePolicy:
                     # resolve left value from subject/resource or dotted paths
                     val = None
                     if isinstance(left, str) and left.startswith('$subject_'):
-                        attr = left[len('$subject_'):]
-                        val = getattr(subject, attr, None)
+                        token = left[len('$subject_'):]
+                        val = None
+                        if subject is not None:
+                            # support dict-like subjects
+                            if isinstance(subject, dict):
+                                val = subject.get(token)
+                            else:
+                                # direct attribute
+                                val = getattr(subject, token, None)
+                                # alias map (org -> organization)
+                                if val is None:
+                                    aliases = {'org':'organization'}
+                                    if token in aliases and hasattr(subject, aliases[token]):
+                                        val = getattr(subject, aliases[token], None)
+                                # fuzzy fallback: substring match on attribute names
+                                if val is None:
+                                    for cand in dir(subject):
+                                        if cand.startswith('_'):
+                                            continue
+                                        if token.lower() in cand.lower():
+                                            try:
+                                                val = getattr(subject, cand, None)
+                                                if val is not None:
+                                                    break
+                                            except Exception:
+                                                continue
                     elif isinstance(left, str) and left.startswith('$resource_'):
-                        attr = left[len('$resource_'):]
-                        val = getattr(resource, attr, None) if resource is not None else None
-                    elif isinstance(left, str) and '.' in left:
+                        token = left[len('$resource_'):]
+                        val = None
+                        if resource is not None:
+                            if isinstance(resource, dict):
+                                val = resource.get(token)
+                            else:
+                                val = getattr(resource, token, None)
+                                if val is None:
+                                    for cand in dir(resource):
+                                        if cand.startswith('_'):
+                                            continue
+                                        if token.lower() in cand.lower():
+                                            try:
+                                                val = getattr(resource, cand, None)
+                                                if val is not None:
+                                                    break
+                                            except Exception:
+                                                continue
+elif isinstance(left, str) and '.' in left:
                         parts = left.split('.')
                         if parts[0] == 'resource' and resource is not None:
                             cur = resource
