@@ -19,6 +19,13 @@ class ExecutionConstraints:
     def __init__(self):
         self.limits: Dict[str, Any] = {}
 
+    def check_constraints(self, op, actor):
+        # simple timeout check: if estimated_duration is large, return failing structure
+        est = getattr(op, 'estimated_duration', 0)
+        if est > 3600:
+            return type('R', (), {'passed': False, 'violations': [type('V', (), {'type': 'timeout'})]})()
+        return type('R', (), {'passed': True, 'violations': []})()
+
 class ResourceQuotaManager:
     def __init__(self):
         self.usage: Dict[str, Any] = {}
