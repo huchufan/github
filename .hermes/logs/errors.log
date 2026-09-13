@@ -1,0 +1,1 @@
+2026-09-14 07:28:43,960 WARNING gateway.run: Shutdown context: signal=SIGTERM under_systemd=no parent_pid=946 parent_name=? loadavg_1m=11.35 parent_cmdline='(unknown)'

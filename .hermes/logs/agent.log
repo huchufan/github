@@ -1,0 +1,13 @@
+2026-09-14 07:28:43,947 INFO gateway.run: Received SIGTERM — initiating shutdown
+2026-09-14 07:28:43,960 WARNING gateway.run: Shutdown context: signal=SIGTERM under_systemd=no parent_pid=946 parent_name=? loadavg_1m=11.35 parent_cmdline='(unknown)'
+2026-09-14 07:28:44,033 INFO gateway.run: Stopping gateway...
+2026-09-14 07:28:44,052 INFO gateway.run: Shutdown phase: notify_active_sessions done at +0.02s
+2026-09-14 07:28:44,070 INFO gateway.run: Shutdown phase: drain done at +0.04s (drain took 0.01s, timed_out=False, active_at_start=0, active_now=0, cron_at_start=0, cron_now=0, api_at_start=0, api_now=0, deferred_at_start=0, deferred_now=0)
+2026-09-14 07:28:44,070 INFO gateway.run: Shutdown phase: all adapters disconnected at +0.04s
+2026-09-14 07:28:44,093 INFO gateway.run: Shutdown phase: final-cleanup tool kill done at +0.06s
+2026-09-14 07:28:44,101 INFO gateway.run: Shutdown phase: executor quiesced at +0.07s
+2026-09-14 07:28:44,140 INFO gateway.run: Shutdown phase: SessionDB close done at +0.11s
+2026-09-14 07:28:44,142 INFO gateway.run: Gateway stopped by an unexpected signal — persisting gateway_state=running so container_boot auto-starts on the next boot (issue #42675)
+2026-09-14 07:28:44,146 INFO gateway.run: Gateway stopped (total teardown 0.11s)
+2026-09-14 07:28:44,152 INFO gateway.run: Gateway housekeeping stopped
+2026-09-14 07:28:44,255 INFO gateway.run: Exiting with code 1 (signal-initiated shutdown without restart request) so the service manager can revive the gateway.

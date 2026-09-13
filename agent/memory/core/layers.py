@@ -21,33 +21,60 @@ class MemoryLayer:
         return datetime.now(timezone.utc)
 
     def store(self, key: str, value: Any) -> None:
-    """Store into session storage and mirror into internal cache for tests."""
-    super().store(key, value)
-    try:
-        # use cache.set if available
-        if hasattr(self, "cache") and hasattr(self.cache, "set"):
-            self.cache.set(key, value)
-        elif hasattr(self, "cache") and hasattr(self.cache, "_cache"):
-            self.cache._cache[key] = value
-    except Exception:
-        pass
+        """Store into session storage and mirror into internal cache for tests."""
+        self.storage[key] = value
+        self.created_at[key] = self.now()
+        try:
+            # use cache.set if available
+            if hasattr(self, "cache") and hasattr(self.cache, "set"):
+                self.cache.set(key, value)
+            elif hasattr(self, "cache") and hasattr(self.cache, "_cache"):
+                self.cache._cache[key] = value
+        except Exception:
+            pass
+
+    def _cleanup_expired(self, key: str) -> bool:
+        """Check if key is expired and clean it from all layers if so.
+        
+        Returns True if key was expired and cleaned, False otherwise.
+        Cleans from: storage, created_at, and internal cache.
+        """
+        if key not in self.created_at:
+            return False
+        
+        created = self.created_at[key]
+        if not self.ttl:
+            return False
+        
+        # guard against naive datetimes set by tests or external code
+        try:
+            if created.tzinfo is None:
+                created = created.replace(tzinfo=timezone.utc)
+        except Exception:
+            pass
+        
+        if (self.now() - created) > self.ttl:
+            # Clean from all layers
+            self.storage.pop(key, None)
+            self.created_at.pop(key, None)
+            # Clean from internal cache if present
+            try:
+                if hasattr(self, "cache"):
+                    if hasattr(self.cache, "_cache") and key in self.cache._cache:
+                        del self.cache._cache[key]
+                    elif hasattr(self.cache, "delete"):
+                        self.cache.delete(key)
+            except Exception:
+                pass
+            return True
+        return False
 
     def retrieve(self, key: str) -> Optional[Any]:
         if key not in self.storage:
             return None
-        created = self.created_at.get(key)
-        if self.ttl and created is not None:
-            # guard against naive datetimes set by tests or external code
-            try:
-                if created.tzinfo is None:
-                    from datetime import timezone
-                    created = created.replace(tzinfo=timezone.utc)
-            except Exception:
-                pass
-            if (self.now() - created) > self.ttl:
-                del self.storage[key]
-                del self.created_at[key]
-                return None
+        # Check and clean if expired
+        if self._cleanup_expired(key):
+            return None
         return self.storage[key]
 
     def search(self, query: str, limit: int = 10) -> List[Any]:
@@ -58,6 +85,24 @@ class MemoryLayer:
                 if len(results) >= limit:
                     break
         return results
+
+    def cleanup_expired(self) -> int:
+        """Clean all expired entries and return count of cleaned items.
+        
+        Iterates over all keys and removes those past their TTL.
+        Returns the number of items cleaned.
+        """
+        if not self.ttl:
+            return 0
+        
+        cleaned_count = 0
+        # Get list of keys to avoid "dictionary changed during iteration" error
+        keys_to_check = list(self.storage.keys())
+        for key in keys_to_check:
+            if self._cleanup_expired(key):
+                cleaned_count += 1
+        
+        return cleaned_count
 
 class ImmediateContextMemory(MemoryLayer):
     def __init__(self, max_size: Optional[int] = None, **kwargs):
@@ -200,19 +245,31 @@ class SessionMemory(MemoryLayer):
     """Minimal session-scoped memory (episodic short-lived between requests)
     Async/sync interfaces not required for PoC: simple wrapper around MemoryLayer.
     """
-    def __init__(self, ttl: Optional[timedelta] = None):
+    def __init__(self, ttl: Optional[timedelta] = None, capacity: Optional[int] = None):
         super().__init__("session", ttl=ttl or timedelta(hours=1))
-        # internal in-memory cache used by some tests
-        class _SimpleCache:
-            def __init__(self):
-                self._cache = {}
-            def set(self, k,v):
-                self._cache[k]=v
-            def get(self,k,default=None):
-                return self._cache.get(k, default)
+        # Use LRUCache for internal cache with configurable capacity
+        self.cache = LRUCache(capacity=capacity or 1024)
+        # Wrap LRUCache to expose _cache dict for test compatibility
+        original_cache = self.cache
+        class CacheAdapter:
+            def __init__(self, lru_cache):
+                self._lru = lru_cache
+                self._cache = lru_cache._store  # expose internal OrderedDict
+            
+            def set(self, k, v):
+                self._lru.put(k, v)
+            
+            def get(self, k, default=None):
+                return self._lru.get(k, default)
+            
+            def delete(self, k):
+                if k in self._cache:
+                    del self._cache[k]
+            
             def clear(self):
                 self._cache.clear()
-        self.cache = _SimpleCache()
+        
+        self.cache = CacheAdapter(original_cache)
 
 class EpisodicMemory(MemoryLayer):
     """Episodic memory across a conversation/session with longer TTL."""
@@ -335,6 +392,33 @@ class ArchiveMemory(MemoryLayer):
         if isinstance(val, (bytes, bytearray)):
             raise ArchiveCorruptedError(f"archive {archive_id} data corrupted")
         return self.storage.get(archive_id)
+
+    def search(self, query: str, limit: int = 10) -> List[Any]:
+        """Search archives and return results with archive_id metadata.
+        
+        Returns list of ArchiveSearchResult objects that include archive_id
+        for proper result tracking and validation.
+        """
+        results: List[Any] = []
+        for k, v in self.storage.items():
+            # Skip data marker keys (end with ':data')
+            if k.endswith(':data'):
+                continue
+            # Check if query matches the stored value
+            if query.lower() in str(v).lower():
+                # Create result object with archive_id
+                class ArchiveSearchResult:
+                    def __init__(self, archive_id: str, record: Any):
+                        self.archive_id = archive_id
+                        self.record = record
+                    
+                    def __repr__(self):
+                        return f"ArchiveSearchResult(archive_id={self.archive_id})"
+                
+                results.append(ArchiveSearchResult(archive_id=k, record=v))
+                if len(results) >= limit:
+                    break
+        return results
 
 class Layers:
     def __init__(self, config: Optional[Dict[str, Any]] = None):

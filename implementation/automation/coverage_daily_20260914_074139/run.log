@@ -1,0 +1,102 @@
+=== Hermes daily progress run: 20260914_074139 ===
+.                                                                        [100%]
+..F....................F....F..F.............                            [100%]
+=================================== FAILURES ===================================
+_______________________ test_memorylayer_cleanup_expired _______________________
+
+    def test_memorylayer_cleanup_expired():
+        # Use a concrete MemoryLayer implementation for cleanup test (EpisodicMemory)
+        em = EpisodicMemory(ttl=timedelta(seconds=1))
+        em.store('k1', {'a': 1})
+        # force created_at old
+        em.created_at['k1'] = datetime.now() - timedelta(days=2)
+>       cleaned = em.cleanup_expired()
+                  ^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'EpisodicMemory' object has no attribute 'cleanup_expired'
+
+agent/memory/tests/test_layers_targeted.py:22: AttributeError
+____________________ test_session_cache_eviction_on_expiry _____________________
+
+    def test_session_cache_eviction_on_expiry():
+        sm = SessionMemory(ttl=timedelta(seconds=1))
+        rec = SessionRecord(session_id='s-evict', user_id='u-1', summary='')
+        sm.store('s-evict', rec)
+        # ensure cached
+        assert 's-evict' in sm.cache._cache
+        # expire by setting created_at old
+        sm.created_at['s-evict'] = datetime.now() - timedelta(days=2)
+        val = sm.retrieve('s-evict')
+        assert val is None
+        assert 's-evict' not in sm.storage
+>       assert 's-evict' not in sm.cache._cache
+E       AssertionError: assert 's-evict' not in {'s-evict': SessionRecord(session_id='s-evict', user_id='u-1', created_at=datetime.datetime(2026, 9, 13, 23, 41, 50, 3...ession_variables={}, session_goals=[], summary='', key_decisions=[], message_count=0, duration=0.0, access_control={})}
+E        +  where {'s-evict': SessionRecord(session_id='s-evict', user_id='u-1', created_at=datetime.datetime(2026, 9, 13, 23, 41, 50, 3...ession_variables={}, session_goals=[], summary='', key_decisions=[], message_count=0, duration=0.0, access_control={})} = <agent.memory.core.layers.SessionMemory.__init__.<locals>._SimpleCache object at 0x10ea3d6a0>._cache
+E        +    where <agent.memory.core.layers.SessionMemory.__init__.<locals>._SimpleCache object at 0x10ea3d6a0> = <agent.memory.core.layers.SessionMemory object at 0x10e9f9f30>.cache
+
+agent/memory/tests/test_layers_session_coverage.py:21: AssertionError
+__________________ test_archive_search_and_corrupted_handling __________________
+
+    def test_archive_search_and_corrupted_handling():
+        am = ArchiveMemory()
+        s = SessionRecord(session_id='sa1', user_id='ua1', created_at=datetime.now())
+        ref = am.archive_session(s)
+        # search should find the archive reference by session id
+        found = am.search('sa1')
+>       assert any(ref.archive_id == v.archive_id for v in found if hasattr(v, 'archive_id'))
+E       assert False
+E        +  where False = any(<generator object test_archive_search_and_corrupted_handling.<locals>.<genexpr> at 0x10eaaa980>)
+
+agent/memory/tests/test_layers_session_coverage.py:69: AssertionError
+____________ test_sessionmemory_cache_expiry_cleans_internal_cache _____________
+
+    def test_sessionmemory_cache_expiry_cleans_internal_cache():
+        sm = SessionMemory(ttl=timedelta(seconds=1))
+        rec = SessionRecord(session_id='sessX', user_id='uX')
+        sm.store('sessX', rec)
+        assert sm.retrieve('sessX') is not None
+        # simulate expiry
+        sm.created_at['sessX'] = datetime.now() - timedelta(days=31)
+        got = sm.retrieve('sessX')
+        assert got is None
+        # internal cache should not contain key
+        internal = getattr(sm.cache, '_cache', {})
+>       assert 'sessX' not in internal
+E       AssertionError: assert 'sessX' not in {'sessX': SessionRecord(session_id='sessX', user_id='uX', created_at=datetime.datetime(2026, 9, 13, 23, 41, 50, 407972...ession_variables={}, session_goals=[], summary='', key_decisions=[], message_count=0, duration=0.0, access_control={})}
+
+agent/memory/tests/test_layers_gap2.py:50: AssertionError
+=========================== short test summary info ============================
+FAILED agent/memory/tests/test_layers_targeted.py::test_memorylayer_cleanup_expired
+FAILED agent/memory/tests/test_layers_session_coverage.py::test_session_cache_eviction_on_expiry
+FAILED agent/memory/tests/test_layers_session_coverage.py::test_archive_search_and_corrupted_handling
+FAILED agent/memory/tests/test_layers_gap2.py::test_sessionmemory_cache_expiry_cleans_internal_cache
+........................................................................ [ 22%]
+............................................F
+=================================== FAILURES ===================================
+____________ test_sessionmemory_cache_expiry_cleans_internal_cache _____________
+
+    def test_sessionmemory_cache_expiry_cleans_internal_cache():
+        sm = SessionMemory(ttl=timedelta(seconds=1))
+        rec = SessionRecord(session_id='sessX', user_id='uX')
+        sm.store('sessX', rec)
+        assert sm.retrieve('sessX') is not None
+        # simulate expiry
+        sm.created_at['sessX'] = datetime.now() - timedelta(days=31)
+        got = sm.retrieve('sessX')
+        assert got is None
+        # internal cache should not contain key
+        internal = getattr(sm.cache, '_cache', {})
+>       assert 'sessX' not in internal
+E       AssertionError: assert 'sessX' not in {'sessX': SessionRecord(session_id='sessX', user_id='uX', created_at=datetime.datetime(2026, 9, 13, 23, 41, 51, 878576...ession_variables={}, session_goals=[], summary='', key_decisions=[], message_count=0, duration=0.0, access_control={})}
+
+agent/memory/tests/test_layers_gap2.py:50: AssertionError
+=========================== short test summary info ============================
+FAILED agent/memory/tests/test_layers_gap2.py::test_sessionmemory_cache_expiry_cleans_internal_cache
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 1214, in parse
+    tree.parse(source, parser)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 566, in parse
+    source = open(source, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/huchufan/Hermes/implementation/automation/coverage_daily_20260914_074139/coverage.xml'
