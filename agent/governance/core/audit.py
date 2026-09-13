@@ -16,6 +16,8 @@ class ComplianceReport:
     summary: str
     details: List[str]
     audit_coverage: float = 0.0
+    policy_id: str = ""
+    log_integrity: bool = True
 
 @dataclass
 class AnomalyReport:
