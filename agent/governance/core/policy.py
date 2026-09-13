@@ -87,13 +87,14 @@ class Policy:
     """Policy module (PoC)
     Accepts constructor args used by tests (id, name, applies_to, conditions, limits)
     """
-    def __init__(self, id: str = '', name: str = '', applies_to: Optional[List[str]] = None, conditions: Optional[List[PolicyCondition]] = None, limits: Optional[List[PolicyLimit]] = None, config: Optional[Dict[str, Any]] = None):
+    def __init__(self, id: str = '', name: str = '', applies_to: Optional[List[str]] = None, conditions: Optional[List[PolicyCondition]] = None, limits: Optional[List[PolicyLimit]] = None, config: Optional[Dict[str, Any]] = None, violation_severity: Optional[str] = None):
         self.id = id
         self.name = name
         self.applies_to = applies_to or []
         self.conditions: List[PolicyCondition] = conditions or []
         self.limits: List[PolicyLimit] = limits or []
         self.config = config or {}
+        self.violation_severity = violation_severity
         self.validator = PolicyValidator()
 
     def add_condition(self, cond: PolicyCondition):
