@@ -119,6 +119,24 @@ class AuditAnalyzer:
                 anomalies.append(AnomalyReport(summary='privilege escalation', reason='guest accessed protected resource', type='PRIVILEGE_ESCALATION', severity=3))
         return anomalies
 
+    def detect_anomalies(self, time_window=None):
+        """Detect generic anomalies from the logger's records in the given time window."""
+        records = self.logger.records if self.logger else []
+        out: List[AnomalyReport] = []
+        # simple heuristics: many accesses to confidential resources or many failures
+        by_actor: Dict[str, int] = {}
+        for r in records:
+            actor = getattr(r, 'actor_id', 'unknown')
+            by_actor[actor] = by_actor.get(actor, 0) + 1
+            if getattr(r, 'data_classification', None) in ('CONFIDENTIAL', 'SECRET'):
+                out.append(AnomalyReport(summary='sensitive access', reason='accessed confidential resource', type='UNUSUAL_ACCESS', severity=2))
+            if getattr(r, 'operation_status', None) == 'FAILURE':
+                out.append(AnomalyReport(summary='operation failures', reason='failure observed', type='HIGH_FAILURE_RATE', severity=3))
+        for actor, cnt in by_actor.items():
+            if cnt > 50:
+                out.append(AnomalyReport(summary=f'unusual access count {cnt}', reason='high access count', type='UNUSUAL_ACCESS', severity=2))
+        return out
+
     def generate_compliance_report(self, start, end, policy_id):
         return ComplianceReport(summary='empty', details=[], audit_coverage=0.0)
 
