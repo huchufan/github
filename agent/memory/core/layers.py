@@ -103,16 +103,20 @@ class SemanticMemory(MemoryLayer):
         self.index: List[Dict[str, Any]] = []
         self.dim = dim
         # PoC semantic index holder and embedding model stub used by tests
-        self.semantic_index = set()
+        class _IndexShim:
+            def __init__(self):
+                self._ids = set()
+            def add(self, id, vector=None):
+                self._ids.add(id)
+            def __contains__(self, id):
+                return id in self._ids
+        self.semantic_index = _IndexShim()
         class EmbStub:
             def __init__(self, dim):
                 self.dim = dim
             def embed(self, text):
                 return [0.0]*self.dim
-        # support tests that call semantic_index.add(id, vector)
-        def _add(idx, id, vector=None):
-            idx.add(id)
-        self.semantic_index.add = lambda x, v=None: _add(self.semantic_index, x, v)
+        self.embedding_model = EmbStub(dim)
 
     def index_item(self, id: str, vector: List[float], payload: Any):
         self.index.append({"id": id, "vector": vector, "payload": payload})
