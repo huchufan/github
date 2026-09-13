@@ -32,6 +32,10 @@ class GovernancePolicy:
                 return True
         return False
 
+    def add_rule(self, rule: AccessRule):
+        # append an AccessRule-like object to rules for deny/allow evaluation
+        self.rules.append(rule)
+
     def evaluate_access(self, subject, action: str, resource, ctx):
         """Compatibility shim: return object with .allow attribute.
         Accepts subject.role as enum or string. Maps action string to Permission when possible.
