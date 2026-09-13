@@ -3,20 +3,20 @@ Governance Framework - Policy Module (compat shim + PoC)
 Provides minimal PolicyCondition/PolicyLimit/PolicyValidator/PolicyViolation
 and a simple Policy class for tests and imports.
 """
-from typing import Any, Dict, NamedTuple, List, Optional
-from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
+from dataclasses import dataclass, field
 
 from agent.core.types import Operation
 
 @dataclass
 class PolicyCondition:
     # Support both old and new field names: tests may pass 'field'/'operator' or 'key'/'op'
-    key: str | None = None
-    op: str | None = None
+    key: Optional[str] = None
+    op: Optional[str] = None
     value: Any = None
     # aliases that tests may use
-    field: str | None = None
-    operator: str | None = None
+    field: Optional[str] = None
+    operator: Optional[str] = None
 
     def __post_init__(self):
         # normalize aliases
@@ -48,17 +48,27 @@ class PolicyLimit:
 @dataclass
 class PolicyViolation:
     reason: str
+    policy_id: str = ''
+    limit: Optional[PolicyLimit] = None
 
-class ValidationResult(NamedTuple):
+@dataclass
+class ValidationResult:
     allowed: bool
     action: str = 'ALLOW'
+    violations: List[PolicyViolation] = field(default_factory=list)
 
 class PolicyValidator:
     def __init__(self):
         self.policies: List[Policy] = []
+        # usage counters for quota checks: {actor_id: {resource_name: used}}
+        self.usage_counters: Dict[str, Dict[str, int]] = {}
 
     def register_policy(self, policy: 'Policy') -> None:
         self.policies.append(policy)
+
+    def record_usage(self, actor_id: str, resource_name: str, amount: int = 1) -> None:
+        self.usage_counters.setdefault(actor_id, {})
+        self.usage_counters[actor_id][resource_name] = self.usage_counters[actor_id].get(resource_name, 0) + amount
 
     def validate_operation(self, op: Operation) -> ValidationResult:
         # check each registered policy that applies to the operation
@@ -69,7 +79,7 @@ class PolicyValidator:
                     applies = True
             if not applies:
                 continue
-            # evaluate conditions: if any condition denies, return DENY
+            # evaluate conditions: if any condition denies, return DENY with violation
             for cond in getattr(pol, 'conditions', []):
                 k = cond.key
                 oper = cond.op
@@ -77,17 +87,22 @@ class PolicyValidator:
                 if k == 'role':
                     role_val = getattr(op.actor, 'role', None)
                     if oper in ('ne', '!=') and role_val == val:
-                        return ValidationResult(False, 'DENY')
+                        return ValidationResult(False, 'DENY', [PolicyViolation(reason='condition_denied', policy_id=pol.id)])
                     if oper in ('eq', '==') and role_val != val:
-                        return ValidationResult(False, 'DENY')
-            # if no denying condition found, allow
-            return ValidationResult(True, 'ALLOW')
+                        return ValidationResult(False, 'DENY', [PolicyViolation(reason='condition_denied', policy_id=pol.id)])
+            # check limits
+            for lim in getattr(pol, 'limits', []):
+                used = self.usage_counters.get(getattr(op.actor, 'id', ''), {}).get(lim.name, 0)
+                if used >= lim.limit:
+                    return ValidationResult(False, 'DENY', [PolicyViolation(reason='limit_exceeded', policy_id=pol.id, limit=lim)])
+            # if no denying condition or limit found, allow
+            return ValidationResult(True, 'ALLOW', [])
         # default deny when no policy allows
-        return ValidationResult(False, 'DENY')
+        return ValidationResult(False, 'DENY', [])
 
 class RuleEngine:
     def decide(self, input_data: Dict[str, Any]) -> ValidationResult:
-        return ValidationResult(True, 'ALLOW')
+        return ValidationResult(True, 'ALLOW', [])
 
     def evaluate_rule(self, policy: 'Policy', context: Dict[str, Any]) -> ValidationResult:
         # Very small evaluator: check conditions in policy against context dict
@@ -115,7 +130,7 @@ class RuleEngine:
             allow = all(results) if results else True
         else:
             allow = any(results) if results else True
-        # return a small object with .passed (legacy tests expect rd.passed)
+        # return a small object with .passed for legacy tests
         return type('R', (), {'passed': allow, 'action': 'ALLOW' if allow else 'DENY'})()
 
 class RuleDecision:
