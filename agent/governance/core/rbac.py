@@ -46,22 +46,20 @@ class GovernancePolicy:
         self.rules.append(rule)
 
     def _eval_condition(self, cond, subject, resource):
-        # cond can be dict with keys left/operator/right
+        # cond is expected as dict {left, operator, right}
         left = cond.get('left')
         op = cond.get('operator')
         right = cond.get('right')
-        # support $subject_<token> and $resource_<token>
+        # handle $subject_token and $resource_token
         if isinstance(left, str) and left.startswith('$subject_'):
             token = left[len('$subject_'):]
             val = getattr(subject, token, None) if subject is not None else None
-            # fuzzy alias: organization vs org
             if val is None and hasattr(subject, 'organization') and 'org' in token.lower():
                 val = getattr(subject, 'organization', None)
         elif isinstance(left, str) and left.startswith('$resource_'):
             token = left[len('$resource_'):]
             val = getattr(resource, token, None) if resource is not None else None
         else:
-            # dotted path support
             val = None
             if isinstance(left, str) and '.' in left:
                 parts = left.split('.')
@@ -75,15 +73,10 @@ class GovernancePolicy:
             return val == right
         if op in ('ne', '!='):
             return val != right
-        # unknown operator -> false
         return False
 
     def evaluate_access(self, subject, action: str, resource, ctx: Optional[ExecutionContext] = None):
-        """Evaluate ABAC rules first; fallback to RBAC check.
-
-        Return a decision-like object with attributes: allow (bool), audit_code (str), reason (str)
-        """
-        # ABAC
+        # ABAC rules
         for rule in getattr(self, 'rules', []):
             conds = rule.conditions or []
             if not conds:
@@ -103,7 +96,7 @@ class GovernancePolicy:
                     return type('D', (), {'allow': False, 'audit_code': 'ACCESS_DENIED', 'reason': getattr(rule, 'deny_reason', '')})()
                 if eff == 'ALLOW':
                     return type('D', (), {'allow': True, 'audit_code': 'ACCESS_GRANTED', 'reason': ''})()
-        # RBAC fallback: map action string -> Permission enum if possible
+        # RBAC fallback
         perm = None
         try:
             perm = Permission(action)
@@ -112,7 +105,6 @@ class GovernancePolicy:
                 perm = Permission[action]
             except Exception:
                 perm = None
-        # derive role value
         role_val = getattr(subject, 'role', subject)
         try:
             role_enum = Role(role_val) if not isinstance(role_val, Role) else role_val
@@ -121,7 +113,6 @@ class GovernancePolicy:
         allowed = False
         if perm is not None:
             allowed = perm in DEFAULT_ROLE_PERMISSIONS.get(role_enum, set())
-        # return decision-like object
         return type('D', (), {'allow': bool(allowed), 'audit_code': 'ACCESS_GRANTED' if allowed else 'ACCESS_DENIED_RBAC', 'reason': ''})()
 
 
@@ -135,7 +126,11 @@ class RBACManager:
         self.config: Dict[str, Any] = {}
 
     def get_permissions(self, role: Role) -> Set[Permission]:
-        # ADMIN gets all permissions by default
+        if not isinstance(role, Role):
+            try:
+                role = Role(role)
+            except Exception:
+                return set()
         if role == Role.ADMIN:
             return set(p for p in Permission)
         base = set(DEFAULT_ROLE_PERMISSIONS.get(role, set()))
