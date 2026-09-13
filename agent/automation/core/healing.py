@@ -1,18 +1,21 @@
 """
-Automation Framework - Healing Module
-Generated: 2026-09-13T11:11:15.370774
+Automation Framework - Healing Module (compat shim)
+Provides SelfHealingSystem and AdaptiveOptimizer expected by package imports.
 """
+from typing import Any, Dict
 
-from typing import Any, Dict, Optional
+class AdaptiveOptimizer:
+    def __init__(self):
+        pass
 
-class Healing:
-    """Healing module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+    def optimize(self, state):
+        return state
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "healing", "ok": True}
+class SelfHealingSystem:
+    def __init__(self):
+        self.state = {}
 
-__all__ = ['Healing']
+    def attempt_heal(self, context):
+        return {"healed": True}
+
+__all__ = ['SelfHealingSystem', 'AdaptiveOptimizer']
