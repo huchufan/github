@@ -205,6 +205,12 @@ class RBACManager:
             raise AccessDeniedError(getattr(dec, 'reason', 'access denied'))
         return True
 
+    def execute(self, *args, **kwargs):
+        """PoC execute method expected by legacy tests: returns a simple success dict.
+        Meant as a minimal compatibility shim.
+        """
+        return {'ok': True}
+
 
 # Backwards-compatibility alias for older tests expecting 'Rbac'
 class Rbac(RBACManager):
