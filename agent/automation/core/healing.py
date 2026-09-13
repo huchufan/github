@@ -1,8 +1,15 @@
 """
-Automation Framework - Healing Module (compat shim)
-Provides SelfHealingSystem and AdaptiveOptimizer expected by package imports.
+Automation Framework - Healing Module (compat shim + PoC)
+Provides Healing (PoC), SelfHealingSystem and AdaptiveOptimizer for tests.
 """
 from typing import Any, Dict
+
+class Healing:
+    def __init__(self, config: Dict[str, Any] | None = None):
+        self.config = config or {}
+
+    def execute(self, *args, **kwargs):
+        return {"ok": True}
 
 class AdaptiveOptimizer:
     def __init__(self):
@@ -18,4 +25,4 @@ class SelfHealingSystem:
     def attempt_heal(self, context):
         return {"healed": True}
 
-__all__ = ['SelfHealingSystem', 'AdaptiveOptimizer']
+__all__ = ['Healing', 'SelfHealingSystem', 'AdaptiveOptimizer']
