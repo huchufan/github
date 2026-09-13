@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 # Use canonical Role and Permission from agent.core.types to ensure consistency
 from agent.core.types import Role, Permission
+from agent.core.errors import AccessDeniedError
 
 @dataclass
 class AccessRule:
