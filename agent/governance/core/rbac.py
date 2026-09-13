@@ -1,294 +1,246 @@
 from typing import Set, Dict, Any, Optional
 from dataclasses import dataclass
-# Use canonical Role and Permission from agent.core.types to ensure consistency
-from agent.core.types import Role, Permission
+
+# canonical Role/Permission from core types
+from agent.core.types import Role, Permission, Actor, Resource, ExecutionContext
 from agent.core.errors import AccessDeniedError
+
+
 @dataclass
 class AccessRule:
-# PoC AccessRule matching test construction (effect, conditions, deny_reason, priority)
-effect: str = "ALLOW"
-conditions: list | None = None
-deny_reason: str = ""
-priority: int = 0
-role: Optional[Role] = None
-permission: Optional[Permission] = None
-resource: str = "*"
-# sensible default permissions map
+    """PoC AccessRule shape used by tests.
+
+    Fields: effect ('ALLOW'|'DENY'), conditions (list of dicts), deny_reason, priority,
+    optional role/permission/resource for RBAC-bound rules.
+    """
+    effect: str = "ALLOW"
+    conditions: Optional[list] = None
+    deny_reason: str = ""
+    priority: int = 0
+    role: Optional[Role] = None
+    permission: Optional[Permission] = None
+    resource: str = "*"
+
+
+# sensible default RBAC mapping used by tests
 DEFAULT_ROLE_PERMISSIONS: Dict[Role, Set[Permission]] = {
-Role.ADMIN: set(p for p in Permission),
-Role.DEVELOPER: {Permission.EXECUTE_AGENT, Permission.READ_MEMORY},
-Role.USER: {Permission.EXECUTE_AGENT},
-Role.GUEST: {Permission.QUERY_READONLY},
+    Role.ADMIN: set(p for p in Permission),
+    Role.DEVELOPER: {Permission.EXECUTE_AGENT, Permission.READ_MEMORY},
+    Role.USER: {Permission.EXECUTE_AGENT},
+    Role.GUEST: {Permission.QUERY_READONLY},
 }
+
+
 class GovernancePolicy:
-"""Minimal policy container and ABAC rule evaluator (PoC).
-Provides .allows(role, permission, resource) for RBAC default checks and
-evaluate_access(subject, action, resource, ctx) for ABAC-style rule evaluation.
-"""
-def __init__(self, rules: Optional[list] = None):
-self.rules = rules or []
-def allows(self, role: Role, permission: Permission, resource: str = "*") -> bool:
-# simple check against defaults then explicit rules
-if permission in DEFAULT_ROLE_PERMISSIONS.get(role, set()):
-return True
-for r in self.rules:
-if getattr(r, 'role', None) == role and getattr(r, 'permission', None) == permission and (
-getattr(r, 'resource', None) == resource or getattr(r, 'resource', None) == "*"
-):
-return True
-return False
-def add_rule(self, rule: AccessRule):
-# append an AccessRule-like object to rules for deny/allow evaluation
-self.rules.append(rule)
-def evaluate_access(self, subject, action: str, resource, ctx):
-"""Evaluate ABAC rules first; fallback to RBAC default check.
-Returns a lightweight decision-like object with attributes:
-- allow (bool)
-- audit_code (str)
-- reason (str)
-"""
-# ABAC: iterate rules and evaluate conditions (supports dict or object conditions)
-for rule in getattr(self, 'rules', []):
-try:
-conds = getattr(rule, 'conditions', None) or []
-if not conds:
-continue
-matches = True
-for cond in conds:
-if isinstance(cond, dict):
-left = cond.get('left')
-op = cond.get('operator')
-right = cond.get('right')
-else:
-left = getattr(cond, 'left', None) or getattr(cond, 'key', None)
-op = getattr(cond, 'operator', None) or getattr(cond, 'op', None)
-right = getattr(cond, 'right', None) or getattr(cond, 'value', None)
-# resolve left value from subject/resource or dotted paths
-val = None
-if isinstance(left, str) and left.startswith('$subject_'):
-token = left[len('$subject_'):]
-val = None
-if subject is not None:
-# support dict-like subjects
-if isinstance(subject, dict):
-val = subject.get(token)
-else:
-# direct attribute
-val = getattr(subject, token, None)
-# alias map (org -> organization)
-if val is None:
-aliases = {'org':'organization'}
-if token in aliases and hasattr(subject, aliases[token]):
-val = getattr(subject, aliases[token], None)
-# fuzzy fallback: substring match on attribute names
-if val is None:
-for cand in dir(subject):
-if cand.startswith('_'):
-continue
-if token.lower() in cand.lower():
-try:
-val = getattr(subject, cand, None)
-if val is not None:
-break
-except Exception:
-continue
-elif isinstance(left, str) and left.startswith('$resource_'):
-token = left[len('$resource_'):]
-val = None
-if resource is not None:
-if isinstance(resource, dict):
-val = resource.get(token)
-else:
-val = getattr(resource, token, None)
-if val is None:
-for cand in dir(resource):
-if cand.startswith('_'):
-continue
-if token.lower() in cand.lower():
-try:
-val = getattr(resource, cand, None)
-if val is not None:
-break
-except Exception:
-continue
-elif isinstance(left, str) and '.' in left:
-parts = left.split('.')
-if parts[0] == 'resource' and resource is not None:
-cur = resource
-for ppart in parts[1:]:
-cur = getattr(cur, ppart, None) if not isinstance(cur, dict) else cur.get(ppart)
-val = cur
-elif parts[0] == 'subject':
-cur = subject
-for ppart in parts[1:]:
-cur = getattr(cur, ppart, None) if not isinstance(cur, dict) else cur.get(ppart)
-val = cur
-else:
-val = None
-# compare
-if op in ('eq', '=='):
-if val != right:
-matches = False
-break
-elif op in ('ne', '!='):
-if val == right:
-matches = False
-break
-else:
-# unsupported -> fail this rule
-matches = False
-break
-if matches:
-eff = getattr(rule, 'effect', '').upper()
-if eff == 'DENY':
-return type('D', (), {'allow': False, 'audit_code': 'ACCESS_DENIED', 'reason': getattr(rule, 'deny_reason', '')})()
-if eff == 'ALLOW':
-return type('D', (), {'allow': True, 'audit_code': 'ACCESS_GRANTED', 'reason': ''})()
-except Exception:
-# ignore ABAC evaluation errors in PoC
-pass
-# Fallback: RBAC mapping
-role_val = getattr(subject, 'role', subject)
-if hasattr(role_val, 'value'):
-role_val = role_val.value
-try:
-role_enum = Role(role_val)
-except Exception:
-return type('D', (), {'allow': False, 'audit_code': 'ACCESS_DENIED', 'reason': ''})()
-perm = None
-if isinstance(action, str):
-try:
-perm = Permission(action)
-except Exception:
-try:
-perm = Permission[action]
-except Exception:
-perm = None
-if perm is None:
-perm = Permission.EXECUTE_AGENT
-allowed = self.allows(role_enum, perm, getattr(resource, 'type', '*'))
-return type('D', (), {'allow': allowed, 'audit_code': 'ACCESS_GRANTED' if allowed else 'ACCESS_DENIED', 'reason': ''})()
+    """Minimal policy container and ABAC rule evaluator (PoC).
+
+    Methods:
+      - add_rule(rule)
+      - evaluate_access(subject, action, resource, ctx) -> decision object
+    """
+
+    def __init__(self, rules: Optional[list] = None):
+        self.rules = rules or []
+
+    def add_rule(self, rule: AccessRule):
+        self.rules.append(rule)
+
+    def _eval_condition(self, cond, subject, resource):
+        # cond can be dict with keys left/operator/right
+        left = cond.get('left')
+        op = cond.get('operator')
+        right = cond.get('right')
+        # support $subject_<token> and $resource_<token>
+        if isinstance(left, str) and left.startswith('$subject_'):
+            token = left[len('$subject_'):]
+            val = getattr(subject, token, None) if subject is not None else None
+            # fuzzy alias: organization vs org
+            if val is None and hasattr(subject, 'organization') and 'org' in token.lower():
+                val = getattr(subject, 'organization', None)
+        elif isinstance(left, str) and left.startswith('$resource_'):
+            token = left[len('$resource_'):]
+            val = getattr(resource, token, None) if resource is not None else None
+        else:
+            # dotted path support
+            val = None
+            if isinstance(left, str) and '.' in left:
+                parts = left.split('.')
+                cur = subject if parts[0] == 'subject' else resource if parts[0] == 'resource' else None
+                for p in parts[1:]:
+                    if cur is None:
+                        break
+                    cur = getattr(cur, p, None) if not isinstance(cur, dict) else cur.get(p)
+                val = cur
+        if op in ('eq', '=='):
+            return val == right
+        if op in ('ne', '!='):
+            return val != right
+        # unknown operator -> false
+        return False
+
+    def evaluate_access(self, subject, action: str, resource, ctx: Optional[ExecutionContext] = None):
+        """Evaluate ABAC rules first; fallback to RBAC check.
+
+        Return a decision-like object with attributes: allow (bool), audit_code (str), reason (str)
+        """
+        # ABAC
+        for rule in getattr(self, 'rules', []):
+            conds = rule.conditions or []
+            if not conds:
+                continue
+            passed = True
+            for cond in conds:
+                try:
+                    if not self._eval_condition(cond, subject, resource):
+                        passed = False
+                        break
+                except Exception:
+                    passed = False
+                    break
+            if passed:
+                eff = (rule.effect or "").upper()
+                if eff == 'DENY':
+                    return type('D', (), {'allow': False, 'audit_code': 'ACCESS_DENIED', 'reason': getattr(rule, 'deny_reason', '')})()
+                if eff == 'ALLOW':
+                    return type('D', (), {'allow': True, 'audit_code': 'ACCESS_GRANTED', 'reason': ''})()
+        # RBAC fallback: map action string -> Permission enum if possible
+        perm = None
+        try:
+            perm = Permission(action)
+        except Exception:
+            try:
+                perm = Permission[action]
+            except Exception:
+                perm = None
+        # derive role value
+        role_val = getattr(subject, 'role', subject)
+        try:
+            role_enum = Role(role_val) if not isinstance(role_val, Role) else role_val
+        except Exception:
+            role_enum = Role.GUEST
+        allowed = False
+        if perm is not None:
+            allowed = perm in DEFAULT_ROLE_PERMISSIONS.get(role_enum, set())
+        # return decision-like object
+        return type('D', (), {'allow': bool(allowed), 'audit_code': 'ACCESS_GRANTED' if allowed else 'ACCESS_DENIED_RBAC', 'reason': ''})()
+
+
 class RBACManager:
-"""Compatibility manager for RBAC-style APIs used in tests.
-Minimal interface:
-- get_permissions(role) -> Set[Permission]
-- resolve_role(subject) -> Role
-- evaluate_access(subject, action, resource, ctx) -> decision object
-- enforce_access(subject, action, resource, ctx) -> True or raises AccessDeniedError
-- grant_permission / revoke_permission for dynamic tests
-"""
-def __init__(self, policy: Optional[GovernancePolicy] = None):
-self.policy = policy or GovernancePolicy()
-# dynamic grants and revokes applied at runtime (tests mutate these)
-self._overrides: Dict[Role, Set[Permission]] = {}
-self._revoked: Dict[Role, Set[Permission]] = {}
-# compatibility: basic config store expected by legacy tests
-self.config: Dict[str, Any] = {}
-def get_permissions(self, role: Role) -> Set[Permission]:
-# Admin role has all permissions by design
-if role == Role.ADMIN:
-return set(p for p in Permission)
-# base defaults, plus overrides, minus revoked entries
-base = set(DEFAULT_ROLE_PERMISSIONS.get(role, set()))
-base |= set(self._overrides.get(role, set()))
-base -= set(self._revoked.get(role, set()))
-return base
-def check_permission(self, role: Role, permission: Permission) -> bool:
-"""Return True if the role currently has the permission.
-Normalize inputs to canonical enums. Revoked permissions take precedence.
-Overrides are respected. Admin has implicit grant unless revoked.
-"""
-# normalize role/permission
-try:
-if not isinstance(role, Role):
-role = Role(role)
-except Exception:
-pass
-try:
-if not isinstance(permission, Permission):
-permission = Permission(permission)
-except Exception:
-pass
-# revoked permissions take precedence
-if role in self._revoked and permission in self._revoked.get(role, set()):
-return False
-# explicit overrides add permissions
-if role in self._overrides and permission in self._overrides.get(role, set()):
-return True
-# Admin has all permissions unless explicitly revoked above
-if role == Role.ADMIN:
-return True
-return permission in self.get_permissions(role)
-def grant_permission(self, role: Role, permission: Permission):
-"""Grant a permission to a role at runtime (for tests/PoC).
-Normalize inputs; if the permission was previously revoked for the role,
-remove the revocation so a subsequent check_permission will succeed.
-"""
-try:
-if not isinstance(role, Role):
-role = Role(role)
-except Exception:
-pass
-try:
-if not isinstance(permission, Permission):
-permission = Permission(permission)
-except Exception:
-pass
-# remove any explicit revocation for this role+permission
-if role in self._revoked and permission in self._revoked.get(role, set()):
-try:
-self._revoked[role].remove(permission)
-except Exception:
-pass
-self._overrides.setdefault(role, set()).add(permission)
-def revoke_permission(self, role: Role, permission: Permission):
-self._revoked.setdefault(role, set()).add(permission)
-if role in self._overrides and permission in self._overrides[role]:
-self._overrides[role].remove(permission)
-def resolve_role(self, subject) -> Role:
-rv = getattr(subject, 'role', None)
-if rv is None:
-return Role.GUEST
-try:
-return Role(rv) if not isinstance(rv, Role) else rv
-except Exception:
-return Role.GUEST
-def evaluate_access(self, subject, action: str, resource, ctx=None):
-return self.policy.evaluate_access(subject, action, resource, ctx)
-def enforce_access(self, subject, action: str, resource, ctx=None):
-dec = self.evaluate_access(subject, action, resource, ctx)
-if not getattr(dec, 'allow', False):
-raise AccessDeniedError(getattr(dec, 'reason', 'access denied'))
-return True
-def execute(self, *args, **kwargs):
-"""PoC execute method expected by legacy tests: returns a simple success dict.
-Meant as a minimal compatibility shim.
-"""
-return {'ok': True}
-# Backwards-compatibility alias for older tests expecting 'Rbac'
+    """Compatibility manager providing RBAC-style helpers expected by tests."""
+
+    def __init__(self, policy: Optional[GovernancePolicy] = None):
+        self.policy = policy or GovernancePolicy()
+        self._overrides: Dict[Role, Set[Permission]] = {}
+        self._revoked: Dict[Role, Set[Permission]] = {}
+        self.config: Dict[str, Any] = {}
+
+    def get_permissions(self, role: Role) -> Set[Permission]:
+        # ADMIN gets all permissions by default
+        if role == Role.ADMIN:
+            return set(p for p in Permission)
+        base = set(DEFAULT_ROLE_PERMISSIONS.get(role, set()))
+        base |= set(self._overrides.get(role, set()))
+        base -= set(self._revoked.get(role, set()))
+        return base
+
+    def check_permission(self, role: Role, permission: Permission) -> bool:
+        # normalize
+        try:
+            if not isinstance(role, Role):
+                role = Role(role)
+        except Exception:
+            pass
+        try:
+            if not isinstance(permission, Permission):
+                permission = Permission(permission)
+        except Exception:
+            pass
+        # revoked takes precedence
+        if role in self._revoked and permission in self._revoked.get(role, set()):
+            return False
+        # overrides
+        if role in self._overrides and permission in self._overrides.get(role, set()):
+            return True
+        # admin implicit
+        if role == Role.ADMIN:
+            return True
+        return permission in self.get_permissions(role)
+
+    def grant_permission(self, role: Role, permission: Permission):
+        try:
+            if not isinstance(role, Role):
+                role = Role(role)
+        except Exception:
+            pass
+        try:
+            if not isinstance(permission, Permission):
+                permission = Permission(permission)
+        except Exception:
+            pass
+        if role in self._revoked and permission in self._revoked.get(role, set()):
+            try:
+                self._revoked[role].remove(permission)
+            except Exception:
+                pass
+        self._overrides.setdefault(role, set()).add(permission)
+
+    def revoke_permission(self, role: Role, permission: Permission):
+        try:
+            if not isinstance(role, Role):
+                role = Role(role)
+        except Exception:
+            pass
+        try:
+            if not isinstance(permission, Permission):
+                permission = Permission(permission)
+        except Exception:
+            pass
+        self._revoked.setdefault(role, set()).add(permission)
+        if role in self._overrides and permission in self._overrides[role]:
+            try:
+                self._overrides[role].remove(permission)
+            except Exception:
+                pass
+
+    def resolve_role(self, subject) -> Role:
+        rv = getattr(subject, 'role', None)
+        if rv is None:
+            return Role.GUEST
+        try:
+            return Role(rv) if not isinstance(rv, Role) else rv
+        except Exception:
+            return Role.GUEST
+
+    def evaluate_access(self, subject, action: str, resource, ctx=None):
+        return self.policy.evaluate_access(subject, action, resource, ctx)
+
+    def enforce_access(self, subject, action: str, resource, ctx=None):
+        dec = self.evaluate_access(subject, action, resource, ctx)
+        if not getattr(dec, 'allow', False):
+            raise AccessDeniedError(getattr(dec, 'reason', 'access denied'))
+        return True
+
+    def execute(self, *args, **kwargs):
+        return {'ok': True}
+
+
+# legacy alias
 class Rbac(RBACManager):
-"""Compatibility shim: older tests import Rbac class.
-Minimal subclass of RBACManager with identical behaviour.
-"""
-pass
-# module-level alias
+    pass
+
 Rbac = Rbac
+
+
 def enforce_access(policy_or_manager, subject, action, resource, ctx=None):
-"""Module-level helper preserving older signature patterns used in tests.
-Accepts either a GovernancePolicy or RBACManager-like object as first arg.
-If it's a GovernancePolicy, evaluate via GovernancePolicy.evaluate_access.
-If it's an RBACManager, call its enforce_access.
-"""
-if hasattr(policy_or_manager, 'enforce_access'):
-return policy_or_manager.enforce_access(subject, action, resource, ctx)
-if isinstance(policy_or_manager, GovernancePolicy):
-dec = policy_or_manager.evaluate_access(subject, action, resource, ctx)
-if not getattr(dec, 'allow', False):
-raise AccessDeniedError(getattr(dec, 'reason', 'access denied'))
-return True
-# unknown manager: try to treat as a policy dict
-try:
-mgr = RBACManager(policy_or_manager)
-return mgr.enforce_access(subject, action, resource, ctx)
-except Exception:
-raise AccessDeniedError('access denied')
+    if hasattr(policy_or_manager, 'enforce_access'):
+        return policy_or_manager.enforce_access(subject, action, resource, ctx)
+    if isinstance(policy_or_manager, GovernancePolicy):
+        dec = policy_or_manager.evaluate_access(subject, action, resource, ctx)
+        if not getattr(dec, 'allow', False):
+            raise AccessDeniedError(getattr(dec, 'reason', 'access denied'))
+        return True
+    try:
+        mgr = RBACManager(policy_or_manager)
+        return mgr.enforce_access(subject, action, resource, ctx)
+    except Exception:
+        raise AccessDeniedError('access denied')
