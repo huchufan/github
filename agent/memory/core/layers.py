@@ -119,10 +119,17 @@ class SemanticMemory(MemoryLayer):
         res = []
         for e in self.index:
             payload = e.get('payload')
-            if isinstance(payload, KnowledgeItem) and query.lower() in payload.content.lower():
+            if isinstance(payload, KnowledgeItem) and query.lower() in (getattr(payload, 'content', '') or '').lower():
                 res.append(payload)
                 if len(res) >= top_k:
                     break
+        # Fallback: if index yielded nothing, search stored items directly (robustness for PoC)
+        if not res:
+            for v in self.storage.values():
+                if isinstance(v, KnowledgeItem) and query.lower() in (getattr(v, 'content', '') or '').lower():
+                    res.append(v)
+                    if len(res) >= top_k:
+                        break
         return res
 
     def build_knowledge_graph(self):
