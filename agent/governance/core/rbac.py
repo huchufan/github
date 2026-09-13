@@ -209,6 +209,9 @@ class RBACManager:
         self.config: Dict[str, Any] = {}
 
     def get_permissions(self, role: Role) -> Set[Permission]:
+        # Admin role has all permissions by design
+        if role == Role.ADMIN:
+            return set(p for p in Permission)
         # base defaults, plus overrides, minus revoked entries
         base = set(DEFAULT_ROLE_PERMISSIONS.get(role, set()))
         base |= set(self._overrides.get(role, set()))
