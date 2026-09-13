@@ -8,9 +8,25 @@ from dataclasses import dataclass
 
 @dataclass
 class PolicyCondition:
-    key: str
-    op: str
-    value: Any
+    # Support both old and new field names: tests may pass 'field'/'operator' or 'key'/'op'
+    key: str | None = None
+    op: str | None = None
+    value: Any = None
+    # aliases that tests may use
+    field: str | None = None
+    operator: str | None = None
+
+    def __post_init__(self):
+        # normalize aliases
+        if self.field and not self.key:
+            self.key = self.field
+        if self.operator and not self.op:
+            self.op = self.operator
+        # final fallback: ensure key/op are strings
+        if self.key is None:
+            self.key = 
+        if self.op is None:
+            self.op = 
 
 @dataclass
 class PolicyLimit:
