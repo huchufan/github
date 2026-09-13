@@ -1,7 +1,7 @@
 """
-Governance Framework - Audit Module (compat shim)
+Governance Framework - Audit Module (compat shim + PoC)
 Provides minimal AuditLogger/AuditAnalyzer/ComplianceReport/AnomalyReport
-names expected by package imports. Lightweight for tests and imports.
+and an Audit PoC object used by some tests.
 """
 from typing import Any, Dict, List
 from dataclasses import dataclass
@@ -32,4 +32,11 @@ class AuditAnalyzer:
                 anomalies.append(e)
         return AnomalyReport(summary=f"{len(anomalies)} anomalies", reason="heuristic")
 
-__all__ = ['AuditLogger', 'AuditAnalyzer', 'ComplianceReport', 'AnomalyReport']
+class Audit:
+    def __init__(self):
+        self.logger = AuditLogger()
+
+    def record_event(self, evt: Dict[str, Any]):
+        self.logger.log(evt)
+
+__all__ = ['Audit', 'AuditLogger', 'AuditAnalyzer', 'ComplianceReport', 'AnomalyReport']
