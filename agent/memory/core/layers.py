@@ -7,6 +7,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, List, Optional
 from .lru import LRUCache
+from .layers_types import KnowledgeItem, SessionRecord
 
 class MemoryLayer:
     """Base memory layer interface"""
@@ -49,17 +50,37 @@ class SemanticMemory(MemoryLayer):
     """Stub semantic memory for embeddings-backed storage (mocked for tests)
     Provides index and query semantics but stores plain values for PoC.
     """
-    def __init__(self):
+    def __init__(self, dim: int = 128):
         super().__init__("semantic", ttl=None)
         # simple list index
         self.index: List[Dict[str, Any]] = []
+        self.dim = dim
 
     def index_item(self, id: str, vector: List[float], payload: Any):
         self.index.append({"id": id, "vector": vector, "payload": payload})
 
-    def query_vector(self, vector: List[float], top_k: int = 5) -> List[Any]:
-        # PoC: return first top_k payloads
-        return [e['payload'] for e in self.index[:top_k]]
+    def store_knowledge_item(self, item: KnowledgeItem):
+        # assign id if missing
+        if not getattr(item, 'knowledge_id', None):
+            item.knowledge_id = f"k_{len(self.index)+1}"
+        self.index.append({"id": item.knowledge_id, "payload": item})
+        self.storage[item.knowledge_id] = item
+        return item
+
+    def semantic_search(self, query: str, top_k: int = 5) -> List[KnowledgeItem]:
+        # PoC: return items whose content contains query
+        res = []
+        for e in self.index:
+            payload = e.get('payload')
+            if isinstance(payload, KnowledgeItem) and query.lower() in payload.content.lower():
+                res.append(payload)
+                if len(res) >= top_k:
+                    break
+        return res
+
+    def build_knowledge_graph(self):
+        # PoC: return dict of id->concepts
+        return {e['id']: getattr(e.get('payload'), 'concepts', []) for e in self.index}
 
 class SessionMemory(MemoryLayer):
     """Minimal session-scoped memory (episodic short-lived between requests)
@@ -82,6 +103,17 @@ class ArchiveMemory(MemoryLayer):
         # append-only behavior
         self.storage[key] = value
 
+    def archive_session(self, session: SessionRecord):
+        aid = f"arc_{len(self.storage)+1}"
+        self.storage[aid] = session
+        class Ref:
+            def __init__(self, archive_id):
+                self.archive_id = archive_id
+        return Ref(archive_id=aid)
+
+    def retrieve_archived_session(self, archive_id: str) -> Optional[SessionRecord]:
+        return self.storage.get(archive_id)
+
 class Layers:
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
@@ -95,4 +127,4 @@ class Layers:
     def execute(self, *args, **kwargs):
         return {"module": "layers", "ok": True}
 
-__all__ = ["MemoryLayer", "ImmediateContextMemory", "SemanticMemory", "SessionMemory", "EpisodicMemory", "ArchiveMemory", "Layers", "LRUCache"]
+__all__ = ["MemoryLayer", "ImmediateContextMemory", "SemanticMemory", "SessionMemory", "EpisodicMemory", "ArchiveMemory", "Layers", "LRUCache", "KnowledgeItem", "SessionRecord"]
