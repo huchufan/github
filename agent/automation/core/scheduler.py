@@ -71,4 +71,13 @@ class ResourceAwareScheduler:
     def schedule(self, tasks, resources=None):
         return tasks
 
+    def optimize_scheduling_order(self, jobs, resource_snapshot=None):
+        """Return jobs ordered by priority desc, simple resource-aware placeholder.
+        Accepts objects with .priority attribute. resource_snapshot is currently unused.
+        """
+        try:
+            return sorted(jobs, key=lambda j: getattr(j, 'priority', 0), reverse=True)
+        except Exception:
+            return jobs
+
 __all__ = ['Scheduler', 'PriorityQueue', 'SchedulingEngine', 'ResourceAwareScheduler']
