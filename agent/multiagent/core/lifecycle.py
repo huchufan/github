@@ -68,6 +68,9 @@ class AgentLifecycleManager:
             raise AgentNotFoundError(agent_id)
         return a
 
+    async def get_all_agents(self) -> List[Agent]:
+        return list(self.agents.values())
+
 
 class Lifecycle:
     def __init__(self, config: Optional[Dict[str, Any]] = None):
