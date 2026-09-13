@@ -1,18 +1,18 @@
 """
-Orchestration Framework - Monitor Module
-Generated: 2026-09-13T11:01:05.561020
+Orchestration Framework - Monitor Module (compat shim)
+Provides ExecutionMonitor and AdaptiveReplanner expected names for imports.
 """
+from typing import Any, Dict, List
 
-from typing import Any, Dict, Optional
+class ExecutionMonitor:
+    def __init__(self):
+        self.events = []
 
-class Monitor:
-    """Monitor module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+    def record(self, evt: Dict[str, Any]):
+        self.events.append(evt)
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "monitor", "ok": True}
+class AdaptiveReplanner:
+    def __init__(self):
+        pass
 
-__all__ = ['Monitor']
+__all__ = ['ExecutionMonitor', 'AdaptiveReplanner']
