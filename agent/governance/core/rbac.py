@@ -219,7 +219,17 @@ class RBACManager:
         return base
 
     def check_permission(self, role: Role, permission: Permission) -> bool:
-        """Return True if the role currently has the permission."""
+        """Return True if the role currently has the permission.
+
+        Revoked permissions take precedence even for ADMIN. For ADMIN, if a
+        permission is not revoked we treat it as granted.
+        """
+        # revoked permissions take precedence
+        if role in self._revoked and permission in self._revoked[role]:
+            return False
+        # Admin has all permissions unless explicitly revoked above
+        if role == Role.ADMIN:
+            return True
         return permission in self.get_permissions(role)
 
     def grant_permission(self, role: Role, permission: Permission):
