@@ -125,7 +125,7 @@ class GovernancePolicy:
                                                     break
                                             except Exception:
                                                 continue
-elif isinstance(left, str) and '.' in left:
+                    elif isinstance(left, str) and '.' in left:
                         parts = left.split('.')
                         if parts[0] == 'resource' and resource is not None:
                             cur = resource
