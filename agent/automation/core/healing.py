@@ -19,6 +19,13 @@ class AdaptiveOptimizer:
     def optimize(self, state):
         return state
 
+    def identify_optimization_opportunities(self, metrics: dict):
+        # naive heuristic: suggest increasing parallelism when potential_speedup > 1
+        ops = []
+        if metrics.get('potential_speedup', 1.0) > 1.1:
+            ops.append({'action': 'increase_parallelism', 'expected_speedup': metrics.get('potential_speedup')})
+        return ops
+
 class SelfHealingSystem:
     def __init__(self):
         self.state = {}
