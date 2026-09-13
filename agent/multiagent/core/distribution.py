@@ -1,18 +1,28 @@
 """
-Multiagent Framework - Distribution Module
-Generated: 2026-09-13T11:25:50.685692
+Multiagent Framework - Distribution Module (compat shim)
+Provides TaskDistributionManager and LoadBalancer minimal implementations for imports/tests.
 """
+from typing import Any, Dict, List
 
-from typing import Any, Dict, Optional
+class LoadBalancer:
+    def __init__(self):
+        self.workers = []
 
-class Distribution:
-    """Distribution module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+    def register_worker(self, w: Dict[str, Any]):
+        self.workers.append(w)
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "distribution", "ok": True}
+    def select_worker(self, job):
+        # naive: return first
+        return self.workers[0] if self.workers else None
 
-__all__ = ['Distribution']
+class TaskDistributionManager:
+    def __init__(self):
+        self.jobs = []
+
+    def distribute(self, job, workers):
+        wb = LoadBalancer()
+        for w in workers:
+            wb.register_worker(w)
+        return wb.select_worker(job)
+
+__all__ = ['TaskDistributionManager', 'LoadBalancer']
