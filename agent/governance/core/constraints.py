@@ -1,10 +1,10 @@
 """
 Governance Framework - Constraints Module (compat shim)
 Provides minimal ConstraintViolation/ConstraintCheckResult/ExecutionConstraints/ResourceQuotaManager
-for imports and lightweight tests.
+for imports and lightweight tests. Also exposes Constraints PoC used by some tests.
 """
 from dataclasses import dataclass
-from typing import List, Any
+from typing import List, Any, Dict
 
 @dataclass
 class ConstraintViolation:
@@ -23,4 +23,11 @@ class ResourceQuotaManager:
     def __init__(self):
         self.usage = {}
 
-__all__ = ['ConstraintViolation', 'ConstraintCheckResult', 'ExecutionConstraints', 'ResourceQuotaManager']
+class Constraints:
+    def __init__(self):
+        self.checks = []
+
+    def check(self, ctx: Dict[str, Any]) -> ConstraintCheckResult:
+        return ConstraintCheckResult(ok=True, violations=[])
+
+__all__ = ['ConstraintViolation', 'ConstraintCheckResult', 'ExecutionConstraints', 'ResourceQuotaManager', 'Constraints']
