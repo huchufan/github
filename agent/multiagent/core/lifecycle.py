@@ -1,18 +1,24 @@
 """
-Multiagent Framework - Lifecycle Module
-Generated: 2026-09-13T11:25:50.682441
+Multiagent Framework - Lifecycle Module (compat shim)
+Provides AgentLifecycleManager and AgentHealthMonitor minimal implementations for imports/tests.
 """
+from typing import Any, Dict, List
 
-from typing import Any, Dict, Optional
+class AgentHealthMonitor:
+    def __init__(self):
+        self.status = {}
 
-class Lifecycle:
-    """Lifecycle module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+    def record(self, agent_id: str, status: Dict[str, Any]):
+        self.status[agent_id] = status
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "lifecycle", "ok": True}
+class AgentLifecycleManager:
+    def __init__(self):
+        self.agents = {}
 
-__all__ = ['Lifecycle']
+    def register_agent(self, agent_id: str, meta: Dict[str, Any] = None):
+        self.agents[agent_id] = meta or {}
+
+    def get_agent(self, agent_id: str):
+        return self.agents.get(agent_id)
+
+__all__ = ['AgentLifecycleManager', 'AgentHealthMonitor']
