@@ -109,7 +109,10 @@ class SemanticMemory(MemoryLayer):
                 self.dim = dim
             def embed(self, text):
                 return [0.0]*self.dim
-        self.embedding_model = EmbStub(dim)
+        # support tests that call semantic_index.add(id, vector)
+        def _add(idx, id, vector=None):
+            idx.add(id)
+        self.semantic_index.add = lambda x, v=None: _add(self.semantic_index, x, v)
 
     def index_item(self, id: str, vector: List[float], payload: Any):
         self.index.append({"id": id, "vector": vector, "payload": payload})
