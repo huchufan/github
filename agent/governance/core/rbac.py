@@ -6,8 +6,13 @@ from agent.core.types import Role, Permission
 
 @dataclass
 class AccessRule:
-    role: Role
-    permission: Permission
+    # PoC AccessRule matching test construction (effect, conditions, deny_reason, priority)
+    effect: str = "ALLOW"
+    conditions: list = None
+    deny_reason: str = ""
+    priority: int = 0
+    role: Optional[Role] = None
+    permission: Optional[Permission] = None
     resource: str = "*"
 
 # sensible default permissions map
