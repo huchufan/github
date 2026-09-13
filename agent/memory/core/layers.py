@@ -43,8 +43,46 @@ class MemoryLayer:
         return results
 
 class ImmediateContextMemory(MemoryLayer):
-    def __init__(self):
+    def __init__(self, max_size: Optional[int] = None, **kwargs):
+        # Accept max_size for compatibility with tests; unused in PoC but stored.
         super().__init__("immediate", ttl=timedelta(hours=2))
+        self.max_size = max_size or 1024
+        # conversation turns storage (list of dict-like entries)
+        self.turns: List[Dict[str, Any]] = []
+        # execution state store
+        self.execution_state: Dict[str, Any] = {}
+        # attention stack
+        self.attention_stack: List[Any] = []
+
+    def record_conversation_turn(self, user_message: str, agent_response: str) -> Dict[str, Any]:
+        t = {
+            'timestamp': self.now(),
+            'user_message': user_message,
+            'agent_response': agent_response,
+        }
+        self.turns.append(t)
+        # trim to max_size for conversation history
+        if len(self.turns) > self.max_size:
+            self.turns = self.turns[-self.max_size:]
+        return t
+
+    def get_conversation_context(self, window_size: int = 5) -> Any:
+        # return a simple context object with required attributes
+        window = self.turns[-window_size:]
+        ctx = type('Ctx', (), {})()
+        ctx.conversation_state = 'active' if window else 'idle'
+        ctx.last_turn_time = window[-1]['timestamp'] if window else None
+        return ctx
+
+    def update_execution_state(self, new_state: Dict[str, Any]) -> None:
+        self.execution_state.update(new_state)
+
+    def get_attention_context(self) -> Any:
+        ac = type('AC', (), {})()
+        ac.primary = self.attention_stack[0] if self.attention_stack else None
+        ac.secondary = self.attention_stack[1:] if len(self.attention_stack) > 1 else []
+        ac.focus_strength = (1.0 / len(self.attention_stack)) if self.attention_stack else 0.0
+        return ac
 
 class SemanticMemory(MemoryLayer):
     """Stub semantic memory for embeddings-backed storage (mocked for tests)
