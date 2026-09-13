@@ -27,8 +27,12 @@ class ExecutionConstraints:
         return type('R', (), {'passed': True, 'violations': []})()
 
 class ResourceQuotaManager:
-    def __init__(self):
-        self.usage: Dict[str, Any] = {}
+    def __init__(self, initial: Optional[Dict[str, Dict[str, int]]] = None):
+        self.usage: Dict[str, Any] = initial or {}
+
+    def check_quota(self, user: str, resource_name: str, amount: int, used: int) -> bool:
+        cap = self.usage.get(user, {}).get(resource_name, 0)
+        return (used + amount) <= cap
 
 class Constraints:
     def __init__(self):
