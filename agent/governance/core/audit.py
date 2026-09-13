@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Callable, Optional
 from dataclasses import dataclass
 from datetime import datetime
 
-from agent.core.types import AuditRecord
+from agent.core.types import AuditRecord, generate_uuid
 
 @dataclass
 class ComplianceReport:
@@ -35,7 +35,7 @@ class AuditLogger:
     def log(self, evt: Dict[str, Any]) -> AuditRecord:
         self.events.append(evt)
         rec = AuditRecord(
-            audit_id=evt.get('op', '') + '-' + datetime.now().isoformat(),
+            audit_id=generate_uuid('aud-'),
             timestamp=datetime.now(),
             actor_id=getattr(evt.get('actor'), 'id', '') if evt.get('actor') else '',
             actor_role=getattr(evt.get('actor'), 'role', '') if evt.get('actor') else '',
