@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from agent.core.types import Role, Permission
 from agent.core.errors import AccessDeniedError
 
+
 @dataclass
 class AccessRule:
     # PoC AccessRule matching test construction (effect, conditions, deny_reason, priority)
@@ -15,6 +16,7 @@ class AccessRule:
     role: Optional[Role] = None
     permission: Optional[Permission] = None
     resource: str = "*"
+
 
 # sensible default permissions map
 DEFAULT_ROLE_PERMISSIONS: Dict[Role, Set[Permission]] = {
@@ -155,13 +157,29 @@ class RBACManager:
       - resolve_role(subject) -> Role
       - evaluate_access(subject, action, resource, ctx) -> decision object
       - enforce_access(subject, action, resource, ctx) -> True or raises AccessDeniedError
+      - grant_permission / revoke_permission for dynamic tests
     """
 
     def __init__(self, policy: Optional[GovernancePolicy] = None):
         self.policy = policy or GovernancePolicy()
+        # dynamic grants and revokes applied at runtime (tests mutate these)
+        self._overrides: Dict[Role, Set[Permission]] = {}
+        self._revoked: Dict[Role, Set[Permission]] = {}
 
     def get_permissions(self, role: Role) -> Set[Permission]:
-        return DEFAULT_ROLE_PERMISSIONS.get(role, set())
+        # base defaults, plus overrides, minus revoked entries
+        base = set(DEFAULT_ROLE_PERMISSIONS.get(role, set()))
+        base |= set(self._overrides.get(role, set()))
+        base -= set(self._revoked.get(role, set()))
+        return base
+
+    def grant_permission(self, role: Role, permission: Permission):
+        self._overrides.setdefault(role, set()).add(permission)
+
+    def revoke_permission(self, role: Role, permission: Permission):
+        self._revoked.setdefault(role, set()).add(permission)
+        if role in self._overrides and permission in self._overrides[role]:
+            self._overrides[role].remove(permission)
 
     def resolve_role(self, subject) -> Role:
         rv = getattr(subject, 'role', None)
@@ -180,6 +198,17 @@ class RBACManager:
         if not getattr(dec, 'allow', False):
             raise AccessDeniedError(getattr(dec, 'reason', 'access denied'))
         return True
+
+
+# Backwards-compatibility alias for older tests expecting 'Rbac'
+class Rbac(RBACManager):
+    """Compatibility shim: older tests import Rbac class.
+    Minimal subclass of RBACManager with identical behaviour.
+    """
+    pass
+
+# module-level alias
+Rbac = Rbac
 
 
 def enforce_access(policy_or_manager, subject, action, resource, ctx=None):
