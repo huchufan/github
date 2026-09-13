@@ -76,6 +76,16 @@ class RBACManager:
         # cache of role->permissions view
         self._permissions_cache: Dict[Role, Set[Permission]] = dict(DEFAULT_ROLE_PERMISSIONS)
 
+    def resolve_role(self, role_name: str) -> Role:
+        # Best-effort resolver: map a string to Role enum, default to GUEST
+        try:
+            return Role(role_name)
+        except Exception:
+            for r in Role:
+                if r.name.lower() == str(role_name).lower():
+                    return r
+        return Role.GUEST
+
     def check_permission(self, role: Role, permission: Permission, resource: str = "*") -> bool:
         return self.policy.allows(role, permission, resource)
 
