@@ -1,18 +1,35 @@
 """
-Governance Framework - Audit Module
-Generated: 2026-09-13T10:54:47.637888
+Governance Framework - Audit Module (compat shim)
+Provides minimal AuditLogger/AuditAnalyzer/ComplianceReport/AnomalyReport
+names expected by package imports. Lightweight for tests and imports.
 """
+from typing import Any, Dict, List
+from dataclasses import dataclass
 
-from typing import Any, Dict, Optional
+@dataclass
+class ComplianceReport:
+    summary: str
+    details: List[str]
 
-class Audit:
-    """Audit module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+@dataclass
+class AnomalyReport:
+    summary: str
+    reason: str
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "audit", "ok": True}
+class AuditLogger:
+    def __init__(self):
+        self.events = []
 
-__all__ = ['Audit']
+    def log(self, evt: Dict[str, Any]):
+        self.events.append(evt)
+
+class AuditAnalyzer:
+    def analyze(self, events: List[Dict[str, Any]]):
+        # very small heuristic
+        anomalies = []
+        for e in events:
+            if e.get('severity', 0) > 5:
+                anomalies.append(e)
+        return AnomalyReport(summary=f"{len(anomalies)} anomalies", reason="heuristic")
+
+__all__ = ['AuditLogger', 'AuditAnalyzer', 'ComplianceReport', 'AnomalyReport']
