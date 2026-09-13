@@ -145,3 +145,60 @@ class GovernancePolicy:
 
         allowed = self.allows(role_enum, perm, getattr(resource, 'type', '*'))
         return type('D', (), {'allow': allowed, 'audit_code': 'ACCESS_GRANTED' if allowed else 'ACCESS_DENIED', 'reason': ''})()
+
+
+class RBACManager:
+    """Compatibility manager for RBAC-style APIs used in tests.
+
+    Minimal interface:
+      - get_permissions(role) -> Set[Permission]
+      - resolve_role(subject) -> Role
+      - evaluate_access(subject, action, resource, ctx) -> decision object
+      - enforce_access(subject, action, resource, ctx) -> True or raises AccessDeniedError
+    """
+
+    def __init__(self, policy: Optional[GovernancePolicy] = None):
+        self.policy = policy or GovernancePolicy()
+
+    def get_permissions(self, role: Role) -> Set[Permission]:
+        return DEFAULT_ROLE_PERMISSIONS.get(role, set())
+
+    def resolve_role(self, subject) -> Role:
+        rv = getattr(subject, 'role', None)
+        if rv is None:
+            return Role.GUEST
+        try:
+            return Role(rv) if not isinstance(rv, Role) else rv
+        except Exception:
+            return Role.GUEST
+
+    def evaluate_access(self, subject, action: str, resource, ctx=None):
+        return self.policy.evaluate_access(subject, action, resource, ctx)
+
+    def enforce_access(self, subject, action: str, resource, ctx=None):
+        dec = self.evaluate_access(subject, action, resource, ctx)
+        if not getattr(dec, 'allow', False):
+            raise AccessDeniedError(getattr(dec, 'reason', 'access denied'))
+        return True
+
+
+def enforce_access(policy_or_manager, subject, action, resource, ctx=None):
+    """Module-level helper preserving older signature patterns used in tests.
+
+    Accepts either a GovernancePolicy or RBACManager-like object as first arg.
+    If it's a GovernancePolicy, evaluate via GovernancePolicy.evaluate_access.
+    If it's an RBACManager, call its enforce_access.
+    """
+    if hasattr(policy_or_manager, 'enforce_access'):
+        return policy_or_manager.enforce_access(subject, action, resource, ctx)
+    if isinstance(policy_or_manager, GovernancePolicy):
+        dec = policy_or_manager.evaluate_access(subject, action, resource, ctx)
+        if not getattr(dec, 'allow', False):
+            raise AccessDeniedError(getattr(dec, 'reason', 'access denied'))
+        return True
+    # unknown manager: try to treat as a policy dict
+    try:
+        mgr = RBACManager(policy_or_manager)
+        return mgr.enforce_access(subject, action, resource, ctx)
+    except Exception:
+        raise AccessDeniedError('access denied')
