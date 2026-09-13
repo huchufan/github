@@ -1,15 +1,7 @@
 """
-distiller 模块的类型定义
+Types for distiller
 """
-
-from typing import Protocol, Any, Dict
-
+from typing import Protocol, Any
 
 class IDistiller(Protocol):
-    """
-    distiller 模块接口
-    """
-
-    def execute(self) -> Any:
-        """执行主逻辑"""
-        ...
+    def execute(self, *args, **kwargs) -> Any: ...
