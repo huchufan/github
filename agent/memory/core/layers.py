@@ -27,10 +27,19 @@ class MemoryLayer:
     def retrieve(self, key: str) -> Optional[Any]:
         if key not in self.storage:
             return None
-        if self.ttl and (self.now() - self.created_at[key]) > self.ttl:
-            del self.storage[key]
-            del self.created_at[key]
-            return None
+        created = self.created_at.get(key)
+        if self.ttl and created is not None:
+            # guard against naive datetimes set by tests or external code
+            try:
+                if created.tzinfo is None:
+                    from datetime import timezone
+                    created = created.replace(tzinfo=timezone.utc)
+            except Exception:
+                pass
+            if (self.now() - created) > self.ttl:
+                del self.storage[key]
+                del self.created_at[key]
+                return None
         return self.storage[key]
 
     def search(self, query: str, limit: int = 10) -> List[Any]:
