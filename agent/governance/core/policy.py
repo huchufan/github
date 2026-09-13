@@ -79,6 +79,34 @@ class RuleEngine:
     def decide(self, input_data: Dict[str, Any]) -> ValidationResult:
         return ValidationResult(True, 'ALLOW')
 
+    def evaluate_rule(self, policy: 'Policy', context: Dict[str, Any]) -> ValidationResult:
+        # Very small evaluator: check conditions in policy against context dict
+        results = []
+        for cond in getattr(policy, 'conditions', []):
+            key = cond.key
+            val = cond.value
+            op = cond.op
+            # support dot-path like 'resource.type'
+            parts = key.split('.') if key else []
+            cur = context
+            for p in parts:
+                if isinstance(cur, dict) and p in cur:
+                    cur = cur[p]
+                else:
+                    cur = None
+                    break
+            if op in ('eq', '=='):
+                results.append(cur == val)
+            elif op in ('ne', '!='):
+                results.append(cur != val)
+            else:
+                results.append(False)
+        if getattr(policy, 'condition_logic', 'OR') == 'AND':
+            allow = all(results) if results else True
+        else:
+            allow = any(results) if results else True
+        return ValidationResult(allow, 'ALLOW' if allow else 'DENY')
+
 class RuleDecision:
     def __init__(self, decision: str = 'ALLOW'):
         self.decision = decision
