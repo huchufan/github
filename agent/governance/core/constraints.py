@@ -1,6 +1,31 @@
+"""
+Governance Framework - Constraints Module (compat shim)
+Provides minimal ConstraintViolation/ConstraintCheckResult/ExecutionConstraints/ResourceQuotaManager
+for imports and lightweight tests. Also exposes Constraints PoC used by some tests.
+"""
+from dataclasses import dataclass
+from typing import List, Any, Dict, Optional
+
+@dataclass
+class ConstraintViolation:
+    reason: str
+
+@dataclass
+class ConstraintCheckResult:
+    ok: bool
+    violations: List[ConstraintViolation]
+
+class ExecutionConstraints:
+    def __init__(self):
+        self.limits: Dict[str, Any] = {}
+
+class ResourceQuotaManager:
+    def __init__(self):
+        self.usage: Dict[str, Any] = {}
+
 class Constraints:
     def __init__(self):
-        self.checks = []
+        self.checks: List[Any] = []
         # expose a simple config dict expected by tests
         self.config: Dict[str, Any] = {}
 
@@ -10,3 +35,5 @@ class Constraints:
     def execute(self):
         # compatibility: some tests call execute() to run constraint checks
         return {"ok": True, "checked": 0}
+
+__all__ = ['ConstraintViolation', 'ConstraintCheckResult', 'ExecutionConstraints', 'ResourceQuotaManager', 'Constraints']
