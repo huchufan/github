@@ -1,7 +1,9 @@
 """
-Governance Framework - Audit Module (compat shim + PoC) -- CLEANED
-This file provides AuditLogger and AuditAnalyzer minimal behavior to satisfy
-existing tests. It intentionally keeps logic simple and defensive.
+Governance Framework - Audit Module (compat shim + PoC)
+Provides AuditLogger/AuditAnalyzer/ComplianceReport/AnomalyReport and a small PoC.
+This module purposely implements minimal, test-focused behavior and reuses
+agent.core.types.AuditRecord so tests that assert isinstance(..., AuditRecord)
+succeed.
 """
 from typing import Any, Dict, List, Callable, Optional
 from dataclasses import dataclass
@@ -98,6 +100,12 @@ class AuditLogger:
             self._alert_handlers.remove(handler)
         except ValueError:
             pass
+
+    # convenience query API used by some unit tests
+    def query(self, actor_id: Optional[str] = None) -> List[AuditRecord]:
+        if actor_id is None:
+            return list(self.records)
+        return [r for r in self.records if getattr(r, 'actor_id', None) == actor_id]
 
 class AuditAnalyzer:
     def __init__(self, logger: Optional[AuditLogger] = None):
