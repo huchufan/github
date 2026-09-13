@@ -190,8 +190,8 @@ class SessionMemory(MemoryLayer):
     """Minimal session-scoped memory (episodic short-lived between requests)
     Async/sync interfaces not required for PoC: simple wrapper around MemoryLayer.
     """
-    def __init__(self):
-        super().__init__("session", ttl=timedelta(hours=1))
+    def __init__(self, ttl: Optional[timedelta] = None):
+        super().__init__("session", ttl=ttl or timedelta(hours=1))
 
 class EpisodicMemory(MemoryLayer):
     """Episodic memory across a conversation/session with longer TTL."""
