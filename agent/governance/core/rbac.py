@@ -73,15 +73,22 @@ class GovernancePolicy:
 class RBACManager:
     def __init__(self, policy: GovernancePolicy | None = None):
         self.policy = policy or GovernancePolicy()
+        # cache of role->permissions view
+        self._permissions_cache: Dict[Role, Set[Permission]] = dict(DEFAULT_ROLE_PERMISSIONS)
 
     def check_permission(self, role: Role, permission: Permission, resource: str = "*") -> bool:
         return self.policy.allows(role, permission, resource)
 
     def grant_permission(self, role: Role, permission: Permission):
         DEFAULT_ROLE_PERMISSIONS.setdefault(role, set()).add(permission)
+        self._permissions_cache[role] = set(DEFAULT_ROLE_PERMISSIONS.get(role, set()))
 
     def revoke_permission(self, role: Role, permission: Permission):
         DEFAULT_ROLE_PERMISSIONS.setdefault(role, set()).discard(permission)
+        self._permissions_cache[role] = set(DEFAULT_ROLE_PERMISSIONS.get(role, set()))
+
+    def get_permissions(self, role: Role) -> Set[Permission]:
+        return set(self._permissions_cache.get(role, DEFAULT_ROLE_PERMISSIONS.get(role, set())))
 
 def enforce_access(policy_or_manager, subject, action: str, resource, ctx=None):
     """Compatibility shim matching tests' enforce_access(policy, subject, action, resource, ctx).
