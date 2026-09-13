@@ -49,14 +49,12 @@ class AuditLogger:
             action_details=evt.get('action', ''),
             source_ip=getattr(evt.get('ctx'), 'source_ip', '') if evt.get('ctx') else '',
             source_gateway=getattr(evt.get('ctx'), 'gateway', '') if evt.get('ctx') else '',
-            request_id=getattr(evt.get('ctx'), 'request_id', '') if evt.get('ctx') else '',
             result_code=getattr(evt.get('result'), 'code', 0) if evt.get('result') else 0,
             error_message=getattr(evt.get('result'), 'error', None) if evt.get('result') else None,
             involves_sensitive_data=bool(getattr(evt.get('resource'), 'classification', None) in ('CONFIDENTIAL', 'SECRET', 'TOP_SECRET')),
             data_classification=getattr(evt.get('resource'), 'classification', '') if evt.get('resource') else '',
             encryption_used=getattr(evt.get('ctx'), 'use_encryption', True) if evt.get('ctx') else True,
             network_security=getattr(evt.get('ctx'), 'network_security_level', '' ) if evt.get('ctx') else '',
-            request_id=getattr(evt.get('ctx'), 'request_id', '') if evt.get('ctx') else '',
             changes=[],
         )
         self.records.append(rec)
