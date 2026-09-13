@@ -23,8 +23,18 @@ class LoadBalancer:
             def __init__(self, overloaded, underloaded):
                 self.overloaded_agents = overloaded
                 self.underloaded_agents = underloaded
-        overloaded = [a.agent_id for a in agents if getattr(a, 'current_load', 0) > getattr(a, 'available_cpu', 1.0)]
-        underloaded = [a.agent_id for a in agents if getattr(a, 'current_load', 0) < getattr(a, 'available_cpu', 1.0)]
+        overloaded = []
+        underloaded = []
+        for a in agents:
+            avail = getattr(a, 'available_cpu', None)
+            if not avail:
+                # assume default available capacity 1.0 if not set
+                avail = 1.0
+            cur = getattr(a, 'current_load', 0)
+            if cur > avail:
+                overloaded.append(getattr(a, 'agent_id', None) or getattr(a, 'id', None))
+            if cur < avail:
+                underloaded.append(getattr(a, 'agent_id', None) or getattr(a, 'id', None))
         return Dist(overloaded, underloaded)
 
 class TaskDistributionManager:
