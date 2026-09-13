@@ -33,15 +33,15 @@ class SchedulingEngine:
     def register_workflow(self, wf):
         self.workflows.append(wf)
 
-    def schedule_workflow(self, wf):
-        # return a simple Job object
+    async def schedule_workflow(self, wf):
+        # return a simple Job object (awaitable for compatibility)
         class Job:
             def __init__(self, priority=0):
                 self.priority = getattr(wf, 'priority', priority)
         return Job(priority=getattr(wf, 'priority', 0))
 
-    def execute_job(self, job, run_fn=None):
-        # simulate execution result
+    async def execute_job(self, job, run_fn=None):
+        # simulate execution result (awaitable)
         class Result:
             def __init__(self):
                 self.status = 'SUCCESS'
