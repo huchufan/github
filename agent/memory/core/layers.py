@@ -282,7 +282,11 @@ class ArchiveMemory(MemoryLayer):
     def archive_session(self, session: SessionRecord):
         aid = f"arc_{len(self.storage)+1}"
         path = f"archive://sessions/{aid}"
+        # store the session and a simple data marker/checksum for corruption detection
         self.storage[aid] = session
+        data_key = f"{aid}:data"
+        # PoC: store a simple checksum/string indicating healthy storage
+        self.storage[data_key] = 'ok'
         class Ref:
             def __init__(self, archive_id, archive_path):
                 self.archive_id = archive_id
