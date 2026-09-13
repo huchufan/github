@@ -1,18 +1,18 @@
 """
-Governance Framework - Rbac Module
-Generated: 2026-09-13T10:54:47.634109
+Governance Framework - -v Module
+Generated: 2026-09-13T10:54:47.640739
 """
 
 from typing import Any, Dict, Optional
 
-class Rbac:
-    """Rbac module (PoC)
+class -V:
+    """-v module (PoC)
     """
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
 
     def execute(self, *args, **kwargs) -> Any:
         """Placeholder execute"""
-        return {"module": "rbac", "ok": True}
+        return {"module": "-v", "ok": True}
 
-__all__ = ['Rbac']
+__all__ = ['-V']
