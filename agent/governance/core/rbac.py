@@ -95,7 +95,10 @@ def enforce_access(policy_or_manager, subject, action: str, resource, ctx=None):
         mgr = RBACManager(policy_or_manager)
     # use policy.evaluate_access if available
     if hasattr(mgr.policy, 'evaluate_access'):
-        return mgr.policy.evaluate_access(subject, action, resource, ctx)
+        decision = mgr.policy.evaluate_access(subject, action, resource, ctx)
+        if hasattr(decision, 'allow') and not decision.allow:
+            raise AccessDeniedError('access denied by policy')
+        return decision
     # fallback boolean decision-like object
     role_val = getattr(subject, 'role', subject)
     if hasattr(role_val, 'value'):
