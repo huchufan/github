@@ -14,6 +14,8 @@ class Agent:
     task_count: int = 0
     current_load: float = 0.0
     available_cpu: float = 0.0
+    available_memory: float = 0.0
+    uptime: float = 0.0
     failure_rate: float = 0.0
 
 
@@ -48,7 +50,7 @@ class AgentLifecycleManager:
             raise AgentAlreadyRegisteredError(agent_id)
         role = getattr(config, 'role', None)
         caps = getattr(config, 'capabilities', None)
-        agent = Agent(agent_id=agent_id, state=AgentState.INITIALIZED.value, role=role, capabilities=caps or [])
+        agent = Agent(agent_id=agent_id, state=AgentState.INITIALIZED.value, role=role, capabilities=caps or [], available_cpu=getattr(config, 'available_cpu', 0.0), available_memory=getattr(config, 'available_memory', 0.0), uptime=getattr(config, 'uptime', 0.0))
         self.agents[agent.agent_id] = agent
         return agent
 
