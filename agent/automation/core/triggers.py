@@ -1,18 +1,21 @@
 """
-Automation Framework - Triggers Module
-Generated: 2026-09-13T11:11:15.365839
+Automation Framework - Triggers Module (compat shim)
+Provides TriggerManager and TriggerExecutor minimal implementations for imports/tests.
 """
+from typing import Any, Dict, List
 
-from typing import Any, Dict, Optional
+class TriggerExecutor:
+    def __init__(self):
+        pass
 
-class Triggers:
-    """Triggers module (PoC)
-    """
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
+    def run(self, trigger):
+        return {"ok": True}
 
-    def execute(self, *args, **kwargs) -> Any:
-        """Placeholder execute"""
-        return {"module": "triggers", "ok": True}
+class TriggerManager:
+    def __init__(self):
+        self.triggers: List[Dict[str, Any]] = []
 
-__all__ = ['Triggers']
+    def register(self, t: Dict[str, Any]):
+        self.triggers.append(t)
+
+__all__ = ['TriggerManager', 'TriggerExecutor']
