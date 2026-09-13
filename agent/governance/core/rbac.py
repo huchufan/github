@@ -15,7 +15,7 @@ DEFAULT_ROLE_PERMISSIONS: Dict[Role, Set[Permission]] = {
     Role.ADMIN: set(p for p in Permission),
     Role.DEVELOPER: {Permission.EXECUTE_AGENT, Permission.READ_MEMORY},
     Role.USER: {Permission.EXECUTE_AGENT},
-    Role.GUEST: set(),
+    Role.GUEST: {Permission.QUERY_READONLY},
 }
 
 class GovernancePolicy:
