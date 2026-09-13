@@ -3,8 +3,10 @@ Governance Framework - Policy Module (compat shim + PoC)
 Provides minimal PolicyCondition/PolicyLimit/PolicyValidator/PolicyViolation
 and a simple Policy class for tests and imports.
 """
-from typing import Any, Dict, NamedTuple, List
+from typing import Any, Dict, NamedTuple, List, Optional
 from dataclasses import dataclass
+
+from agent.core.types import Operation
 
 @dataclass
 class PolicyCondition:
@@ -42,9 +44,36 @@ class ValidationResult(NamedTuple):
     action: str = 'ALLOW'
 
 class PolicyValidator:
-    def validate(self, ctx: Dict[str, Any]) -> ValidationResult:
-        # trivial validator: allow everything
-        return ValidationResult(True, 'ALLOW')
+    def __init__(self):
+        self.policies: List[Policy] = []
+
+    def register_policy(self, policy: 'Policy') -> None:
+        self.policies.append(policy)
+
+    def validate_operation(self, op: Operation) -> ValidationResult:
+        # check each registered policy that applies to the operation
+        for pol in self.policies:
+            applies = False
+            if getattr(pol, 'applies_to', None):
+                if op.action in pol.applies_to:
+                    applies = True
+            if not applies:
+                continue
+            # evaluate conditions: if any condition denies, return DENY
+            for cond in getattr(pol, 'conditions', []):
+                k = cond.key
+                oper = cond.op
+                val = cond.value
+                if k == 'role':
+                    role_val = getattr(op.actor, 'role', None)
+                    if oper in ('ne', '!=') and role_val == val:
+                        return ValidationResult(False, 'DENY')
+                    if oper in ('eq', '==') and role_val != val:
+                        return ValidationResult(False, 'DENY')
+            # if no denying condition found, allow
+            return ValidationResult(True, 'ALLOW')
+        # default deny when no policy allows
+        return ValidationResult(False, 'DENY')
 
 class RuleEngine:
     def decide(self, input_data: Dict[str, Any]) -> ValidationResult:
@@ -56,11 +85,15 @@ class RuleDecision:
 
 class Policy:
     """Policy module (PoC)
+    Accepts constructor args used by tests (id, name, applies_to, conditions, limits)
     """
-    def __init__(self, config: Dict[str, Any] | None = None):
+    def __init__(self, id: str = '', name: str = '', applies_to: Optional[List[str]] = None, conditions: Optional[List[PolicyCondition]] = None, limits: Optional[List[PolicyLimit]] = None, config: Optional[Dict[str, Any]] = None):
+        self.id = id
+        self.name = name
+        self.applies_to = applies_to or []
+        self.conditions: List[PolicyCondition] = conditions or []
+        self.limits: List[PolicyLimit] = limits or []
         self.config = config or {}
-        self.conditions: List[PolicyCondition] = []
-        self.limits: List[PolicyLimit] = []
         self.validator = PolicyValidator()
 
     def add_condition(self, cond: PolicyCondition):
