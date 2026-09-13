@@ -203,11 +203,13 @@ class ArchiveMemory(MemoryLayer):
 
     def archive_session(self, session: SessionRecord):
         aid = f"arc_{len(self.storage)+1}"
+        path = f"archive://sessions/{aid}"
         self.storage[aid] = session
         class Ref:
-            def __init__(self, archive_id):
+            def __init__(self, archive_id, archive_path):
                 self.archive_id = archive_id
-        return Ref(archive_id=aid)
+                self.archive_path = archive_path
+        return Ref(archive_id=aid, archive_path=path)
 
     def retrieve_archived_session(self, archive_id: str) -> Optional[SessionRecord]:
         return self.storage.get(archive_id)
