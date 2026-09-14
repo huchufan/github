@@ -77,6 +77,18 @@ class ErrorHandlingStrategy:
             return {"action": "FALLBACK", "fallback_skill": None}
         return {"action": "STOP"}
 
+    def get_recovery_action(self, strategy: Dict[str, Any]):
+        # return RecoveryAction dataclass when available; else simple object
+        try:
+            from agent.core.types import RecoveryAction
+            return RecoveryAction(action=strategy.get('action'), fallback_skill=strategy.get('fallback_skill'))
+        except Exception:
+            class RA:
+                def __init__(self, d):
+                    self.action = d.get('action')
+                    self.fallback_skill = d.get('fallback_skill')
+            return RA(strategy)
+
 
 class OrchestrationEngine:
     def __init__(self, skill_registry: Optional[Dict[str, Any]] = None, error_strategy: Optional[ErrorHandlingStrategy] = None):
@@ -115,7 +127,16 @@ class OrchestrationEngine:
 
     async def execute_task_group(self, tasks: List[SubTask], state: Optional[ExecutionState], context: Optional[Dict[str, Any]] = None) -> List[TaskResult]:
         coros = [self.execute_single_task(t, state, context) for t in tasks]
-        results = await asyncio.gather(*coros, return_exceptions=False)
+        # convert exceptions into TaskResult so callers don't see raw exceptions
+        raw = await asyncio.gather(*coros, return_exceptions=True)
+        results: List[TaskResult] = []
+        for item, sub in zip(raw, tasks):
+            if isinstance(item, Exception):
+                # map to TaskResult
+                tr = TaskResult(task_id=sub.id, status=OperationStatus.FAILURE.value, error=str(item), success=False)
+                results.append(tr)
+            else:
+                results.append(item)
         return results
 
     async def handle_task_failures(self, results: List[TaskResult], state: ExecutionState, plan: ExecutionPlan) -> bool:
