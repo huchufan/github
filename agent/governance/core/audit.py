@@ -1,172 +1,50 @@
-"""
-Governance Framework - Audit Module (compat shim + PoC)
-Provides AuditLogger/AuditAnalyzer/ComplianceReport/AnomalyReport and a small PoC.
-This module purposely implements minimal, test-focused behavior and reuses
-agent.core.types.AuditRecord so tests that assert isinstance(..., AuditRecord)
-succeed.
-"""
-from typing import Any, Dict, List, Callable, Optional
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict, field
 from datetime import datetime
-
-from agent.core.types import AuditRecord, generate_uuid
-
-@dataclass
-class ComplianceReport:
-    summary: str
-    details: List[str]
-    audit_coverage: float = 0.0
-    policy_id: str = ""
-    log_integrity: bool = True
+from typing import Any, Dict, List, Optional
 
 @dataclass
-class AnomalyReport:
-    summary: str
-    reason: str
-    type: str = ''
-    severity: int = 0
+class AuditRecord:
+    audit_id: str
+    timestamp: datetime
+    actor: str
+    action: str
+    resource_type: str
+    resource_id: str
+    result: Any = None
+    success: bool = True
+    details: Dict[str, Any] = field(default_factory=dict)
 
-class AuditLogger:
+
+class AuditLog:
+    """Simple in-memory audit log PoC"""
+
     def __init__(self):
-        self.events: List[Dict[str, Any]] = []
         self.records: List[AuditRecord] = []
-        self.immutable_log: List[AuditRecord] = []
-        self.alerts: List[Dict[str, Any]] = []
-        self._alert_handlers: List[Callable[[Dict[str, Any]], None]] = []
 
-    def log(self, evt: Dict[str, Any]) -> AuditRecord:
-        self.events.append(evt)
+    def record(self, actor: str, action: str, resource_type: str, resource_id: str, result: Any = None, success: bool = True, details: Optional[Dict[str, Any]] = None) -> AuditRecord:
         rec = AuditRecord(
-            audit_id=generate_uuid('aud-'),
-            timestamp=datetime.now(),
-            actor_id=getattr(evt.get('actor'), 'id', '') if evt.get('actor') else '',
-            actor_role=getattr(evt.get('actor'), 'role', '') if evt.get('actor') else '',
-            actor_organization=getattr(evt.get('actor'), 'organization', '') if evt.get('actor') else '',
-            operation_type=evt.get('op', ''),
-            operation_status=getattr(evt.get('result'), 'status', '') if evt.get('result') else '',
-            resource_type=getattr(evt.get('resource'), 'type', '') if evt.get('resource') else '',
-            resource_id=getattr(evt.get('resource'), 'id', '') if evt.get('resource') else '',
-            resource_owner=getattr(evt.get('resource'), 'owner', '') if evt.get('resource') else '',
-            action_details=evt.get('action', ''),
-            source_ip=getattr(evt.get('ctx'), 'source_ip', '') if evt.get('ctx') else '',
-            source_gateway=getattr(evt.get('ctx'), 'gateway', '') if evt.get('ctx') else '',
-            result_code=getattr(evt.get('result'), 'code', 0) if evt.get('result') else 0,
-            error_message=getattr(evt.get('result'), 'error', None) if evt.get('result') else None,
-            involves_sensitive_data=bool(getattr(evt.get('resource'), 'classification', None) in ('CONFIDENTIAL', 'SECRET', 'TOP_SECRET')),
-            data_classification=getattr(evt.get('resource'), 'classification', '') if evt.get('resource') else '',
-            encryption_used=getattr(evt.get('ctx'), 'use_encryption', True) if evt.get('ctx') else True,
-            network_security=getattr(evt.get('ctx'), 'network_security_level', '' ) if evt.get('ctx') else '',
-            changes=[],
+            audit_id=str(len(self.records) + 1),
+            timestamp=datetime.utcnow(),
+            actor=actor,
+            action=action,
+            resource_type=resource_type,
+            resource_id=resource_id,
+            result=result,
+            success=success,
+            details=details or {},
         )
         self.records.append(rec)
-        self.immutable_log.append(rec)
-
-        # emit alert when heuristic matches
-        if self.should_alert(rec) or getattr(evt.get('result', {}), 'status', None) == 'FAILURE':
-            level = 'ERROR' if getattr(evt.get('result', {}), 'status', None) == 'FAILURE' else 'WARN'
-            alert = {'level': level, 'record': rec}
-            self.alerts.append(alert)
-            for h in list(self._alert_handlers):
-                try:
-                    h(alert)
-                except Exception:
-                    pass
         return rec
 
-    def log_operation(self, op, actor, resource, action, result, ctx) -> AuditRecord:
-        evt = {
-            'op': op,
-            'actor': actor,
-            'resource': resource,
-            'action': action,
-            'result': result,
-            'ctx': ctx,
-        }
-        return self.log(evt)
+    def query(self, actor: Optional[str] = None, resource_type: Optional[str] = None, success: Optional[bool] = None) -> List[AuditRecord]:
+        res = self.records
+        if actor is not None:
+            res = [r for r in res if r.actor == actor]
+        if resource_type is not None:
+            res = [r for r in res if r.resource_type == resource_type]
+        if success is not None:
+            res = [r for r in res if r.success == success]
+        return res
 
-    def should_alert(self, record: AuditRecord) -> bool:
-        if not record:
-            return False
-        if record.data_classification in ('CONFIDENTIAL', 'SECRET', 'TOP_SECRET'):
-            return True
-        if record.operation_status == 'FAILURE':
-            return True
-        return False
-
-    def register_alert_handler(self, handler: Callable[[Dict[str, Any]], None]):
-        if callable(handler):
-            self._alert_handlers.append(handler)
-
-    def unregister_alert_handler(self, handler: Callable[[Dict[str, Any]], None]):
-        try:
-            self._alert_handlers.remove(handler)
-        except ValueError:
-            pass
-
-    # convenience query API used by some unit tests
-    def query(self, actor_id: Optional[str] = None) -> List[AuditRecord]:
-        if actor_id is None:
-            return list(self.records)
-        return [r for r in self.records if getattr(r, 'actor_id', None) == actor_id]
-
-class AuditAnalyzer:
-    def __init__(self, logger: Optional[AuditLogger] = None):
-        self.logger = logger or AuditLogger()
-
-    def analyze(self, events: List[Dict[str, Any]]):
-        anomalies: List[AnomalyReport] = []
-        for e in events:
-            if e.get('severity', 0) > 5:
-                anomalies.append(AnomalyReport(summary=str(e), reason='severity', type='SEV', severity=e.get('severity', 0)))
-        return anomalies
-
-    def detect_privilege_escalation(self, records: List[AuditRecord]):
-        anomalies: List[AnomalyReport] = []
-        for r in records:
-            # simple PoC: if a low-role (user/guest) performs admin-like ops, flag it
-            if getattr(r, 'actor_role', None) in ('user', 'guest') and getattr(r, 'operation_type', '').startswith('policy:'):
-                anomalies.append(AnomalyReport(summary='privilege escalation', reason='low-role performed high-risk operation', type='PRIVILEGE_ESCALATION', severity=4))
-        return anomalies
-
-    def detect_anomalies(self, time_window=None):
-        records = self.logger.records if self.logger else []
-        out: List[AnomalyReport] = []
-        by_actor: Dict[str, int] = {}
-        for r in records:
-            actor = getattr(r, 'actor_id', 'unknown')
-            by_actor[actor] = by_actor.get(actor, 0) + 1
-            if getattr(r, 'data_classification', None) in ('CONFIDENTIAL', 'SECRET'):
-                out.append(AnomalyReport(summary='sensitive access', reason='accessed confidential resource', type='UNUSUAL_ACCESS', severity=2))
-            if getattr(r, 'operation_status', None) == 'FAILURE':
-                out.append(AnomalyReport(summary='operation failures', reason='failure observed', type='HIGH_FAILURE_RATE', severity=3))
-        for actor, cnt in by_actor.items():
-            if cnt > 50:
-                out.append(AnomalyReport(summary=f'unusual access count {cnt}', reason='high access count', type='UNUSUAL_ACCESS', severity=2))
-
-        try:
-            out.extend(self.detect_privilege_escalation(records))
-        except Exception:
-            pass
-        return out
-
-    def generate_compliance_report(self, start, end, policy_id):
-        # Build a lightweight compliance report scoped to [start, end].
-        recs = [r for r in self.logger.records if getattr(r, 'timestamp', None) and start <= r.timestamp <= end]
-        total = len(recs)
-        sensitive = sum(1 for r in recs if getattr(r, 'involves_sensitive_data', False))
-        coverage = (sensitive / total) if total else 0.0
-        details = [f"{r.audit_id}:{r.operation_type}:{r.data_classification}" for r in recs]
-        return ComplianceReport(summary=f"Compliance report for {policy_id}", details=details, audit_coverage=coverage, policy_id=policy_id, log_integrity=True)
-
-class Audit:
-    def __init__(self):
-        self.config: Dict[str, Any] = {}
-        self.logger = AuditLogger()
-
-    def record_event(self, evt: Dict[str, Any]):
-        self.logger.log(evt)
-
-    def execute(self, *args, **kwargs):
-        return {"module": "audit", "ok": True}
-
-__all__ = ['Audit', 'AuditLogger', 'AuditAnalyzer', 'ComplianceReport', 'AnomalyReport', 'AuditRecord']
+    def to_dicts(self) -> List[Dict[str, Any]]:
+        return [asdict(r) for r in self.records]
