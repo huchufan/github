@@ -26,7 +26,8 @@ class ErrorHandlingStrategy:
         # PoC categorization
         if isinstance(err, TimeoutError) or isinstance(err, asyncio.TimeoutError):
             return 'TIMEOUT'
-        if isinstance(err, RateLimitError):
+        # handle test-local RateLimitError classes (by name) or the shared one
+        if isinstance(err, RateLimitError) or getattr(getattr(err, '__class__', None), '__name__', '') == 'RateLimitError':
             return 'NETWORK_ERROR'
         try:
             from agent.core.errors import ConnectionError
