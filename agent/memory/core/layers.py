@@ -298,7 +298,13 @@ class SessionMemory(MemoryLayer):
     # Compatibility helpers expected by tests
     def store_session_context(self, session_id: str, ctx: Any) -> None:
         # store a serializable representation
-        self.store(session_id, ctx)
+        # Normalize SessionContext to expected stored shape used by tests
+        data = {
+            'session_id': getattr(ctx, 'session_id', None),
+            'user_preferences': getattr(ctx, 'user_preferences', getattr(ctx, 'preferences', {})),
+            'user_style': getattr(ctx, 'user_style', None),
+        }
+        self.store(session_id, data)
 
     def retrieve_session_context(self, session_id: str) -> Any:
         return self.retrieve(session_id)
