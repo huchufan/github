@@ -17,6 +17,12 @@ class Agent:
     available_memory: float = 0.0
     uptime: float = 0.0
     failure_rate: float = 0.0
+    # Observability fields expected by ClusterMonitor tests
+    cpu_usage: float = 0.0
+    memory_usage: float = 0.0
+    avg_response_time: float = 0.0
+    completed_tasks: int = 0
+    failed_tasks: int = 0
 
 
 class AgentHealthMonitor:
