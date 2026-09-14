@@ -1,0 +1,34 @@
+=== Hermes daily progress run: 20260914_080002 ===
+.                                                                        [100%]
+.............................................                            [100%]
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+........F
+=================================== FAILURES ===================================
+______________________ TestLayers.test_immediate_context _______________________
+
+self = <agent.memory.tests.test_memory.TestLayers object at 0x10a768550>
+
+    def test_immediate_context(self):
+        mem = ImmediateContextMemory()
+        mem.store("k", "value")
+        assert mem.retrieve("k") == "value"
+        turn = mem.record_conversation_turn("hi", "hello")
+        ctx = mem.get_conversation_context()
+        assert ctx.conversation_state == "active"
+>       assert ctx.turns[-1].user_message == "hi"
+               ^^^^^^^^^
+E       AttributeError: 'Ctx' object has no attribute 'turns'
+
+agent/memory/tests/test_memory.py:56: AttributeError
+=========================== short test summary info ============================
+FAILED agent/memory/tests/test_memory.py::TestLayers::test_immediate_context
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 1214, in parse
+    tree.parse(source, parser)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 566, in parse
+    source = open(source, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/huchufan/Hermes/implementation/automation/coverage_daily_20260914_080002/coverage.xml'
