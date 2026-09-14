@@ -62,7 +62,7 @@ class ErrorHandlingStrategy:
                     self.fallback_skill = d.get('fallback_skill') if isinstance(d, dict) else getattr(d, 'fallback_skill', None)
             return RA(strategy)
 
-    def select_recovery_strategy(self, task: Any = None, err_type: str = '', retry_count: int = 0, default_strategy: Optional[str] = None) -> Dict[str, Any]:
+    def select_recovery_strategy(self, task: Any = None, error_category: str = '', retry_count: int = 0, default_strategy: Optional[str] = None, **kwargs) -> Dict[str, Any]:
         """Select a recovery strategy for a given task and error type.
         Prioritize explicit strategy from task.retry_policy if present in self.strategies; otherwise fallback to default heuristics.
         """
@@ -82,9 +82,9 @@ class ErrorHandlingStrategy:
         # fallback heuristics
         if strategy == 'retry_on_transient' and retry_count >= 3:
             return {'action': 'STOP'}
-        if err_type == 'TIMEOUT':
+        if error_category == 'TIMEOUT':
             return {'action': 'RETRY'}
-        if err_type == 'NETWORK_ERROR':
+        if error_category == 'NETWORK_ERROR':
             return {'action': 'FALLBACK', 'fallback_skill': 'alternative_skill'}
         return {'action': 'STOP'}
 
@@ -104,7 +104,14 @@ class OrchestrationEngine:
         if skill is None:
             return TaskResult(task_id=subtask.id, status='FAILURE', error=f"skill {subtask.skill_name} not found", success=False)
         attempts = 0
-        max_retries = getattr(subtask, 'retry_policy', 1) if isinstance(subtask, SubTask) else 1
+        # Interpret retry_policy as max_retries for PoC when it's numeric-like, otherwise default 1
+        max_retries = 1
+        try:
+            rp = getattr(subtask, 'retry_policy', None)
+            if isinstance(rp, int):
+                max_retries = rp
+        except Exception:
+            max_retries = 1
         while True:
             try:
                 # call sync or async
@@ -117,8 +124,8 @@ class OrchestrationEngine:
                 return TaskResult(task_id=subtask.id, status='SUCCESS', result=res, success=True)
             except Exception as e:
                 attempts += 1
-                err_type = self.error_strategy.categorize_error(e)
-                strat = self.error_strategy.select_recovery_strategy(task=subtask, err_type=err_type, retry_count=attempts)
+                error_cat = self.error_strategy.categorize_error(e)
+                strat = self.error_strategy.select_recovery_strategy(task=subtask, error_category=error_cat, retry_count=attempts)
                 action = strat.get('action') if isinstance(strat, dict) else getattr(strat, 'action', 'STOP')
                 if action == 'RETRY' and attempts <= max_retries:
                     await asyncio.sleep(0)  # yield
@@ -140,10 +147,57 @@ class OrchestrationEngine:
                 # otherwise stop
                 return TaskResult(task_id=subtask.id, status='FAILURE', error=str(e), success=False)
 
-    async def orchestrate_execution(self, plan: 'ExecutionPlan') -> ExecutionResult:
+    async def execute_single_task(self, subtask: SubTask, state: Optional['ExecutionState'], context: Optional[Dict[str, Any]] = None) -> TaskResult:
+        return await self._run_single(subtask, context or {})
+
+    async def execute_task_group(self, tasks: List[SubTask], state: Optional['ExecutionState'], context: Optional[Dict[str, Any]] = None) -> List[TaskResult]:
+        coros = [self._run_single(t, context or {}) for t in tasks]
+        results = await asyncio.gather(*coros, return_exceptions=False)
+        return results
+
+    async def handle_task_failures(self, results: List[TaskResult], state: 'ExecutionState', plan: 'ExecutionPlan') -> bool:
+        """Process failed TaskResult entries and decide whether orchestration should continue.
+        Returns True to continue, False to stop.
+        """
+        # append failed results to state
+        for r in results:
+            if not getattr(r, 'success', False):
+                state.tasks_failed.append(r)
+        # default: continue if none of the failures are critical (stop action)
+        for r in results:
+            if not getattr(r, 'success', False):
+                # find subtask by id
+                st = next((s for s in getattr(plan, 'subtasks', []) if s.id == r.task_id), None)
+                retry_count = state.get_retry_count(r.task_id) if hasattr(state, 'get_retry_count') else 0
+                strat = self.error_strategy.select_recovery_strategy(task=st, error_category=getattr(r, 'status', ''), retry_count=retry_count)
+                action = strat.get('action') if isinstance(strat, dict) else getattr(strat, 'action', 'STOP')
+                if action == 'STOP':
+                    return False
+                if action == 'CONTINUE':
+                    continue
+                if action == 'RETRY':
+                    state.retry_counts[r.task_id] = retry_count + 1 if hasattr(state, 'get_retry_count') else 1
+                    return True
+                if action == 'FALLBACK':
+                    fb = strat.get('fallback_skill') if isinstance(strat, dict) else getattr(strat, 'fallback_skill', None)
+                    if fb and fb in self.skill_registry:
+                        try:
+                            fb_skill = self.skill_registry[fb]
+                            if asyncio.iscoroutinefunction(fb_skill):
+                                await fb_skill({}, {})
+                            else:
+                                fb_skill({}, {})
+                        except Exception:
+                            return False
+                        return True
+                    else:
+                        return False
+        return True
+
+    async def orchestrate_execution(self, plan: 'ExecutionPlan', context: Optional[Dict[str, Any]] = None) -> ExecutionResult:
         # simple level-by-level executor
         result = ExecutionResult(status='SUCCESS', tasks_executed=0, tasks_completed=0, tasks_failed=0)
-        context = {}
+        context = context or {}
         for level in getattr(plan, 'execution_order', []) or []:
             # run level tasks in parallel
             tasks: List[Any] = []
