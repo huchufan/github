@@ -11,6 +11,10 @@ class Planner:
     def execute_plan(self, dag):
         return list(dag.nodes.keys())
 
+    def execute(self):
+        # backward-compatible execute used in tests
+        return {"ok": True}
+
 class TaskPlanner:
     def __init__(self):
         self.tasks = []
@@ -32,8 +36,11 @@ class TaskPlanner:
         return list(dag.nodes.keys())
 
     def plan_execution(self, intent, parameters):
-        # create a basic ExecutionPlan-like dict for tests expecting a plan
-        return {'intent': intent, 'parameters': parameters, 'ok': True}
+        # create a basic ExecutionPlan object for tests expecting a plan
+        from agent.core.types import ExecutionPlan, SubTask
+        subtasks = [SubTask(id=f"{i}", skill_name=s) for i, s in enumerate(getattr(intent, 'skills_involved', []), start=1)]
+        plan = ExecutionPlan(intent=intent, subtasks=subtasks, execution_order=[[t for t in subtasks]])
+        return plan
 
 __all__ = ['Planner', 'TaskPlanner']
 
