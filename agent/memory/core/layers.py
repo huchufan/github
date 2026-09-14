@@ -301,7 +301,11 @@ class SessionMemory(MemoryLayer):
         # Normalize SessionContext to expected stored shape used by tests
         data = {
             'session_id': getattr(ctx, 'session_id', None),
-            'user_preferences': getattr(ctx, 'user_preferences', getattr(ctx, 'preferences', {})),
+            # Some SessionContext implementations expose preferences via fields, others expect 'user_preferences'
+            'user_preferences': getattr(ctx, 'user_preferences', None) or {
+                'communication_style': getattr(ctx, 'user_style', None),
+                'technical_level': getattr(ctx, 'technical_level', None),
+            },
             'user_style': getattr(ctx, 'user_style', None),
         }
         self.store(session_id, data)
