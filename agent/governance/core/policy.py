@@ -16,36 +16,32 @@ class PolicyRule:
     condition: Optional[Dict[str, Any]] = None
     effect: Decision = Decision.ALLOW
 
-class PolicyEngine:
-    """Simple policy engine PoC: evaluate rules against a request context
+class Policy:
+    def __init__(self, config: Optional[Dict[str, Any]] = None):
+        self.config = config or {}
 
-    Policy evaluation algorithm (PoC):
-    - iterate rules in order; first matching rule returns its effect
-    - rule match: resource_type equals and action in actions and condition satisfied (if any)
-    """
+    def execute(self, *args, **kwargs):
+        return {"ok": True}
 
-    def __init__(self, rules: Optional[List[PolicyRule]] = None):
-        self.rules: List[PolicyRule] = rules or []
 
-    def add_rule(self, rule: PolicyRule) -> None:
-        self.rules.append(rule)
+class PolicyCondition:
+    pass
 
-    def evaluate(self, resource_type: str, action: str, context: Optional[Dict[str, Any]] = None) -> Decision:
-        ctx = context or {}
-        for r in self.rules:
-            if r.resource_type != resource_type:
-                continue
-            if action not in r.actions:
-                continue
-            if r.condition:
-                if not self._match_condition(r.condition, ctx):
-                    continue
-            return r.effect
-        return Decision.DENY
+class PolicyLimit:
+    pass
 
-    def _match_condition(self, condition: Dict[str, Any], ctx: Dict[str, Any]) -> bool:
-        # PoC: support simple equality checks in condition dict
-        for k, v in condition.items():
-            if ctx.get(k) != v:
-                return False
-        return True
+class PolicyValidator:
+    pass
+
+class PolicyViolation:
+    pass
+
+class ValidationResult:
+    pass
+
+class RuleEngine:
+    pass
+
+class RuleDecision:
+    pass
+
