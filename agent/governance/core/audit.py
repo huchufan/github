@@ -191,8 +191,9 @@ class AuditAnalyzer:
         anomalies: List[AnomalyReport] = []
         for r in records:
             actor = getattr(r, 'actor_id', '')
-            action = getattr(r, 'action', '')
-            role = getattr(r, 'details', {}).get('actor_role')
+            # prefer operation_type/action_details fields from shared AuditRecord
+            action = getattr(r, 'operation_type', None) or getattr(r, 'action_details', '')
+            role = getattr(r, 'actor_role', None) or getattr(getattr(r, 'details', {}), 'get', lambda k, d=None: None)('actor_role')
             # PoC: if actor id startswith 'g' (guest) or role=='guest' and action contains 'policy' -> escalation
             if (str(actor).startswith('g') or role == 'guest') and 'policy' in str(action):
                 anomalies.append(AnomalyReport(type='PRIVILEGE_ESCALATION', severity='HIGH', description=f'Guest attempted privileged action {action}'))
@@ -204,17 +205,17 @@ class AuditAnalyzer:
         anomalies: List[AnomalyReport] = []
         # high failure rate
         total = len(records)
-        failures = len([r for r in records if not r.success])
+        failures = len([r for r in records if not getattr(r, 'success', True)])
         if total >= 5 and (failures / total) > 0.5:
             anomalies.append(AnomalyReport(type='HIGH_FAILURE_RATE', severity='HIGH', description='High failure rate'))
         # many confidential accesses by same actor
-        conf = [r for r in records if getattr(r, 'details', {}).get('classification') in ('CONFIDENTIAL', 'SECRET')]
+        conf = [r for r in records if (getattr(r, 'data_classification', None) in ('CONFIDENTIAL', 'SECRET')) or getattr(r, 'involves_sensitive_data', False)]
         actors = {}
         for r in conf:
-            actors.setdefault(r.actor_id, 0)
-            actors[r.actor_id] += 1
-            if actors[r.actor_id] > 50:
-                anomalies.append(AnomalyReport(type='UNUSUAL_SENSITIVE_ACCESS', severity='HIGH', description=f'Actor {r.actor_id} accessed many sensitive resources'))
+            actors.setdefault(getattr(r, 'actor_id', ''), 0)
+            actors[getattr(r, 'actor_id', '')] += 1
+            if actors[getattr(r, 'actor_id', '')] > 50:
+                anomalies.append(AnomalyReport(type='UNUSUAL_SENSITIVE_ACCESS', severity='HIGH', description=f'Actor {getattr(r, "actor_id", "")} accessed many sensitive resources'))
         return anomalies
 
     def generate_compliance_report(self, start: Any, end: Any, policy_name: str) -> ComplianceReport:
