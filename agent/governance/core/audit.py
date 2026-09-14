@@ -106,6 +106,8 @@ class AuditLogger:
             details['actor_role'] = actor_role
 
         rec = self._log.record(actor=actor_id, action=action, resource_type=res_type, resource_id=res_id, result=result, success=success, details=details)
+        # ensure actor mirror for compatibility
+        rec.actor = actor_id
         # update immutable copy
         self.immutable_log = list(self.records)
 
