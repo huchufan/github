@@ -69,7 +69,7 @@ def test_voting_and_weighted():
     r3 = SimpleNamespace(status="SUCCESS", data="B")
     vote = (
         asyncio.run(agg.voting_results([r1, r2, r3]))
-        if asyncio.iscoroutinefunction(agg.voting_results)
+        if inspect.iscoroutinefunction(agg.voting_results)
         else agg.voting_results([r1, r2, r3])
     )
     # voting may return 'A'
