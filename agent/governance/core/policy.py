@@ -134,17 +134,20 @@ class PolicyValidator:
         for p in self.policies:
             if op.action in p.applies_to:
                 rd = RuleEngine().evaluate_rule(p, ctx)
+                violations: List[PolicyViolation] = []
                 if not rd.passed:
                     v = PolicyViolation(policy_id=p.id, id=p.id, message='condition failed')
-                    return ValidationResult(allowed=False, action='DENY', violations=[v])
-                # check limits
+                    violations.append(v)
+                # check limits regardless of condition outcome
                 for lim in p.limits:
                     actor_id = ctx.get('actor_id')
                     if actor_id:
                         used = self.usage_counters.get(actor_id, {}).get(lim.limit_type, 0)
                         if used >= lim.max_count:
-                            v = PolicyViolation(policy_id=p.id, id=p.id, message='limit exceeded', limit=lim)
-                            return ValidationResult(allowed=False, action='DENY', violations=[v])
+                            vlim = PolicyViolation(policy_id=p.id, id=p.id, message='limit exceeded', limit=lim)
+                            violations.append(vlim)
+                if violations:
+                    return ValidationResult(allowed=False, action='DENY', violations=violations)
         return ValidationResult(allowed=True, action='ALLOW')
 
 
