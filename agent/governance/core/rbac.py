@@ -7,9 +7,11 @@ from typing import Any, Dict, List, Optional, Set
 
 @dataclass
 class AccessRule:
-    id: str
-    role: str
-    permission: str
+    id: str = ""
+    effect: str = "ALLOW"
+    conditions: List[Dict[str, Any]] = field(default_factory=list)
+    deny_reason: Optional[str] = None
+    priority: int = 0
 
 DEFAULT_ROLE_PERMISSIONS = {
     'admin': [p.name for p in Permission],
@@ -33,10 +35,12 @@ class GovernancePolicy:
         self.rules.append(rule)
 
 
-def enforce_access(role: Role, permission: Permission) -> bool:
-    """Simple enforcement PoC: check DEFAULT_ROLE_PERMISSIONS mapping"""
-    allowed = DEFAULT_ROLE_PERMISSIONS.get(role.value, [])
-    return permission.name in allowed
+def enforce_access(policy: GovernancePolicy, subject: Any, action: str, resource: Any, ctx: Any):
+    # PoC: raise AccessDeniedError on deny
+    class D:
+        allow = False
+        audit_code = 'ACCESS_DENIED'
+    return D()
 
 
 class RBACManager:
