@@ -21,6 +21,15 @@ class ErrorHandlingStrategy:
     def __init__(self, skill_registry: Optional[Dict[str, Any]] = None, default_strategy: str = 'retry_on_transient'):
         self.skill_registry = skill_registry or {}
         self.default_strategy = default_strategy
+        # strategies mapping for tests to mutate directly
+        # example keys: 'retry_on_transient', 'execute_fallback', 'skip_and_continue', 'immediate_fail', 'no_retry'
+        self.strategies: Dict[str, Dict[str, Any]] = {
+            'retry_on_transient': {'action': 'RETRY', 'retries': 3},
+            'execute_fallback': {'action': 'FALLBACK', 'retries': 1, 'fallback_skill': 'alternative_skill'},
+            'skip_and_continue': {'action': 'CONTINUE', 'retries': 0},
+            'immediate_fail': {'action': 'STOP', 'retries': 0},
+            'no_retry': {'action': 'RETRY', 'retries': 0},
+        }
 
     def categorize_error(self, err: Exception) -> str:
         # PoC categorization
@@ -55,13 +64,22 @@ class ErrorHandlingStrategy:
 
     def select_recovery_strategy(self, task: Any = None, err_type: str = '', retry_count: int = 0, default_strategy: Optional[str] = None) -> Dict[str, Any]:
         """Select a recovery strategy for a given task and error type.
-        PoC logic:
-         - If default_strategy == 'retry_on_transient' and retry_count >= 3 -> STOP
-         - If err_type == 'TIMEOUT' -> RETRY
-         - If err_type == 'NETWORK_ERROR' -> FALLBACK
-         - Otherwise return {'action': 'STOP'}
+        Prioritize explicit strategy from task.retry_policy if present in self.strategies; otherwise fallback to default heuristics.
         """
+        # if task defines explicit retry_policy and it's registered, use it
+        policy = None
+        try:
+            policy = getattr(task, 'retry_policy', None)
+        except Exception:
+            policy = None
+        if policy and policy in self.strategies:
+            strat = dict(self.strategies[policy])
+            # attach current retry_count
+            strat['retries_done'] = retry_count
+            return strat
+
         strategy = default_strategy or self.default_strategy
+        # fallback heuristics
         if strategy == 'retry_on_transient' and retry_count >= 3:
             return {'action': 'STOP'}
         if err_type == 'TIMEOUT':
