@@ -295,6 +295,14 @@ class SessionMemory(MemoryLayer):
         
         self.cache = CacheAdapter(original_cache)
 
+    # Compatibility helpers expected by tests
+    def store_session_context(self, session_id: str, ctx: Any) -> None:
+        # store a serializable representation
+        self.store(session_id, ctx)
+
+    def retrieve_session_context(self, session_id: str) -> Any:
+        return self.retrieve(session_id)
+
 class EpisodicMemory(MemoryLayer):
     """Episodic memory across a conversation/session with longer TTL."""
     def __init__(self, ttl: Optional[timedelta] = None):
