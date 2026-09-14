@@ -1,6 +1,6 @@
 # Patch: add missing ExecutionPlan reference and monitor helpers
 from typing import Any, Dict, Optional
-from agent.core.types import ExecutionPlan, ExecutionMetrics, TaskResult, ExecutionState, SubTask
+from agent.core.types import ExecutionPlan, ExecutionMetrics, TaskResult, ExecutionState, SubTask, Anomaly, Severity
 
 class Monitor:
     """Monitor module (PoC)"""
@@ -20,7 +20,16 @@ class ExecutionMonitor:
     def calculate_avg_duration(self, durations):
         if not durations:
             return 0.0
-        return sum(durations)/len(durations)
+        # durations may be TaskResult objects; extract .duration when present
+        vals = []
+        for d in durations:
+            if hasattr(d, 'duration'):
+                vals.append(getattr(d, 'duration', 0.0))
+            elif isinstance(d, (int, float)):
+                vals.append(d)
+        if not vals:
+            return 0.0
+        return sum(vals)/len(vals)
 
     def identify_bottleneck_tasks(self, state: ExecutionState):
         # PoC: return tasks with duration > 30
@@ -40,14 +49,43 @@ class ExecutionMonitor:
         completed = len(state.tasks_completed)
         return (completed/total)*100.0
 
-    def detect_anomalies(self, state: ExecutionState):
+    def monitor_execution(self, state: 'ExecutionState') -> 'ExecutionMetrics':
+        metrics = ExecutionMetrics()
+        # overall progress
+        metrics.overall_progress = self.calculate_critical_path_progress(state)
+        metrics.average_task_duration = self.calculate_avg_duration(state.tasks_completed)
+        metrics.bottleneck_tasks = self.identify_bottleneck_tasks(state)
+        metrics.retry_rate = self.calculate_retry_rate(state) if hasattr(self, 'calculate_retry_rate') else 0.0
+        return metrics
+
+    def calculate_retry_rate(self, state: 'ExecutionState') -> float:
+        # simple ratio: sum retries / total tasks attempted
+        retry_counts = getattr(state, 'retry_counts', {}) or {}
+        total_retries = sum(retry_counts.values())
+        total_tasks = max(1, len(getattr(state, 'tasks_completed', [])) + len(getattr(state, 'tasks_failed', [])))
+        return total_retries / total_tasks
+
+    def estimate_remaining_time(self, state: 'ExecutionState') -> float:
+        avg = self.calculate_avg_duration(state.tasks_completed)
+        remaining_levels = max(0, len(getattr(state.plan, 'execution_order', [])) - len(getattr(state, 'tasks_completed', [])))
+        # assume each remaining level takes avg * 60 for PoC
+        return avg * remaining_levels * 60
+
+    def detect_anomalies(self, state: 'ExecutionState'):
         anomalies = []
         # find long-running tasks
         for t in getattr(state, 'tasks_in_progress', []):
             start = getattr(t, 'start_time', None)
             timeout = getattr(t, 'timeout', None)
             if start and timeout and (ExecutionMonitor._now_seconds() - start.timestamp()) > timeout:
-                anomalies.append({'type':'TIMEOUT','task_id':getattr(t,'id',None)})
+                anomalies.append(Anomaly(type='EXCESSIVE_TIMEOUT', severity=Severity.HIGH.value, task_id=getattr(t, 'id', None), suggestion='Investigate task timeout'))
+        # high failure rate
+        completed = getattr(state, 'tasks_completed', [])
+        failed = getattr(state, 'tasks_failed', [])
+        if len(completed) + len(failed) >= 5:
+            recent_failure_rate = len(failed) / max(1, len(completed) + len(failed))
+            if recent_failure_rate > 0.5:
+                anomalies.append(Anomaly(type='HIGH_FAILURE_RATE', severity=Severity.HIGH.value, suggestion='High recent failure rate'))
         return anomalies
 
     @staticmethod
