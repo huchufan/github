@@ -49,6 +49,7 @@ class AuditLog:
             audit_id=f"aud-{uuid.uuid4().hex[:8]}",
             timestamp=datetime.now(timezone.utc),
             actor_id=actor,
+            actor=actor,
             action=action,
             resource_type=resource_type,
             resource_id=resource_id,
