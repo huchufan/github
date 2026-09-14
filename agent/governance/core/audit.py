@@ -88,6 +88,12 @@ class AuditLog:
             changes=details.get('changes', []),
         )
 
+        # Add backward-compatible attributes expected by existing tests
+        setattr(types_rec, 'actor', str(actor))
+        setattr(types_rec, 'result', result)
+        setattr(types_rec, 'success', success)
+        setattr(types_rec, 'details', details)
+
         self.records.append(types_rec)
         return types_rec
 
