@@ -70,14 +70,78 @@ class ErrorHandlingStrategy:
             return {'action': 'FALLBACK', 'fallback_skill': 'alternative_skill'}
         return {'action': 'STOP'}
 
-class OrchestrationEngine:
-    def __init__(self):
-        self.state = {}
+import asyncio
+from typing import Any, Dict, Optional, List
+from agent.core.types import ExecutionResult, TaskResult, SubTask
 
-    def run(self, dag, planner, executor):
-        results = {}
-        for nid in dag.nodes:
-            results[nid] = executor.execute(nid)
-        return results
+class OrchestrationEngine:
+    def __init__(self, skill_registry: Optional[Dict[str, Any]] = None, error_strategy: Optional[object] = None):
+        # skill_registry: name -> callable (sync or async)
+        self.skill_registry = skill_registry or {}
+        self.error_strategy = error_strategy or ErrorHandlingStrategy()
+        self.state: Dict[str, Any] = {}
+
+    async def _run_single(self, subtask: SubTask, context: Dict[str, Any]) -> TaskResult:
+        skill = self.skill_registry.get(subtask.skill_name)
+        if skill is None:
+            return TaskResult(task_id=subtask.id, status='FAILURE', error=f"skill {subtask.skill_name} not found", success=False)
+        attempts = 0
+        max_retries = getattr(subtask, 'retry_policy', 1) if isinstance(subtask, SubTask) else 1
+        while True:
+            try:
+                # call sync or async
+                if asyncio.iscoroutinefunction(skill):
+                    res = await skill(subtask.parameters, context)
+                else:
+                    res = skill(subtask.parameters, context)
+                    if asyncio.iscoroutine(res):
+                        res = await res
+                return TaskResult(task_id=subtask.id, status='SUCCESS', result=res, success=True)
+            except Exception as e:
+                attempts += 1
+                err_type = self.error_strategy.categorize_error(e)
+                strat = self.error_strategy.select_recovery_strategy(task=subtask, err_type=err_type, retry_count=attempts)
+                action = strat.get('action') if isinstance(strat, dict) else getattr(strat, 'action', 'STOP')
+                if action == 'RETRY' and attempts <= max_retries:
+                    await asyncio.sleep(0)  # yield
+                    continue
+                if action == 'FALLBACK':
+                    fb = strat.get('fallback_skill') if isinstance(strat, dict) else getattr(strat, 'fallback_skill', None)
+                    if fb and fb in self.skill_registry:
+                        try:
+                            fb_skill = self.skill_registry[fb]
+                            if asyncio.iscoroutinefunction(fb_skill):
+                                fres = await fb_skill(subtask.parameters, context)
+                            else:
+                                fres = fb_skill(subtask.parameters, context)
+                                if asyncio.iscoroutine(fres):
+                                    fres = await fres
+                            return TaskResult(task_id=subtask.id, status='SUCCESS', result=fres, success=True)
+                        except Exception as e2:
+                            return TaskResult(task_id=subtask.id, status='FAILURE', error=str(e2), success=False)
+                # otherwise stop
+                return TaskResult(task_id=subtask.id, status='FAILURE', error=str(e), success=False)
+
+    async def orchestrate_execution(self, plan: 'ExecutionPlan') -> ExecutionResult:
+        # simple level-by-level executor
+        result = ExecutionResult(status='SUCCESS', tasks_executed=0, tasks_completed=0, tasks_failed=0)
+        context = {}
+        for level in getattr(plan, 'execution_order', []) or []:
+            # run level tasks in parallel
+            tasks: List[Any] = []
+            for st in level:
+                tasks.append(self._run_single(st, context))
+            completed: List[TaskResult] = await asyncio.gather(*tasks)
+            for tr in completed:
+                result.tasks_executed += 1
+                if tr.success:
+                    result.tasks_completed += 1
+                else:
+                    result.tasks_failed += 1
+                    result.status = 'FAILURE'
+            if result.status == 'FAILURE':
+                # stop on first failed level for PoC
+                break
+        return result
 
 __all__ = ['Executor', 'OrchestrationEngine', 'ErrorHandlingStrategy']
