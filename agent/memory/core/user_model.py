@@ -39,5 +39,14 @@ class UserModel:
         pref_model = UserPreferenceModel()
         return pref_model.learn_user_preferences(sessions)
 
+    def build_comprehensive_user_model(self, history: Any) -> Any:
+        # PoC: build a simple aggregated model from UserHistory
+        class Result:
+            pass
+        r = Result()
+        r.user_id = getattr(history, 'user_id', None)
+        r.preference_profile = self.learn_user_preferences(getattr(history, 'sessions', []))
+        return r
+
     def execute(self, *args, **kwargs) -> Any:
         return {"module": "user_model", "ok": True}
