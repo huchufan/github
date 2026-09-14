@@ -94,13 +94,9 @@ class DAG:
             if len(p) > len(best_overall):
                 best_overall = p
         return best_overall
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        self.config = config or {}
-        # delegate to an internal DAG for structural operations if needed
-        self._internal = DAG()
 
-    def execute(self, *args, **kwargs):
-        # simple placeholder behavior for tests
-        return {"module": "dag", "ok": True}
+# Backwards-compatible alias expected by tests
+Dag = DAG
 
 __all__ = ['DAG', 'Node', 'Edge', 'Dag']
+
