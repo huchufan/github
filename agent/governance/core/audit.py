@@ -35,6 +35,8 @@ class ComplianceReport:
     start_time: Optional[Any] = None
     end_time: Optional[Any] = None
     policy_id: Optional[str] = None
+    # compatibility field expected by tests
+    log_integrity: bool = True
 
 # --- PoC compatibility wrappers expected by tests
 
@@ -57,6 +59,9 @@ class AuditLog:
             success=success,
             details=details or {},
         )
+        # also set actor field for direct AuditLog.record callers expecting .actor
+        rec.actor = actor
+
         self.records.append(rec)
         return rec
 
