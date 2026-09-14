@@ -76,6 +76,15 @@ class ErrorHandlingStrategy:
             strat = dict(self.strategies[policy])
             # attach current retry_count
             strat['retries_done'] = retry_count
+            # if policy is RETRY but retries exhausted, prefer STOP unless fallback defined
+            try:
+                max_retries = int(strat.get('retries', 0))
+            except Exception:
+                max_retries = 0
+            action = strat.get('action')
+            if action == 'RETRY' and retry_count >= max_retries:
+                # no more retries allowed -> STOP
+                return {'action': 'STOP'}
             return strat
 
         strategy = default_strategy or self.default_strategy
