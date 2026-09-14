@@ -194,9 +194,13 @@ class AuditAnalyzer:
             # prefer operation_type/action_details fields from shared AuditRecord
             action = getattr(r, 'operation_type', None) or getattr(r, 'action_details', '')
             role = getattr(r, 'actor_role', None) or getattr(getattr(r, 'details', {}), 'get', lambda k, d=None: None)('actor_role')
-            # PoC: if actor id startswith 'g' (guest) or role=='guest' and action contains 'policy' -> escalation
-            if (str(actor).startswith('g') or role == 'guest') and 'policy' in str(action):
-                anomalies.append(AnomalyReport(type='PRIVILEGE_ESCALATION', severity='HIGH', description=f'Guest attempted privileged action {action}'))
+            # PoC: flag policy-management attempts by low-privilege actors as privilege escalation.
+            # Treat 'admin', 'developer', 'service' as allowed; others (user, guest, etc.) are suspicious.
+            allowed_roles = {'admin', 'developer', 'service'}
+            is_policy = 'policy' in str(action)
+            low_priv = (str(actor).startswith('g')) or (role not in allowed_roles)
+            if is_policy and low_priv:
+                anomalies.append(AnomalyReport(type='PRIVILEGE_ESCALATION', severity='HIGH', description=f'Potential privilege escalation by {actor} on action {action}'))
         return anomalies
 
     def detect_anomalies(self, time_window: Optional[Any] = None) -> List[AnomalyReport]:
