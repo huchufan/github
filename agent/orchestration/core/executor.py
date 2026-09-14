@@ -66,6 +66,9 @@ class ErrorHandlingStrategy:
         """Select a recovery strategy for a given task and error type.
         Prioritize explicit strategy from task.retry_policy if present in self.strategies; otherwise fallback to default heuristics.
         """
+        # if no task (missing in plan) -> continue by default
+        if task is None:
+            return {'action': 'CONTINUE'}
         # if task defines explicit retry_policy and it's registered, use it
         policy = None
         try:
