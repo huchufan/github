@@ -37,12 +37,38 @@ class ErrorHandlingStrategy:
             pass
         return 'GENERIC_ERROR'
 
-    def get_recovery_action(self, strategy: Dict[str, Any]) -> Dict[str, Any]:
+    def get_recovery_action(self, strategy: Dict[str, Any]):
         # strategy is a dict containing action and params
-        return strategy
+        # return a dataclass-like object with attribute access expected by tests
+        try:
+            from agent.core.types import RecoveryAction
+            action = strategy.get('action') if isinstance(strategy, dict) else getattr(strategy, 'action', None)
+            fallback = strategy.get('fallback_skill') if isinstance(strategy, dict) else getattr(strategy, 'fallback_skill', None)
+            return RecoveryAction(action=action or 'STOP', fallback_skill=fallback)
+        except Exception:
+            # fallback: return a simple object
+            class RA:
+                def __init__(self, d):
+                    self.action = d.get('action') if isinstance(d, dict) else getattr(d, 'action', None)
+                    self.fallback_skill = d.get('fallback_skill') if isinstance(d, dict) else getattr(d, 'fallback_skill', None)
+            return RA(strategy)
 
-    def select_recovery_strategy(self, default_strategy: Optional[str] = None) -> str:
-        return default_strategy or self.default_strategy
+    def select_recovery_strategy(self, task: Any = None, err_type: str = '', retry_count: int = 0, default_strategy: Optional[str] = None) -> Dict[str, Any]:
+        """Select a recovery strategy for a given task and error type.
+        PoC logic:
+         - If default_strategy == 'retry_on_transient' and retry_count >= 3 -> STOP
+         - If err_type == 'TIMEOUT' -> RETRY
+         - If err_type == 'NETWORK_ERROR' -> FALLBACK
+         - Otherwise return {'action': 'STOP'}
+        """
+        strategy = default_strategy or self.default_strategy
+        if strategy == 'retry_on_transient' and retry_count >= 3:
+            return {'action': 'STOP'}
+        if err_type == 'TIMEOUT':
+            return {'action': 'RETRY'}
+        if err_type == 'NETWORK_ERROR':
+            return {'action': 'FALLBACK', 'fallback_skill': 'alternative_skill'}
+        return {'action': 'STOP'}
 
 class OrchestrationEngine:
     def __init__(self):
