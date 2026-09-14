@@ -311,7 +311,20 @@ class SessionMemory(MemoryLayer):
         self.store(session_id, data)
 
     def retrieve_session_context(self, session_id: str) -> Any:
-        return self.retrieve(session_id)
+        data = self.retrieve(session_id)
+        if data is None:
+            return None
+        # If stored as a dict, wrap into an object with attribute access expected by tests
+        if isinstance(data, dict):
+            class SessionCtxObj:
+                def __init__(self, d):
+                    self.session_id = d.get('session_id')
+                    self.user_preferences = d.get('user_preferences', {})
+                    self.user_style = d.get('user_style')
+                def __repr__(self):
+                    return f"SessionCtxObj(session_id={self.session_id})"
+            return SessionCtxObj(data)
+        return data
 
 class EpisodicMemory(MemoryLayer):
     """Episodic memory across a conversation/session with longer TTL."""
