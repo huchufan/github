@@ -74,10 +74,10 @@ class AuditLog:
         if success is not None:
             res = [r for r in res if r.success == success]
         return res
-+    
-+    # Backwards-compatible alias expected by AuditLogger tests
-+    def query_records(self, actor: Optional[str] = None, resource_type: Optional[str] = None, success: Optional[bool] = None) -> List[AuditRecord]:
-+        return self.query(actor=actor, resource_type=resource_type, success=success)
+
+    # Backwards-compatible alias expected by AuditLogger tests
+    def query_records(self, actor: Optional[str] = None, resource_type: Optional[str] = None, success: Optional[bool] = None) -> List[AuditRecord]:
+        return self.query(actor=actor, resource_type=resource_type, success=success)
 
     def to_dicts(self) -> List[Dict[str, Any]]:
         return [asdict(r) for r in self.records]
