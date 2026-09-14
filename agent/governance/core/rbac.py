@@ -1,17 +1,6 @@
-from typing import Set, Dict
-from enum import Enum
-
-class Role(Enum):
-    ADMIN = "admin"
-    DEVELOPER = "developer"
-    USER = "user"
-    GUEST = "guest"
-
-class Permission(Enum):
-    EXECUTE_AGENT = "agent:execute"
-    READ_MEMORY = "memory:read"
-    WRITE_CONFIG = "config:write"
-    AUDIT_LOG = "audit:read"
+from typing import Set, Dict, Optional
+# Use shared Role/Permission types from agent.core.types so tests import the same enums
+from agent.core.types import Role, Permission
 
 from dataclasses import dataclass
 
@@ -53,13 +42,23 @@ class RBACManager:
 
     def check_permission(self, role: Role, permission: Permission) -> bool:
         """检查权限"""
-        return permission in self.roles.get(role, set())
-
-    def grant_permission(self, role: Role, permission: Permission):
-        """授予权限"""
-        if role not in self.roles:
-            self.roles[role] = set()
-        self.roles[role].add(permission)
+-        return permission in self.roles.get(role, set())
++        perms = self.roles.get(role, set())
++        if isinstance(perms, list):
++            return permission.name in perms
++        return permission in perms
++
++    def get_permissions(self, role: Role) -> Set[Permission]:
++        perms = self.roles.get(role, set())
++        if isinstance(perms, list):
++            return set(Permission[p] for p in perms if p in Permission.__members__)
++        return perms
++
++    def resolve_role(self, role_name: str) -> Role:
++        try:
++            return Role(role_name)
++        except Exception:
++            return Role.GUEST
 
     def revoke_permission(self, role: Role, permission: Permission):
         """撤销权限"""

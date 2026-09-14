@@ -10,6 +10,7 @@ class AuditRecord:
     audit_id: str = field(default_factory=lambda: f"aud-{uuid.uuid4().hex[:8]}")
     timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     actor_id: str = ""
+    actor: str = ""
     action: str = ""
     resource_type: str = ""
     resource_id: str = ""
