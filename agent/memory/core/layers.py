@@ -225,39 +225,36 @@ class SemanticMemory(MemoryLayer):
                 if len(res) >= top_k:
                     break
         # Fallback: if index yielded nothing, search stored items directly (robustness for PoC)
-class SemanticMemory(MemoryLayer):
-@@
-         if not res:
-             for v in self.storage.values():
-                 text = None
-                 if hasattr(v, 'content'):
-                     text = getattr(v, 'content')
-                 elif isinstance(v, dict):
-                     text = v.get('content')
-                 if text and q in str(text).lower():
-                     res.append(v)
-                     if len(res) >= top_k:
-                         break
--        return res
-+        # Ensure returned objects expose 'title' attribute for tests (wrap dicts or dataclasses)
-+        wrapped = []
-+        for item in res:
-+            if isinstance(item, dict) and 'title' in item:
-+                class ItemObj:
-+                    def __init__(self, d):
-+                        self.title = d.get('title')
-+                        self.content = d.get('content')
-+                wrapped.append(ItemObj(item))
-+            elif hasattr(item, 'title'):
-+                wrapped.append(item)
-+            else:
-+                # Fallback wrapper
-+                class ItemObj2:
-+                    def __init__(self, v):
-+                        self.title = getattr(v, 'title', None) or str(v)[:32]
-+                        self.content = getattr(v, 'content', str(v))
-+                wrapped.append(ItemObj2(item))
-+        return wrapped
+        if not res:
+            for v in self.storage.values():
+                text = None
+                if hasattr(v, 'content'):
+                    text = getattr(v, 'content')
+                elif isinstance(v, dict):
+                    text = v.get('content')
+                if text and q in str(text).lower():
+                    res.append(v)
+                    if len(res) >= top_k:
+                        break
+        # Ensure returned objects expose 'title' attribute for tests (wrap dicts or dataclasses)
+        wrapped = []
+        for item in res:
+            if isinstance(item, dict) and 'title' in item:
+                class ItemObj:
+                    def __init__(self, d):
+                        self.title = d.get('title')
+                        self.content = d.get('content')
+                wrapped.append(ItemObj(item))
+            elif hasattr(item, 'title'):
+                wrapped.append(item)
+            else:
+                # Fallback wrapper
+                class ItemObj2:
+                    def __init__(self, v):
+                        self.title = getattr(v, 'title', None) or str(v)[:32]
+                        self.content = getattr(v, 'content', str(v))
+                wrapped.append(ItemObj2(item))
+        return wrapped
 
     def build_knowledge_graph(self):
         # PoC: build a simple knowledge graph structure with nodes and edges.
