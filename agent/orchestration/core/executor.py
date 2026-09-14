@@ -126,14 +126,31 @@ class OrchestrationEngine:
             max_retries = 1
         while True:
             try:
-                # call sync or async
+                # call sync or async, respecting subtask.timeout when possible
+                timeout = getattr(subtask, 'timeout', None)
                 if asyncio.iscoroutinefunction(skill):
-                    res = await skill(subtask.parameters, context)
+                    if timeout and timeout > 0:
+                        res = await asyncio.wait_for(skill(subtask.parameters, context), timeout=timeout)
+                    else:
+                        res = await skill(subtask.parameters, context)
                 else:
+                    # sync callable: call directly (tests use async sleep for timeout checks)
                     res = skill(subtask.parameters, context)
                     if asyncio.iscoroutine(res):
-                        res = await res
+                        if timeout and timeout > 0:
+                            res = await asyncio.wait_for(res, timeout=timeout)
+                        else:
+                            res = await res
                 return TaskResult(task_id=subtask.id, status='SUCCESS', result=res, success=True)
+            except asyncio.TimeoutError as te:
+                attempts += 1
+                # treat as timeout category
+                strat = self.error_strategy.select_recovery_strategy(task=subtask, error_category='TIMEOUT', retry_count=attempts)
+                action = strat.get('action') if isinstance(strat, dict) else getattr(strat, 'action', 'STOP')
+                if action == 'RETRY' and attempts <= max_retries:
+                    await asyncio.sleep(0)
+                    continue
+                return TaskResult(task_id=subtask.id, status='TIMEOUT', error=str(te), success=False)
             except Exception as e:
                 attempts += 1
                 error_cat = self.error_strategy.categorize_error(e)
@@ -148,12 +165,21 @@ class OrchestrationEngine:
                         try:
                             fb_skill = self.skill_registry[fb]
                             if asyncio.iscoroutinefunction(fb_skill):
-                                fres = await fb_skill(subtask.parameters, context)
+                                if getattr(subtask, 'timeout', None):
+                                    fres = await asyncio.wait_for(fb_skill(subtask.parameters, context), timeout=subtask.timeout)
+                                else:
+                                    fres = await fb_skill(subtask.parameters, context)
                             else:
                                 fres = fb_skill(subtask.parameters, context)
                                 if asyncio.iscoroutine(fres):
-                                    fres = await fres
+                                    if getattr(subtask, 'timeout', None):
+                                        fres = await asyncio.wait_for(fres, timeout=subtask.timeout)
+                                    else:
+                                        fres = await fres
+                            # return fallback success as TaskResult
                             return TaskResult(task_id=subtask.id, status='SUCCESS', result=fres, success=True)
+                        except asyncio.TimeoutError as te2:
+                            return TaskResult(task_id=subtask.id, status='TIMEOUT', error=str(te2), success=False)
                         except Exception as e2:
                             return TaskResult(task_id=subtask.id, status='FAILURE', error=str(e2), success=False)
                 # otherwise stop
