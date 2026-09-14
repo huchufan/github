@@ -52,11 +52,21 @@ class ExecutionMonitor:
     def monitor_execution(self, state: 'ExecutionState') -> 'ExecutionMetrics':
         metrics = ExecutionMetrics()
         # overall progress
-        metrics.overall_progress = self.calculate_critical_path_progress(state)
         metrics.average_task_duration = self.calculate_avg_duration(state.tasks_completed)
         metrics.bottleneck_tasks = self.identify_bottleneck_tasks(state)
         metrics.retry_rate = self.calculate_retry_rate(state) if hasattr(self, 'calculate_retry_rate') else 0.0
+        # success rate
+        success_count = len([t for t in getattr(state, 'tasks_completed', []) if getattr(t, 'success', False)])
+        total_completed = max(1, len(getattr(state, 'tasks_completed', [])))
+        metrics.success_rate = (success_count / total_completed) * 100.0
         return metrics
+
+    def _recent_failure_rate(self, state: ExecutionState, window: int = 60) -> float:
+        """Return fraction of failures in the last `window` seconds (PoC uses counts only)."""
+        completed = getattr(state, 'tasks_completed', []) or []
+        failed = getattr(state, 'tasks_failed', []) or []
+        total = max(1, len(completed) + len(failed))
+        return len(failed) / total
 
     def calculate_retry_rate(self, state: 'ExecutionState') -> float:
         # simple ratio: sum retries / total tasks attempted
