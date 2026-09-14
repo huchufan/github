@@ -13,6 +13,33 @@ class Permission(Enum):
     WRITE_CONFIG = "config:write"
     AUDIT_LOG = "audit:read"
 
+from dataclasses import dataclass
+
+@dataclass
+class AccessRule:
+    id: str
+    role: str
+    permission: str
+
+DEFAULT_ROLE_PERMISSIONS = {
+    'admin': [p.name for p in Permission],
+    'developer': ['EXECUTE_AGENT','READ_MEMORY'],
+    'user': ['EXECUTE_AGENT'],
+    'guest': [],
+}
+
+@dataclass
+class GovernancePolicy:
+    name: str
+    rules: list
+
+
+def enforce_access(role: Role, permission: Permission) -> bool:
+    """Simple enforcement PoC: check RBACManager default mapping"""
+    allowed = DEFAULT_ROLE_PERMISSIONS.get(role.value, [])
+    return permission.name in allowed
+
+
 class RBACManager:
     """角色基础访问控制管理"""
 
