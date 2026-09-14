@@ -45,3 +45,6 @@ class RuleEngine:
 class RuleDecision:
     pass
 
+# Backwards-compatible alias expected by tests
+PolicyEngine = Policy
+
