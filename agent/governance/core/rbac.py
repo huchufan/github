@@ -2,7 +2,8 @@ from typing import Set, Dict, Optional
 # Use shared Role/Permission types from agent.core.types so tests import the same enums
 from agent.core.types import Role, Permission
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional, Set
 
 @dataclass
 class AccessRule:
@@ -12,15 +13,24 @@ class AccessRule:
 
 DEFAULT_ROLE_PERMISSIONS = {
     'admin': [p.name for p in Permission],
-    'developer': ['EXECUTE_AGENT', 'READ_MEMORY'],
-    'user': ['EXECUTE_AGENT'],
-    'guest': [],
+    'developer': ['EXECUTE_AGENT', 'READ_MEMORY', 'QUERY_READONLY'],
+    'user': ['EXECUTE_AGENT', 'QUERY_READONLY'],
+    'guest': ['QUERY_READONLY'],
 }
 
 @dataclass
 class GovernancePolicy:
-    name: str
-    rules: list
+    name: str = "default"
+    rules: list = field(default_factory=list)
+
+    def evaluate_access(self, subject: Any, action: str, resource: Any, ctx: Any) -> Any:
+        # PoC: default deny
+        class D:
+            allow = False
+        return D()
+
+    def add_rule(self, rule: Any) -> None:
+        self.rules.append(rule)
 
 
 def enforce_access(role: Role, permission: Permission) -> bool:
