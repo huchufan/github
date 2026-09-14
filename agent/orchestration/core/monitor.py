@@ -111,19 +111,26 @@ class AdaptiveReplanner:
         try:
             if metrics is None:
                 return False
+            # retry rate or explicit bottlenecks always trigger
             if getattr(metrics, 'retry_rate', 0.0) > 0.3:
                 return True
             if getattr(metrics, 'bottleneck_tasks', None):
                 return True
-            if getattr(metrics, 'estimated_remaining_time', 0.0) > 3600:
+            # if estimated remaining time is many times larger than original plan estimate
+            plan_est = getattr(getattr(execution_state, 'plan', None), 'time_estimate', 0.0)
+            if plan_est and getattr(metrics, 'estimated_remaining_time', 0.0) > (plan_est * 2):
                 return True
         except Exception:
             return False
         return False
 
     def identify_plan_changes(self, plan: ExecutionPlan, metrics: ExecutionMetrics):
-        # PoC: return a simple re-ordered execution_order
-        return []
+        changes = []
+        if getattr(metrics, 'retry_rate', 0.0) > 0.3:
+            changes.append('reduce_parallelism')
+        if getattr(metrics, 'bottleneck_tasks', None):
+            changes.append('reassign_bottleneck')
+        return changes
 
     async def replan_if_needed(self, execution_state: 'ExecutionState', metrics: 'ExecutionMetrics') -> Optional['ExecutionPlan']:
         if execution_state is None or getattr(execution_state, 'plan', None) is None:
@@ -131,17 +138,20 @@ class AdaptiveReplanner:
         plan = execution_state.plan
         if not self.should_replan(execution_state, metrics):
             return None
-        # create shallow copy
+        # shallow copy
         new_plan = ExecutionPlan(
             intent=plan.intent,
             subtasks=list(plan.subtasks),
             parallel_groups=list(plan.parallel_groups) if getattr(plan, 'parallel_groups', None) else [],
-            execution_order=list(getattr(plan,'execution_order',[])),
-            time_estimate=getattr(plan,'time_estimate',0.0),
-            resource_estimate=getattr(plan,'resource_estimate',{}),
-            fallback_strategies=getattr(plan,'fallback_strategies',[]),
-            contingency_plans=getattr(plan,'contingency_plans',[]),
+            execution_order=list(getattr(plan, 'execution_order', [])),
+            time_estimate=getattr(plan, 'time_estimate', 0.0),
+            resource_estimate=getattr(plan, 'resource_estimate', {}),
+            fallback_strategies=getattr(plan, 'fallback_strategies', []),
+            contingency_plans=getattr(plan, 'contingency_plans', []),
         )
+        # if retry rate high, flatten to single-task levels (reduce parallelism)
+        if getattr(metrics, 'retry_rate', 0.0) > 0.4:
+            new_plan.execution_order = [[t] for t in new_plan.subtasks]
         return new_plan
 
 __all__ = ['Monitor', 'ExecutionMonitor', 'AdaptiveReplanner']
