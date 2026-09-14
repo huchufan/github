@@ -15,8 +15,24 @@ class Executor:
         return {"module": "executor", "ok": True}
 
 class ErrorHandlingStrategy:
-    def __init__(self, strategy: str = 'retry'):
-        self.strategy = strategy
+    def __init__(self, skill_registry: Optional[Dict[str, Any]] = None, default_strategy: str = 'retry_on_transient'):
+        self.skill_registry = skill_registry or {}
+        self.default_strategy = default_strategy
+
+    def categorize_error(self, err: Exception) -> str:
+        # PoC categorization
+        if isinstance(err, TimeoutError) or isinstance(err, asyncio.TimeoutError):
+            return 'TIMEOUT'
+        if isinstance(err, ConnectionError):
+            return 'TRANSIENT'
+        return 'FATAL'
+
+    def get_recovery_action(self, strategy: Dict[str, Any]) -> Dict[str, Any]:
+        # strategy is a dict containing action and params
+        return strategy
+
+    def select_recovery_strategy(self, default_strategy: Optional[str] = None) -> str:
+        return default_strategy or self.default_strategy
 
 class OrchestrationEngine:
     def __init__(self):
