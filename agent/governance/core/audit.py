@@ -10,13 +10,18 @@ class AuditRecord:
     audit_id: str = field(default_factory=lambda: f"aud-{uuid.uuid4().hex[:8]}")
     timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     actor_id: str = ""
-    actor: str = ""
+    actor: str = ""  # compatibility: tests expect .actor
     action: str = ""
     resource_type: str = ""
     resource_id: str = ""
     result: Any = None
     success: bool = True
     details: Dict[str, Any] = field(default_factory=dict)
+
+    @property
+    def involves_sensitive_data(self) -> bool:
+        cls = self.details.get('classification')
+        return cls in ('CONFIDENTIAL', 'SECRET')
 
 @dataclass
 class AnomalyReport:
