@@ -214,4 +214,12 @@ class OrchestrationEngine:
         return result
 
 
-__all__ = ["ErrorHandlingStrategy", "OrchestrationEngine"]
+class Executor:
+    def __init__(self, config: Optional[Dict[str, Any]] = None):
+        self.config = config or {}
+
+    def execute(self, *args, **kwargs):
+        return {"ok": True}
+
+
+__all__ = ["Executor", "ErrorHandlingStrategy", "OrchestrationEngine"]
