@@ -220,10 +220,14 @@ class SemanticMemory(MemoryLayer):
                 text = getattr(payload, 'content')
             elif isinstance(payload, dict):
                 text = payload.get('content')
-            if text and q in str(text).lower():
-                res.append(payload)
-                if len(res) >= top_k:
-                    break
+            if text:
+                # match if any token in query appears in the text (more permissive)
+                q_tokens = [t for t in q.split() if t]
+                text_lower = str(text).lower()
+                if any(tok in text_lower for tok in q_tokens):
+                    res.append(payload)
+                    if len(res) >= top_k:
+                        break
         # Fallback: if index yielded nothing, search stored items directly (robustness for PoC)
         if not res:
             for v in self.storage.values():
