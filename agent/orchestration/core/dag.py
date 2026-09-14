@@ -34,23 +34,30 @@ class DAG:
             raise ValueError("Source or target node not found")
         self.edges.append(Edge(source, target, condition))
 
-    def topological_sort(self):
-        # simple Kahn's algorithm
-        in_degree = {n: 0 for n in self.nodes}
+    def get_execution_order(self):
+        """Return execution levels: list of sets, each set are nodes executable in parallel."""
+        # Build adjacency
+        incoming: Dict[str, int] = {n: 0 for n in self.nodes}
+        adj: Dict[str, List[str]] = {n: [] for n in self.nodes}
         for e in self.edges:
-            in_degree[e.target] += 1
-        zero = [n for n, d in in_degree.items() if d == 0]
-        order = []
+            adj[e.source].append(e.target)
+            incoming[e.target] += 1
+        # Kahn but emit levels
+        levels: List[List[str]] = []
+        zero = [n for n, d in incoming.items() if d == 0]
         while zero:
-            n = zero.pop()
-            order.append(n)
-            for e in [x for x in self.edges if x.source == n]:
-                in_degree[e.target] -= 1
-                if in_degree[e.target] == 0:
-                    zero.append(e.target)
-        if len(order) != len(self.nodes):
-            raise ValueError("Graph has cycles")
-        return order
+            current_level = list(zero)
+            levels.append(current_level)
+            next_zero: List[str] = []
+            for n in current_level:
+                for t in adj.get(n, []):
+                    incoming[t] -= 1
+                    if incoming[t] == 0:
+                        next_zero.append(t)
+            zero = next_zero
+        if sum(len(l) for l in levels) != len(self.nodes):
+            raise ValueError("Graph has cycles or disconnected nodes")
+        return levels
 
     def has_cycle(self) -> bool:
         try:
