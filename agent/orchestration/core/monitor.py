@@ -53,8 +53,7 @@ class ExecutionMonitor:
         metrics = ExecutionMetrics()
         # overall progress based on critical path
         metrics.overall_progress = self.calculate_critical_path_progress(state)
-        metrics.bottleneck_tasks = self.identify_bottleneck_tasks(state)
-        metrics.retry_rate = self.calculate_retry_rate(state) if hasattr(self, 'calculate_retry_rate') else 0.0
+        metrics.average_task_duration = self.calculate_avg_duration(state.tasks_completed) if getattr(state, 'tasks_completed', None) else 0.0
         # success rate
         success_count = len([t for t in getattr(state, 'tasks_completed', []) if getattr(t, 'success', False)])
         total_completed = max(1, len(getattr(state, 'tasks_completed', [])))
