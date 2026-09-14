@@ -1,0 +1,46 @@
+=== Hermes daily progress run: 20260914_081611 ===
+.                                                                        [100%]
+.............................................                            [100%]
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+.............F
+=================================== FAILURES ===================================
+___________________ TestMigrationAndRetrieval.test_migration ___________________
+
+self = <agent.memory.tests.test_memory.TestMigrationAndRetrieval object at 0x106c087d0>
+
+    def test_migration(self):
+        immediate, session, episodic, semantic, archive = self._make_stack()
+        immediate.record_conversation_turn("hi", "hello")
+        manager = MemoryMigrationManager(immediate, session, episodic, semantic, archive)
+>       result = manager.migrate_between_layers()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+agent/memory/tests/test_memory.py:105: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+agent/memory/core/migration.py:47: in migrate_between_layers
+    "layer_1_to_2": self.migrate_layer_1_to_2(),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <agent.memory.core.migration.MemoryMigrationManager object at 0x106d5ecf0>
+
+    def migrate_layer_1_to_2(self) -> int:
+        """即时上下文 → 短期会话（会话历史迁移为会话记录）。"""
+        count = 0
+>       turns = list(self.immediate.conversation_buffer)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ImmediateContextMemory' object has no attribute 'conversation_buffer'
+
+agent/memory/core/migration.py:56: AttributeError
+=========================== short test summary info ============================
+FAILED agent/memory/tests/test_memory.py::TestMigrationAndRetrieval::test_migration
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 1214, in parse
+    tree.parse(source, parser)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 566, in parse
+    source = open(source, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/huchufan/Hermes/implementation/automation/coverage_daily_20260914_081611/coverage.xml'

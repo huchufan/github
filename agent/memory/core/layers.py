@@ -391,6 +391,17 @@ class EpisodicMemory(MemoryLayer):
                 self.actor = getattr(event, 'actor', None)
         return EventRef(event_id=eid, timestamp=ts, event=event)
 
+    def search_events(self, query: str) -> List[Any]:
+        # PoC: return events whose string repr contains the query
+        res = []
+        q = query.lower()
+        for e in self.events:
+            try:
+                if q in str(e.get('event')).lower():
+                    res.append(e.get('event'))
+            except Exception:
+                pass
+        return res
     def extract_learned_patterns(self, time_window: Optional[timedelta] = None) -> List[Any]:
         """Simple PoC pattern extraction.
 

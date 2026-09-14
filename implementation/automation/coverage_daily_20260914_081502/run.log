@@ -1,0 +1,32 @@
+=== Hermes daily progress run: 20260914_081502 ===
+.                                                                        [100%]
+.............................................                            [100%]
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+...........F
+=================================== FAILURES ===================================
+_______________________ TestLayers.test_semantic_search ________________________
+
+self = <agent.memory.tests.test_memory.TestLayers object at 0x1129ae2c0>
+
+    def test_semantic_search(self):
+        mem = SemanticMemory()
+        mem.store_knowledge_item(KnowledgeItem(title="python", content="python programming language", category="dev"))
+        mem.store_knowledge_item(KnowledgeItem(title="cooking", content="how to cook pasta", category="food"))
+        results = mem.semantic_search("python code", top_k=1)
+>       assert results[0].title == "python"
+               ^^^^^^^^^^
+E       IndexError: list index out of range
+
+agent/memory/tests/test_memory.py:79: IndexError
+=========================== short test summary info ============================
+FAILED agent/memory/tests/test_memory.py::TestLayers::test_semantic_search - ...
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 1214, in parse
+    tree.parse(source, parser)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 566, in parse
+    source = open(source, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/huchufan/Hermes/implementation/automation/coverage_daily_20260914_081502/coverage.xml'
