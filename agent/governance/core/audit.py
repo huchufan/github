@@ -220,6 +220,19 @@ class AuditAnalyzer:
             actors[getattr(r, 'actor_id', '')] += 1
             if actors[getattr(r, 'actor_id', '')] > 50:
                 anomalies.append(AnomalyReport(type='UNUSUAL_SENSITIVE_ACCESS', severity='HIGH', description=f'Actor {getattr(r, "actor_id", "")} accessed many sensitive resources'))
+        # include privilege escalation detections based on recent records
+        try:
+            priv = self.detect_privilege_escalation(records)
+            # merge while avoiding exact duplicates
+            existing = {(a.type, a.description) for a in anomalies}
+            for p in priv:
+                key = (p.type, p.description)
+                if key not in existing:
+                    anomalies.append(p)
+                    existing.add(key)
+        except Exception:
+            # non-fatal: if privilege detection fails, continue with other anomaly detections
+            pass
         return anomalies
 
     def generate_compliance_report(self, start: Any, end: Any, policy_name: str) -> ComplianceReport:
