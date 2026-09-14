@@ -90,16 +90,21 @@ class AuditLogger:
     def log_operation(self, action: str, actor: Any, resource: Any, op: str, result: Any = None, context: Optional[Dict[str, Any]] = None) -> AuditRecord:
         # Normalize actor id and resource info
         actor_id = actor.id if hasattr(actor, 'id') else str(actor)
+        actor_role = getattr(actor, 'role', None)
         res_type = getattr(resource, 'type', str(resource))
         res_id = getattr(resource, 'id', getattr(resource, 'resource_id', ''))
         success = getattr(result, 'status', '') == 'SUCCESS' if result is not None else True
 
-        rec = self._log.record(actor=actor_id, action=action, resource_type=res_type, resource_id=res_id, result=result, success=success, details=getattr(resource, '__dict__', {}) or {})
+        details = getattr(resource, '__dict__', {}) or {}
+        if actor_role is not None:
+            details['actor_role'] = actor_role
+
+        rec = self._log.record(actor=actor_id, action=action, resource_type=res_type, resource_id=res_id, result=result, success=success, details=details)
         # update immutable copy
         self.immutable_log = list(self.records)
 
         # Alert on failures or sensitive classifications
-        classification = getattr(resource, 'classification', '')
+        classification = details.get('classification', '')
         if not rec.success or classification in ('CONFIDENTIAL', 'SECRET'):
             alert = AnomalyReport(type='AUDIT_ALERT', severity='HIGH', description=f'Alert for {rec.resource_type}')
             self.alerts.append(alert)
@@ -135,8 +140,9 @@ class AuditAnalyzer:
         for r in records:
             actor = getattr(r, 'actor_id', '')
             action = getattr(r, 'action', '')
-            # PoC: if actor id startswith 'g' (guest) and action contains 'policy' -> escalation
-            if str(actor).startswith('g') and 'policy' in str(action):
+            role = getattr(r, 'details', {}).get('actor_role')
+            # PoC: if actor id startswith 'g' (guest) or role=='guest' and action contains 'policy' -> escalation
+            if (str(actor).startswith('g') or role == 'guest') and 'policy' in str(action):
                 anomalies.append(AnomalyReport(type='PRIVILEGE_ESCALATION', severity='HIGH', description=f'Guest attempted privileged action {action}'))
         return anomalies
 
