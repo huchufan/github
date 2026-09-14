@@ -14,7 +14,6 @@ import math
 import re
 from typing import Dict, Iterable, List, Tuple
 
-
 DEFAULT_DIM = 256
 
 
@@ -26,7 +25,7 @@ def _tokenize(text: str) -> List[str]:
     # 字符 n-gram（中文与短词友好）
     compact = re.sub(r"\s+", "", text)
     for n in (2, 3):
-        features.extend(compact[i:i + n] for i in range(max(0, len(compact) - n + 1)))
+        features.extend(compact[i : i + n] for i in range(max(0, len(compact) - n + 1)))
     return features
 
 
@@ -71,7 +70,9 @@ class SemanticIndex:
     def remove(self, item_id: str) -> None:
         self._items.pop(item_id, None)
 
-    def search(self, query_embedding: List[float], top_k: int = 10) -> List[Tuple[str, float]]:
+    def search(
+        self, query_embedding: List[float], top_k: int = 10
+    ) -> List[Tuple[str, float]]:
         """返回 (item_id, similarity) 列表，按相似度降序。"""
         scored = [
             (item_id, cosine_similarity(query_embedding, emb))
@@ -97,4 +98,10 @@ class EmbeddingModel:
         return cosine_similarity(self.encode(a), self.encode(b))
 
 
-__all__ = ["embed", "cosine_similarity", "SemanticIndex", "EmbeddingModel", "DEFAULT_DIM"]
+__all__ = [
+    "embed",
+    "cosine_similarity",
+    "SemanticIndex",
+    "EmbeddingModel",
+    "DEFAULT_DIM",
+]

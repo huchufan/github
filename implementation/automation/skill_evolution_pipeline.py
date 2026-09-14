@@ -6,9 +6,9 @@
 - Produce a validation report into Obsidian and a TODO checklist for remaining items
 """
 import os
-from pathlib import Path
 import shutil
 import subprocess
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PATCH_DIR = ROOT / 'implementation' / 'skills' / 'patches'

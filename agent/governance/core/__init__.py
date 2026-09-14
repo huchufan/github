@@ -6,11 +6,11 @@ Hermes 系统的规则和约束层：访问控制、审计追踪、合规检查�
 设计文档: 01_治理框架设计.md
 """
 
+from agent.governance.core.audit import AuditLog, AuditRecord
+from agent.governance.core.policy import Decision, PolicyEngine, PolicyRule
 # Governance core public surface - lightweight exports for PoC
 # Export only implemented PoC symbols to avoid import-time failures in tests.
-from agent.governance.core.rbac import RBACManager, Role, Permission
-from agent.governance.core.audit import AuditLog, AuditRecord
-from agent.governance.core.policy import PolicyEngine, PolicyRule, Decision
+from agent.governance.core.rbac import Permission, RBACManager, Role
 
 __all__ = [
     # RBAC

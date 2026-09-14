@@ -11,11 +11,8 @@ from __future__ import annotations
 import logging
 from typing import Any, Dict, List, Optional
 
-from agent.core.types import (
-    ArchitecturalImprovement,
-    BottleneckAnalysis,
-    KnowledgeItem,
-)
+from agent.core.types import (ArchitecturalImprovement, BottleneckAnalysis,
+                              KnowledgeItem)
 
 logger = logging.getLogger(__name__)
 
@@ -26,18 +23,30 @@ class ArchitecturalEvolution:
     def __init__(self):
         self.planned_changes: List[ArchitecturalImprovement] = []
 
-    def identify_system_bottlenecks(self, metrics: Dict[str, float]) -> BottleneckAnalysis:
+    def identify_system_bottlenecks(
+        self, metrics: Dict[str, float]
+    ) -> BottleneckAnalysis:
         """识别系统瓶颈。"""
         analysis = BottleneckAnalysis()
         if metrics.get("pool_utilization", 0) > 0.9:
-            analysis.add_bottleneck("CONCURRENCY_LIMIT", "HIGH", "Increase worker pool or add multi-processing")
+            analysis.add_bottleneck(
+                "CONCURRENCY_LIMIT",
+                "HIGH",
+                "Increase worker pool or add multi-processing",
+            )
         if metrics.get("storage_latency_ms", 0) > 100:
-            analysis.add_bottleneck("STORAGE_LATENCY", "MEDIUM", "Optimize indices or add caching layer")
+            analysis.add_bottleneck(
+                "STORAGE_LATENCY", "MEDIUM", "Optimize indices or add caching layer"
+            )
         if metrics.get("network_utilization", 0) > 0.8:
-            analysis.add_bottleneck("NETWORK_BANDWIDTH", "HIGH", "Add compression or reduce message size")
+            analysis.add_bottleneck(
+                "NETWORK_BANDWIDTH", "HIGH", "Add compression or reduce message size"
+            )
         return analysis
 
-    def generate_architectural_improvements(self, bottleneck: BottleneckAnalysis) -> List[ArchitecturalImprovement]:
+    def generate_architectural_improvements(
+        self, bottleneck: BottleneckAnalysis
+    ) -> List[ArchitecturalImprovement]:
         """生成架构改进建议。"""
         return [
             ArchitecturalImprovement(
@@ -49,7 +58,9 @@ class ArchitecturalEvolution:
             for b in bottleneck.bottlenecks
         ]
 
-    async def evolve_system_architecture(self, metrics: Dict[str, float]) -> List[ArchitecturalImprovement]:
+    async def evolve_system_architecture(
+        self, metrics: Dict[str, float]
+    ) -> List[ArchitecturalImprovement]:
         """演进系统架构，返回已计划的改进。"""
         bottlenecks = self.identify_system_bottlenecks(metrics)
         improvements = self.generate_architectural_improvements(bottlenecks)
@@ -81,7 +92,9 @@ class ClusterLearningSystem:
             return True
         return False
 
-    async def share_knowledge_across_cluster(self, remote_pull: List[KnowledgeItem]) -> List[KnowledgeItem]:
+    async def share_knowledge_across_cluster(
+        self, remote_pull: List[KnowledgeItem]
+    ) -> List[KnowledgeItem]:
         """在集群中共享知识（模拟发布/拉取）。"""
         integrated = []
         for item in remote_pull:

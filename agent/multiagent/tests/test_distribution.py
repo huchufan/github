@@ -1,7 +1,9 @@
 """
 Auto-generated test for distribution
 """
+
 import pytest
+
 from agent.multiagent.core.distribution import Distribution
 
 
@@ -13,4 +15,4 @@ def test_distribution_init():
 def test_distribution_execute():
     inst = Distribution()
     r = inst.execute()
-    assert r.get('ok') is True
+    assert r.get("ok") is True

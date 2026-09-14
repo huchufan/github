@@ -1,7 +1,9 @@
 """
 Auto-generated test for executor
 """
+
 import pytest
+
 from agent.automation.core.executor import Executor
 
 
@@ -13,4 +15,4 @@ def test_executor_init():
 def test_executor_execute():
     inst = Executor()
     r = inst.execute()
-    assert r.get('ok') is True
+    assert r.get("ok") is True

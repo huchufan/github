@@ -2,7 +2,9 @@
 Orchestration Framework - Planner Module (compat shim + PoC)
 Provides Planner and TaskPlanner names for imports.
 """
+
 from typing import Any, Dict, List
+
 
 class Planner:
     def __init__(self, config: Dict[str, Any] | None = None):
@@ -15,6 +17,7 @@ class Planner:
         # backward-compatible execute used in tests
         return {"ok": True}
 
+
 class TaskPlanner:
     def __init__(self):
         self.tasks = []
@@ -27,6 +30,7 @@ class TaskPlanner:
         # backward-compatible execute used in tests
         return {"ok": True}
 
+
 class TaskPlanner:
     def __init__(self):
         self.tasks = []
@@ -38,11 +42,20 @@ class TaskPlanner:
     def plan_execution(self, intent, parameters):
         # create a basic ExecutionPlan object for tests expecting a plan
         from agent.core.types import ExecutionPlan, SubTask
-        subtasks = [SubTask(id=f"{i}", skill_name=s) for i, s in enumerate(getattr(intent, 'skills_involved', []), start=1)]
+
+        subtasks = [
+            SubTask(id=f"{i}", skill_name=s)
+            for i, s in enumerate(getattr(intent, "skills_involved", []), start=1)
+        ]
         # estimate time as 60s per skill by default
         time_estimate = len(subtasks) * 60.0
-        plan = ExecutionPlan(intent=intent, subtasks=subtasks, execution_order=[[t for t in subtasks]], time_estimate=time_estimate)
+        plan = ExecutionPlan(
+            intent=intent,
+            subtasks=subtasks,
+            execution_order=[[t for t in subtasks]],
+            time_estimate=time_estimate,
+        )
         return plan
 
-__all__ = ['Planner', 'TaskPlanner']
 
+__all__ = ["Planner", "TaskPlanner"]

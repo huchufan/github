@@ -1,6 +1,7 @@
-from typing import Any, Dict, List, Optional
 from dataclasses import dataclass, field
 from enum import Enum
+from typing import Any, Dict, List, Optional
+
 
 class Decision(Enum):
     ALLOW = "ALLOW"
@@ -80,15 +81,15 @@ class RuleEngine:
         results: List[bool] = []
         for c in policy.conditions:
             # support nested field lookups like 'resource.type' or simple 'role'
-            if '.' in c.field:
-                parts = c.field.split('.')
+            if "." in c.field:
+                parts = c.field.split(".")
                 val = context
                 for p in parts:
                     if isinstance(val, dict):
                         val = val.get(p)
                     else:
                         val = getattr(val, p, None)
-                        
+
                     if val is None:
                         break
             else:
@@ -107,7 +108,7 @@ class RuleEngine:
             results.append(passed)
 
         matched = sum(1 for r in results if r)
-        if policy.condition_logic.upper() == 'AND':
+        if policy.condition_logic.upper() == "AND":
             overall = all(results) if results else True
         else:
             overall = any(results) if results else True
@@ -126,35 +127,48 @@ class PolicyValidator:
     def record_usage(self, actor_id: str, limit_type: str):
         if actor_id not in self.usage_counters:
             self.usage_counters[actor_id] = {}
-        self.usage_counters[actor_id][limit_type] = self.usage_counters[actor_id].get(limit_type, 0) + 1
+        self.usage_counters[actor_id][limit_type] = (
+            self.usage_counters[actor_id].get(limit_type, 0) + 1
+        )
 
     def validate_operation(self, op: Any) -> ValidationResult:
         # Build a simple context from operation
         ctx: Dict[str, Any] = {}
-        if getattr(op, 'actor', None) is not None:
-            ctx['role'] = getattr(op.actor, 'role', None)
-            ctx['actor_id'] = getattr(op.actor, 'id', None)
-        if getattr(op, 'resource', None) is not None:
-            ctx['resource'] = {'type': getattr(op.resource, 'type', None)}
+        if getattr(op, "actor", None) is not None:
+            ctx["role"] = getattr(op.actor, "role", None)
+            ctx["actor_id"] = getattr(op.actor, "id", None)
+        if getattr(op, "resource", None) is not None:
+            ctx["resource"] = {"type": getattr(op.resource, "type", None)}
 
         for p in self.policies:
             if op.action in p.applies_to:
                 rd = RuleEngine().evaluate_rule(p, ctx)
                 violations: List[PolicyViolation] = []
                 if not rd.passed:
-                    v = PolicyViolation(policy_id=p.id, id=p.id, message='condition failed')
+                    v = PolicyViolation(
+                        policy_id=p.id, id=p.id, message="condition failed"
+                    )
                     violations.append(v)
                 # check limits regardless of condition outcome
                 for lim in p.limits:
-                    actor_id = ctx.get('actor_id')
+                    actor_id = ctx.get("actor_id")
                     if actor_id:
-                        used = self.usage_counters.get(actor_id, {}).get(lim.limit_type, 0)
+                        used = self.usage_counters.get(actor_id, {}).get(
+                            lim.limit_type, 0
+                        )
                         if used >= lim.max_count:
-                            vlim = PolicyViolation(policy_id=p.id, id=p.id, message='limit exceeded', limit=lim)
+                            vlim = PolicyViolation(
+                                policy_id=p.id,
+                                id=p.id,
+                                message="limit exceeded",
+                                limit=lim,
+                            )
                             violations.append(vlim)
                 if violations:
-                    return ValidationResult(allowed=False, action='DENY', violations=violations)
-        return ValidationResult(allowed=True, action='ALLOW')
+                    return ValidationResult(
+                        allowed=False, action="DENY", violations=violations
+                    )
+        return ValidationResult(allowed=True, action="ALLOW")
 
 
 # Backwards-compatible alias expected by tests

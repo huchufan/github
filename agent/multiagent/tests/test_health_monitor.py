@@ -1,4 +1,5 @@
 import pytest
+
 from agent.multiagent.health_monitor import HealthMonitor
 
 
@@ -7,4 +8,4 @@ def test_health_monitor_run_once():
     res = m.run_once_blocking()
     assert isinstance(res, dict)
     # expecting T1 at least present
-    assert 'T1' in res
+    assert "T1" in res

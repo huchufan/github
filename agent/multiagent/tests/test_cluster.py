@@ -1,7 +1,9 @@
 """
 Auto-generated test for cluster
 """
+
 import pytest
+
 from agent.multiagent.core.cluster import Cluster
 
 
@@ -13,4 +15,4 @@ def test_cluster_init():
 def test_cluster_execute():
     inst = Cluster()
     r = inst.execute()
-    assert r.get('ok') is True
+    assert r.get("ok") is True

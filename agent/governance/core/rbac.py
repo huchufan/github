@@ -1,9 +1,9 @@
-from typing import Set, Dict, Optional
-# Use shared Role/Permission types from agent.core.types so tests import the same enums
-from agent.core.types import Role, Permission
-
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Set
+
+# Use shared Role/Permission types from agent.core.types so tests import the same enums
+from agent.core.types import Permission, Role
+
 
 # Compatibility decision object used by GovernancePolicy.evaluate_access
 @dataclass
@@ -11,6 +11,7 @@ class PolicyDecision:
     allow: bool = False
     reason: str = ""
     audit_code: str = "ACCESS_DENIED"
+
 
 @dataclass
 class AccessRule:
@@ -20,12 +21,14 @@ class AccessRule:
     deny_reason: Optional[str] = None
     priority: int = 0
 
+
 DEFAULT_ROLE_PERMISSIONS = {
-    'admin': [p.name for p in Permission],
-    'developer': ['EXECUTE_AGENT', 'READ_MEMORY', 'QUERY_READONLY'],
-    'user': ['EXECUTE_AGENT', 'QUERY_READONLY'],
-    'guest': ['QUERY_READONLY'],
+    "admin": [p.name for p in Permission],
+    "developer": ["EXECUTE_AGENT", "READ_MEMORY", "QUERY_READONLY"],
+    "user": ["EXECUTE_AGENT", "QUERY_READONLY"],
+    "guest": ["QUERY_READONLY"],
 }
+
 
 @dataclass
 class GovernancePolicy:
@@ -39,11 +42,11 @@ class GovernancePolicy:
         key = token[1:]
         # support subject_foo or subject.foo
         if key.startswith("subject_"):
-            attr = key[len("subject_"):]
+            attr = key[len("subject_") :]
             # common alias mapping (e.g. $subject_org -> subject.organization)
             alias_map = {
-                'org': 'organization',
-                'org_id': 'organization',
+                "org": "organization",
+                "org_id": "organization",
             }
             mapped = alias_map.get(attr, attr)
             if hasattr(subject, mapped):
@@ -51,31 +54,37 @@ class GovernancePolicy:
             # fallback: try raw attr
             return getattr(subject, attr, None)
         if key.startswith("subject."):
-            attr = key.split('.', 1)[1]
+            attr = key.split(".", 1)[1]
             return getattr(subject, attr, None)
         if key.startswith("resource_"):
-            attr = key[len("resource_"):]
-            alias_map = {'id': 'id', 'owner': 'owner'}
+            attr = key[len("resource_") :]
+            alias_map = {"id": "id", "owner": "owner"}
             mapped = alias_map.get(attr, attr)
             if hasattr(resource, mapped):
                 return getattr(resource, mapped, None)
             return getattr(resource, attr, None)
         if key.startswith("resource."):
-            attr = key.split('.', 1)[1]
+            attr = key.split(".", 1)[1]
             return getattr(resource, attr, None)
         if key.startswith("ctx_"):
-            attr = key[len("ctx_"):]
+            attr = key[len("ctx_") :]
             return getattr(ctx, attr, None)
         if key.startswith("ctx."):
-            attr = key.split('.', 1)[1]
+            attr = key.split(".", 1)[1]
             return getattr(ctx, attr, None)
         return None
 
-    def _eval_condition(self, cond: Dict[str, Any], subject: Any, resource: Any, ctx: Any) -> bool:
+    def _eval_condition(
+        self, cond: Dict[str, Any], subject: Any, resource: Any, ctx: Any
+    ) -> bool:
         left = cond.get("left")
         op = cond.get("operator")
         right = cond.get("right")
-        lval = self._resolve_value(left, subject, resource, ctx) if isinstance(left, str) and left.startswith("$") else left
+        lval = (
+            self._resolve_value(left, subject, resource, ctx)
+            if isinstance(left, str) and left.startswith("$")
+            else left
+        )
         rval = right
         if op in ("eq", "=="):
             return str(lval) == str(rval)
@@ -84,7 +93,9 @@ class GovernancePolicy:
         # extend as needed
         return False
 
-    def evaluate_access(self, subject: Any, action: str, resource: Any, ctx: Any) -> Any:
+    def evaluate_access(
+        self, subject: Any, action: str, resource: Any, ctx: Any
+    ) -> Any:
         """Evaluate ABAC-like governance policy (PoC).
 
         Behavior (PoC):
@@ -93,10 +104,14 @@ class GovernancePolicy:
         - return a Decision object with allow/reason/audit_code to satisfy tests
         """
         # default deny decision
-        decision = PolicyDecision(allow=False, reason="Default deny", audit_code="ACCESS_DENIED")
+        decision = PolicyDecision(
+            allow=False, reason="Default deny", audit_code="ACCESS_DENIED"
+        )
 
         # sort by priority descending
-        rules = sorted(self.rules, key=lambda r: getattr(r, "priority", 0), reverse=True)
+        rules = sorted(
+            self.rules, key=lambda r: getattr(r, "priority", 0), reverse=True
+        )
         for rule in rules:
             # if no conditions, rule matches all
             conds = getattr(rule, "conditions", []) or []
@@ -108,12 +123,18 @@ class GovernancePolicy:
             if matched:
                 if getattr(rule, "effect", "ALLOW").upper() == "DENY":
                     decision.allow = False
-                    decision.reason = getattr(rule, "deny_reason", "") or "Access denied by policy"
-                    decision.audit_code = getattr(rule, "audit_code", "ACCESS_DENIED_RBAC")
+                    decision.reason = (
+                        getattr(rule, "deny_reason", "") or "Access denied by policy"
+                    )
+                    decision.audit_code = getattr(
+                        rule, "audit_code", "ACCESS_DENIED_RBAC"
+                    )
                     return decision
                 else:
                     decision.allow = True
-                    decision.reason = getattr(rule, "deny_reason", "") or "Allowed by policy"
+                    decision.reason = (
+                        getattr(rule, "deny_reason", "") or "Allowed by policy"
+                    )
                     decision.audit_code = getattr(rule, "audit_code", "ACCESS_ALLOWED")
                     return decision
         return decision
@@ -124,7 +145,10 @@ class GovernancePolicy:
 
 from agent.core.errors import AccessDeniedError
 
-def enforce_access(policy: GovernancePolicy, subject: Any, action: str, resource: Any, ctx: Any):
+
+def enforce_access(
+    policy: GovernancePolicy, subject: Any, action: str, resource: Any, ctx: Any
+):
     """Evaluate policy and raise AccessDeniedError when denied (PoC).
     Expected to be used in tests with pytest.raises(AccessDeniedError).
     """
@@ -134,9 +158,9 @@ def enforce_access(policy: GovernancePolicy, subject: Any, action: str, resource
         # On unexpected errors, deny
         raise AccessDeniedError("policy evaluation failed")
 
-    allow = getattr(decision, 'allow', False)
+    allow = getattr(decision, "allow", False)
     if not allow:
-        reason = getattr(decision, 'reason', 'Access denied')
+        reason = getattr(decision, "reason", "Access denied")
         raise AccessDeniedError(reason)
     return True
 

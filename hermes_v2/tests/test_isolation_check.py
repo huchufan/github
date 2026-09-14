@@ -1,5 +1,7 @@
 import pytest
-from hermes_v2.isolation_check import is_path_isolated, is_import_isolated, is_config_isolated
+
+from hermes_v2.isolation_check import (is_config_isolated, is_import_isolated,
+                                       is_path_isolated)
 
 
 def test_path_isolation():

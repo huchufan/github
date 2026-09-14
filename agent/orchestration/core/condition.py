@@ -53,9 +53,13 @@ class ConditionEvaluator:
             return left in right
         return False
 
-    def evaluate_boolean_logic(self, condition: Condition, execution_state: Any) -> bool:
+    def evaluate_boolean_logic(
+        self, condition: Condition, execution_state: Any
+    ) -> bool:
         """布尔逻辑（AND/OR 组合子条件）。"""
-        results = [self.evaluate_condition(c, execution_state) for c in condition.children]
+        results = [
+            self.evaluate_condition(c, execution_state) for c in condition.children
+        ]
         if condition.logic == "AND":
             return all(results)
         if condition.logic == "OR":
@@ -67,7 +71,9 @@ class ConditionEvaluator:
         value = self.resolve_value(condition.left, execution_state)
         return bool(value)
 
-    def evaluate_metric_condition(self, condition: Condition, execution_state: Any) -> bool:
+    def evaluate_metric_condition(
+        self, condition: Condition, execution_state: Any
+    ) -> bool:
         """指标条件（基于执行状态中的指标）。"""
         return self.evaluate_comparison(condition, execution_state)
 

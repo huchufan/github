@@ -3,11 +3,11 @@ Simple, dependency-free HTTP fallback implemented with urllib.
 This file was patched to: (1) initialize client when possible, (2) robustly parse client results,
 (3) normalize point ids (UUID/int) for HTTP fallback, and (4) expose deterministic id helper.
 """
-from typing import Any, Dict, List
 import json
-import urllib.request
 import urllib.error
+import urllib.request
 import uuid
+from typing import Any, Dict, List
 
 QDRANT_AVAILABLE = False
 _HTTP_AVAILABLE = False

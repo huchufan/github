@@ -2,22 +2,13 @@
 
 import asyncio
 
-from agent.core.types import (
-    KnowledgeItem,
-    SessionContext,
-    ConversationTurn,
-    SystemEvent,
-    UserHistory,
-    SessionRecord,
-)
-from agent.memory.core.embeddings import embed, cosine_similarity, SemanticIndex, EmbeddingModel
-from agent.memory.core.layers import (
-    ImmediateContextMemory,
-    SessionMemory,
-    EpisodicMemory,
-    SemanticMemory,
-    ArchiveMemory,
-)
+from agent.core.types import (ConversationTurn, KnowledgeItem, SessionContext,
+                              SessionRecord, SystemEvent, UserHistory)
+from agent.memory.core.embeddings import (EmbeddingModel, SemanticIndex,
+                                          cosine_similarity, embed)
+from agent.memory.core.layers import (ArchiveMemory, EpisodicMemory,
+                                      ImmediateContextMemory, SemanticMemory,
+                                      SessionMemory)
 from agent.memory.core.migration import MemoryMigrationManager
 from agent.memory.core.retrieval import MemoryRetrievalEngine
 from agent.memory.core.user_model import UserModel, UserPreferenceModel
@@ -73,8 +64,14 @@ class TestLayers:
 
     def test_semantic_search(self):
         mem = SemanticMemory()
-        mem.store_knowledge_item(KnowledgeItem(title="python", content="python programming language", category="dev"))
-        mem.store_knowledge_item(KnowledgeItem(title="cooking", content="how to cook pasta", category="food"))
+        mem.store_knowledge_item(
+            KnowledgeItem(
+                title="python", content="python programming language", category="dev"
+            )
+        )
+        mem.store_knowledge_item(
+            KnowledgeItem(title="cooking", content="how to cook pasta", category="food")
+        )
         results = mem.semantic_search("python code", top_k=1)
         assert results[0].title == "python"
         graph = mem.build_knowledge_graph()
@@ -101,13 +98,17 @@ class TestMigrationAndRetrieval:
     def test_migration(self):
         immediate, session, episodic, semantic, archive = self._make_stack()
         immediate.record_conversation_turn("hi", "hello")
-        manager = MemoryMigrationManager(immediate, session, episodic, semantic, archive)
+        manager = MemoryMigrationManager(
+            immediate, session, episodic, semantic, archive
+        )
         result = manager.migrate_between_layers()
         assert result["layer_1_to_2"] >= 1
 
     def test_retrieval_fusion(self):
         immediate, session, episodic, semantic, archive = self._make_stack()
-        semantic.store_knowledge_item(KnowledgeItem(title="python", content="python code", category="dev"))
+        semantic.store_knowledge_item(
+            KnowledgeItem(title="python", content="python code", category="dev")
+        )
         engine = MemoryRetrievalEngine(immediate, session, episodic, semantic, archive)
         result = engine.retrieve_relevant_memory("python")
         assert result.fused is not None
@@ -117,8 +118,20 @@ class TestMigrationAndRetrieval:
 class TestUserModel:
     def test_preferences(self):
         sessions = [
-            SessionRecord(user_id="u1", user_preferences={"communication_style": "concise", "technical_level": "expert"}),
-            SessionRecord(user_id="u1", user_preferences={"communication_style": "concise", "technical_level": "expert"}),
+            SessionRecord(
+                user_id="u1",
+                user_preferences={
+                    "communication_style": "concise",
+                    "technical_level": "expert",
+                },
+            ),
+            SessionRecord(
+                user_id="u1",
+                user_preferences={
+                    "communication_style": "concise",
+                    "technical_level": "expert",
+                },
+            ),
         ]
         model = UserPreferenceModel()
         profile = model.learn_user_preferences(sessions)
@@ -127,7 +140,9 @@ class TestUserModel:
 
     def test_comprehensive_model(self):
         model = UserModel()
-        history = UserHistory(user_id="u1", sessions=[SessionRecord(user_id="u1", summary="python ml")])
+        history = UserHistory(
+            user_id="u1", sessions=[SessionRecord(user_id="u1", summary="python ml")]
+        )
         result = model.build_comprehensive_user_model(history)
         assert result.user_id == "u1"
         assert result.preference_profile is not None

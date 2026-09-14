@@ -1,7 +1,9 @@
 """
 Types for scheduler
 """
-from typing import Protocol, Any
+
+from typing import Any, Protocol
+
 
 class IScheduler(Protocol):
     def execute(self, *args, **kwargs) -> Any: ...

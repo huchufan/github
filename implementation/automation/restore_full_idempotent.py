@@ -2,8 +2,13 @@
 """Idempotent restore script for Qdrant: normalize IDs to UUID5, batch upsert.
 Writes a report to backups/restore_full_idempotent_<ts>.md
 """
-import os, time, json, hashlib, sys
-from uuid import uuid5, NAMESPACE_URL
+import hashlib
+import json
+import os
+import sys
+import time
+from uuid import NAMESPACE_URL, uuid5
+
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
 

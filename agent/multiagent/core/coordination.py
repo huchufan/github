@@ -11,11 +11,7 @@ from __future__ import annotations
 import logging
 from typing import Any, Dict, List, Optional
 
-from agent.core.types import (
-    SubTaskResult,
-    Task,
-    TaskCoordination,
-)
+from agent.core.types import SubTaskResult, Task, TaskCoordination
 
 logger = logging.getLogger(__name__)
 
@@ -72,13 +68,18 @@ class TaskDecompositionCoordinator:
             if agent_id:
                 coordination.assigned_agents[subtask.task_id] = agent_id
 
-        return {"coordination": coordination, "assigned": len(coordination.assigned_agents)}
+        return {
+            "coordination": coordination,
+            "assigned": len(coordination.assigned_agents),
+        }
 
 
 class ResultAggregator:
     """结果融合和冲突解决。"""
 
-    async def aggregate_results(self, subtask_results: List[SubTaskResult], aggregation_strategy: str) -> Any:
+    async def aggregate_results(
+        self, subtask_results: List[SubTaskResult], aggregation_strategy: str
+    ) -> Any:
         """聚合子任务结果。"""
         if aggregation_strategy == "MERGE":
             return self.merge_results(subtask_results)

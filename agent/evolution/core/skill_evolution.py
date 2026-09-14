@@ -11,12 +11,8 @@ from __future__ import annotations
 import logging
 from typing import Any, Dict, List, Optional
 
-from agent.core.types import (
-    SkillCreationOpportunity,
-    SkillDefinition,
-    SkillImprovement,
-    SkillQualityMetrics,
-)
+from agent.core.types import (SkillCreationOpportunity, SkillDefinition,
+                              SkillImprovement, SkillQualityMetrics)
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +39,9 @@ class SkillRegistry:
 class SkillQualityAssurance:
     """技能质量评估。"""
 
-    async def evaluate_skill_quality(self, skill: SkillDefinition) -> SkillQualityMetrics:
+    async def evaluate_skill_quality(
+        self, skill: SkillDefinition
+    ) -> SkillQualityMetrics:
         """评估技能质量。"""
         metrics = SkillQualityMetrics(skill_id=skill.name)
         metrics.functional_correctness = self._test_functional(skill)
@@ -108,7 +106,9 @@ class SkillEvolutionSystem:
         self.qa = SkillQualityAssurance()
         self.improvement_log: List[Dict[str, Any]] = []
 
-    async def improve_existing_skill(self, opportunity: SkillImprovement) -> Optional[SkillDefinition]:
+    async def improve_existing_skill(
+        self, opportunity: SkillImprovement
+    ) -> Optional[SkillDefinition]:
         """改进现有技能。"""
         skill = self.registry.get_skill(opportunity.skill_id)
         if skill is None:
@@ -117,9 +117,9 @@ class SkillEvolutionSystem:
         improved = SkillDefinition(
             name=skill.name,
             description=skill.description,
-            code=getattr(skill, 'code', ''),
+            code=getattr(skill, "code", ""),
             version=self._bump_version(skill.version),
-            created_from_pattern=getattr(skill, 'created_from_pattern', ''),
+            created_from_pattern=getattr(skill, "created_from_pattern", ""),
         )
         original_score = (await self.qa.evaluate_skill_quality(skill)).overall_score
         test = await self.qa.evaluate_skill_quality(improved)
@@ -127,11 +127,15 @@ class SkillEvolutionSystem:
 
         if improved_score >= original_score:
             self.registry.update_skill(improved)
-            self.improvement_log.append({"skill": skill.name, "from": original_score, "to": improved_score})
+            self.improvement_log.append(
+                {"skill": skill.name, "from": original_score, "to": improved_score}
+            )
             return improved
         return None
 
-    async def create_new_skill(self, opportunity: SkillCreationOpportunity) -> Optional[SkillDefinition]:
+    async def create_new_skill(
+        self, opportunity: SkillCreationOpportunity
+    ) -> Optional[SkillDefinition]:
         """创建新技能。"""
         skill = SkillDefinition(
             name=opportunity.skill_name,

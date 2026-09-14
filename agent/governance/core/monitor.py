@@ -21,6 +21,7 @@ logger = logging.getLogger(__name__)
 @dataclass
 class GovernanceAlert:
     """治理告警。"""
+
     timestamp: Any = field(default_factory=now)
     level: str = Severity.MEDIUM.value
     category: str = ""
@@ -59,9 +60,7 @@ class GovernanceMonitor:
             ):
                 level = getattr(self, check_name)(op)
                 if level:
-                    raised.append(
-                        self.raise_alert(level, category, op)
-                    )
+                    raised.append(self.raise_alert(level, category, op))
         return raised
 
     def detect_privilege_abuse(self, op: Any) -> Optional[str]:
@@ -73,7 +72,9 @@ class GovernanceMonitor:
 
     def detect_anomaly(self, op: Any) -> Optional[str]:
         # 单条操作简单启发式：失败且涉及敏感数据
-        if getattr(op, "operation_status", "") == "FAILURE" and getattr(op, "involves_sensitive_data", False):
+        if getattr(op, "operation_status", "") == "FAILURE" and getattr(
+            op, "involves_sensitive_data", False
+        ):
             return Severity.HIGH.value
         return None
 
@@ -91,7 +92,9 @@ class GovernanceMonitor:
             level=level,
             category=category,
             operation=operation,
-            recommended_action=self.RECOMMENDED_ACTIONS.get(category, "Review manually"),
+            recommended_action=self.RECOMMENDED_ACTIONS.get(
+                category, "Review manually"
+            ),
         )
         self.alerts.append(alert)
         logger.warning("Governance alert [%s] %s", level, category)

@@ -1,7 +1,9 @@
 """
 Types for lifecycle
 """
-from typing import Protocol, Any
+
+from typing import Any, Protocol
+
 
 class ILifecycle(Protocol):
     def execute(self, *args, **kwargs) -> Any: ...

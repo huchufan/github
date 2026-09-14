@@ -6,13 +6,14 @@ Requires qdrant_adapter.QDRANT_AVAILABLE == True and qdrant-client installed.
 # ensure project root on sys.path
 import sys
 from pathlib import Path as _Path
+
 _ROOT = _Path(__file__).resolve().parents[2]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
 import pickle
-from pathlib import Path
 import time
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 STORE = ROOT / 'implementation' / 'memory' / 'in_memory_store.pkl'

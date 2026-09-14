@@ -15,7 +15,8 @@ import logging
 import os
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
-from urllib import request, error as urlerror
+from urllib import error as urlerror
+from urllib import request
 
 logger = logging.getLogger(__name__)
 
@@ -40,6 +41,7 @@ DEFAULT_MODEL_CONFIG: Dict[str, Any] = {
 @dataclass
 class ModelConfig:
     """模型配置。"""
+
     model: str = DEFAULT_MODEL
     provider: str = "openrouter"
     base_url: str = "https://openrouter.ai/api/v1"
@@ -60,6 +62,7 @@ class ModelConfig:
 @dataclass
 class ModelResponse:
     """模型响应。"""
+
     text: str = ""
     model: str = DEFAULT_MODEL
     usage: Dict[str, Any] = field(default_factory=dict)
@@ -69,6 +72,7 @@ class ModelResponse:
 # ---------------------------------------------------------------------------
 # 模型提供方抽象
 # ---------------------------------------------------------------------------
+
 
 class ModelProvider:
     """
@@ -99,7 +103,9 @@ class ModelProvider:
         payload = {
             "model": self.config.model,
             "messages": [],
-            "temperature": temperature if temperature is not None else self.config.temperature,
+            "temperature": (
+                temperature if temperature is not None else self.config.temperature
+            ),
             "max_tokens": max_tokens or self.config.max_tokens,
         }
         if system:
@@ -134,7 +140,9 @@ class ModelProvider:
         """确定性的本地回退，用于离线运行与测试。"""
         # 简单关键词提取，模拟结构化输出
         text = prompt.strip()
-        return ModelResponse(text=text, model=DEFAULT_MODEL, usage={"local_fallback": True})
+        return ModelResponse(
+            text=text, model=DEFAULT_MODEL, usage={"local_fallback": True}
+        )
 
 
 # ---------------------------------------------------------------------------

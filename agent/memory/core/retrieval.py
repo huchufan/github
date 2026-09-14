@@ -11,19 +11,11 @@ from __future__ import annotations
 import logging
 from typing import Any, Dict, List
 
-from agent.core.types import (
-    FusedMemoryResult,
-    FusedResult,
-    SearchQuery,
-    SearchResult,
-)
-from agent.memory.core.layers import (
-    ArchiveMemory,
-    EpisodicMemory,
-    ImmediateContextMemory,
-    SemanticMemory,
-    SessionMemory,
-)
+from agent.core.types import (FusedMemoryResult, FusedResult, SearchQuery,
+                              SearchResult)
+from agent.memory.core.layers import (ArchiveMemory, EpisodicMemory,
+                                      ImmediateContextMemory, SemanticMemory,
+                                      SessionMemory)
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +37,9 @@ class MemoryRetrievalEngine:
         self.semantic = semantic
         self.archive = archive
 
-    def retrieve_relevant_memory(self, query: str, layers: List[int] | None = None) -> FusedMemoryResult:
+    def retrieve_relevant_memory(
+        self, query: str, layers: List[int] | None = None
+    ) -> FusedMemoryResult:
         """从多层检索相关记忆。"""
         layers = layers if layers is not None else [1, 2, 3, 4]
         results: Dict[str, Any] = {
@@ -100,7 +94,11 @@ class MemoryRetrievalEngine:
         seen: set = set()
         unique: List[Any] = []
         for item, _score in candidates:
-            ident = id(item) if not isinstance(item, SearchResult) else getattr(item, "knowledge_id", id(item))
+            ident = (
+                id(item)
+                if not isinstance(item, SearchResult)
+                else getattr(item, "knowledge_id", id(item))
+            )
             if ident not in seen:
                 seen.add(ident)
                 unique.append(item)

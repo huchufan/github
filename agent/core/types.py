@@ -11,16 +11,16 @@ evolution / multiagent) 共用的数据模型、枚举与协议接口。
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field, asdict
+import uuid
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
-import uuid
-
 
 # ---------------------------------------------------------------------------
 # 基础工具
 # ---------------------------------------------------------------------------
+
 
 def now() -> datetime:
     """返回带 UTC 时区的当前时间。"""
@@ -36,6 +36,7 @@ def generate_uuid(prefix: str = "") -> str:
 # ---------------------------------------------------------------------------
 # 通用枚举
 # ---------------------------------------------------------------------------
+
 
 class Decision(str, Enum):
     ALLOW = "ALLOW"
@@ -65,6 +66,7 @@ class Severity(str, Enum):
 # ---------------------------------------------------------------------------
 # 治理框架类型 (Governance)
 # ---------------------------------------------------------------------------
+
 
 class Role(str, Enum):
     ADMIN = "admin"
@@ -98,6 +100,7 @@ class Permission(str, Enum):
 @dataclass
 class Actor:
     """操作发起者（用户 / 服务账户 / agent）。"""
+
     id: str = field(default_factory=generate_uuid)
     role: str = Role.USER.value
     organization: str = "default"
@@ -109,6 +112,7 @@ class Actor:
 @dataclass
 class Resource:
     """被访问的目标资源。"""
+
     type: str = "generic"
     id: str = field(default_factory=generate_uuid)
     owner: str = ""
@@ -120,6 +124,7 @@ class Resource:
 @dataclass
 class ExecutionContext:
     """执行上下文（治理 / 编排 / 自动化共用）。"""
+
     request_id: str = field(default_factory=generate_uuid)
     source_ip: str = "127.0.0.1"
     gateway: str = "cli"
@@ -134,6 +139,7 @@ class ExecutionContext:
 @dataclass
 class AccessDecision:
     """访问控制决策结果。"""
+
     allow: bool = False
     reason: str = "Default deny"
     audit_code: str = "ACCESS_DENIED"
@@ -144,6 +150,7 @@ class AccessDecision:
 @dataclass
 class Operation:
     """一次待治理校验的操作。"""
+
     action: str = ""
     actor: Optional[Actor] = None
     resource: Optional[Resource] = None
@@ -155,6 +162,7 @@ class Operation:
 @dataclass
 class OperationResult:
     """操作执行结果。"""
+
     status: str = OperationStatus.SUCCESS.value
     code: int = 0
     error: Optional[str] = None
@@ -165,6 +173,7 @@ class OperationResult:
 @dataclass
 class AuditRecord:
     """审计日志记录。"""
+
     audit_id: str = field(default_factory=lambda: generate_uuid("aud-"))
     timestamp: datetime = field(default_factory=now)
     actor_id: str = ""
@@ -195,9 +204,11 @@ class AuditRecord:
 # 编排框架类型 (Orchestration)
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class IntentAnalysis:
     """意图识别结果。"""
+
     primary_intent: str = ""
     confidence: float = 0.0
     alternative_intents: List[Tuple[str, float]] = field(default_factory=list)
@@ -211,6 +222,7 @@ class IntentAnalysis:
 @dataclass
 class ParameterDef:
     """参数定义。"""
+
     name: str = ""
     type: str = "string"
     description: str = ""
@@ -221,6 +233,7 @@ class ParameterDef:
 @dataclass
 class Intent:
     """意图定义。"""
+
     name: str = ""
     keywords: List[str] = field(default_factory=list)
     required_parameters: List[ParameterDef] = field(default_factory=list)
@@ -232,6 +245,7 @@ class Intent:
 @dataclass
 class ParameterSet:
     """参数提取结果。"""
+
     parameters: Dict[str, Any] = field(default_factory=dict)
     missing_required: List[str] = field(default_factory=list)
     complete: bool = True
@@ -240,6 +254,7 @@ class ParameterSet:
 @dataclass
 class SubTask:
     """子任务。"""
+
     id: str = field(default_factory=generate_uuid)
     skill_name: str = ""
     description: str = ""
@@ -253,6 +268,7 @@ class SubTask:
 @dataclass
 class ExecutionPlan:
     """执行计划。"""
+
     intent: Optional[Intent] = None
     subtasks: List[SubTask] = field(default_factory=list)
     parallel_groups: List[List[SubTask]] = field(default_factory=list)
@@ -270,6 +286,7 @@ class ExecutionPlan:
 @dataclass
 class TaskResult:
     """任务执行结果。"""
+
     task_id: str = ""
     status: str = OperationStatus.SUCCESS.value
     result: Any = None
@@ -281,6 +298,7 @@ class TaskResult:
 @dataclass
 class ExecutionResult:
     """工作流 / 计划执行结果。"""
+
     status: str = OperationStatus.SUCCESS.value
     result: Any = None
     error: Optional[str] = None
@@ -294,6 +312,7 @@ class ExecutionResult:
 @dataclass
 class ExecutionState:
     """执行状态跟踪。"""
+
     plan: Optional[ExecutionPlan] = None
     start_time: datetime = field(default_factory=now)
     tasks_completed: List[TaskResult] = field(default_factory=list)
@@ -309,6 +328,7 @@ class ExecutionState:
 @dataclass
 class RecoveryAction:
     """恢复动作。"""
+
     action: str = "STOP"  # STOP / RETRY / FALLBACK / CONTINUE
     skip_dependents: bool = False
     fallback_skill: Optional[str] = None
@@ -317,6 +337,7 @@ class RecoveryAction:
 @dataclass
 class ExecutionMetrics:
     """执行监控指标。"""
+
     overall_progress: float = 0.0
     critical_path_progress: float = 0.0
     average_task_duration: float = 0.0
@@ -331,6 +352,7 @@ class ExecutionMetrics:
 @dataclass
 class Anomaly:
     """异常。"""
+
     type: str = ""
     severity: str = Severity.MEDIUM.value
     task_id: Optional[str] = None
@@ -341,6 +363,7 @@ class Anomaly:
 @dataclass
 class Condition:
     """条件。"""
+
     type: str = "COMPARISON"
     left: Any = None
     right: Any = None
@@ -353,9 +376,11 @@ class Condition:
 # 记忆框架类型 (Memory)
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class ConversationTurn:
     """对话轮次。"""
+
     timestamp: datetime = field(default_factory=now)
     user_message: str = ""
     agent_response: str = ""
@@ -369,6 +394,7 @@ class ConversationTurn:
 @dataclass
 class ConversationContext:
     """对话上下文。"""
+
     turns: List[ConversationTurn] = field(default_factory=list)
     main_topic: str = ""
     participant_intents: List[str] = field(default_factory=list)
@@ -380,6 +406,7 @@ class ConversationContext:
 @dataclass
 class AttentionContext:
     """注意力上下文。"""
+
     items: List[Any] = field(default_factory=list)
     primary: Any = None
     secondary: List[Any] = field(default_factory=list)
@@ -389,6 +416,7 @@ class AttentionContext:
 @dataclass
 class SessionRecord:
     """会话记录。"""
+
     session_id: str = field(default_factory=generate_uuid)
     user_id: str = ""
     created_at: datetime = field(default_factory=now)
@@ -406,6 +434,7 @@ class SessionRecord:
 @dataclass
 class SessionContext:
     """会话上下文。"""
+
     session_id: str = ""
     conversation_history: List[ConversationTurn] = field(default_factory=list)
     user_style: str = "neutral"
@@ -420,6 +449,7 @@ class SessionContext:
 @dataclass
 class UserProfile:
     """用户偏好画像。"""
+
     communication_style: str = "neutral"
     verbosity: float = 0.5
     formality: float = 0.5
@@ -435,6 +465,7 @@ class UserProfile:
 @dataclass
 class SystemEvent:
     """系统事件。"""
+
     type: str = ""
     actor: str = ""
     action: str = ""
@@ -451,6 +482,7 @@ class SystemEvent:
 @dataclass
 class EventRecord:
     """事件记录。"""
+
     event_id: str = field(default_factory=generate_uuid)
     timestamp: datetime = field(default_factory=now)
     event_type: str = ""
@@ -468,6 +500,7 @@ class EventRecord:
 @dataclass
 class LearnedPattern:
     """学习到的模式。"""
+
     pattern_type: str = ""
     description: str = ""
     confidence: float = 0.5
@@ -477,6 +510,7 @@ class LearnedPattern:
 @dataclass
 class KnowledgeItem:
     """知识项。"""
+
     title: str = ""
     content: str = ""
     category: str = ""
@@ -491,6 +525,7 @@ class KnowledgeItem:
 @dataclass
 class KnowledgeRecord:
     """知识记录。"""
+
     knowledge_id: str = field(default_factory=generate_uuid)
     title: str = ""
     content: str = ""
@@ -511,6 +546,7 @@ class KnowledgeRecord:
 @dataclass
 class SearchResult:
     """搜索结果。"""
+
     knowledge_id: str = ""
     title: str = ""
     summary: str = ""
@@ -523,6 +559,7 @@ class SearchResult:
 @dataclass
 class SearchQuery:
     """搜索查询。"""
+
     user_id: Optional[str] = None
     topic: str = ""
     date_range: Optional[Tuple[datetime, datetime]] = None
@@ -533,6 +570,7 @@ class SearchQuery:
 @dataclass
 class ArchiveReference:
     """档案引用。"""
+
     archive_id: str = field(default_factory=generate_uuid)
     session_id: str = ""
     archive_path: str = ""
@@ -548,6 +586,7 @@ class ArchiveReference:
 @dataclass
 class FusedResult:
     """融合结果。"""
+
     candidates: List[Any] = field(default_factory=list)
     fusion_method: str = "weighted_combination"
 
@@ -555,6 +594,7 @@ class FusedResult:
 @dataclass
 class FusedMemoryResult:
     """跨层记忆检索结果。"""
+
     layer_1: Any = None
     layer_2: List[Any] = field(default_factory=list)
     layer_3: List[Any] = field(default_factory=list)
@@ -565,6 +605,7 @@ class FusedMemoryResult:
 @dataclass
 class UserHistory:
     """用户历史。"""
+
     user_id: str = ""
     sessions: List[SessionRecord] = field(default_factory=list)
 
@@ -572,6 +613,7 @@ class UserHistory:
 @dataclass
 class CapabilityProfile:
     """能力画像。"""
+
     strong_domains: List[str] = field(default_factory=list)
     weak_domains: List[str] = field(default_factory=list)
     technical_skills: List[str] = field(default_factory=list)
@@ -582,6 +624,7 @@ class CapabilityProfile:
 @dataclass
 class ComprehensiveUserModel:
     """综合用户模型。"""
+
     user_id: str = ""
     capability_profile: Any = None
     preference_profile: Any = None
@@ -594,11 +637,15 @@ class ComprehensiveUserModel:
 # 自动化框架类型 (Automation)
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class Trigger:
     """触发器。"""
+
     trigger_id: str = field(default_factory=generate_uuid)
-    trigger_type: str = "manual"  # schedule/event/condition/manual/webhook/message/system
+    trigger_type: str = (
+        "manual"  # schedule/event/condition/manual/webhook/message/system
+    )
     workflow_id: str = ""
     enabled: bool = True
     config: Dict[str, Any] = field(default_factory=dict)
@@ -608,6 +655,7 @@ class Trigger:
 @dataclass
 class TriggerRegistration:
     """触发器注册信息。"""
+
     trigger_id: str = ""
     workflow_id: str = ""
     trigger: Optional[Trigger] = None
@@ -618,6 +666,7 @@ class TriggerRegistration:
 @dataclass
 class TriggerContext:
     """触发上下文。"""
+
     trigger_id: str = ""
     fired_at: datetime = field(default_factory=now)
     payload: Dict[str, Any] = field(default_factory=dict)
@@ -627,6 +676,7 @@ class TriggerContext:
 @dataclass
 class Workflow:
     """工作流定义。"""
+
     id: str = field(default_factory=generate_uuid)
     name: str = ""
     tasks: List[SubTask] = field(default_factory=list)
@@ -640,6 +690,7 @@ class Workflow:
 @dataclass
 class WorkflowExecution:
     """工作流执行实例。"""
+
     workflow_id: str = ""
     execution_id: str = field(default_factory=generate_uuid)
     trigger_id: str = ""
@@ -652,6 +703,7 @@ class WorkflowExecution:
 @dataclass
 class ResourceEstimate:
     """资源估计。"""
+
     duration: float = 0.0
     memory: float = 0.0
     cpu: float = 0.0
@@ -660,6 +712,7 @@ class ResourceEstimate:
 @dataclass
 class ScheduleJob:
     """调度任务。"""
+
     job_id: str = field(default_factory=generate_uuid)
     workflow_id: str = ""
     trigger_id: str = ""
@@ -679,6 +732,7 @@ class ScheduleJob:
 @dataclass
 class JobResult:
     """调度任务结果。"""
+
     job_id: str = ""
     status: str = OperationStatus.SUCCESS.value
     result: Any = None
@@ -690,6 +744,7 @@ class JobResult:
 @dataclass
 class ResourceSnapshot:
     """资源快照。"""
+
     cpu: float = 1.0
     memory: float = 1.0
     timestamp: datetime = field(default_factory=now)
@@ -698,6 +753,7 @@ class ResourceSnapshot:
 @dataclass
 class Worker:
     """执行工作进程。"""
+
     worker_id: str = field(default_factory=generate_uuid)
     available_memory: float = 1.0
     available_cpu: float = 1.0
@@ -714,9 +770,11 @@ class Worker:
 # 自进化框架类型 (Evolution)
 # ---------------------------------------------------------------------------
 
+
 @dataclass
 class ExecutionTrace:
     """执行轨迹。"""
+
     execution_id: str = ""
     steps: List[Dict[str, Any]] = field(default_factory=list)
     decisions: List[Dict[str, Any]] = field(default_factory=list)
@@ -726,6 +784,7 @@ class ExecutionTrace:
 @dataclass
 class ExecutionInsight:
     """执行洞察。"""
+
     execution_id: str = ""
     timestamp: datetime = field(default_factory=now)
     success_patterns: List[Any] = field(default_factory=list)
@@ -738,6 +797,7 @@ class ExecutionInsight:
 @dataclass
 class SuccessFactors:
     """成功因素。"""
+
     skills_used: List[str] = field(default_factory=list)
     parameters: Dict[str, Any] = field(default_factory=dict)
     execution_order: List[str] = field(default_factory=list)
@@ -747,6 +807,7 @@ class SuccessFactors:
 @dataclass
 class FailureAnalysis:
     """失败分析。"""
+
     error_type: str = ""
     root_cause: str = ""
     recovery_actions: List[str] = field(default_factory=list)
@@ -756,6 +817,7 @@ class FailureAnalysis:
 @dataclass
 class SuccessfulConfiguration:
     """成功配置。"""
+
     skill_selection: List[str] = field(default_factory=list)
     parameter_values: Dict[str, Any] = field(default_factory=dict)
     execution_order: List[str] = field(default_factory=list)
@@ -765,6 +827,7 @@ class SuccessfulConfiguration:
 @dataclass
 class RecoveryPattern:
     """恢复模式。"""
+
     failure_type: str = ""
     root_cause: str = ""
     recovery_actions: List[str] = field(default_factory=list)
@@ -774,6 +837,7 @@ class RecoveryPattern:
 @dataclass
 class ImpactAnalysis:
     """参数影响分析。"""
+
     param_name: str = ""
     correlation: float = 0.0
     optimal_value: Any = None
@@ -782,6 +846,7 @@ class ImpactAnalysis:
 @dataclass
 class ParameterConstraints:
     """参数约束。"""
+
     min_value: float = 0.0
     max_value: float = 1.0
 
@@ -789,6 +854,7 @@ class ParameterConstraints:
 @dataclass
 class SkillDefinition:
     """技能定义。"""
+
     name: str = ""
     description: str = ""
     code: str = ""
@@ -800,6 +866,7 @@ class SkillDefinition:
 @dataclass
 class SkillImprovement:
     """技能改进机会。"""
+
     skill_id: str = ""
     target: str = ""
     training_examples: List[Any] = field(default_factory=list)
@@ -809,6 +876,7 @@ class SkillImprovement:
 @dataclass
 class SkillCreationOpportunity:
     """技能创建机会。"""
+
     skill_name: str = ""
     description: str = ""
     pattern: str = ""
@@ -820,6 +888,7 @@ class SkillCreationOpportunity:
 @dataclass
 class SkillQualityMetrics:
     """技能质量指标。"""
+
     skill_id: str = ""
     functional_correctness: float = 0.0
     performance_efficiency: float = 0.0
@@ -834,6 +903,7 @@ class SkillQualityMetrics:
 @dataclass
 class PerformanceAnalysis:
     """性能分析。"""
+
     critical_path_utilization: float = 0.0
     parallelism_efficiency: float = 0.0
     resource_utilization_variance: float = 0.0
@@ -842,6 +912,7 @@ class PerformanceAnalysis:
 @dataclass
 class OrchestrationStrategy:
     """编排策略。"""
+
     name: str = ""
     dag_structure: Any = None
     parallelism_degree: int = 1
@@ -851,6 +922,7 @@ class OrchestrationStrategy:
 @dataclass
 class QueueAnalysis:
     """队列分析。"""
+
     avg_memory: float = 0.0
     avg_wait_time: float = 0.0
     avg_priority: float = 0.0
@@ -859,25 +931,32 @@ class QueueAnalysis:
 @dataclass
 class PriorityFunction:
     """优先级函数。"""
+
     name: str = ""
 
 
 @dataclass
 class BottleneckAnalysis:
     """瓶颈分析。"""
+
     bottlenecks: List[Dict[str, Any]] = field(default_factory=list)
 
-    def add_bottleneck(self, type: str, severity: str, potential_improvement: str) -> None:
-        self.bottlenecks.append({
-            "type": type,
-            "severity": severity,
-            "potential_improvement": potential_improvement,
-        })
+    def add_bottleneck(
+        self, type: str, severity: str, potential_improvement: str
+    ) -> None:
+        self.bottlenecks.append(
+            {
+                "type": type,
+                "severity": severity,
+                "potential_improvement": potential_improvement,
+            }
+        )
 
 
 @dataclass
 class ArchitecturalImprovement:
     """架构改进。"""
+
     type: str = ""
     description: str = ""
     value_score: float = 0.0
@@ -887,6 +966,7 @@ class ArchitecturalImprovement:
 @dataclass
 class UserFeedback:
     """用户反馈。"""
+
     type: str = "CORRECTION"  # CORRECTION / PREFERENCE / FEATURE_REQUEST / BUG_REPORT
     content: str = ""
     context: Dict[str, Any] = field(default_factory=dict)
@@ -895,6 +975,7 @@ class UserFeedback:
 @dataclass
 class CorrectionFeedback:
     """纠正反馈。"""
+
     root_cause_type: str = ""
     content: str = ""
     related_skill: Optional[str] = None
@@ -903,6 +984,7 @@ class CorrectionFeedback:
 # ---------------------------------------------------------------------------
 # 多智能体框架类型 (Multi-Agent)
 # ---------------------------------------------------------------------------
+
 
 class AgentState(str, Enum):
     CREATED = "CREATED"
@@ -920,6 +1002,7 @@ class AgentState(str, Enum):
 @dataclass
 class AgentConfig:
     """Agent 配置。"""
+
     role: str = "WORKER"
     capabilities: List[str] = field(default_factory=list)
     specialization: str = ""
@@ -931,6 +1014,7 @@ class AgentConfig:
 @dataclass
 class Agent:
     """Agent 实例。"""
+
     agent_id: str = field(default_factory=lambda: generate_uuid("agent-"))
     config: AgentConfig = field(default_factory=AgentConfig)
     state: str = AgentState.CREATED.value
@@ -973,6 +1057,7 @@ class Agent:
 @dataclass
 class AgentHeartbeat:
     """Agent 心跳。"""
+
     agent_id: str = ""
     timestamp: datetime = field(default_factory=now)
     state: str = ""
@@ -984,6 +1069,7 @@ class AgentHeartbeat:
 @dataclass
 class AgentHealthStatus:
     """Agent 健康状态。"""
+
     agent_id: str = ""
     check_time: datetime = field(default_factory=now)
     connectivity: bool = True
@@ -997,6 +1083,7 @@ class AgentHealthStatus:
 @dataclass
 class AgentMessage:
     """Agent 消息。"""
+
     message_id: str = field(default_factory=generate_uuid)
     from_agent: str = ""
     to_agents: List[str] = field(default_factory=list)
@@ -1009,6 +1096,7 @@ class AgentMessage:
 @dataclass
 class RPCRequest:
     """RPC 请求。"""
+
     request_id: str = field(default_factory=generate_uuid)
     from_agent: str = ""
     to_agent: str = ""
@@ -1020,6 +1108,7 @@ class RPCRequest:
 @dataclass
 class RPCResponse:
     """RPC 响应。"""
+
     request_id: str = ""
     result: Any = None
     error: Optional[str] = None
@@ -1029,6 +1118,7 @@ class RPCResponse:
 @dataclass
 class Task:
     """多智能体任务。"""
+
     task_id: str = field(default_factory=generate_uuid)
     task_type: str = ""
     parameters: Dict[str, Any] = field(default_factory=dict)
@@ -1045,6 +1135,7 @@ class Task:
 @dataclass
 class SubTaskResult:
     """子任务结果。"""
+
     task_id: str = ""
     status: str = OperationStatus.SUCCESS.value
     data: Any = None
@@ -1054,6 +1145,7 @@ class SubTaskResult:
 @dataclass
 class TaskCoordination:
     """任务协调上下文。"""
+
     parent_task_id: str = ""
     subtasks: List[Task] = field(default_factory=list)
     created_at: datetime = field(default_factory=now)
@@ -1063,6 +1155,7 @@ class TaskCoordination:
 @dataclass
 class AgentInfo:
     """Agent 注册信息。"""
+
     id: str = field(default_factory=generate_uuid)
     role: str = "WORKER"
     capabilities: List[str] = field(default_factory=list)
@@ -1074,6 +1167,7 @@ class AgentInfo:
 @dataclass
 class LoadDistribution:
     """负载分布。"""
+
     overloaded_agents: List[str] = field(default_factory=list)
     underloaded_agents: List[str] = field(default_factory=list)
     avg_load: float = 0.0
@@ -1084,6 +1178,7 @@ class LoadDistribution:
 @dataclass
 class ClusterMetrics:
     """集群指标。"""
+
     total_agents: int = 0
     running_agents: int = 0
     failed_agents: int = 0
@@ -1099,6 +1194,7 @@ class ClusterMetrics:
 @dataclass
 class OptimizationOpportunity:
     """优化机会。"""
+
     type: str = ""
     current_metric: float = 0.0
     potential_improvement: float = 0.0
@@ -1110,5 +1206,6 @@ class OptimizationOpportunity:
 @dataclass
 class PerformanceSnapshot:
     """性能快照。"""
+
     timestamp: datetime = field(default_factory=now)
     metrics: Dict[str, Any] = field(default_factory=dict)

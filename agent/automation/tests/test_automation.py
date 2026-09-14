@@ -4,25 +4,18 @@ import asyncio
 
 import pytest
 
-from agent.core.types import (
-    Trigger,
-    TriggerContext,
-    Workflow,
-    SubTask,
-    Worker,
-    ResourceSnapshot,
-    JobResult,
-    OperationStatus,
-    Anomaly,
-    Severity,
-)
-from agent.core.errors import WorkflowNotFoundError
-from agent.automation.core.triggers import TriggerManager, TriggerExecutor
-from agent.automation.core.scheduler import SchedulingEngine, ResourceAwareScheduler, PriorityQueue
 from agent.automation.core.executor import WorkflowExecutionEngine
+from agent.automation.core.healing import AdaptiveOptimizer, SelfHealingSystem
 from agent.automation.core.loadbalance import LoadBalancingManager
-from agent.automation.core.healing import SelfHealingSystem, AdaptiveOptimizer
-from agent.core.types import ExecutionContext
+from agent.automation.core.scheduler import (PriorityQueue,
+                                             ResourceAwareScheduler,
+                                             SchedulingEngine)
+from agent.automation.core.triggers import TriggerExecutor, TriggerManager
+from agent.core.errors import WorkflowNotFoundError
+from agent.core.types import (Anomaly, ExecutionContext, JobResult,
+                              OperationStatus, ResourceSnapshot, Severity,
+                              SubTask, Trigger, TriggerContext, Worker,
+                              Workflow)
 
 
 class TestTriggers:
@@ -41,9 +34,13 @@ class TestTriggers:
 
     def test_execute_triggered_workflow(self):
         manager = TriggerManager()
-        executor = TriggerExecutor(workflow_registry={"wf1": Workflow(id="wf1", name="test")})
+        executor = TriggerExecutor(
+            workflow_registry={"wf1": Workflow(id="wf1", name="test")}
+        )
         trigger = Trigger(trigger_type="schedule", workflow_id="wf1")
-        execution = asyncio.run(executor.execute_triggered_workflow(trigger, TriggerContext()))
+        execution = asyncio.run(
+            executor.execute_triggered_workflow(trigger, TriggerContext())
+        )
         assert execution is not None
         assert execution.workflow_id == "wf1"
 
@@ -80,8 +77,11 @@ class TestScheduler:
     def test_resource_aware_scheduling_order(self):
         scheduler = ResourceAwareScheduler()
         from agent.core.types import ScheduleJob
+
         jobs = [ScheduleJob(priority=10), ScheduleJob(priority=90)]
-        ordered = scheduler.optimize_scheduling_order(jobs, ResourceSnapshot(cpu=1.0, memory=1.0))
+        ordered = scheduler.optimize_scheduling_order(
+            jobs, ResourceSnapshot(cpu=1.0, memory=1.0)
+        )
         assert ordered[0].priority == 90
 
 
@@ -97,17 +97,25 @@ class TestWorkflowEngine:
         engine = WorkflowExecutionEngine()
         engine.declare_dependency("wf1", ["missing_dep"])
         # 依赖检查默认放行，这里测试结果正常返回
-        result = asyncio.run(engine.execute_workflow(Workflow(id="wf1"), ExecutionContext()))
+        result = asyncio.run(
+            engine.execute_workflow(Workflow(id="wf1"), ExecutionContext())
+        )
         assert result.status == "SUCCESS"
 
 
 class TestLoadBalance:
     def test_distribute(self):
         manager = LoadBalancingManager()
-        manager.register_worker(Worker(worker_id="w1", available_cpu=1.0, available_memory=1.0))
-        manager.register_worker(Worker(worker_id="w2", available_cpu=0.1, available_memory=0.1))
+        manager.register_worker(
+            Worker(worker_id="w1", available_cpu=1.0, available_memory=1.0)
+        )
+        manager.register_worker(
+            Worker(worker_id="w2", available_cpu=0.1, available_memory=0.1)
+        )
         wf = Workflow(id="wf1", cpu_requirement=0.8, memory_requirement=0.8)
-        selected = asyncio.run(manager.distribute_workflow_execution(wf, manager.workers))
+        selected = asyncio.run(
+            manager.distribute_workflow_execution(wf, manager.workers)
+        )
         assert selected.worker_id == "w1"
 
     def test_suitability_penalizes_low_resources(self):
@@ -115,7 +123,9 @@ class TestLoadBalance:
         good = Worker(available_cpu=1.0, available_memory=1.0)
         bad = Worker(available_cpu=0.1, available_memory=0.1)
         wf = Workflow(cpu_requirement=0.8, memory_requirement=0.8)
-        assert manager.evaluate_worker_suitability(good, wf) > manager.evaluate_worker_suitability(bad, wf)
+        assert manager.evaluate_worker_suitability(
+            good, wf
+        ) > manager.evaluate_worker_suitability(bad, wf)
 
 
 class TestSelfHealing:
@@ -127,8 +137,14 @@ class TestSelfHealing:
 
     def test_adaptive_optimizer_opportunities(self):
         optimizer = AdaptiveOptimizer()
-        opportunities = optimizer.identify_optimization_opportunities({
-            "avg_parallelism": 1, "optimal_parallelism": 4, "potential_speedup": 2.0,
-            "resource_utilization": 0.5, "avg_wait_time": 100, "target_wait_time": 30,
-        })
+        opportunities = optimizer.identify_optimization_opportunities(
+            {
+                "avg_parallelism": 1,
+                "optimal_parallelism": 4,
+                "potential_speedup": 2.0,
+                "resource_utilization": 0.5,
+                "avg_wait_time": 100,
+                "target_wait_time": 30,
+            }
+        )
         assert len(opportunities) >= 1

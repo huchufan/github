@@ -9,6 +9,7 @@ Hermes Agent - 共享异常定义 (Shared Exceptions)
 
 class HermesError(Exception):
     """所有 Hermes 异常的基类。"""
+
     code: str = "HERMES_ERROR"
 
     def __init__(self, message: str = ""):
@@ -19,6 +20,7 @@ class HermesError(Exception):
 # ---------------------------------------------------------------------------
 # 治理框架异常
 # ---------------------------------------------------------------------------
+
 
 class AccessDeniedError(HermesError):
     code = "ACCESS_DENIED"
@@ -35,14 +37,17 @@ class ConstraintViolationError(HermesError):
 class QuotaExceededError(HermesError):
     code = "QUOTA_EXCEEDED"
 
+
 class RateLimitError(HermesError):
     """Raised when an external service reports rate limiting / throttling."""
+
     code = "RATE_LIMIT"
 
 
 # ---------------------------------------------------------------------------
 # 编排框架异常
 # ---------------------------------------------------------------------------
+
 
 class ExecutionFailedError(HermesError):
     code = "EXECUTION_FAILED"
@@ -77,6 +82,7 @@ class PreCheckFailedError(HermesError):
 # 记忆框架异常
 # ---------------------------------------------------------------------------
 
+
 class ArchiveCorruptedError(HermesError):
     code = "ARCHIVE_CORRUPTED"
 
@@ -88,6 +94,7 @@ class MemoryNotFoundError(HermesError):
 # ---------------------------------------------------------------------------
 # 自动化框架异常
 # ---------------------------------------------------------------------------
+
 
 class TriggerValidationError(HermesError):
     code = "TRIGGER_VALIDATION"
@@ -104,6 +111,7 @@ class NoAvailableWorkersError(HermesError):
 # ---------------------------------------------------------------------------
 # 多智能体框架异常
 # ---------------------------------------------------------------------------
+
 
 class AgentStateError(HermesError):
     code = "AGENT_STATE_ERROR"

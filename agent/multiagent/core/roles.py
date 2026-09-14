@@ -11,12 +11,9 @@ from __future__ import annotations
 import logging
 from typing import Any, Dict, List, Optional
 
+from agent.core.errors import (InsufficientCapabilityError,
+                               NoAvailableAgentError, RoleLimitExceededError)
 from agent.core.types import Agent, AgentConfig
-from agent.core.errors import (
-    InsufficientCapabilityError,
-    NoAvailableAgentError,
-    RoleLimitExceededError,
-)
 
 logger = logging.getLogger(__name__)
 
@@ -58,9 +55,13 @@ class AgentRoleManager:
         self.coordinator_id: Optional[str] = None
 
     def get_role_definition(self, role: str) -> Dict[str, Any]:
-        return ROLE_DEFINITIONS.get(role, {"count_per_cluster": 1000, "required_capabilities": []})
+        return ROLE_DEFINITIONS.get(
+            role, {"count_per_cluster": 1000, "required_capabilities": []}
+        )
 
-    def verify_agent_capabilities(self, agent: Agent, role_definition: Dict[str, Any]) -> bool:
+    def verify_agent_capabilities(
+        self, agent: Agent, role_definition: Dict[str, Any]
+    ) -> bool:
         """验证 Agent 能力。"""
         required = role_definition.get("required_capabilities", [])
         return all(c in agent.capabilities for c in required)
@@ -71,7 +72,9 @@ class AgentRoleManager:
         agents = await self.lifecycle.get_all_agents()
         return sum(1 for a in agents if a.role == role)
 
-    async def assign_role(self, agent: Agent, role: str, specialization: Optional[str] = None) -> Agent:
+    async def assign_role(
+        self, agent: Agent, role: str, specialization: Optional[str] = None
+    ) -> Agent:
         """为 Agent 分配角色。"""
         role_definition = self.get_role_definition(role)
 

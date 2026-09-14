@@ -1,10 +1,10 @@
 """Qdrant adapter: prefers qdrant-client, falls back to HTTP API.
 Simple, dependency-free HTTP fallback implemented with urllib.
 """
-from typing import Any, Dict, List
 import json
-import urllib.request
 import urllib.error
+import urllib.request
+from typing import Any, Dict, List
 
 QDRANT_AVAILABLE = False
 _HTTP_AVAILABLE = False

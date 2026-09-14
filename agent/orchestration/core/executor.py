@@ -2,28 +2,32 @@
 Orchestration Framework - Executor Module (compat shim + PoC)
 Provides Executor class expected by tests and a concrete OrchestrationEngine used by tests.
 """
+
 import asyncio
-from typing import Any, Dict, Optional, List
+import inspect
+from typing import Any, Dict, List, Optional
 
 from agent.core.errors import RateLimitError
-from agent.core.types import (
-    ExecutionResult,
-    TaskResult,
-    SubTask,
-    ExecutionState,
-    ExecutionPlan,
-    OperationStatus,
-)
+from agent.core.types import (ExecutionPlan, ExecutionResult, ExecutionState,
+                              OperationStatus, SubTask, TaskResult)
 
 
 class ErrorHandlingStrategy:
-    def __init__(self, skill_registry: Optional[Dict[str, Any]] = None, default_strategy: str = "retry_on_transient"):
+    def __init__(
+        self,
+        skill_registry: Optional[Dict[str, Any]] = None,
+        default_strategy: str = "retry_on_transient",
+    ):
         self.skill_registry = skill_registry or {}
         self.default_strategy = default_strategy
         # strategies mapping for tests to mutate directly
         self.strategies: Dict[str, Dict[str, Any]] = {
             "retry_on_transient": {"action": "RETRY", "retries": 3},
-            "execute_fallback": {"action": "FALLBACK", "retries": 1, "fallback_skill": None},
+            "execute_fallback": {
+                "action": "FALLBACK",
+                "retries": 1,
+                "fallback_skill": None,
+            },
             "skip_and_continue": {"action": "CONTINUE", "retries": 0},
             "immediate_fail": {"action": "STOP", "retries": 0},
             "no_retry": {"action": "RETRY", "retries": 0},
@@ -32,7 +36,11 @@ class ErrorHandlingStrategy:
     def categorize_error(self, err: Exception) -> str:
         if isinstance(err, (TimeoutError, asyncio.TimeoutError)):
             return OperationStatus.TIMEOUT.value
-        if isinstance(err, RateLimitError) or getattr(getattr(err, "__class__", None), "__name__", "") == "RateLimitError":
+        if (
+            isinstance(err, RateLimitError)
+            or getattr(getattr(err, "__class__", None), "__name__", "")
+            == "RateLimitError"
+        ):
             return "NETWORK_ERROR"
         try:
             from agent.core.errors import ConnectionError
@@ -43,7 +51,14 @@ class ErrorHandlingStrategy:
             pass
         return "GENERIC_ERROR"
 
-    def select_recovery_strategy(self, task: Optional[SubTask] = None, error_category: str = "", retry_count: int = 0, default_strategy: Optional[str] = None, **_kwargs) -> Dict[str, Any]:
+    def select_recovery_strategy(
+        self,
+        task: Optional[SubTask] = None,
+        error_category: str = "",
+        retry_count: int = 0,
+        default_strategy: Optional[str] = None,
+        **_kwargs,
+    ) -> Dict[str, Any]:
         """Return a strategy dict: {'action': 'RETRY'|'FALLBACK'|'CONTINUE'|'STOP', ...}
         Conservative defaults:
          - missing task -> CONTINUE
@@ -71,7 +86,10 @@ class ErrorHandlingStrategy:
         strategy = default_strategy or self.default_strategy
         if strategy == "retry_on_transient" and retry_count >= 3:
             return {"action": "STOP"}
-        if error_category == OperationStatus.TIMEOUT.value or error_category == "TIMEOUT":
+        if (
+            error_category == OperationStatus.TIMEOUT.value
+            or error_category == "TIMEOUT"
+        ):
             return {"action": "RETRY"}
         if error_category == "NETWORK_ERROR":
             return {"action": "FALLBACK", "fallback_skill": None}
@@ -81,25 +99,41 @@ class ErrorHandlingStrategy:
         # return RecoveryAction dataclass when available; else simple object
         try:
             from agent.core.types import RecoveryAction
-            return RecoveryAction(action=strategy.get('action'), fallback_skill=strategy.get('fallback_skill'))
+
+            return RecoveryAction(
+                action=strategy.get("action"),
+                fallback_skill=strategy.get("fallback_skill"),
+            )
         except Exception:
+
             class RA:
                 def __init__(self, d):
-                    self.action = d.get('action')
-                    self.fallback_skill = d.get('fallback_skill')
+                    self.action = d.get("action")
+                    self.fallback_skill = d.get("fallback_skill")
+
             return RA(strategy)
 
 
 class OrchestrationEngine:
-    def __init__(self, skill_registry: Optional[Dict[str, Any]] = None, error_strategy: Optional[ErrorHandlingStrategy] = None):
+    def __init__(
+        self,
+        skill_registry: Optional[Dict[str, Any]] = None,
+        error_strategy: Optional[ErrorHandlingStrategy] = None,
+    ):
         self.skill_registry = skill_registry or {}
-        self.error_strategy = error_strategy or ErrorHandlingStrategy(self.skill_registry)
+        self.error_strategy = error_strategy or ErrorHandlingStrategy(
+            self.skill_registry
+        )
 
-    async def _call_skill(self, skill_callable: Any, params: Dict[str, Any], timeout: Optional[float]) -> TaskResult:
+    async def _call_skill(
+        self, skill_callable: Any, params: Dict[str, Any], timeout: Optional[float]
+    ) -> TaskResult:
         try:
-            if asyncio.iscoroutinefunction(skill_callable):
+            if inspect.iscoroutinefunction(skill_callable):
                 if timeout and timeout > 0:
-                    res = await asyncio.wait_for(skill_callable(params, {}), timeout=timeout)
+                    res = await asyncio.wait_for(
+                        skill_callable(params, {}), timeout=timeout
+                    )
                 else:
                     res = await skill_callable(params, {})
             else:
@@ -109,23 +143,53 @@ class OrchestrationEngine:
                         res = await asyncio.wait_for(res, timeout=timeout)
                     else:
                         res = await res
-            return TaskResult(task_id=params.get("_task_id", ""), status=OperationStatus.SUCCESS.value, result=res, success=True)
+            return TaskResult(
+                task_id=params.get("_task_id", ""),
+                status=OperationStatus.SUCCESS.value,
+                result=res,
+                success=True,
+            )
         except asyncio.TimeoutError as te:
-            return TaskResult(task_id=params.get("_task_id", ""), status=OperationStatus.TIMEOUT.value, error=str(te), success=False)
+            return TaskResult(
+                task_id=params.get("_task_id", ""),
+                status=OperationStatus.TIMEOUT.value,
+                error=str(te),
+                success=False,
+            )
         except Exception as e:
-            return TaskResult(task_id=params.get("_task_id", ""), status=OperationStatus.FAILURE.value, error=str(e), success=False)
+            return TaskResult(
+                task_id=params.get("_task_id", ""),
+                status=OperationStatus.FAILURE.value,
+                error=str(e),
+                success=False,
+            )
 
-    async def execute_single_task(self, subtask: SubTask, state: Optional[ExecutionState], context: Optional[Dict[str, Any]] = None) -> TaskResult:
+    async def execute_single_task(
+        self,
+        subtask: SubTask,
+        state: Optional[ExecutionState],
+        context: Optional[Dict[str, Any]] = None,
+    ) -> TaskResult:
         # find skill
         skill = self.skill_registry.get(subtask.skill_name)
         if skill is None:
-            return TaskResult(task_id=subtask.id, status=OperationStatus.FAILURE.value, error=f"skill {subtask.skill_name} not found", success=False)
+            return TaskResult(
+                task_id=subtask.id,
+                status=OperationStatus.FAILURE.value,
+                error=f"skill {subtask.skill_name} not found",
+                success=False,
+            )
         # call skill with timeout support
         params = dict(subtask.parameters or {})
         params["_task_id"] = subtask.id
         return await self._call_skill(skill, params, getattr(subtask, "timeout", None))
 
-    async def execute_task_group(self, tasks: List[SubTask], state: Optional[ExecutionState], context: Optional[Dict[str, Any]] = None) -> List[TaskResult]:
+    async def execute_task_group(
+        self,
+        tasks: List[SubTask],
+        state: Optional[ExecutionState],
+        context: Optional[Dict[str, Any]] = None,
+    ) -> List[TaskResult]:
         coros = [self.execute_single_task(t, state, context) for t in tasks]
         # convert exceptions into TaskResult so callers don't see raw exceptions
         raw = await asyncio.gather(*coros, return_exceptions=True)
@@ -133,13 +197,20 @@ class OrchestrationEngine:
         for item, sub in zip(raw, tasks):
             if isinstance(item, Exception):
                 # map to TaskResult
-                tr = TaskResult(task_id=sub.id, status=OperationStatus.FAILURE.value, error=str(item), success=False)
+                tr = TaskResult(
+                    task_id=sub.id,
+                    status=OperationStatus.FAILURE.value,
+                    error=str(item),
+                    success=False,
+                )
                 results.append(tr)
             else:
                 results.append(item)
         return results
 
-    async def handle_task_failures(self, results: List[TaskResult], state: ExecutionState, plan: ExecutionPlan) -> bool:
+    async def handle_task_failures(
+        self, results: List[TaskResult], state: ExecutionState, plan: ExecutionPlan
+    ) -> bool:
         """Process failed TaskResult entries and decide whether orchestration should continue.
         Returns True to continue, False to stop.
         Behavior implemented to match tests:
@@ -159,9 +230,17 @@ class OrchestrationEngine:
             except Exception:
                 pass
 
-            st = next((s for s in getattr(plan, "subtasks", []) if s.id == r.task_id), None)
-            retry_count = state.get_retry_count(r.task_id) if hasattr(state, "get_retry_count") else 0
-            strat = self.error_strategy.select_recovery_strategy(task=st, error_category=r.status, retry_count=retry_count)
+            st = next(
+                (s for s in getattr(plan, "subtasks", []) if s.id == r.task_id), None
+            )
+            retry_count = (
+                state.get_retry_count(r.task_id)
+                if hasattr(state, "get_retry_count")
+                else 0
+            )
+            strat = self.error_strategy.select_recovery_strategy(
+                task=st, error_category=r.status, retry_count=retry_count
+            )
             action = strat.get("action")
 
             if action == "STOP":
@@ -193,7 +272,11 @@ class OrchestrationEngine:
                 return True
 
             if action == "FALLBACK":
-                fb = strat.get("fallback_skill") or strat.get("fallback") or strat.get("fallback_skill_name")
+                fb = (
+                    strat.get("fallback_skill")
+                    or strat.get("fallback")
+                    or strat.get("fallback_skill_name")
+                )
                 if not fb:
                     return False
                 if fb not in self.skill_registry:
@@ -213,8 +296,15 @@ class OrchestrationEngine:
 
         return True
 
-    async def orchestrate_execution(self, plan: ExecutionPlan, context: Optional[Dict[str, Any]] = None) -> ExecutionResult:
-        result = ExecutionResult(status=OperationStatus.SUCCESS.value, tasks_executed=0, tasks_completed=0, tasks_failed=0)
+    async def orchestrate_execution(
+        self, plan: ExecutionPlan, context: Optional[Dict[str, Any]] = None
+    ) -> ExecutionResult:
+        result = ExecutionResult(
+            status=OperationStatus.SUCCESS.value,
+            tasks_executed=0,
+            tasks_completed=0,
+            tasks_failed=0,
+        )
         context = context or {}
         for level in getattr(plan, "execution_order", []) or []:
             results = await self.execute_task_group(level, None, context)

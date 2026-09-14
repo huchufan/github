@@ -2,27 +2,29 @@
 
 import asyncio
 
-from agent.core.types import (
-    ExecutionResult,
-    ExecutionTrace,
-    KnowledgeItem,
-    SkillDefinition,
-    SkillImprovement,
-    SkillCreationOpportunity,
-    UserFeedback,
-)
-from agent.evolution.core.execution_learning import ExecutionLevelLearning, DecisionOptimizer
-from agent.evolution.core.skill_evolution import SkillRegistry, SkillQualityAssurance, SkillEvolutionSystem
-from agent.evolution.core.strategy import OrchestrationStrategyOptimization, SchedulingStrategyOptimization
-from agent.evolution.core.system import ArchitecturalEvolution, ClusterLearningSystem
-from agent.evolution.core.feedback import UserFeedbackIntegration, KnowledgeDistillation
+from agent.core.types import (ExecutionResult, ExecutionTrace, KnowledgeItem,
+                              SkillCreationOpportunity, SkillDefinition,
+                              SkillImprovement, UserFeedback)
+from agent.evolution.core.execution_learning import (DecisionOptimizer,
+                                                     ExecutionLevelLearning)
+from agent.evolution.core.feedback import (KnowledgeDistillation,
+                                           UserFeedbackIntegration)
+from agent.evolution.core.skill_evolution import (SkillEvolutionSystem,
+                                                  SkillQualityAssurance,
+                                                  SkillRegistry)
+from agent.evolution.core.strategy import (OrchestrationStrategyOptimization,
+                                           SchedulingStrategyOptimization)
+from agent.evolution.core.system import (ArchitecturalEvolution,
+                                         ClusterLearningSystem)
 
 
 class TestExecutionLearning:
     def test_analyze_success(self):
         learner = ExecutionLevelLearning()
         result = ExecutionResult(status="SUCCESS", execution_id="e1")
-        trace = ExecutionTrace(execution_id="e1", steps=[{"task_id": "t0", "skill": "s1"}])
+        trace = ExecutionTrace(
+            execution_id="e1", steps=[{"task_id": "t0", "skill": "s1"}]
+        )
         insight = asyncio.run(learner.analyze_execution(result, trace))
         assert insight.success_patterns is not None
         assert "s1" in learner.confidence_model
@@ -44,14 +46,18 @@ class TestExecutionLearning:
 class TestSkillEvolution:
     def test_quality_evaluation(self):
         qa = SkillQualityAssurance()
-        skill = SkillDefinition(name="test", description="a test skill", code="def run(): pass")
+        skill = SkillDefinition(
+            name="test", description="a test skill", code="def run(): pass"
+        )
         metrics = asyncio.run(qa.evaluate_skill_quality(skill))
         assert metrics.overall_score > 0.5
         assert metrics.quality_tier in ("PRODUCTION", "BETA", "ALPHA", "EXPERIMENTAL")
 
     def test_create_new_skill(self):
         system = SkillEvolutionSystem()
-        opp = SkillCreationOpportunity(skill_name="new_skill", description="auto", pattern="p1")
+        opp = SkillCreationOpportunity(
+            skill_name="new_skill", description="auto", pattern="p1"
+        )
         skill = asyncio.run(system.create_new_skill(opp))
         assert skill is not None
         assert system.registry.get_skill("new_skill") is not None
@@ -74,11 +80,15 @@ class TestStrategyOptimization:
 class TestSystemLearning:
     def test_architectural_evolution(self):
         evo = ArchitecturalEvolution()
-        planned = asyncio.run(evo.evolve_system_architecture({
-            "pool_utilization": 0.95,
-            "storage_latency_ms": 150,
-            "network_utilization": 0.5,
-        }))
+        planned = asyncio.run(
+            evo.evolve_system_architecture(
+                {
+                    "pool_utilization": 0.95,
+                    "storage_latency_ms": 150,
+                    "network_utilization": 0.5,
+                }
+            )
+        )
         assert len(planned) >= 1
 
     def test_cluster_learning(self):

@@ -1,7 +1,9 @@
 """
 Auto-generated test for learner
 """
+
 import pytest
+
 from agent.evolution.core.learner import Learner
 
 
@@ -13,4 +15,4 @@ def test_learner_init():
 def test_learner_execute():
     inst = Learner()
     r = inst.execute()
-    assert r.get('ok') is True
+    assert r.get("ok") is True

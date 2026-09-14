@@ -2,6 +2,7 @@ import importlib
 import sys
 from pathlib import Path
 
+
 def test_can_import_implementation():
     # ensure implementation package is importable
     sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
@@ -11,8 +12,9 @@ def test_can_import_implementation():
 
 def test_qdrant_adapter_and_migrator_exist():
     sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
-    from implementation.memory import qdrant_adapter
     import implementation.automation.migrate_to_qdrant as migr
+    from implementation.memory import qdrant_adapter
+
     # basic attribute checks
     assert hasattr(qdrant_adapter, 'upsert')
     assert hasattr(qdrant_adapter, 'create_collection_if_not_exists')

@@ -4,32 +4,30 @@ import asyncio
 
 import pytest
 
-from agent.core.types import (
-    AgentConfig,
-    AgentInfo,
-    AgentMessage,
-    AgentState,
-    SubTaskResult,
-    Task,
-)
-from agent.core.errors import (
-    AgentNotFoundError,
-    AgentAlreadyRegisteredError,
-    InsufficientCapabilityError,
-)
-from agent.multiagent.core.lifecycle import AgentLifecycleManager, AgentHealthMonitor
-from agent.multiagent.core.roles import AgentRoleManager
-from agent.multiagent.core.communication import AgentCommunicationBus
-from agent.multiagent.core.distribution import TaskDistributionManager, LoadBalancer
-from agent.multiagent.core.coordination import TaskDecompositionCoordinator, ResultAggregator
+from agent.core.errors import (AgentAlreadyRegisteredError, AgentNotFoundError,
+                               InsufficientCapabilityError)
+from agent.core.types import (AgentConfig, AgentInfo, AgentMessage, AgentState,
+                              SubTaskResult, Task)
 from agent.multiagent.core.cluster import AgentRegistry, ClusterScaler
+from agent.multiagent.core.communication import AgentCommunicationBus
+from agent.multiagent.core.coordination import (ResultAggregator,
+                                                TaskDecompositionCoordinator)
+from agent.multiagent.core.distribution import (LoadBalancer,
+                                                TaskDistributionManager)
+from agent.multiagent.core.lifecycle import (AgentHealthMonitor,
+                                             AgentLifecycleManager)
 from agent.multiagent.core.monitor import ClusterMonitor, ClusterOptimizer
+from agent.multiagent.core.roles import AgentRoleManager
 
 
 class TestLifecycle:
     def test_create_and_start(self):
         manager = AgentLifecycleManager()
-        agent = asyncio.run(manager.create_agent(AgentConfig(role="WORKER", capabilities=["task_execution"])))
+        agent = asyncio.run(
+            manager.create_agent(
+                AgentConfig(role="WORKER", capabilities=["task_execution"])
+            )
+        )
         assert agent.state == AgentState.INITIALIZED.value
         asyncio.run(manager.start_agent(agent.agent_id))
         assert agent.state == AgentState.RUNNING.value
@@ -65,7 +63,11 @@ class TestRoles:
 
     def test_elect_coordinator(self):
         manager = AgentLifecycleManager()
-        a1 = asyncio.run(manager.create_agent(AgentConfig(capabilities=["global_view", "task_decomposition"])))
+        a1 = asyncio.run(
+            manager.create_agent(
+                AgentConfig(capabilities=["global_view", "task_decomposition"])
+            )
+        )
         a1.available_cpu = 1.0
         a1.failure_rate = 0.0
         role_manager = AgentRoleManager(manager)
@@ -91,7 +93,9 @@ class TestCommunication:
 class TestDistribution:
     def test_distribute_task(self):
         manager = AgentLifecycleManager()
-        agent = asyncio.run(manager.create_agent(AgentConfig(capabilities=["task_execution"])))
+        agent = asyncio.run(
+            manager.create_agent(AgentConfig(capabilities=["task_execution"]))
+        )
         asyncio.run(manager.start_agent(agent.agent_id))
         distributor = TaskDistributionManager(manager)
         task = Task(task_type="compute", required_skills=["task_execution"])
@@ -140,7 +144,9 @@ class TestCoordination:
 class TestCluster:
     def test_register_and_discover(self):
         registry = AgentRegistry()
-        info = AgentInfo(id="a1", role="WORKER", capabilities=["task_execution"], state="RUNNING")
+        info = AgentInfo(
+            id="a1", role="WORKER", capabilities=["task_execution"], state="RUNNING"
+        )
         asyncio.run(registry.register_agent(info))
         discovered = asyncio.run(registry.discover_agents(role="WORKER"))
         assert len(discovered) == 1

@@ -10,7 +10,9 @@ class TestBehaviorRule:
         assert rule.category == "test"
 
     def test_from_dict_ignores_unknown(self):
-        rule = BehaviorRule.from_dict({"id": "r1", "name": "测试", "unknown_field": 123})
+        rule = BehaviorRule.from_dict(
+            {"id": "r1", "name": "测试", "unknown_field": 123}
+        )
         assert rule.id == "r1"
         assert not hasattr(rule, "unknown_field")
 
@@ -18,7 +20,14 @@ class TestBehaviorRule:
 class TestBehaviorRuleStore:
     def test_add_and_query(self):
         store = BehaviorRuleStore()
-        store.add_rule(BehaviorRule(id="r1", name="中文交流", category="communication", applies_to=["conversation"]))
+        store.add_rule(
+            BehaviorRule(
+                id="r1",
+                name="中文交流",
+                category="communication",
+                applies_to=["conversation"],
+            )
+        )
         assert len(store) == 1
         assert store.get_rule("r1").name == "中文交流"
         assert store.get_rules("communication")[0].id == "r1"

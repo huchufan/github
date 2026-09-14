@@ -1,37 +1,51 @@
 import sys
-import types
 import time
+import types
 from types import SimpleNamespace
 
 import pytest
 
 # Ensure prometheus_client shim exists before importing health_monitor module
-fake = types.ModuleType('prometheus_client')
+fake = types.ModuleType("prometheus_client")
+
+
 class NoopMetric:
     def __init__(self, *a, **k):
         pass
+
     def labels(self, *a, **k):
         return self
+
     def set(self, *a, **k):
         return None
+
     def observe(self, *a, **k):
         return None
+
+
 fake.Gauge = NoopMetric
 fake.Histogram = NoopMetric
 fake.CollectorRegistry = lambda *a, **k: None
 fake.REGISTRY = SimpleNamespace()
-fake.generate_latest = lambda *a, **k: b''
+fake.generate_latest = lambda *a, **k: b""
 fake.start_http_server = lambda *a, **k: None
-sys.modules['prometheus_client'] = fake
+sys.modules["prometheus_client"] = fake
 
-from agent.multiagent.health_monitor import HealthMonitor
 import agent.multiagent.router as router
+from agent.multiagent.health_monitor import HealthMonitor
 
 
 def test_run_once_blocking_uses_router(monkeypatch):
     # monkeypatch router.run_health_check_once to return a controlled summary
     def fake_run():
-        return {"T1": {"availability": 1, "latency_ms": 12, "confidence": 0.82, "status": "ok"}}
+        return {
+            "T1": {
+                "availability": 1,
+                "latency_ms": 12,
+                "confidence": 0.82,
+                "status": "ok",
+            }
+        }
 
     monkeypatch.setattr(router, "run_health_check_once", fake_run)
 
@@ -55,7 +69,7 @@ def test_update_metrics_noop_and_custom_metric_object():
             self.last = v
 
         def observe(self, v):
-            self.obs = getattr(self, 'obs', 0) + float(v)
+            self.obs = getattr(self, "obs", 0) + float(v)
 
     # replace metrics with dummy objects to avoid interacting with CollectorRegistry
     m.availability_gauge = DummyMetric()
@@ -71,7 +85,7 @@ def test_update_metrics_noop_and_custom_metric_object():
     m._update_metrics(summary)
 
     # confirm dummy metric recorded something for T1 last_check
-    assert hasattr(m.last_check_gauge, 'last') or hasattr(m.availability_gauge, 'last')
+    assert hasattr(m.last_check_gauge, "last") or hasattr(m.availability_gauge, "last")
 
 
 def test_start_and_stop_thread_lifecycle():

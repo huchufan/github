@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
-import os, time, json
+import json
+import os
+import time
+
 from qdrant_client import QdrantClient
+
 ROOT=os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 BACKUP_DIR=os.path.join(ROOT, 'implementation', 'automation', 'backups')
 os.makedirs(BACKUP_DIR, exist_ok=True)

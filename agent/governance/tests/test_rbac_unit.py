@@ -1,6 +1,7 @@
 import pytest
+
+from agent.core.types import Permission, Role
 from agent.governance.core.rbac import RBACManager
-from agent.core.types import Role, Permission
 
 
 def test_rbac_check_and_modify():
@@ -13,4 +14,3 @@ def test_rbac_check_and_modify():
     # grant back
     mgr.grant_permission(Role.ADMIN, Permission.AUDIT_LOG)
     assert mgr.check_permission(Role.ADMIN, Permission.AUDIT_LOG)
-

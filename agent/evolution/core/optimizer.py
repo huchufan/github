@@ -5,9 +5,10 @@ Generated: 2026-09-13T11:15:34.511876
 
 from typing import Any, Dict, Optional
 
+
 class Optimizer:
-    """Optimizer module (PoC)
-    """
+    """Optimizer module (PoC)"""
+
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         self.config = config or {}
 
@@ -15,4 +16,5 @@ class Optimizer:
         """Placeholder execute"""
         return {"module": "optimizer", "ok": True}
 
-__all__ = ['Optimizer']
+
+__all__ = ["Optimizer"]

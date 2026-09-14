@@ -3,11 +3,12 @@ Runs two microbenchmarks and prints JSON results to stdout:
 - multiagent_monitor_collect: call ClusterMonitor.collect_cluster_metrics N times using a dummy lifecycle
 - memory_semantic_search: call SemanticMemory.search mock N times
 """
-from time import perf_counter
 import json
+from time import perf_counter
 
-from agent.multiagent.core.monitor import ClusterMonitor
 from agent.memory.core.layers import SemanticMemory
+from agent.multiagent.core.monitor import ClusterMonitor
+
 
 class DummyAgent:
     def __init__(self, id):

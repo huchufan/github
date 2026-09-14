@@ -8,17 +8,13 @@
 
 from __future__ import annotations
 
-import logging
-from typing import Any, Dict, List, Optional
 import asyncio
 import inspect
+import logging
+from typing import Any, Dict, List, Optional
 
-from agent.core.types import (
-    Anomaly,
-    ClusterMetrics,
-    OptimizationOpportunity,
-    Severity,
-)
+from agent.core.types import (Anomaly, ClusterMetrics, OptimizationOpportunity,
+                              Severity)
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +30,7 @@ class ClusterMonitor:
         if self.lifecycle is None:
             return ClusterMetrics()
         # lifecycle.get_all_agents may be sync or async; handle both
-        get_agents = getattr(self.lifecycle, 'get_all_agents', None)
+        get_agents = getattr(self.lifecycle, "get_all_agents", None)
         if get_agents is None:
             return ClusterMetrics()
         if inspect.iscoroutinefunction(get_agents):
@@ -66,28 +62,51 @@ class ClusterMonitor:
         if metrics.total_agents > 0:
             failure_rate = metrics.failed_agents / metrics.total_agents
             if failure_rate > 0.2:
-                anomalies.append(Anomaly(type="HIGH_FAILURE_RATE", severity=Severity.HIGH.value, value=failure_rate))
+                anomalies.append(
+                    Anomaly(
+                        type="HIGH_FAILURE_RATE",
+                        severity=Severity.HIGH.value,
+                        value=failure_rate,
+                    )
+                )
 
         if metrics.avg_response_time > 5000:
-            anomalies.append(Anomaly(type="SLOW_RESPONSE", severity=Severity.MEDIUM.value, value=metrics.avg_response_time))
+            anomalies.append(
+                Anomaly(
+                    type="SLOW_RESPONSE",
+                    severity=Severity.MEDIUM.value,
+                    value=metrics.avg_response_time,
+                )
+            )
 
         if metrics.avg_cpu_usage > 90 or metrics.avg_memory_usage > 90:
-            anomalies.append(Anomaly(type="HIGH_RESOURCE_USAGE", severity=Severity.MEDIUM.value,
-                                     value=max(metrics.avg_cpu_usage, metrics.avg_memory_usage)))
+            anomalies.append(
+                Anomaly(
+                    type="HIGH_RESOURCE_USAGE",
+                    severity=Severity.MEDIUM.value,
+                    value=max(metrics.avg_cpu_usage, metrics.avg_memory_usage),
+                )
+            )
         return anomalies
 
 
 class ClusterOptimizer:
     """集群自适应优化。"""
 
-    def identify_optimization_opportunities(self, performance_history: List[Dict[str, Any]]) -> List[OptimizationOpportunity]:
+    def identify_optimization_opportunities(
+        self, performance_history: List[Dict[str, Any]]
+    ) -> List[OptimizationOpportunity]:
         """识别优化机会。"""
         opportunities: List[OptimizationOpportunity] = []
 
         imbalance = self._analyze_task_distribution(performance_history)
         if imbalance > 0.3:
             opportunities.append(
-                OptimizationOpportunity(type="TASK_ALLOCATION", current_metric=imbalance, potential_improvement=0.2)
+                OptimizationOpportunity(
+                    type="TASK_ALLOCATION",
+                    current_metric=imbalance,
+                    potential_improvement=0.2,
+                )
             )
         return opportunities
 
@@ -102,7 +121,9 @@ class ClusterOptimizer:
             return 0.0
         return max(abs(l - avg) for l in loads) / avg
 
-    async def optimize_cluster_configuration(self, performance_history: List[Dict[str, Any]]) -> List[OptimizationOpportunity]:
+    async def optimize_cluster_configuration(
+        self, performance_history: List[Dict[str, Any]]
+    ) -> List[OptimizationOpportunity]:
         """优化集群配置，返回已应用的优化机会。"""
         opportunities = self.identify_optimization_opportunities(performance_history)
         applied = []

@@ -1,9 +1,11 @@
 """
 Governance Framework - Audit Module (compat shim + PoC) -- FINALIZE QUERY
 """
-from typing import Any, Dict, List, Callable, Optional
+
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any, Callable, Dict, List, Optional
+
 from agent.core.types import AuditRecord
 
 # append a small AuditLogger wrapper file to provide query() at module level for tests that import AuditLogger

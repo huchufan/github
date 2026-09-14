@@ -1,0 +1,38 @@
+=== Hermes daily progress run: 20260915_073437 ===
+[Task 1] Multiagent health monitor tests...
+.                                                                        [100%]
+✓ Task 1 passed
+[Task 2] Memory layer tests...
+...............................................                          [100%]
+✓ Task 2 passed
+[Task 3] Full test coverage (conditional)...
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+........................................................................ [ 67%]
+........................................................................ [ 89%]
+.................................                                        [100%]
+=============================== warnings summary ===============================
+agent/multiagent/tests/test_coordination_cover.py::test_voting_and_weighted
+  /Users/huchufan/Hermes/agent/multiagent/tests/test_coordination_cover.py:71: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(agg.voting_results)
+
+agent/orchestration/tests/test_executor_additional.py: 1 warning
+agent/orchestration/tests/test_executor_cover_more.py: 1 warning
+agent/orchestration/tests/test_executor_executor_targeted2.py: 3 warnings
+agent/orchestration/tests/test_executor_failures.py: 4 warnings
+agent/orchestration/tests/test_executor_more.py: 4 warnings
+agent/orchestration/tests/test_executor_targeted.py: 2 warnings
+agent/orchestration/tests/test_executor_unit.py: 2 warnings
+agent/orchestration/tests/test_orchestration.py: 2 warnings
+  /Users/huchufan/Hermes/agent/orchestration/core/executor.py:131: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(skill_callable):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.14.5-final-0 _______________
+
+Coverage HTML written to dir /Users/huchufan/Hermes/implementation/automation/coverage_daily_20260915_073437/htmlcov
+Coverage XML written to file /Users/huchufan/Hermes/implementation/automation/coverage_daily_20260915_073437/coverage.xml
+✓ Task 3 passed
+Wrote daily note: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/DAILY_PROGRESS_20260915_073437.md
+=== Run complete: 3/3 tasks passed ===

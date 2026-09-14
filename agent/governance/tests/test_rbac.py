@@ -1,5 +1,6 @@
 import pytest
-from agent.governance.core.rbac import RBACManager, Role, Permission
+
+from agent.governance.core.rbac import Permission, RBACManager, Role
 
 
 def test_rbac_initial_permissions():

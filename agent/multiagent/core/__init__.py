@@ -6,13 +6,16 @@ Hermes 系统的分布式协作层：生命周期、角色、通信、任务分�
 设计文档: 06_多智能体管理架构.md
 """
 
-from agent.multiagent.core.lifecycle import AgentLifecycleManager, AgentHealthMonitor
-from agent.multiagent.core.roles import AgentRoleManager, ROLE_DEFINITIONS
-from agent.multiagent.core.communication import AgentCommunicationBus
-from agent.multiagent.core.distribution import TaskDistributionManager, LoadBalancer
-from agent.multiagent.core.coordination import TaskDecompositionCoordinator, ResultAggregator
 from agent.multiagent.core.cluster import AgentRegistry, ClusterScaler
+from agent.multiagent.core.communication import AgentCommunicationBus
+from agent.multiagent.core.coordination import (ResultAggregator,
+                                                TaskDecompositionCoordinator)
+from agent.multiagent.core.distribution import (LoadBalancer,
+                                                TaskDistributionManager)
+from agent.multiagent.core.lifecycle import (AgentHealthMonitor,
+                                             AgentLifecycleManager)
 from agent.multiagent.core.monitor import ClusterMonitor, ClusterOptimizer
+from agent.multiagent.core.roles import ROLE_DEFINITIONS, AgentRoleManager
 
 __all__ = [
     "AgentLifecycleManager",

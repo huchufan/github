@@ -1,7 +1,7 @@
-from typing import Any, Dict, List, Optional
 from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
-from agent.core.errors import AgentNotFoundError, AgentAlreadyRegisteredError
+from agent.core.errors import AgentAlreadyRegisteredError, AgentNotFoundError
 from agent.core.types import AgentState
 
 
@@ -26,7 +26,7 @@ class Agent:
 
 
 class AgentHealthMonitor:
-    def __init__(self, lifecycle_manager: 'AgentLifecycleManager'):
+    def __init__(self, lifecycle_manager: "AgentLifecycleManager"):
         self.status: Dict[str, Dict[str, Any]] = {}
         self.manager = lifecycle_manager
 
@@ -36,11 +36,12 @@ class AgentHealthMonitor:
     async def perform_health_check(self, agent_id: str):
         # simple PoC health check
         agent = await self.manager.get_agent(agent_id)
+
         class Health:
             def __init__(self, overall_health: str):
                 self.overall_health = overall_health
 
-        return Health(overall_health='HEALTHY')
+        return Health(overall_health="HEALTHY")
 
 
 class AgentLifecycleManager:
@@ -51,12 +52,24 @@ class AgentLifecycleManager:
     async def create_agent(self, config: Any) -> Agent:
         # config may be AgentConfig or dict-like; create a simple Agent instance
         # assign a synthetic id if not provided
-        agent_id = getattr(config, 'id', None) or getattr(config, 'agent_id', None) or f"agent_{len(self.agents)+1}"
+        agent_id = (
+            getattr(config, "id", None)
+            or getattr(config, "agent_id", None)
+            or f"agent_{len(self.agents)+1}"
+        )
         if agent_id in self.agents:
             raise AgentAlreadyRegisteredError(agent_id)
-        role = getattr(config, 'role', None)
-        caps = getattr(config, 'capabilities', None)
-        agent = Agent(agent_id=agent_id, state=AgentState.INITIALIZED.value, role=role, capabilities=caps or [], available_cpu=getattr(config, 'available_cpu', 0.0), available_memory=getattr(config, 'available_memory', 0.0), uptime=getattr(config, 'uptime', 0.0))
+        role = getattr(config, "role", None)
+        caps = getattr(config, "capabilities", None)
+        agent = Agent(
+            agent_id=agent_id,
+            state=AgentState.INITIALIZED.value,
+            role=role,
+            capabilities=caps or [],
+            available_cpu=getattr(config, "available_cpu", 0.0),
+            available_memory=getattr(config, "available_memory", 0.0),
+            uptime=getattr(config, "uptime", 0.0),
+        )
         self.agents[agent.agent_id] = agent
         return agent
 
@@ -86,4 +99,4 @@ class Lifecycle:
         return {"module": "lifecycle", "ok": True}
 
 
-__all__ = ['AgentLifecycleManager', 'AgentHealthMonitor', 'Lifecycle']
+__all__ = ["AgentLifecycleManager", "AgentHealthMonitor", "Lifecycle"]

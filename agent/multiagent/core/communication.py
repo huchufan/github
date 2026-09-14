@@ -2,7 +2,9 @@
 Multiagent Framework - Communication Module (compat shim)
 Provides AgentCommunicationBus minimal implementation for imports/tests and Communication PoC.
 """
+
 from typing import Any, Dict, List, Optional
+
 
 class AgentCommunicationBus:
     def __init__(self):
@@ -16,9 +18,17 @@ class AgentCommunicationBus:
         return self.channels.get(channel, [])
 
     # compatibility API expected by tests
-    async def send_message(self, sender: str, recipients: List[str], message_type: str, payload: Dict[str, Any]):
+    async def send_message(
+        self,
+        sender: str,
+        recipients: List[str],
+        message_type: str,
+        payload: Dict[str, Any],
+    ):
         for r in recipients:
-            self.publish(r, type('Msg', (), {'message_type': message_type, 'payload': payload}))
+            self.publish(
+                r, type("Msg", (), {"message_type": message_type, "payload": payload})
+            )
 
     def receive_messages(self, recipient: str):
         return self.channels.get(recipient, [])
@@ -26,14 +36,17 @@ class AgentCommunicationBus:
     def register_rpc_handler(self, name: str, fn):
         self._rpc_handlers[name] = fn
 
-    async def call_rpc(self, caller: str, target: str, name: str, params: Dict[str, Any]):
+    async def call_rpc(
+        self, caller: str, target: str, name: str, params: Dict[str, Any]
+    ):
         if name not in self._rpc_handlers:
-            raise Exception('rpc handler not found')
+            raise Exception("rpc handler not found")
         fn = self._rpc_handlers[name]
         res = fn(params)
-        if hasattr(res, '__await__'):
+        if hasattr(res, "__await__"):
             return await res
         return res
+
 
 class Communication:
     def __init__(self, config: Optional[Dict[str, Any]] = None):
@@ -42,4 +55,5 @@ class Communication:
     def execute(self, *args, **kwargs):
         return {"module": "communication", "ok": True}
 
-__all__ = ['AgentCommunicationBus', 'Communication']
+
+__all__ = ["AgentCommunicationBus", "Communication"]

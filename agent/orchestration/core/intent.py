@@ -12,13 +12,8 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
 
-from agent.core.types import (
-    Intent,
-    IntentAnalysis,
-    ParameterDef,
-    ParameterSet,
-)
 from agent.core.errors import ParameterValidationError
+from agent.core.types import Intent, IntentAnalysis, ParameterDef, ParameterSet
 
 logger = logging.getLogger(__name__)
 
@@ -75,7 +70,11 @@ class IntentRecognizer:
             hit = sum(1 for kw in intent.keywords if kw.lower() in text)
             # 关键词命中占比 + 基础分
             base = 0.3
-            score = base + (hit / max(len(intent.keywords), 1)) * 0.7 if intent.keywords else base
+            score = (
+                base + (hit / max(len(intent.keywords), 1)) * 0.7
+                if intent.keywords
+                else base
+            )
             scores[intent.name] = min(score, 1.0)
         return scores
 
@@ -84,10 +83,14 @@ class IntentRecognizer:
             return ""
         return max(scores, key=scores.get)
 
-    def get_top_n_intents(self, scores: Dict[str, float], n: int = 3) -> List[Tuple[str, float]]:
+    def get_top_n_intents(
+        self, scores: Dict[str, float], n: int = 3
+    ) -> List[Tuple[str, float]]:
         return sorted(scores.items(), key=lambda kv: kv[1], reverse=True)[:n]
 
-    def recognize_intent(self, user_input: str, session_history: Optional[List[Any]] = None) -> IntentAnalysis:
+    def recognize_intent(
+        self, user_input: str, session_history: Optional[List[Any]] = None
+    ) -> IntentAnalysis:
         """识别用户意图。"""
         tokens = self.tokenize(user_input)
         entities = self.extract_entities(tokens)
@@ -113,7 +116,9 @@ class IntentRecognizer:
                 "urgency": "normal",
             },
             requires_clarification=confidence < 0.7,
-            clarification_questions=self.generate_clarification_questions(primary_intent, parameters),
+            clarification_questions=self.generate_clarification_questions(
+                primary_intent, parameters
+            ),
         )
 
     def get_intent(self, name: str) -> Optional[Intent]:
@@ -122,7 +127,9 @@ class IntentRecognizer:
                 return intent
         return None
 
-    def _extract_simple_parameters(self, intent: Intent, user_input: str) -> Dict[str, Any]:
+    def _extract_simple_parameters(
+        self, intent: Intent, user_input: str
+    ) -> Dict[str, Any]:
         params: Dict[str, Any] = {}
         for p in intent.required_parameters + intent.optional_parameters:
             if p.default is not None:
@@ -140,7 +147,9 @@ class IntentRecognizer:
         return mapping.get(intent_name, "general")
 
     @staticmethod
-    def generate_clarification_questions(intent_name: str, parameters: Dict[str, Any]) -> List[str]:
+    def generate_clarification_questions(
+        intent_name: str, parameters: Dict[str, Any]
+    ) -> List[str]:
         missing = [k for k, v in parameters.items() if v is None]
         return [f"请提供缺失的信息：{k}" for k in missing] if missing else []
 
@@ -182,7 +191,9 @@ class ParameterExtractor:
             complete=len(missing_required) == 0,
         )
 
-    def extract_parameter_value(self, param_def: ParameterDef, user_input: str, entities: Dict[str, Any]) -> Any:
+    def extract_parameter_value(
+        self, param_def: ParameterDef, user_input: str, entities: Dict[str, Any]
+    ) -> Any:
         """从输入/实体中提取参数值（简单启发式）。"""
         text = user_input
         if param_def.type == "file_or_url":

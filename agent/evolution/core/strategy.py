@@ -12,11 +12,8 @@ import logging
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 
-from agent.core.types import (
-    OrchestrationStrategy,
-    PerformanceAnalysis,
-    QueueAnalysis,
-)
+from agent.core.types import (OrchestrationStrategy, PerformanceAnalysis,
+                              QueueAnalysis)
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +25,9 @@ class OrchestrationStrategyOptimization:
         self.current_strategy: Optional[OrchestrationStrategy] = None
         self.strategy_change_log: List[Dict[str, Any]] = []
 
-    def analyze_orchestration_performance(self, execution_data: List[Dict[str, Any]]) -> PerformanceAnalysis:
+    def analyze_orchestration_performance(
+        self, execution_data: List[Dict[str, Any]]
+    ) -> PerformanceAnalysis:
         """分析编排性能。"""
         if not execution_data:
             return PerformanceAnalysis()
@@ -39,31 +38,50 @@ class OrchestrationStrategyOptimization:
             resource_utilization_variance=0.2,
         )
 
-    def generate_improved_strategies(self, current_performance: PerformanceAnalysis, execution_data: List[Dict[str, Any]]) -> List[OrchestrationStrategy]:
+    def generate_improved_strategies(
+        self,
+        current_performance: PerformanceAnalysis,
+        execution_data: List[Dict[str, Any]],
+    ) -> List[OrchestrationStrategy]:
         """生成改进的编排策略。"""
         strategies: List[OrchestrationStrategy] = []
         if current_performance.critical_path_utilization > 0.9:
             strategies.append(OrchestrationStrategy(name="optimize_dag_structure"))
         if current_performance.parallelism_efficiency < 0.7:
-            strategies.append(OrchestrationStrategy(name="optimize_parallelism", parallelism_degree=2))
+            strategies.append(
+                OrchestrationStrategy(name="optimize_parallelism", parallelism_degree=2)
+            )
         if current_performance.resource_utilization_variance > 0.3:
-            strategies.append(OrchestrationStrategy(name="optimize_resource_allocation"))
+            strategies.append(
+                OrchestrationStrategy(name="optimize_resource_allocation")
+            )
         return strategies
 
-    async def validate_strategy_improvement(self, current: Optional[OrchestrationStrategy], new: OrchestrationStrategy) -> Dict[str, Any]:
+    async def validate_strategy_improvement(
+        self, current: Optional[OrchestrationStrategy], new: OrchestrationStrategy
+    ) -> Dict[str, Any]:
         """验证策略改进。"""
         return {"is_significant": True, "improvement": 0.15}
 
-    async def optimize_orchestration_strategies(self, execution_data: List[Dict[str, Any]]) -> List[OrchestrationStrategy]:
+    async def optimize_orchestration_strategies(
+        self, execution_data: List[Dict[str, Any]]
+    ) -> List[OrchestrationStrategy]:
         """优化编排策略，返回已应用的新策略。"""
         current = self.analyze_orchestration_performance(execution_data)
         improved = self.generate_improved_strategies(current, execution_data)
         applied = []
         for strategy in improved:
-            validation = await self.validate_strategy_improvement(self.current_strategy, strategy)
+            validation = await self.validate_strategy_improvement(
+                self.current_strategy, strategy
+            )
             if validation["is_significant"]:
                 self.current_strategy = strategy
-                self.strategy_change_log.append({"strategy": strategy.name, "improvement": validation["improvement"]})
+                self.strategy_change_log.append(
+                    {
+                        "strategy": strategy.name,
+                        "improvement": validation["improvement"],
+                    }
+                )
                 applied.append(strategy)
         return applied
 
@@ -83,7 +101,9 @@ class SchedulingStrategyOptimization:
         """分析队列性能。"""
         return QueueAnalysis(avg_memory=0.5, avg_wait_time=10.0, avg_priority=0.5)
 
-    def generate_improved_priority_weights(self, analysis: QueueAnalysis) -> Dict[str, float]:
+    def generate_improved_priority_weights(
+        self, analysis: QueueAnalysis
+    ) -> Dict[str, float]:
         """生成改进的优先级权重。"""
         weights = dict(self.current_weights)
         if analysis.avg_wait_time > 30:

@@ -1,16 +1,19 @@
 """智能编排框架测试"""
 
 import asyncio
+
 import pytest
 
-from agent.core.types import Intent, ParameterDef, ParameterSet, SubTask, ExecutionPlan
-from agent.orchestration.core.dag import DAG, Node
-from agent.orchestration.core.intent import IntentRecognizer, ParameterExtractor
-from agent.orchestration.core.planner import TaskPlanner
-from agent.orchestration.core.executor import OrchestrationEngine, ErrorHandlingStrategy
+from agent.core.types import (Condition, ExecutionPlan, Intent, ParameterDef,
+                              ParameterSet, SubTask)
 from agent.orchestration.core.condition import ConditionEvaluator
+from agent.orchestration.core.dag import DAG, Node
+from agent.orchestration.core.executor import (ErrorHandlingStrategy,
+                                               OrchestrationEngine)
+from agent.orchestration.core.intent import (IntentRecognizer,
+                                             ParameterExtractor)
 from agent.orchestration.core.monitor import ExecutionMonitor
-from agent.core.types import Condition
+from agent.orchestration.core.planner import TaskPlanner
 
 
 class TestDAG:
@@ -58,9 +61,17 @@ class TestDAG:
 class TestIntent:
     def _make_recognizer(self):
         intents = [
-            Intent(name="intent_generate_code", keywords=["写", "生成", "实现"], complexity="high",
-                   required_parameters=[ParameterDef(name="requirements", type="text")]),
-            Intent(name="intent_search_information", keywords=["搜索", "查找"], complexity="low"),
+            Intent(
+                name="intent_generate_code",
+                keywords=["写", "生成", "实现"],
+                complexity="high",
+                required_parameters=[ParameterDef(name="requirements", type="text")],
+            ),
+            Intent(
+                name="intent_search_information",
+                keywords=["搜索", "查找"],
+                complexity="low",
+            ),
         ]
         return IntentRecognizer(intents=intents)
 
@@ -80,9 +91,14 @@ class TestIntent:
 
 class TestPlanner:
     def test_plan_execution(self):
-        intent = Intent(name="intent_analyze_data", skills_involved=["data:load", "data:analyze", "data:visualize"])
+        intent = Intent(
+            name="intent_analyze_data",
+            skills_involved=["data:load", "data:analyze", "data:visualize"],
+        )
         planner = TaskPlanner()
-        plan = planner.plan_execution(intent, ParameterSet(parameters={"data_source": "x.csv"}))
+        plan = planner.plan_execution(
+            intent, ParameterSet(parameters={"data_source": "x.csv"})
+        )
         assert len(plan.subtasks) == 3
         assert plan.execution_order
         assert plan.time_estimate == 3 * 60.0
@@ -93,10 +109,12 @@ class TestExecutor:
         def skill(params, context):
             return {"ok": True, "skill": params}
 
-        engine = OrchestrationEngine(skill_registry={
-            "s1": skill,
-            "s2": skill,
-        })
+        engine = OrchestrationEngine(
+            skill_registry={
+                "s1": skill,
+                "s2": skill,
+            }
+        )
         plan = ExecutionPlan(
             subtasks=[
                 SubTask(id="t0", skill_name="s1"),
@@ -125,7 +143,8 @@ class TestCondition:
     def test_boolean_logic(self):
         ev = ConditionEvaluator()
         cond = Condition(
-            type="BOOLEAN_LOGIC", logic="AND",
+            type="BOOLEAN_LOGIC",
+            logic="AND",
             children=[
                 Condition(type="COMPARISON", left=1, right=1, operator="=="),
                 Condition(type="COMPARISON", left=2, right=1, operator=">"),
@@ -137,8 +156,11 @@ class TestCondition:
 class TestMonitor:
     def test_progress(self):
         from agent.core.types import ExecutionState, TaskResult
+
         plan = ExecutionPlan(subtasks=[SubTask(id="t0"), SubTask(id="t1")])
-        state = ExecutionState(plan=plan, tasks_completed=[TaskResult(task_id="t0", success=True)])
+        state = ExecutionState(
+            plan=plan, tasks_completed=[TaskResult(task_id="t0", success=True)]
+        )
         monitor = ExecutionMonitor()
         metrics = monitor.monitor_execution(state)
         assert metrics.overall_progress == 50.0

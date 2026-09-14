@@ -4,8 +4,8 @@ Hermes module code generator (PoC)
 Generates a simple module file, a types file, and a test file under agent/<framework>/core and tests.
 """
 import sys
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 TEMPLATE_MODULE = '''"""
 {framework_cap} Framework - {module_cap} Module

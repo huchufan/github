@@ -65,7 +65,9 @@ class BehaviorRuleStore:
         return [r for r in self.rules if scope in r.applies_to]
 
     @classmethod
-    def from_yaml(cls, path: str | Path, key: str = "behavior_rules") -> "BehaviorRuleStore":
+    def from_yaml(
+        cls, path: str | Path, key: str = "behavior_rules"
+    ) -> "BehaviorRuleStore":
         """从 YAML 配置加载行为规则。"""
         import yaml
 

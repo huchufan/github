@@ -13,13 +13,9 @@ import logging
 from typing import Any, List
 
 from agent.core.types import KnowledgeItem, SessionRecord, SystemEvent
-from agent.memory.core.layers import (
-    ArchiveMemory,
-    EpisodicMemory,
-    ImmediateContextMemory,
-    SemanticMemory,
-    SessionMemory,
-)
+from agent.memory.core.layers import (ArchiveMemory, EpisodicMemory,
+                                      ImmediateContextMemory, SemanticMemory,
+                                      SessionMemory)
 
 logger = logging.getLogger(__name__)
 

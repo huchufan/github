@@ -1,24 +1,21 @@
 """治理框架测试"""
 
 import asyncio
+
 import pytest
 
-from agent.core.types import (
-    Actor,
-    AccessDecision,
-    ExecutionContext,
-    Operation,
-    OperationResult,
-    Permission,
-    Resource,
-    Role,
-)
 from agent.core.errors import AccessDeniedError
-from agent.governance.core.rbac import RBACManager, GovernancePolicy, AccessRule, enforce_access
-from agent.governance.core.audit import AuditLogger, AuditAnalyzer
-from agent.governance.core.policy import Policy, PolicyCondition, PolicyValidator
-from agent.governance.core.constraints import ExecutionConstraints, ResourceQuotaManager
+from agent.core.types import (AccessDecision, Actor, ExecutionContext,
+                              Operation, OperationResult, Permission, Resource,
+                              Role)
+from agent.governance.core.audit import AuditAnalyzer, AuditLogger
+from agent.governance.core.constraints import (ExecutionConstraints,
+                                               ResourceQuotaManager)
 from agent.governance.core.monitor import GovernanceMonitor
+from agent.governance.core.policy import (Policy, PolicyCondition,
+                                          PolicyValidator)
+from agent.governance.core.rbac import (AccessRule, GovernancePolicy,
+                                        RBACManager, enforce_access)
 
 
 class TestRBAC:
@@ -51,9 +48,16 @@ class TestABAC:
 
     def test_deny_rule_blocks(self):
         policy = GovernancePolicy()
-        policy.add_rule(AccessRule(effect="DENY", conditions=[
-            {"operator": "eq", "left": "$subject_role", "right": "guest"},
-        ], deny_reason="Guests are blocked", priority=10))
+        policy.add_rule(
+            AccessRule(
+                effect="DENY",
+                conditions=[
+                    {"operator": "eq", "left": "$subject_role", "right": "guest"},
+                ],
+                deny_reason="Guests are blocked",
+                priority=10,
+            )
+        )
         subject = Actor(role=Role.GUEST.value)
         resource = Resource()
         ctx = ExecutionContext()
@@ -64,7 +68,9 @@ class TestABAC:
         policy = GovernancePolicy()
         subject = Actor(role=Role.GUEST.value)
         with pytest.raises(AccessDeniedError):
-            enforce_access(policy, subject, "agent:execute", Resource(), ExecutionContext())
+            enforce_access(
+                policy, subject, "agent:execute", Resource(), ExecutionContext()
+            )
 
 
 class TestAudit:
@@ -74,7 +80,9 @@ class TestAudit:
         resource = Resource(type="skill", classification="CONFIDENTIAL")
         ctx = ExecutionContext()
         result = OperationResult(status="SUCCESS")
-        record = logger.log_operation("skill:create", actor, resource, "create skill", result, ctx)
+        record = logger.log_operation(
+            "skill:create", actor, resource, "create skill", result, ctx
+        )
         assert record.audit_id.startswith("aud-")
         assert record.involves_sensitive_data
         assert len(logger.records) == 1
@@ -83,15 +91,25 @@ class TestAudit:
         logger = AuditLogger()
         actor = Actor(role=Role.USER.value)
         resource = Resource(classification="SECRET")
-        logger.log_operation("data:export", actor, resource, "export", OperationResult(status="SUCCESS"), ExecutionContext())
+        logger.log_operation(
+            "data:export",
+            actor,
+            resource,
+            "export",
+            OperationResult(status="SUCCESS"),
+            ExecutionContext(),
+        )
         assert len(logger.alerts) == 1
 
     def test_compliance_report(self):
         logger = AuditLogger()
         analyzer = AuditAnalyzer(logger)
         from datetime import datetime, timedelta
+
         now = datetime.now()
-        report = analyzer.generate_compliance_report(now - timedelta(days=1), now, "pol-001")
+        report = analyzer.generate_compliance_report(
+            now - timedelta(days=1), now, "pol-001"
+        )
         assert report.policy_id == "pol-001"
         assert report.log_integrity
 
@@ -99,8 +117,12 @@ class TestAudit:
 class TestPolicy:
     def test_policy_validation_allow(self):
         validator = PolicyValidator()
-        policy = Policy(id="pol-001", name="test", applies_to=["agent:execute"],
-                        conditions=[PolicyCondition(field="role", operator="ne", value="guest")])
+        policy = Policy(
+            id="pol-001",
+            name="test",
+            applies_to=["agent:execute"],
+            conditions=[PolicyCondition(field="role", operator="ne", value="guest")],
+        )
         validator.register_policy(policy)
         actor = Actor(role=Role.USER.value)
         op = Operation(action="agent:execute", actor=actor, resource=Resource())
@@ -109,9 +131,13 @@ class TestPolicy:
 
     def test_policy_validation_deny(self):
         validator = PolicyValidator()
-        policy = Policy(id="pol-001", name="test", applies_to=["agent:execute"],
-                        conditions=[PolicyCondition(field="role", operator="ne", value="guest")],
-                        violation_severity="CRITICAL")
+        policy = Policy(
+            id="pol-001",
+            name="test",
+            applies_to=["agent:execute"],
+            conditions=[PolicyCondition(field="role", operator="ne", value="guest")],
+            violation_severity="CRITICAL",
+        )
         validator.register_policy(policy)
         actor = Actor(role=Role.GUEST.value)
         op = Operation(action="agent:execute", actor=actor, resource=Resource())
