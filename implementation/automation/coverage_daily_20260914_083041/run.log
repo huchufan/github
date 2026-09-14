@@ -1,0 +1,66 @@
+=== Hermes daily progress run: 20260914_083041 ===
+.                                                                        [100%]
+.............................................                            [100%]
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+......................................................................F
+=================================== FAILURES ===================================
+_______________________ TestCluster.test_cluster_monitor _______________________
+
+self = <agent.multiagent.tests.test_multiagent.TestCluster object at 0x112b07100>
+
+    def test_cluster_monitor(self):
+        manager = AgentLifecycleManager()
+        agent = asyncio.run(manager.create_agent(AgentConfig()))
+        asyncio.run(manager.start_agent(agent.agent_id))
+        agent.cpu_usage = 95
+        monitor = ClusterMonitor(manager)
+>       metrics = asyncio.run(monitor.collect_cluster_metrics())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+agent/multiagent/tests/test_multiagent.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py:204: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/runners.py:127: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/base_events.py:719: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+agent/multiagent/core/monitor.py:53: in collect_cluster_metrics
+    avg_memory_usage=sum(a.memory_usage for a in agents) / n,
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0x10f771c00>
+
+>       avg_memory_usage=sum(a.memory_usage for a in agents) / n,
+                             ^^^^^^^^^^^^^^
+        avg_load=sum(a.current_load for a in agents) / n,
+        avg_response_time=sum(a.avg_response_time for a in agents) / n,
+        total_tasks=sum(a.task_count for a in agents),
+        completed_tasks=sum(a.completed_tasks for a in agents),
+        failed_tasks=sum(a.failed_tasks for a in agents),
+    )
+E   AttributeError: 'Agent' object has no attribute 'memory_usage'
+
+agent/multiagent/core/monitor.py:53: AttributeError
+=============================== warnings summary ===============================
+agent/multiagent/tests/test_coordination_cover.py::test_voting_and_weighted
+  /Users/huchufan/Hermes/agent/multiagent/tests/test_coordination_cover.py:68: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    vote = asyncio.run(agg.voting_results([r1, r2, r3])) if asyncio.iscoroutinefunction(agg.voting_results) else agg.voting_results([r1, r2, r3])
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED agent/multiagent/tests/test_multiagent.py::TestCluster::test_cluster_monitor
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 1214, in parse
+    tree.parse(source, parser)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 566, in parse
+    source = open(source, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/huchufan/Hermes/implementation/automation/coverage_daily_20260914_083041/coverage.xml'
