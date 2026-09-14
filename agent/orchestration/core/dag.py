@@ -75,6 +75,27 @@ class DAG:
             raise ValueError("Graph has cycles or disconnected nodes")
         return order
 
+    def has_cycle(self) -> bool:
+        # Detect cycle using Kahn's algorithm without modifying original structures
+        incoming = {n: 0 for n in self.nodes}
+        adj = {n: [] for n in self.nodes}
+        for e in self.edges:
+            if e.source in adj:
+                adj[e.source].append(e.target)
+            else:
+                adj[e.source] = [e.target]
+            incoming[e.target] = incoming.get(e.target, 0) + 1
+        zero = [n for n, d in incoming.items() if d == 0]
+        removed = 0
+        while zero:
+            n = zero.pop()
+            removed += 1
+            for t in adj.get(n, []):
+                incoming[t] -= 1
+                if incoming[t] == 0:
+                    zero.append(t)
+        return removed != len(self.nodes)
+
     def find_critical_path(self):
         # PoC: find a longest path in DAG (by number of nodes) using DFS
         def dfs(node, visited):

@@ -1,0 +1,12 @@
+id: hermes-probe
+namespace: hermes
+tasks:
+  - id: call-hermes
+    type: http
+    url: http://host.docker.internal:5001/run-skill
+    method: POST
+    body:
+      skill: echo
+      payload:
+        x: 1
+

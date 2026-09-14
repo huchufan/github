@@ -1,0 +1,26 @@
+=== Hermes daily progress run: 20260914_090646 ===
+[Task 1] Multiagent health monitor tests...
+.                                                                        [100%]
+✓ Task 1 passed
+[Task 2] Memory layer tests...
+...............................................                          [100%]
+✓ Task 2 passed
+[Task 3] Full test coverage (conditional)...
+
+==================================== ERRORS ====================================
+____________ ERROR collecting agent/orchestration/tests/test_dag.py ____________
+ImportError while importing test module '/Users/huchufan/Hermes/agent/orchestration/tests/test_dag.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent/orchestration/tests/test_dag.py:5: in <module>
+    from agent.orchestration.core.dag import Dag
+E   ImportError: cannot import name 'Dag' from 'agent.orchestration.core.dag' (/Users/huchufan/Hermes/agent/orchestration/core/dag.py)
+=========================== short test summary info ============================
+ERROR agent/orchestration/tests/test_dag.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+✗ Task 3 failed (see details in /Users/huchufan/Hermes/implementation/automation/coverage_daily_20260914_090646/run.log)
+Wrote daily note: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/DAILY_PROGRESS_20260914_090646.md
+=== Run complete: 2/3 tasks passed ===

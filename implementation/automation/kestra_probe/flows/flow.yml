@@ -1,0 +1,10 @@
+id: hermes-probe
+namespace: hermes
+# simple Kestra flow: one HTTP request task to call Hermes runner
+tasks:
+  - id: call-hermes
+    type: io.kestra.plugin.core.http.Request
+    uri: "http://host.docker.internal:5001/run-skill"
+    method: POST
+    body: |
+      {"skill": "echo", "payload": {"x": 1}}
