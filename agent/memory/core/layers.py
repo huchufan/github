@@ -127,6 +127,8 @@ class ImmediateContextMemory(MemoryLayer):
         self.max_size = max_size or 1024
         # conversation turns storage (list of dict-like entries)
         self.turns: List[Dict[str, Any]] = []
+        # back-compat: some components expect conversation_buffer attribute
+        self.conversation_buffer = self.turns
         # execution state store
         self.execution_state: Dict[str, Any] = {}
         # attention stack
