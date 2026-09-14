@@ -20,7 +20,83 @@ class ExecutionMonitor:
         self.events.append(evt)
 
 class AdaptiveReplanner:
+    """Adaptive replanner PoC.
+
+    Methods implemented:
+    - should_replan(execution_state, metrics) -> bool
+    - async replan_if_needed(execution_state, metrics) -> Optional[ExecutionPlan]
+
+    Simple heuristics used by tests:
+    - Replan when retry_rate exceeds 0.3
+    - Replan when bottleneck_tasks non-empty
+    - Replan when estimated_remaining_time is very large (> 3600s)
+
+    Replanning strategies (PoC):
+    - If retry_rate high: reduce parallelism by flattening execution_order to singletons
+    - If bottleneck_tasks present: move bottleneck tasks to their own serial levels
+    - If no plan provided: return None
+    """
     def __init__(self):
         pass
 
+    def should_replan(self, execution_state: 'ExecutionState', metrics: 'ExecutionMetrics') -> bool:
+        try:
+            if metrics is None:
+                return False
+            if getattr(metrics, 'retry_rate', 0.0) > 0.3:
+                return True
+            if getattr(metrics, 'bottleneck_tasks', None):
+                return True
+            if getattr(metrics, 'estimated_remaining_time', 0.0) > 3600:
+                return True
+        except Exception:
+            return False
+        return False
+
+    async def replan_if_needed(self, execution_state: 'ExecutionState', metrics: 'ExecutionMetrics') -> Optional['ExecutionPlan']:
+        # If there's no plan, nothing to replan
+        if execution_state is None or getattr(execution_state, 'plan', None) is None:
+            return None
+        plan = execution_state.plan
+        # Quick guard
+        if not self.should_replan(execution_state, metrics):
+            return None
+        # Make a shallow copy of the plan as PoC
+        new_plan = ExecutionPlan(
+            intent=plan.intent,
+            subtasks=list(plan.subtasks),
+            parallel_groups=list(plan.parallel_groups) if getattr(plan, 'parallel_groups', None) else [],
+            execution_order=[],
+            time_estimate=plan.time_estimate,
+            resource_estimate=plan.resource_estimate,
+            fallback_strategies=plan.fallback_strategies,
+            contingency_plans=plan.contingency_plans,
+        )
+        # Strategy 1: high retry_rate -> flatten execution_order into singletons (reduce parallelism)
+        if getattr(metrics, 'retry_rate', 0.0) > 0.3:
+            flat = []
+            for group in plan.execution_order:
+                for task in group:
+                    flat.append([task])
+            new_plan.execution_order = flat
+            return new_plan
+        # Strategy 2: bottleneck tasks -> isolate them into their own levels while keeping others grouped
+        bottlenecks = set(getattr(metrics, 'bottleneck_tasks', []) or [])
+        if bottlenecks:
+            remaining = []
+            isolated = []
+            for group in plan.execution_order:
+                grp_non_b = [t for t in group if getattr(t, 'id', None) not in bottlenecks]
+                grp_b = [t for t in group if getattr(t, 'id', None) in bottlenecks]
+                if grp_non_b:
+                    remaining.append(grp_non_b)
+                if grp_b:
+                    for t in grp_b:
+                        isolated.append([t])
+            new_plan.execution_order = remaining + isolated
+            return new_plan
+        # Fallback: simple reshuffle - no change
+        return None
+
 __all__ = ['Monitor', 'ExecutionMonitor', 'AdaptiveReplanner']
+
