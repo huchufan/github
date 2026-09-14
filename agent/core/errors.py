@@ -35,6 +35,10 @@ class ConstraintViolationError(HermesError):
 class QuotaExceededError(HermesError):
     code = "QUOTA_EXCEEDED"
 
+class RateLimitError(HermesError):
+    """Raised when an external service reports rate limiting / throttling."""
+    code = "RATE_LIMIT"
+
 
 # ---------------------------------------------------------------------------
 # 编排框架异常
