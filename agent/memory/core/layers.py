@@ -311,6 +311,8 @@ class SessionMemory(MemoryLayer):
             def clear(self):
                 self._cache.clear()
         
+        self.cache = CacheAdapter(original_cache)
+
         # Provide minimal search_sessions implementation for compatibility
     def search_sessions(self, query: Any) -> List[Any]:
         # PoC: return list of stored session records matching the topic in their string form
