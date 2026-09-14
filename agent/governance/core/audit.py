@@ -2,6 +2,7 @@ from dataclasses import dataclass, asdict, field
 from datetime import datetime, timezone
 import uuid
 from typing import Any, Dict, List, Optional
+from agent.core.types import AuditRecord as TypesAuditRecord
 
 # --- Data models
 
@@ -41,29 +42,54 @@ class ComplianceReport:
 # --- PoC compatibility wrappers expected by tests
 
 class AuditLog:
-    """Simple in-memory audit log PoC"""
+    """Simple in-memory audit log PoC. Stores agent.core.types.AuditRecord instances so
+    callers that import AuditRecord from agent.core.types see consistent types.
+    """
 
     def __init__(self):
-        self.records: List[AuditRecord] = []
+        self.records: List[TypesAuditRecord] = []
 
-    def record(self, actor: str, action: str, resource_type: str, resource_id: str, result: Any = None, success: bool = True, details: Optional[Dict[str, Any]] = None) -> AuditRecord:
-        rec = AuditRecord(
-            audit_id=f"aud-{uuid.uuid4().hex[:8]}",
-            timestamp=datetime.now(timezone.utc),
-            actor_id=actor,
-            actor=actor,
-            action=action,
+    def record(self, actor: str, action: str, resource_type: str, resource_id: str, result: Any = None, success: bool = True, details: Optional[Dict[str, Any]] = None) -> TypesAuditRecord:
+        details = details or {}
+        # Build a TypesAuditRecord with fields mapped from PoC inputs. Tests primarily assert
+        # isinstance(...) and a handful of attributes, so fill sensible defaults.
+        audit_id = f"aud-{uuid.uuid4().hex[:8]}"
+        timestamp = datetime.now(timezone.utc)
+        actor_role = details.get('actor_role', '')
+        resource_owner = details.get('owner', '')
+        data_class = details.get('classification', 'INTERNAL')
+        error_msg = None
+        result_code = 0
+        if not success:
+            result_code = getattr(result, 'code', 1) if result is not None else 1
+            error_msg = getattr(result, 'error', None) if result is not None else None
+
+        types_rec = TypesAuditRecord(
+            audit_id=audit_id,
+            timestamp=timestamp,
+            actor_id=str(actor),
+            actor_role=actor_role,
+            actor_organization=details.get('organization', ''),
+            operation_type=str(action),
+            operation_status=('SUCCESS' if success else 'FAILURE'),
             resource_type=resource_type,
             resource_id=resource_id,
-            result=result,
-            success=success,
-            details=details or {},
+            resource_owner=resource_owner,
+            action_details=str(action),
+            source_ip=details.get('source_ip', ''),
+            source_gateway=details.get('source_gateway', ''),
+            request_id=details.get('request_id', ''),
+            result_code=result_code,
+            error_message=error_msg,
+            involves_sensitive_data=(data_class in ('CONFIDENTIAL', 'SECRET')),
+            data_classification=data_class,
+            encryption_used=details.get('encryption_used', True),
+            network_security=details.get('network_security', ''),
+            changes=details.get('changes', []),
         )
-        # also set actor field for direct AuditLog.record callers expecting .actor
-        rec.actor = actor
 
-        self.records.append(rec)
-        return rec
+        self.records.append(types_rec)
+        return types_rec
 
     def query(self, actor: Optional[str] = None, resource_type: Optional[str] = None, success: Optional[bool] = None) -> List[AuditRecord]:
         res = self.records
@@ -76,7 +102,7 @@ class AuditLog:
         return res
 
     # Backwards-compatible alias expected by AuditLogger tests
-    def query_records(self, actor: Optional[str] = None, resource_type: Optional[str] = None, success: Optional[bool] = None) -> List[AuditRecord]:
+    def query_records(self, actor: Optional[str] = None, resource_type: Optional[str] = None, success: Optional[bool] = None) -> List[TypesAuditRecord]:
         return self.query(actor=actor, resource_type=resource_type, success=success)
 
     def to_dicts(self) -> List[Dict[str, Any]]:
@@ -116,8 +142,6 @@ class AuditLogger:
             details['actor_role'] = actor_role
 
         rec = self._log.record(actor=actor_id, action=action, resource_type=res_type, resource_id=res_id, result=result, success=success, details=details)
-        # ensure actor mirror for compatibility
-        rec.actor = actor_id
         # update immutable copy
         self.immutable_log = list(self.records)
 
@@ -128,6 +152,10 @@ class AuditLogger:
             self.alerts.append(alert)
             self._emit_alert(alert)
         return rec
+
+    # Convenience query to match test expectations (uses actor_id keyword)
+    def query(self, actor_id: Optional[str] = None, resource_type: Optional[str] = None, success: Optional[bool] = None) -> List[TypesAuditRecord]:
+        return self._log.query(actor=actor_id, resource_type=resource_type, success=success)
 
     def should_alert(self, record: AuditRecord) -> bool:
         if not record:
