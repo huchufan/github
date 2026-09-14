@@ -57,13 +57,29 @@ class MemoryLayer:
             # Clean from all layers
             self.storage.pop(key, None)
             self.created_at.pop(key, None)
-            # Clean from internal cache if present
+            # Robustly clean from internal cache if present
             try:
                 if hasattr(self, "cache"):
-                    if hasattr(self.cache, "_cache") and key in self.cache._cache:
-                        del self.cache._cache[key]
-                    elif hasattr(self.cache, "delete"):
-                        self.cache.delete(key)
+                    c = self.cache
+                    # Try common internal dict attributes
+                    for attr in ("_cache", "_store", "_dict", "cache", "data", "_data"):
+                        try:
+                            d = getattr(c, attr, None)
+                            if isinstance(d, dict) and key in d:
+                                del d[key]
+                        except Exception:
+                            pass
+                    # Common deletion methods
+                    try:
+                        if hasattr(c, "delete"):
+                            c.delete(key)
+                    except Exception:
+                        pass
+                    try:
+                        if hasattr(c, "pop"):
+                            c.pop(key, None)
+                    except Exception:
+                        pass
             except Exception:
                 pass
             return True
@@ -131,9 +147,17 @@ class ImmediateContextMemory(MemoryLayer):
     def get_conversation_context(self, window_size: int = 5) -> Any:
         # return a simple context object with required attributes
         window = self.turns[-window_size:]
+        # Build a context object that exposes 'turns' attribute expected by tests
         ctx = type('Ctx', (), {})()
         ctx.conversation_state = 'active' if window else 'idle'
         ctx.last_turn_time = window[-1]['timestamp'] if window else None
+        # Expose turns as objects with attributes for compatibility
+        class TurnObj:
+            def __init__(self, d):
+                self.user_message = d.get('user_message')
+                self.agent_response = d.get('agent_response')
+                self.timestamp = d.get('timestamp')
+        ctx.turns = [TurnObj(t) for t in window]
         return ctx
 
     def update_execution_state(self, new_state: Dict[str, Any]) -> None:
