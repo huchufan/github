@@ -51,8 +51,8 @@ class ExecutionMonitor:
 
     def monitor_execution(self, state: 'ExecutionState') -> 'ExecutionMetrics':
         metrics = ExecutionMetrics()
-        # overall progress
-        metrics.average_task_duration = self.calculate_avg_duration(state.tasks_completed)
+        # overall progress based on critical path
+        metrics.overall_progress = self.calculate_critical_path_progress(state)
         metrics.bottleneck_tasks = self.identify_bottleneck_tasks(state)
         metrics.retry_rate = self.calculate_retry_rate(state) if hasattr(self, 'calculate_retry_rate') else 0.0
         # success rate

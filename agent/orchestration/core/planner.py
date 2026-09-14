@@ -39,7 +39,9 @@ class TaskPlanner:
         # create a basic ExecutionPlan object for tests expecting a plan
         from agent.core.types import ExecutionPlan, SubTask
         subtasks = [SubTask(id=f"{i}", skill_name=s) for i, s in enumerate(getattr(intent, 'skills_involved', []), start=1)]
-        plan = ExecutionPlan(intent=intent, subtasks=subtasks, execution_order=[[t for t in subtasks]])
+        # estimate time as 60s per skill by default
+        time_estimate = len(subtasks) * 60.0
+        plan = ExecutionPlan(intent=intent, subtasks=subtasks, execution_order=[[t for t in subtasks]], time_estimate=time_estimate)
         return plan
 
 __all__ = ['Planner', 'TaskPlanner']
