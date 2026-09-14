@@ -40,15 +40,19 @@ else
     echo "✗ Task 2 failed"
 fi
 
-# 3) Full coverage run (may be heavy)
-echo "[Task 3] Full test coverage..."
+# 3) Full coverage run (may be heavy) — execute only if targeted tests passed
+echo "[Task 3] Full test coverage (conditional)..."
 TASK_COUNT=$((TASK_COUNT+1))
-if python3 -m pytest -q --maxfail=5 --cov=agent --cov-report=xml:$OUTDIR/coverage.xml --cov-report=html:$OUTDIR/htmlcov 2>&1 | head -100; then
-    PASS_COUNT=$((PASS_COUNT+1))
-    echo "✓ Task 3 passed"
+if [ "$FAIL_COUNT" -eq 0 ]; then
+    if python3 -m pytest -q --maxfail=5 --cov=agent --cov-report=xml:$OUTDIR/coverage.xml --cov-report=html:$OUTDIR/htmlcov 2>&1 | tee /tmp/coverage_run.out | head -100; then
+        PASS_COUNT=$((PASS_COUNT+1))
+        echo "✓ Task 3 passed"
+    else
+        FAIL_COUNT=$((FAIL_COUNT+1))
+        echo "✗ Task 3 failed (see details in $LOG)"
+    fi
 else
-    FAIL_COUNT=$((FAIL_COUNT+1))
-    echo "✗ Task 3 failed (see details in $LOG)"
+    echo "! Skipping full coverage because targeted tests failed (FAIL_COUNT=$FAIL_COUNT)"
 fi
 
 # 4) Parse coverage xml for line-rate (with fallback)
