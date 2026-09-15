@@ -1,0 +1,25 @@
+name: coverage-threshold
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  coverage-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install deps
+        run: pip install coverage || true
+      - name: Run tests with coverage
+        run: |
+          python -m coverage run -m pytest
+          python -m coverage xml -o coverage_ci.xml
+      - name: Check coverage threshold
+        run: |
+          python -c "import xml.etree.ElementTree as ET; root=ET.parse('coverage_ci.xml').getroot(); line_rate=float(root.attrib.get('line-rate','0')); threshold=0.85; print(f'Line-rate: {line_rate:.4f}, threshold: {threshold}'); exit(1 if line_rate < threshold else 0)"
