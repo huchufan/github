@@ -1,0 +1,27 @@
+name: generator-smoke-test
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  generator-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install deps
+        run: pip install -r requirements.txt || true
+      - name: Run generator smoke-test
+        run: |
+          python3 tools/generators/module_generator.py governance smoke_test
+          testfile=agent/governance/tests/test_smoke_smoke_test.py
+          if [ ! -f "$testfile" ]; then
+            echo "Smoke test failed: generated test file missing"; exit 1
+          fi
+      - name: Lint generated scaffolds
+        run: |
+          python -m pyflakes agent || true
