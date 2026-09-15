@@ -1,0 +1,33 @@
+# 自动化执行框架配置
+# 设计文档: 04_自动化执行框架.md
+
+triggers:
+  schedule:
+    type: "schedule"
+    options: { timezone: "Asia/Shanghai", retry_on_fail: true, max_concurrent: 3 }
+  event:
+    type: "event"
+    options: { debounce: "5s", max_queue_size: 1000, priority: "high" }
+  condition:
+    type: "condition"
+    options: { check_interval: "60s", cooldown: "300s", consecutive_triggers: 3 }
+  manual:
+    type: "manual"
+  webhook:
+    type: "webhook"
+  message:
+    type: "message"
+  system:
+    type: "system"
+
+scheduler:
+  max_workers: 10
+  scheduling_factors:
+    priority_weight: 0.4
+    wait_time_weight: 0.3
+    resource_availability_weight: 0.2
+    sla_risk_weight: 0.1
+
+self_healing:
+  check_interval: "30s"
+  categories: [TIMEOUT, RESOURCE_EXHAUSTION, HIGH_ERROR_RATE, QUEUE_BACKLOG]

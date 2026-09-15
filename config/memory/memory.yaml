@@ -1,0 +1,37 @@
+# 记忆系统架构配置
+# 设计文档: 03_记忆系统架构.md
+
+layers:
+  layer_1:
+    name: "即时上下文记忆"
+    ttl: "2h"
+    max_size: 1000
+  layer_2:
+    name: "短期会话记忆"
+    ttl: "30d"
+  layer_3:
+    name: "中期事件记忆"
+    ttl: "90d"
+  layer_4:
+    name: "长期语义记忆"
+    ttl: "unlimited"
+  layer_5:
+    name: "永久存档记忆"
+    ttl: "7y"
+
+embedding:
+  dim: 256
+  method: "feature-hashing"
+
+retrieval:
+  fusion_weights:
+    layer_1: 0.40
+    layer_2: 0.30
+    layer_3: 0.20
+    layer_4: 0.10
+
+migration:
+  layer_1_to_2: "2h"
+  layer_2_to_3: "30d"
+  layer_3_to_4: "abstract_and_summarize"
+  layer_4_to_5: "7y"

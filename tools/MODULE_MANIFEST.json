@@ -1,0 +1,82 @@
+{
+  "frameworks": {
+    "governance": {
+      "name": "治理框架",
+      "modules": [
+        "rbac",
+        "audit",
+        "policy",
+        "constraints",
+        "monitor"
+      ],
+      "total": 5,
+      "priority": "HIGH"
+    },
+    "orchestration": {
+      "name": "编排框架",
+      "modules": [
+        "dag",
+        "intent",
+        "planner",
+        "executor",
+        "condition",
+        "monitor"
+      ],
+      "total": 6,
+      "priority": "HIGH"
+    },
+    "memory": {
+      "name": "记忆框架",
+      "modules": [
+        "embeddings",
+        "layers",
+        "user_model",
+        "migration",
+        "retrieval"
+      ],
+      "total": 5,
+      "priority": "MEDIUM"
+    },
+    "automation": {
+      "name": "自动化框架",
+      "modules": [
+        "triggers",
+        "scheduler",
+        "executor",
+        "loadbalance",
+        "healing"
+      ],
+      "total": 5,
+      "priority": "MEDIUM"
+    },
+    "evolution": {
+      "name": "自进化框架",
+      "modules": [
+        "execution_learning",
+        "skill_evolution",
+        "strategy",
+        "system",
+        "feedback"
+      ],
+      "total": 5,
+      "priority": "LOW"
+    },
+    "multiagent": {
+      "name": "多Agent框架",
+      "modules": [
+        "lifecycle",
+        "roles",
+        "communication",
+        "distribution",
+        "coordination",
+        "cluster",
+        "monitor"
+      ],
+      "total": 7,
+      "priority": "LOW"
+    }
+  },
+  "total_modules": 33,
+  "default_model": "crazyroute/gpt-5-mini",
+  "target_completion": "2026-11-27"
+}

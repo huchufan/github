@@ -1,0 +1,59 @@
+# Multi-agent registry generated from style files
+
+agents:
+  - id: agents_orchestrator
+    name: AgentsOrchestrator
+    display_name: 总调度智能体
+    profile_path: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/AgentsOrchestrator/profile.yaml
+    soul: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/AgentsOrchestrator/soul.md
+    skill: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/AgentsOrchestrator/SKILL.md
+    workspace: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/AgentsOrchestrator/workspace
+  - id: intelligence_collector
+    name: IntelligenceCollector
+    display_name: 情报收集智能体
+    profile_path: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/IntelligenceCollector/profile.yaml
+    soul: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/IntelligenceCollector/soul.md
+    skill: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/IntelligenceCollector/SKILL.md
+    workspace: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/IntelligenceCollector/workspace
+  - id: data_analyst
+    name: DataAnalyst
+    display_name: 智能数据分析助手
+    profile_path: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/DataAnalyst/profile.yaml
+    skill: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/DataAnalyst/SKILL.md
+    workspace: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/DataAnalyst/workspace
+  - id: architect_ux
+    name: ArchitectUX
+    display_name: 架构师智能体
+    profile_path: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/ArchitectUX/profile.yaml
+    skill: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/ArchitectUX/SKILL.md
+    workspace: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/ArchitectUX/workspace
+  - id: code_engineer
+    name: CodeEngineer
+    display_name: 代码工程师智能体
+    profile_path: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/CodeEngineer/profile.yaml
+    skill: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/CodeEngineer/SKILL.md
+    workspace: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/CodeEngineer/workspace
+  - id: office_doc_assistant
+    name: OfficeDocAssistant
+    display_name: 办公文档处理智能体
+    profile_path: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/OfficeDocAssistant/profile.yaml
+    skill: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/OfficeDocAssistant/SKILL.md
+    workspace: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/OfficeDocAssistant/workspace
+  - id: quality_manager
+    name: QualityManager
+    display_name: 质量管理智能体
+    profile_path: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/QualityManager/profile.yaml
+    skill: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/QualityManager/SKILL.md
+    workspace: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/QualityManager/workspace
+  - id: ppt_designer
+    name: PPTDesigner
+    display_name: PPT 设计智能体
+    profile_path: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/PPTDesigner/profile.yaml
+    skill: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/PPTDesigner/SKILL.md
+    workspace: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/PPTDesigner/workspace
+  - id: default_agent
+    name: DefaultAgent
+    display_name: Default Agent
+    profile_path: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/DefaultAgent/profile.yaml
+    skill: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/DefaultAgent/SKILL.md
+    workspace: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/多智能体管理架构/agent_profiles/DefaultAgent/workspace
