@@ -8866,3 +8866,219 @@ summary:
 timestamp: '2026-09-14T23:35:07Z'
 type: model_health_check
 ---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-15T02:42:30Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1505
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-15T02:42:39Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1005
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1502
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4003
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-15T02:42:37Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1505
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4003
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-15T02:42:40Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1505
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4001
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-15T02:42:46Z'
+type: model_health_check
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1001
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1500
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4004
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 754
+    status: ok
+timestamp: '2026-09-15T02:43:05Z'
+type: model_health_check
+---
+agent_id: code_engineer
+attempts:
+- &id001
+  confidence: 0.7
+  latency_ms: 1505
+  model_key: T1
+  output: simulated output from T1
+chosen: *id001
+reason: confidence_ok
+task_meta:
+  cost_budget: 0.02
+  requires_deep_reasoning: false
+  risk: LOW
+  sensitivity_level: PUBLIC
+timestamp: '2026-09-15T02:43:14Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1004
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4001
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 750
+    status: ok
+timestamp: '2026-09-15T02:43:13Z'
+type: model_health_check
+---
+agent_id: agents_orchestrator
+attempts:
+- &id001
+  confidence: 0.8
+  latency_ms: 1505
+  model_key: T1
+  output: simulated output from T1
+- confidence: 0.8
+  latency_ms: 4003
+  model_key: T2
+  output: simulated output from T2
+chosen: *id001
+reason: parallel_consistent
+task_meta:
+  cost_budget: 1.0
+  requires_deep_reasoning: true
+  risk: HIGH
+  sensitivity_level: INTERNAL
+timestamp: '2026-09-15T02:43:15Z'
+---
+summary:
+  T0:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1002
+    status: ok
+  T1:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 1503
+    status: ok
+  T2:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 4005
+    status: ok
+  T3:
+    availability: 1
+    confidence: 0.7
+    latency_ms: 753
+    status: ok
+timestamp: '2026-09-15T02:43:21Z'
+type: model_health_check
+---
