@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: Hermes Agent API (skeleton)
+  version: 0.1.0
+paths:
+  /tasks:
+    post:
+      summary: Create a task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreate'
+      responses:
+        '201':
+          description: task created
+  /agents/{agent_id}/heartbeat:
+    post:
+      summary: Agent heartbeat
+      parameters:
+        - name: agent_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ok
+components:
+  schemas:
+    TaskCreate:
+      type: object
+      properties:
+        intent:
+          type: string
+        payload:
+          type: object

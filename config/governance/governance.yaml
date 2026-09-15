@@ -1,0 +1,60 @@
+# 治理框架配置
+# 设计文档: 01_治理框架设计.md
+
+roles:
+  admin:
+    permissions: [agent:execute_any, skill:create, skill:execute, config:write, audit:read_all, policy:manage]
+    constraints: { max_concurrent_tasks: unlimited, resource_quota: unlimited }
+  user:
+    permissions: [agent:execute_own, skill:execute, config:read, audit:read_own]
+    constraints: { max_concurrent_tasks: 10, resource_quota: 100GB, execution_timeout: 3600 }
+  service:
+    permissions: [agent:execute_scheduled, skill:execute, gateway:write]
+    constraints: { max_concurrent_tasks: 5 }
+  guest:
+    permissions: [agent:query_readonly, skill:explore]
+    constraints: { max_concurrent_tasks: 1, resource_quota: 1GB }
+
+# 属性化访问控制规则
+abac_rules:
+  - id: rule-deny-guest-write
+    effect: DENY
+    priority: 10
+    conditions:
+      - { operator: eq, left: "$subject_role", right: "guest" }
+
+policies:
+  rule_resource_access:
+    id: "pol-001"
+    name: "资源访问控制"
+    applies_to: ["agent:execute", "skill:execute"]
+  rule_data_export:
+    id: "pol-002"
+    name: "敏感数据导出控制"
+    applies_to: ["data:export"]
+  rule_system_config:
+    id: "pol-003"
+    name: "系统配置修改控制"
+    applies_to: ["config:modify_system"]
+
+resource_quotas:
+  user_quota: { storage: 100GB, concurrent_tasks: 10, daily_executions: 1000 }
+  role_quotas:
+    admin: { storage: unlimited, concurrent_tasks: unlimited }
+    user: { storage: 100GB, concurrent_tasks: 10 }
+  organization_quota: { storage: 10TB, concurrent_tasks: 500 }
+
+# 行为规则（系统遵循的沟通与自动化准则）
+behavior_rules:
+  - id: rule-zh-communication
+    name: "中文交流规则"
+    category: "communication"
+    priority: "HIGH"
+    description: "所有对话和书写均使用中文；除非特殊情况（代码、专有名词、用户明确要求），一律采用中文交流。"
+    applies_to: ["conversation", "writing", "response"]
+  - id: rule-automation-preference
+    name: "自动化与用户偏好规则"
+    category: "automation"
+    priority: "HIGH"
+    description: "持续判断并熟悉用户的习惯和偏好；系统应尽可能自动化，默认选择参照用户的习惯和偏好执行。"
+    applies_to: ["decision_making", "task_execution", "default_choice"]

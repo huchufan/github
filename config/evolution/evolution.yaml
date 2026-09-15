@@ -1,0 +1,27 @@
+# 自进化框架配置
+# 设计文档: 05_自进化框架.md
+
+levels:
+  level_1:
+    name: "执行级学习"
+    focus: "成功模式识别、失败恢复、决策优化"
+  level_2:
+    name: "技能级学习"
+    focus: "技能改进、新技能创建、技能库演进"
+  level_3:
+    name: "策略级学习"
+    focus: "编排策略、调度策略、决策策略优化"
+  level_4:
+    name: "系统级学习"
+    focus: "架构演进、性能优化、智能体进化"
+
+feedback_loops:
+  user_feedback: true
+  cross_agent_learning: true
+  knowledge_distillation: true
+
+skill_quality_tiers:
+  production: 0.85
+  beta: 0.70
+  alpha: 0.50
+  experimental: 0.0

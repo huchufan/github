@@ -1,0 +1,34 @@
+=== Hermes daily progress run: 20260914_074041 ===
+/Users/huchufan/.hermes/scripts/daily_progress_run.sh: line 16: pytest: command not found
+/Users/huchufan/.hermes/scripts/daily_progress_run.sh: line 17: pytest: command not found
+........................................................................ [ 22%]
+............................................F
+=================================== FAILURES ===================================
+____________ test_sessionmemory_cache_expiry_cleans_internal_cache _____________
+
+    def test_sessionmemory_cache_expiry_cleans_internal_cache():
+        sm = SessionMemory(ttl=timedelta(seconds=1))
+        rec = SessionRecord(session_id='sessX', user_id='uX')
+        sm.store('sessX', rec)
+        assert sm.retrieve('sessX') is not None
+        # simulate expiry
+        sm.created_at['sessX'] = datetime.now() - timedelta(days=31)
+        got = sm.retrieve('sessX')
+        assert got is None
+        # internal cache should not contain key
+        internal = getattr(sm.cache, '_cache', {})
+>       assert 'sessX' not in internal
+E       AssertionError: assert 'sessX' not in {'sessX': SessionRecord(session_id='sessX', user_id='uX', created_at=datetime.datetime(2026, 9, 13, 23, 40, 44, 772592...ession_variables={}, session_goals=[], summary='', key_decisions=[], message_count=0, duration=0.0, access_control={})}
+
+agent/memory/tests/test_layers_gap2.py:50: AssertionError
+=========================== short test summary info ============================
+FAILED agent/memory/tests/test_layers_gap2.py::test_sessionmemory_cache_expiry_cleans_internal_cache
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 1214, in parse
+    tree.parse(source, parser)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 566, in parse
+    source = open(source, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/huchufan/Hermes/implementation/automation/coverage_daily_20260914_074041/coverage.xml'

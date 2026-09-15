@@ -1,0 +1,17 @@
+name: Canary Skill Evolution
+on:
+  workflow_dispatch:
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run security scans
+        run: |
+          echo "Placeholder: run semgrep/bandit"
+      - name: Run tests
+        run: |
+          pytest -q
+      - name: Run replay
+        run: |
+          echo "Placeholder: run skill replay"

@@ -1,0 +1,50 @@
+# Hermes 系统 - 全局配置
+# 设计文档: 00_系统架构总览.md
+# 默认模型: crazyroute/gpt-5-mini (via OpenRouter)
+
+system:
+  name: "Hermes Agent"
+  version: "1.0.0"
+  description: "自进化 AI 智能体系统"
+
+model:
+  default: "crazyroute/gpt-5-mini"
+  provider: "openrouter"
+  base_url: "https://openrouter.ai/api/v1"
+  temperature: 0.7
+  max_tokens: 2048
+  timeout: 60
+  api_key_env: "OPENROUTER_API_KEY"
+
+frameworks:
+  governance:
+    name: "治理框架"
+    path: "agent/governance"
+    priority: "HIGH"
+  orchestration:
+    name: "智能编排框架"
+    path: "agent/orchestration"
+    priority: "HIGH"
+  memory:
+    name: "记忆系统"
+    path: "agent/memory"
+    priority: "MEDIUM"
+  automation:
+    name: "自动化执行框架"
+    path: "agent/automation"
+    priority: "MEDIUM"
+  evolution:
+    name: "自进化框架"
+    path: "agent/evolution"
+    priority: "LOW"
+  multiagent:
+    name: "多智能体管理架构"
+    path: "agent/multiagent"
+    priority: "LOW"
+
+# 全局 KPI 目标（来自 00_系统架构总览.md）
+kpi:
+  availability: 0.999
+  task_success_rate: 0.98
+  intent_accuracy: 0.92
+  automation_coverage: 0.85

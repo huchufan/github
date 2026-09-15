@@ -1,0 +1,30 @@
+=== Hermes daily progress run: 20260914_082941 ===
+.                                                                        [100%]
+.............................................                            [100%]
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+................F
+=================================== FAILURES ===================================
+____________________ TestUserModel.test_comprehensive_model ____________________
+
+self = <agent.memory.tests.test_memory.TestUserModel object at 0x10dc88a50>
+
+    def test_comprehensive_model(self):
+        model = UserModel()
+        history = UserHistory(user_id="u1", sessions=[SessionRecord(user_id="u1", summary="python ml")])
+>       result = model.build_comprehensive_user_model(history)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'UserModel' object has no attribute 'build_comprehensive_user_model'
+
+agent/memory/tests/test_memory.py:131: AttributeError
+=========================== short test summary info ============================
+FAILED agent/memory/tests/test_memory.py::TestUserModel::test_comprehensive_model
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 1214, in parse
+    tree.parse(source, parser)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 566, in parse
+    source = open(source, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/huchufan/Hermes/implementation/automation/coverage_daily_20260914_082941/coverage.xml'

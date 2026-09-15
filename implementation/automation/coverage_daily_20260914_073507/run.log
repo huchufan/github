@@ -1,0 +1,47 @@
+Hermes Daily Automation Run - 20260914_073507
+============================================================
+
+TASK 1: Multiagent Health Monitor Tests
+------------------------------------------------------------
+.                                                                        [100%]
+
+Return code: 0
+
+TASK 2: Memory Layer Tests
+------------------------------------------------------------
+
+
+STDERR:
+ERROR: file or directory not found: agent/memory/tests/test_layers_*
+
+
+Return code: 4
+
+TASK 3: Full Coverage Tests
+------------------------------------------------------------
+........................................................................ [ 22%]
+............................................F.....................F....F [ 44%]
+
+=================================== FAILURES ===================================
+____________ test_sessionmemory_cache_expiry_cleans_internal_cache _____________
+agent/memory/tests/test_layers_gap2.py:50: in test_sessionmemory_cache_expiry_cleans_internal_cache
+    assert 'sessX' not in internal
+E   AssertionError: assert 'sessX' not in {'sessX': SessionRecord(session_id='sessX', user_id='uX', created_at=datetime.datetime(2026, 9, 13, 23, 35, 19, 997077...ession_variables={}, session_goals=[], summary='', key_decisions=[], message_count=0, duration=0.0, access_control={})}
+____________________ test_session_cache_eviction_on_expiry _____________________
+agent/memory/tests/test_layers_session_coverage.py:21: in test_session_cache_eviction_on_expiry
+    assert 's-evict' not in sm.cache._cache
+E   AssertionError: assert 's-evict' not in {'s-evict': SessionRecord(session_id='s-evict', user_id='u-1', created_at=datetime.datetime(2026, 9, 13, 23, 35, 20, 4...ession_variables={}, session_goals=[], summary='', key_decisions=[], message_count=0, duration=0.0, access_control={})}
+E    +  where {'s-evict': SessionRecord(session_id='s-evict', user_id='u-1', created_at=datetime.datetime(2026, 9, 13, 23, 35, 20, 4...ession_variables={}, session_goals=[], summary='', key_decisions=[], message_count=0, duration=0.0, access_control={})} = <agent.memory.core.layers.SessionMemory.__init__.<locals>._SimpleCache object at 0x110d3f380>._cache
+E    +    where <agent.memory.core.layers.SessionMemory.__init__.<locals>._SimpleCache object at 0x110d3f380> = <agent.memory.core.layers.SessionMemory object at 0x110e15850>.cache
+__________________ test_archive_search_and_corrupted_handling __________________
+agent/memory/tests/test_layers_session_coverage.py:69: in test_archive_search_and_corrupted_handling
+    assert any(ref.archive_id == v.archive_id for v in found if hasattr(v, 'archive_id'))
+E   assert False
+E    +  where False = any(<generator object test_archive_search_and_corrupted_handling.<locals>.<genexpr> at 0x110dd2110>)
+=========================== short test summary info ============================
+FAILED agent/memory/tests/test_layers_gap2.py::test_sessionmemory_cache_expiry_cleans_internal_cache
+FAILED agent/memory/tests/test_layers_session_coverage.py::test_session_cache_eviction_on_expiry
+FAILED agent/memory/tests/test_layers_session_coverage.py::test_archive_search_and_corrupted_handling
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 3 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Return code: 1

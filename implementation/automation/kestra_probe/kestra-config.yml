@@ -1,0 +1,15 @@
+kestra:
+  storage:
+    type: local
+    local:
+      basePath: /work/storage
+  repository:
+    type: memory
+  queue:
+    type: memory
+server:
+  port: 8080
+ui:
+  enabled: true
+logging:
+  level: INFO

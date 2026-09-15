@@ -1,0 +1,55 @@
+=== Hermes daily progress run: 20260914_081705 ===
+.                                                                        [100%]
+.............................................                            [100%]
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+..............F
+=================================== FAILURES ===================================
+_______________ TestMigrationAndRetrieval.test_retrieval_fusion ________________
+
+self = <agent.memory.tests.test_memory.TestMigrationAndRetrieval object at 0x104064910>
+
+    def test_retrieval_fusion(self):
+        immediate, session, episodic, semantic, archive = self._make_stack()
+        semantic.store_knowledge_item(KnowledgeItem(title="python", content="python code", category="dev"))
+        engine = MemoryRetrievalEngine(immediate, session, episodic, semantic, archive)
+>       result = engine.retrieve_relevant_memory("python")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+agent/memory/tests/test_memory.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <agent.memory.core.retrieval.MemoryRetrievalEngine object at 0x1041bacf0>
+query = 'python', layers = [1, 2, 3, 4]
+
+    def retrieve_relevant_memory(self, query: str, layers: List[int] | None = None) -> FusedMemoryResult:
+        """从多层检索相关记忆。"""
+        layers = layers if layers is not None else [1, 2, 3, 4]
+        results: Dict[str, Any] = {
+            "layer_1": None,
+            "layer_2": [],
+            "layer_3": [],
+            "layer_4": [],
+        }
+    
+        if 1 in layers:
+            results["layer_1"] = self.immediate.get_conversation_context()
+        if 2 in layers:
+            results["layer_2"] = self.session.search_sessions(SearchQuery(topic=query))
+        if 3 in layers:
+>           results["layer_3"] = self.episodic.search_events(query)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: 'EpisodicMemory' object has no attribute 'search_events'
+
+agent/memory/core/retrieval.py:63: AttributeError
+=========================== short test summary info ============================
+FAILED agent/memory/tests/test_memory.py::TestMigrationAndRetrieval::test_retrieval_fusion
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 1214, in parse
+    tree.parse(source, parser)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py", line 566, in parse
+    source = open(source, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/huchufan/Hermes/implementation/automation/coverage_daily_20260914_081705/coverage.xml'

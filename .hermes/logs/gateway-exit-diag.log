@@ -1,0 +1,2 @@
+{"ts": "2026-09-13T23:28:44.263942+00:00", "tag": "asyncio.run.returned", "pid": 984, "python": "3.11.16", "platform": "darwin", "success": false}
+{"ts": "2026-09-13T23:28:44.264302+00:00", "tag": "gateway.exit_nonzero", "pid": 984, "python": "3.11.16", "platform": "darwin"}

@@ -1,0 +1,42 @@
+{
+  "generated": [
+    {
+      "fw": "memory",
+      "mod": "search",
+      "exit_code": 0,
+      "output": "✓ 模块生成完成: memory/search"
+    },
+    {
+      "fw": "memory",
+      "mod": "fusion",
+      "exit_code": 0,
+      "output": "✓ 模块生成完成: memory/fusion"
+    },
+    {
+      "fw": "evolution",
+      "mod": "analyzer",
+      "exit_code": 0,
+      "output": "✓ 模块生成完成: evolution/analyzer"
+    },
+    {
+      "fw": "evolution",
+      "mod": "learner",
+      "exit_code": 0,
+      "output": "✓ 模块生成完成: evolution/learner"
+    },
+    {
+      "fw": "evolution",
+      "mod": "optimizer",
+      "exit_code": 0,
+      "output": "✓ 模块生成完成: evolution/optimizer"
+    },
+    {
+      "fw": "evolution",
+      "mod": "distiller",
+      "exit_code": 0,
+      "output": "✓ 模块生成完成: evolution/distiller"
+    }
+  ],
+  "pytest_exit": 0,
+  "pytest_output_head": "........................................................................ [ 62%]\n............................................                             [100%]"
+}

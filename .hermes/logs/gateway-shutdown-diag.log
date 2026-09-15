@@ -1,0 +1,14 @@
+shell-init: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+=== shutdown diagnostic @ SIGTERM ===
+--- date ---
+job-working-directory: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+2026-09-13T23:28:44Z
+--- ps auxf (top 60 by cpu) ---
+job-working-directory: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+--- pstree of self ---
+job-working-directory: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+--- /proc/loadavg ---
+job-working-directory: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+--- recent dmesg (oom/killed) ---
+job-working-directory: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+=== end ===

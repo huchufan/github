@@ -1,0 +1,87 @@
+=== Hermes daily progress run: 20260914_090133 ===
+[Task 1] Multiagent health monitor tests...
+.                                                                        [100%]
+✓ Task 1 passed
+[Task 2] Memory layer tests...
+...............................................                          [100%]
+✓ Task 2 passed
+[Task 3] Full test coverage (conditional)...
+........................................................................ [ 22%]
+........................................................................ [ 44%]
+........................................................................ [ 67%]
+...............F.F.FF..F
+=================================== FAILURES ===================================
+__________________ test_topological_sort_and_cycle_detection ___________________
+
+    def test_topological_sort_and_cycle_detection():
+        d = DAG()
+        for i in ['a','b','c']:
+            d.add_node(Node(id=i))
+        d.add_edge('a','b')
+        d.add_edge('b','c')
+>       order = d.topological_sort()
+                ^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'DAG' object has no attribute 'topological_sort'
+
+agent/orchestration/tests/test_dag_cover.py:28: AttributeError
+___________________________ test_find_critical_path ____________________________
+
+    def test_find_critical_path():
+        d = DAG()
+        for i in ['a','b','c','d','e']:
+            d.add_node(Node(id=i))
+        d.add_edge('a','b')
+        d.add_edge('b','c')
+        d.add_edge('a','d')
+        d.add_edge('d','e')
+>       path = d.find_critical_path()
+               ^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'DAG' object has no attribute 'find_critical_path'
+
+agent/orchestration/tests/test_dag_cover.py:60: AttributeError
+_______________ test_select_recovery_strategy_retries_exhausted ________________
+
+    def test_select_recovery_strategy_retries_exhausted():
+        s = ErrorHandlingStrategy(default_strategy='retry_on_transient')
+        task = SubTask(id='t1', skill_name='s')
+        # for retry_on_transient retries = 3, so if retry_count >=3 should return STOP
+>       strat = s.select_recovery_strategy(task, 'TIMEOUT', retry_count=3)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: ErrorHandlingStrategy.select_recovery_strategy() got an unexpected keyword argument 'retry_count'
+
+agent/orchestration/tests/test_error_strategy_unit.py:21: TypeError
+_______________________ test_get_recovery_action_fields ________________________
+
+    def test_get_recovery_action_fields():
+        s = ErrorHandlingStrategy()
+        strategy = {'action': 'FALLBACK', 'fallback_skill': 'alt'}
+        ra = s.get_recovery_action(strategy)
+>       assert ra.action == 'FALLBACK'
+               ^^^^^^^^^
+E       AttributeError: 'dict' object has no attribute 'action'
+
+agent/orchestration/tests/test_error_strategy_unit.py:29: AttributeError
+____________________ test_handle_task_failures_task_missing ____________________
+
+    def test_handle_task_failures_task_missing():
+>       engine = OrchestrationEngine(skill_registry={'s': sync_ok})
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: OrchestrationEngine.__init__() got an unexpected keyword argument 'skill_registry'
+
+agent/orchestration/tests/test_executor_additional.py:23: TypeError
+=============================== warnings summary ===============================
+agent/multiagent/tests/test_coordination_cover.py::test_voting_and_weighted
+  /Users/huchufan/Hermes/agent/multiagent/tests/test_coordination_cover.py:68: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    vote = asyncio.run(agg.voting_results([r1, r2, r3])) if asyncio.iscoroutinefunction(agg.voting_results) else agg.voting_results([r1, r2, r3])
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED agent/orchestration/tests/test_dag_cover.py::test_topological_sort_and_cycle_detection
+FAILED agent/orchestration/tests/test_dag_cover.py::test_find_critical_path
+FAILED agent/orchestration/tests/test_error_strategy_unit.py::test_select_recovery_strategy_retries_exhausted
+FAILED agent/orchestration/tests/test_error_strategy_unit.py::test_get_recovery_action_fields
+FAILED agent/orchestration/tests/test_executor_additional.py::test_handle_task_failures_task_missing
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 5 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+✗ Task 3 failed (see details in /Users/huchufan/Hermes/implementation/automation/coverage_daily_20260914_090133/run.log)
+Wrote daily note: /Users/huchufan/Documents/obsidian/obsidian_mac/INBOX_收集箱/Hermes/DAILY_PROGRESS_20260914_090133.md
+=== Run complete: 2/3 tasks passed ===

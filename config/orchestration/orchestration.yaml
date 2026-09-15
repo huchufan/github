@@ -1,0 +1,36 @@
+# 智能编排框架配置
+# 设计文档: 02_智能编排框架设计.md
+
+intents:
+  intent_analyze_data:
+    name: "分析数据"
+    keywords: ["分析", "统计", "汇总", "对比"]
+    skills_involved: ["data:load", "data:clean", "data:analyze", "data:visualize"]
+    complexity: "medium"
+  intent_generate_code:
+    name: "生成代码"
+    keywords: ["写", "生成", "编写", "实现"]
+    skills_involved: ["code:generate", "code:review", "code:test", "code:optimize"]
+    complexity: "high"
+  intent_search_information:
+    name: "查找信息"
+    keywords: ["查找", "搜索", "告诉我", "是什么"]
+    skills_involved: ["search:query", "web:fetch", "memory:recall", "knowledge:synthesize"]
+    complexity: "low"
+  intent_automate_workflow:
+    name: "自动化工作流"
+    keywords: ["自动化", "定时", "每天", "每周"]
+    skills_involved: ["cron:create", "workflow:setup", "notification:configure"]
+    complexity: "high"
+
+control_flow:
+  sequence: "task1 -> task2 -> task3"
+  parallel: "task1 | task2 | task3"
+  conditional: "if/elif/else 分支"
+  loop: "while 条件循环"
+  try_catch: "异常处理与恢复"
+
+error_handling:
+  default_strategy: "retry_on_transient"
+  retry: 3
+  backoff: "exponential"

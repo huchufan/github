@@ -1,0 +1,41 @@
+name: Multiagent CI
+
+on:
+  push:
+    paths:
+      - 'agent/multiagent/**'
+      - '.github/workflows/multiagent-ci.yml'
+  pull_request:
+    paths:
+      - 'agent/multiagent/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.10, 3.11, 3.12]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install pytest; fi
+
+      - name: Run multiagent tests
+        run: |
+          pytest -q agent/multiagent/tests
+
+      - name: Verify registry bootstrap
+        run: |
+          python - <<'PY'
+          import agent.multiagent as m
+          print('BOOTSTRAP:', m._bootstrap_summary)
+          PY
