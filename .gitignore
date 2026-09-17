@@ -3,3 +3,5 @@ implementation/impl_starts/logs/
 implementation/automation/coverage_tmp.xml
 implementation/automation/*.tmp
 *.log
+__pycache__/
+*.pyc
