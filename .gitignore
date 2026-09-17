@@ -1,3 +1,5 @@
-
-__pycache__/
-*.pyc
+# Ignore runtime logs and temporary automation files
+implementation/impl_starts/logs/
+implementation/automation/coverage_tmp.xml
+implementation/automation/*.tmp
+*.log
