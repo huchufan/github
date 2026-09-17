@@ -1,0 +1,396 @@
+[
+  {
+    "branch": "feat/impl/automation_extra_004",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_004.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_004.prfix.20260916T105744Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_004.prfix.20260916T105744Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_004.prfix'; 'agent.automation.tests.test_automation_extra_004' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_004.prfix.20260916T105744Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_010",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_010.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_010.prfix.20260916T105759Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_010.prfix.20260916T105759Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_010.prfix'; 'agent.automation.tests.test_automation_extra_010' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_010.prfix.20260916T105759Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_016",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_016.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_016.prfix.20260916T105814Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_016.prfix.20260916T105814Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_016.prfix'; 'agent.automation.tests.test_automation_extra_016' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_016.prfix.20260916T105814Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_022",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_022.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_022.prfix.20260916T105828Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_022.prfix.20260916T105828Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_022.prfix'; 'agent.automation.tests.test_automation_extra_022' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_022.prfix.20260916T105828Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_028",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_028.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_028.prfix.20260916T105843Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_028.prfix.20260916T105843Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_028.prfix'; 'agent.automation.tests.test_automation_extra_028' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_028.prfix.20260916T105843Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_034",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_034.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_034.prfix.20260916T105857Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_034.prfix.20260916T105857Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_034.prfix'; 'agent.automation.tests.test_automation_extra_034' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_034.prfix.20260916T105857Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_040",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_040.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_040.prfix.20260916T105912Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_040.prfix.20260916T105912Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_040.prfix'; 'agent.automation.tests.test_automation_extra_040' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_040.prfix.20260916T105912Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_046",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_046.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_046.fix.20260916T101228Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_046.fix.20260916T101228Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_046.fix'; 'agent.automation.tests.test_automation_extra_046' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_046.fix.20260916T101228Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_046.fix.20260916T101228Z.prfix.20260916T105940Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_046.fix.20260916T101228Z.prfix.20260916T105940Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_046.fix'; 'agent.automation.tests.test_automation_extra_046' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_046.fix.20260916T101228Z.prfix.20260916T105940Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_046.prfix",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_046.prfix.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_046.prfix'; 'agent.automation.tests.test_automation_extra_046' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_046.prfix.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_046.prfix.20260916T105926Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_046.prfix.20260916T105926Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_046.prfix'; 'agent.automation.tests.test_automation_extra_046' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_046.prfix.20260916T105926Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_046.prfix.prfix.20260916T105959Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_046.prfix.prfix.20260916T105959Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_046.prfix'; 'agent.automation.tests.test_automation_extra_046' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_046.prfix.prfix.20260916T105959Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_052",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_052.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_052.prfix.20260916T110021Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_052.prfix.20260916T110021Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_052.prfix'; 'agent.automation.tests.test_automation_extra_052' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_052.prfix.20260916T110021Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_058",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_058.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_058.prfix.20260916T110036Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_058.prfix.20260916T110036Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_058.prfix'; 'agent.automation.tests.test_automation_extra_058' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_058.prfix.20260916T110036Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_064",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_064.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_064.prfix.20260916T110050Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_064.prfix.20260916T110050Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_064.prfix'; 'agent.automation.tests.test_automation_extra_064' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_064.prfix.20260916T110050Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_070",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_070.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_070.prfix.20260916T110105Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_070.prfix.20260916T110105Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_070.prfix'; 'agent.automation.tests.test_automation_extra_070' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_070.prfix.20260916T110105Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_076",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_076.py",
+    "pytest_rc": 0,
+    "pytest_out_tail": [
+      "..                                                                       [100%]"
+    ],
+    "coverage_line_rate": 0.9452,
+    "pr": null,
+    "merge": false,
+    "reason": "pr create/list failed"
+  },
+  {
+    "branch": "feat/impl/automation_extra_076.prfix.20260916T110120Z",
+    "testpath": "/Users/huchufan/Hermes/agent/automation/tests/test_automation_extra_076.prfix.20260916T110120Z.py",
+    "pytest_rc": 2,
+    "pytest_out_tail": [
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "E   ModuleNotFoundError: No module named 'agent.automation.tests.test_automation_extra_076.prfix'; 'agent.automation.tests.test_automation_extra_076' is not a package",
+      "=========================== short test summary info ============================",
+      "ERROR agent/automation/tests/test_automation_extra_076.prfix.20260916T110120Z.py",
+      "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!"
+    ],
+    "merge": false,
+    "reason": "pytest failed"
+  }
+]
